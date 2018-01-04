@@ -28,4 +28,7 @@
 #define IS_IOS10 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) ? YES : NO)
 #define IS_IOS11 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) ? YES : NO)
 
+#define WEAKSELF        typeof(self) __weak weakSelf = self;
+#define STRONGSELF(x)   typeof(x) __strong strongSelf = x;
+
 #endif /* ModuleDef_h */

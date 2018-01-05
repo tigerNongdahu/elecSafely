@@ -202,12 +202,12 @@
     CAMediaTimingFunction *easeOutFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     CAMediaTimingFunction *easeInOutTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 
-    
+    NSNumber *begin123 = @0.075;
     // Opacity
     CAKeyframeAnimation *labelAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
     labelAnimation.duration = kAnimationDuration;
     labelAnimation.timingFunctions = @[easeInOutTimingFunction, timingFunction, timingFunction, easeOutFunction, linearFunction];
-    labelAnimation.keyTimes = @[@0.0,@0.11,@0.20,@1.0];
+    labelAnimation.keyTimes = @[@0.0,begin123,@0.10,@1.0];
     labelAnimation.values = @[@0,@0,@1,@1];
     labelAnimation.beginTime = beginTime;
     [_companyLabel.layer addAnimation:labelAnimation forKey:@"opacity"];
@@ -216,7 +216,7 @@
     CAKeyframeAnimation *positionAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     positionAnimation.duration = kAnimationDuration;
     positionAnimation.timingFunctions = @[linearFunction, timingFunction, timingFunction, linearFunction];
-    positionAnimation.keyTimes = @[@0.0,@0.11,@0.15];
+    positionAnimation.keyTimes = @[@0.0,begin123,@0.13];
     positionAnimation.values = @[zeroPointValue, zeroPointValue, [NSValue valueWithCGPoint:CGPointMake(0, -50)]];
     positionAnimation.additive = YES;
     [animations addObject:positionAnimation];
@@ -226,7 +226,7 @@
     CAKeyframeAnimation *opacityAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
     opacityAnimation.duration = kAnimationDuration;
     opacityAnimation.timingFunctions = @[easeInOutTimingFunction, timingFunction, timingFunction, easeOutFunction, linearFunction];
-    opacityAnimation.keyTimes = @[@0.0,@0.11,@0.20,@1.0];
+    opacityAnimation.keyTimes = @[@0.0,begin123,@0.13,@1.0];
     opacityAnimation.values = @[@0.0,@0.0,@1,@1];
     [animations addObject:opacityAnimation];
     

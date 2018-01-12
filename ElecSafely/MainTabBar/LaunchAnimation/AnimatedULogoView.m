@@ -59,7 +59,7 @@
 {
     _beginTime = CACurrentMediaTime();
     self.layer.anchorPoint = CGPointZero;
-    [self animateMaskLayer];
+//    [self animateMaskLayer];
 //    [self animateCircleLayer];
 //    [self animateLineLayer];
 //    [self animateSquareLayer];
@@ -172,7 +172,7 @@
     // backgroundColor
     CABasicAnimation *backgroundColorAnimation = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
     backgroundColorAnimation.fromValue = (__bridge id _Nullable)([UIColor whiteColor].CGColor);
-    backgroundColorAnimation.toValue = (__bridge id _Nullable)(UberBlue.CGColor);
+    backgroundColorAnimation.toValue = (__bridge id _Nullable)(DarkBack.CGColor);
     backgroundColorAnimation.timingFunction = self.squareLayerTimingFunction;
     backgroundColorAnimation.fillMode = kCAFillModeBoth;
     backgroundColorAnimation.beginTime = kAnimationDurationDelay * 2.0 / kAnimationDuration;
@@ -215,7 +215,7 @@
     layer.frame = CGRectZero;
     layer.allowsGroupOpacity = YES;
     layer.lineWidth = 5.0;
-    layer.strokeColor = UberBlue.CGColor;
+    layer.strokeColor = DarkBack.CGColor;
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     [bezierPath moveToPoint:CGPointZero];
@@ -232,7 +232,7 @@
     layer.frame =CGRectMake(-_squareLayerLength / 2, -_squareLayerLength / 2, _squareLayerLength, _squareLayerLength);
     layer.cornerRadius = 1.5;
     layer.allowsGroupOpacity = YES;
-    layer.backgroundColor = UberBlue.CGColor;
+    layer.backgroundColor = DarkBack.CGColor;
     return layer;
 }
 

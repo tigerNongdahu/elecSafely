@@ -20,7 +20,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     TFLaunchViewController *launchVC = [[TFLaunchViewController alloc] init];
-    self.window.rootViewController = launchVC;
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:launchVC];
+    self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
     return YES;
 }

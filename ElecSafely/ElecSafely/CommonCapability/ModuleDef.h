@@ -31,4 +31,18 @@
 #define WEAKSELF        typeof(self) __weak weakSelf = self;
 #define STRONGSELF(x)   typeof(x) __strong strongSelf = x;
 
+#define DarkBack UIColorRGB(0x0e0f12)
+#define PingFangRegular(x) [UIFont fontWithName:@"PingFangSC-Regular" size:x]
+#define PingFangLight(x) [UIFont fontWithName:@"PingFangSC-Light" size:x]
+#define PingFangMedium(x) [UIFont fontWithName:@"PingFangSC-Medium" size:x]
+#define MAS_SHORTHAND //use Masonry without the 'mas_' prefix
+#define MAS_SHORTHAND_GLOBALS //enable auto-boxing for default syntax
+
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define NavibarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height + 44)
+
+#define UserAccount @"userAccount"
+#define UserPassword @"userPassword"
+
 #endif /* ModuleDef_h */

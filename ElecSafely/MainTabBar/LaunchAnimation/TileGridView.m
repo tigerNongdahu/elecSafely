@@ -52,10 +52,10 @@
         
         [self renderTileViews];
         
-        _logoLabel = [self generateLogoLabel];
+//        _logoLabel = [self generateLogoLabel];
         _newlogoLabel = [self newLogoLabel];
         _companyLabel = [self companyLabel];
-        [_centerTileView addSubview:_logoLabel];
+//        [_centerTileView addSubview:_logoLabel];
         
         [self addSubview:_companyLabel];
         [self addSubview:_newlogoLabel];
@@ -69,9 +69,7 @@
 {
     _beginTime = CACurrentMediaTime();
     [self startAnimatingWithBeginTime:_beginTime];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        exit(0);
-    });
+    
 }
 
 -(void)layoutSubviews
@@ -81,8 +79,8 @@
     _modelTileView.center = _containerView.center;
     if (_centerTileView) {
         // Custom offset needed for UILabel font
-        CGPoint center = CGPointMake(CGRectGetMidX(_centerTileView.bounds), CGRectGetMidY(_centerTileView.bounds));
-        _logoLabel.center = center;
+//        CGPoint center = CGPointMake(CGRectGetMidX(_centerTileView.bounds), CGRectGetMidY(_centerTileView.bounds));
+//        _logoLabel.center = center;
     }
 }
 
@@ -207,7 +205,7 @@
     CAKeyframeAnimation *labelAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
     labelAnimation.duration = kAnimationDuration;
     labelAnimation.timingFunctions = @[easeInOutTimingFunction, timingFunction, timingFunction, easeOutFunction, linearFunction];
-    labelAnimation.keyTimes = @[@0.0,begin123,@0.10,@1.0];
+    labelAnimation.keyTimes = @[@0.0,begin123,@0.13,@1.0];
     labelAnimation.values = @[@0,@0,@1,@1];
     labelAnimation.beginTime = beginTime;
     [_companyLabel.layer addAnimation:labelAnimation forKey:@"opacity"];
@@ -227,7 +225,7 @@
     opacityAnimation.duration = kAnimationDuration;
     opacityAnimation.timingFunctions = @[easeInOutTimingFunction, timingFunction, timingFunction, easeOutFunction, linearFunction];
     opacityAnimation.keyTimes = @[@0.0,begin123,@0.13,@1.0];
-    opacityAnimation.values = @[@0.0,@0.0,@1,@1];
+    opacityAnimation.values = @[@0.0,@0.0,@1,@0];
     [animations addObject:opacityAnimation];
     
     // Group
@@ -241,7 +239,7 @@
     groupAnimation.timeOffset = kAnimationTimeOffset;
     [_newlogoLabel.layer addAnimation:groupAnimation forKey:@"ripple"];
     
-   
+    
 }
 
 - (CGFloat)distanceFromCenterViewWithView:(UIView *)view

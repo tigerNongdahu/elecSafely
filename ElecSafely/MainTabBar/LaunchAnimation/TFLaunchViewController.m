@@ -7,7 +7,6 @@
 //
 
 #import "TFLaunchViewController.h"
-#import "AnimatedULogoView.h"
 #import "Contans.h"
 #import "TileGridView.h"
 #import "TileView.h"
@@ -15,7 +14,6 @@
 
 
 @interface TFLaunchViewController ()
-@property (nonatomic,strong) AnimatedULogoView *animatedView;
 @property (nonatomic,strong) TileGridView *tileGridView;
 
 @end
@@ -25,34 +23,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.hidden = YES;
     _tileGridView = [[TileGridView alloc] initWithTileFileName:@"Chimes"];
     [self.view addSubview:_tileGridView];
     _tileGridView.frame = [UIScreen mainScreen].bounds;
     
-//    _tileGridView.didEndBlock = ^{
-//        TFLoginViewController *loginVC = [[TFLoginViewController alloc] init];
-//        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
-//        [UIApplication sharedApplication].delegate.window.rootViewController = nav;
-//        [[UIApplication sharedApplication].delegate.window reloadInputViews];
-//    };
+    self.view.backgroundColor = DarkBack;
     
-    _animatedView = [[AnimatedULogoView alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
-    [self.view addSubview:_animatedView];
-    _animatedView.layer.position = self.view.layer.position;
-    self.view.backgroundColor = UberBlue;
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+        CATransition *tration = [CATransition animation];
+        tration.duration = 0.3f;
+        tration.type = kCATransitionFade;
+        [self.navigationController.view.layer addAnimation:tration forKey:nil];
+        [self.navigationController pushViewController:loginVC animated:NO];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [_tileGridView startAnimating];
-    [_animatedView startAniamting];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-
 }
 
 /*

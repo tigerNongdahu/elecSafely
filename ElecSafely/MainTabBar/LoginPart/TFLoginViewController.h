@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TFLoginViewController : UIViewController
+- (instancetype)initWithFrame:(CGRect)frame;
 
 @end

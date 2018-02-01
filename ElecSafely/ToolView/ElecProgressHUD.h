@@ -7,7 +7,12 @@
 //
 
 #import "AFHTTPSessionManager.h"
+#import "DGActivityIndicatorView.h"
 
 @interface ElecProgressHUD : AFHTTPSessionManager
+
+- (instancetype)showHUD:(UIView*)view Offset:(CGFloat)offset animation:(NSInteger)i;
+
+- (void)dismiss;
 
 @end

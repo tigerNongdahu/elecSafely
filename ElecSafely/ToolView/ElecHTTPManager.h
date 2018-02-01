@@ -10,4 +10,6 @@
 
 @interface ElecHTTPManager : AFHTTPSessionManager
 
++ (instancetype)manager;
+
 @end

@@ -2,8 +2,8 @@
 //  NSData+Base64.h
 //  CheckSDKAPI_IMSS
 //
-//  Created by jiaozhiyu on 15-1-27.
-//  Copyright (c) 2015年 Huawei Co. Ltd. All rights reserved.
+//  Created by Gurpartap Singh on 06/05/12.
+//  Copyright (c) 2012 Gurpartap Singh. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

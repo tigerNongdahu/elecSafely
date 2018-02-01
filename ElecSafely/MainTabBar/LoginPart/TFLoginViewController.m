@@ -11,8 +11,10 @@
 #import "TFLoginViewController.h"
 #import "PrivateFunction.h"
 #import "DESCrypt.h"
+#import "TFLoginProgram.h"
+#import "ElecProgressHUD.h"
 
-@interface TFLoginViewController ()<UITextFieldDelegate>
+@interface TFLoginViewController ()<UITextFieldDelegate,TFLoginProgramDelegate>
 
 @property (nonatomic, strong) UIButton *loginBtn;
 @property (nonatomic, strong) UITextField *userNameTF;
@@ -24,7 +26,6 @@
 @implementation TFLoginViewController
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    
     [self initUI];
     return self;
 }
@@ -34,9 +35,19 @@
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
+// 18 4 24
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(FieldDidChange) name:UITextFieldTextDidChangeNotification object:nil];
+    ElecProgressHUD *a = [[ElecProgressHUD alloc] init];
+    
+    [a showHUD:self.view Offset:0 animation:18];
+    
+
 }
 
 - (void)initUI {
@@ -79,25 +90,14 @@
     });
 }
 
-- (void)sureAction {
-    _loginBtn.userInteractionEnabled = NO;
-    NSString *nameStr = [_userNameTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSString *passWordStr = [_passWordTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    if(nameStr && ![nameStr isEqualToString:@""] && ![passWordStr isEqualToString:@""])
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:nameStr forKey:UserAccount];//存贮账号1
-        [[NSUserDefaults standardUserDefaults] setObject:XPressEncryptUTF8(passWordStr) forKey:UserPassword];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
++ (NSString *)getW3Password {
+    NSString *pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
+    return [DESCrypt decryptUTF8:pwd password:[PrivateFunction getUserFunction]];
 }
 
 NSString *XPressEncryptUTF8(NSString *plainText) {
     //使用utf8加解密
     return [DESCrypt encryptUTF8:plainText password:[PrivateFunction getUserFunction]];
-}
-NSString *XPressEncrypt(NSString *plainText) {
-    return [DESCrypt encryptHEX:plainText password:[PrivateFunction getUserFunction]];
 }
 
 - (void)FieldDidChange {
@@ -187,7 +187,9 @@ NSString *XPressEncrypt(NSString *plainText) {
         loginBtn.userInteractionEnabled = NO;
         [loginBtn addTarget:self action:@selector(sureAction) forControlEvents:UIControlEventTouchUpInside];
         loginBtn.titleLabel.font = PingFangRegular(17);
-        loginBtn.titleLabel.textColor = RGBA(85, 85, 85, 1);
+//        loginBtn.titleLabel.textColor = RGBA(85, 85, 85, 1);
+        [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [loginBtn setTitleColor:UIColorRGB(0xacacac) forState:UIControlStateHighlighted];
         loginBtn.layer.cornerRadius = 20;
         loginBtn.layer.masksToBounds= YES;
         _loginBtn = loginBtn;
@@ -244,11 +246,35 @@ NSString *XPressEncrypt(NSString *plainText) {
     return _passWordTF;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
+- (void)sureAction {
+    _loginBtn.userInteractionEnabled = NO;
+    [_userNameTF resignFirstResponder];
+    [_passWordTF resignFirstResponder];
+    
+    NSString *nameStr = [_userNameTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *passWordStr = [_passWordTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if(nameStr && ![nameStr isEqualToString:@""] && ![passWordStr isEqualToString:@""]) {
+        [[NSUserDefaults standardUserDefaults] setObject:nameStr forKey:UserAccount];//存贮账号1
+        [[NSUserDefaults standardUserDefaults] setObject:XPressEncryptUTF8(passWordStr) forKey:UserPassword];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[TFLoginProgram sharedInstance] userLoginWithAccount:nameStr passWord:passWordStr];
+        [TFLoginProgram sharedInstance].delegate = self;
+    }
+}
+
+#pragma mark loginProgramDelegate
+- (void)loginProgram:(TFLoginProgram *)program DidLoginSuccess:(NSString *)account passWord:(NSString *)password {
+    [ElecTipsView showTips:@"登陆成功"];
+}
+
+- (void)loginProgram:(TFLoginProgram *)program DidLoginFailed:(NSString *)error {
+    [ElecTipsView showTips:error];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

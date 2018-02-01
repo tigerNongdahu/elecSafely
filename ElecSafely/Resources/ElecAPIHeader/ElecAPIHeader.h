@@ -9,5 +9,7 @@
 #ifndef ElecAPIHeader_h
 #define ElecAPIHeader_h
 
+#define FrigateAPI_Login_Check @"http://www.frigate-iot.com/data/login_chk.php"
+
 
 #endif /* ElecAPIHeader_h */

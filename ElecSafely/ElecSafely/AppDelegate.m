@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "TFLaunchViewController.h"
+
+#import "TFLoginViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -19,7 +21,8 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    TFLaunchViewController *launchVC = [[TFLaunchViewController alloc] init];
+//    TFLaunchViewController *launchVC = [[TFLaunchViewController alloc] init];
+    TFLoginViewController *launchVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:launchVC];
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];

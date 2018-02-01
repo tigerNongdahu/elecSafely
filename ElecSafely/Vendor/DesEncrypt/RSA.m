@@ -2,8 +2,8 @@
 //  RSA.m
 //  iMSSiPhonePlatform
 //
-//  Created by jiaozhiyu on 16-1-7.
-//  Copyright (c) 2015年 Huawei Co. Ltd. All rights reserved.
+//  Created by Gurpartap Singh on 06/05/12.
+//  Copyright (c) 2012 Gurpartap Singh. All rights reserved.
 //
 
 #import "RSA.h"

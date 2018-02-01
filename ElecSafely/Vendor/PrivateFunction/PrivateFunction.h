@@ -2,8 +2,8 @@
 //  PrivateFunction.h
 //  PrivateFunction
 //
-//  Created by jiaozhiyu on 15/6/29.
-//  Copyright (c) 2015年 jiaozhiyu. All rights reserved.
+//  Created by Gurpartap Singh on 06/05/12.
+//  Copyright (c) 2012 Gurpartap Singh. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

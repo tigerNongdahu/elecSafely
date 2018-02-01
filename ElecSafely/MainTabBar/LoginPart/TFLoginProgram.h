@@ -8,6 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
+@class TFLoginProgram;
+
+@protocol TFLoginProgramDelegate <NSObject>
+
+- (void)loginProgram:(TFLoginProgram *)program DidLoginSuccess:(NSString *)account passWord:(NSString *)password;
+
+- (void)loginProgram:(TFLoginProgram *)program DidLoginFailed:(NSString *)error;
+
+@end
+
 @interface TFLoginProgram : NSObject
+
+@property (nonatomic, weak) id<TFLoginProgramDelegate> delegate;
+
+
++ (instancetype)sharedInstance;
+
+- (BOOL)checkCacheLogin;
+
+- (void)userLoginWithAccount:(NSString *)account passWord:(NSString *)password;
 
 @end

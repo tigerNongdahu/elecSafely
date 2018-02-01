@@ -10,4 +10,16 @@
 
 @implementation ElecHTTPManager
 
++ (instancetype)manager {
+    ElecHTTPManager *manager = [super manager];
+    NSMutableSet *newSet = [NSMutableSet set];
+    newSet.set = manager.responseSerializer.acceptableContentTypes;
+    [newSet addObject:@"text/html"];
+    manager.responseSerializer.acceptableContentTypes = newSet;
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    return manager;
+}
+
 @end

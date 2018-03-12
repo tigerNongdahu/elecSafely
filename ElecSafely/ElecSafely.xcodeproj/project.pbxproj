@@ -69,6 +69,7 @@
 		553D386A2004E47300FCC58F /* DESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 553D385C2004E47200FCC58F /* DESCrypt.m */; };
 		553D386B2004E47300FCC58F /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 553D385E2004E47200FCC58F /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		553D386C2004E47300FCC58F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 553D38622004E47300FCC58F /* Base64.m */; };
+		55CDA3F42056831E0044A7EE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CDA3F32056831E0044A7EE /* libz.tbd */; };
 		55E1E8131FF5D9CD00964CFB /* TileGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E1E80C1FF5D9CC00964CFB /* TileGridView.m */; };
 		55E1E8141FF5D9CD00964CFB /* AnimatedULogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E1E80E1FF5D9CC00964CFB /* AnimatedULogoView.m */; };
 		55E1E8151FF5D9CD00964CFB /* TileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E1E80F1FF5D9CC00964CFB /* TileView.m */; };
@@ -251,6 +252,7 @@
 		553D38622004E47300FCC58F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		553D386F2004E5B300FCC58F /* PrivateFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateFunction.h; sourceTree = "<group>"; };
 		55C529D21FF09BCE00E32152 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		55CDA3F32056831E0044A7EE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		55E1E80B1FF5D9CC00964CFB /* Contans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contans.h; sourceTree = "<group>"; };
 		55E1E80C1FF5D9CC00964CFB /* TileGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileGridView.m; sourceTree = "<group>"; };
 		55E1E80D1FF5D9CC00964CFB /* TileGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileGridView.h; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55CDA3F42056831E0044A7EE /* libz.tbd in Frameworks */,
 				55F656D92045070A00F2FB2D /* libsqlite3.0.tbd in Frameworks */,
 				55F656D7204506EE00F2FB2D /* UserNotifications.framework in Frameworks */,
 				55F656D5204506D700F2FB2D /* SystemConfiguration.framework in Frameworks */,
@@ -648,6 +651,7 @@
 		55EF8A461FDE32F2003F5061 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55CDA3F32056831E0044A7EE /* libz.tbd */,
 				55F656D82045070A00F2FB2D /* libsqlite3.0.tbd */,
 				55F656D6204506EE00F2FB2D /* UserNotifications.framework */,
 				55F656D4204506D700F2FB2D /* SystemConfiguration.framework */,
@@ -1119,7 +1123,7 @@
 					"$(PROJECT_DIR)/Vendor/PrivateFunction",
 					"$(PROJECT_DIR)/Vendor/XgPushSDK",
 				);
-				OTHER_LDFLAGS = "-Objc";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a153c6fe-be80-4e9c-bd2e-6b52a834b96f";
@@ -1151,7 +1155,7 @@
 					"$(PROJECT_DIR)/Vendor/PrivateFunction",
 					"$(PROJECT_DIR)/Vendor/XgPushSDK",
 				);
-				OTHER_LDFLAGS = "-Objc";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a153c6fe-be80-4e9c-bd2e-6b52a834b96f";

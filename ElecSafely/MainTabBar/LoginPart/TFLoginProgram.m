@@ -8,7 +8,9 @@
 
 #import "TFLoginProgram.h"
 #import <CommonCrypto/CommonDigest.h>
-@interface TFLoginProgram ()
+#import "XGPush.h"
+
+@interface TFLoginProgram ()<XGPushTokenManagerDelegate>
 
 @property (nonatomic, strong) ElecHTTPManager *requestManager;
 
@@ -27,8 +29,8 @@ static TFLoginProgram *loginProgram = nil;
 }
 
 - (void)userLoginWithAccount:(NSString *)account passWord:(NSString *)password {
-    account = @"demo";
-    password = @"88888888";
+//    account = @"demo";
+//    password = @"88888888";
     password = [self md5:password];
     if (account.length > 0 && password.length > 0) {
         
@@ -53,17 +55,24 @@ static TFLoginProgram *loginProgram = nil;
                 [self.delegate loginProgram:loginProgram DidLoginFailed:@"登陆失败"];
             }
         }];
-        
-        NSString *aaa = @"https://www.baidu.com";
-        [_requestManager GET:[aaa stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]] parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-            
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSLog(@"111");
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"222");
-        }];
     }
 }
+
+//绑定信鸽推送
+- (void)bindWithAccount:(NSString *)account {
+    [XGPushTokenManager defaultTokenManager].delegatge = self;
+    [[XGPushTokenManager defaultTokenManager] bindWithIdentifier:account type:XGPushTokenBindTypeAccount];
+}
+
+#pragma mark - XGPushTokenManagerDelegate
+- (void)xgPushDidBindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
+    NSLog(@"%s, id is %@, error %@", __FUNCTION__, identifier, error);
+}
+
+- (void)xgPushDidUnbindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
+    NSLog(@"%s, id is %@, error %@", __FUNCTION__, identifier, error);
+}
+
 
 //md5加密
 - (NSString *)md5:(NSString *)string

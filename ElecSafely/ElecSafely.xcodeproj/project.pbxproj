@@ -80,6 +80,11 @@
 		55EF89F51FDE3148003F5061 /* ElecSafely.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55EF89F31FDE3148003F5061 /* ElecSafely.xcdatamodeld */; };
 		55EF89F71FDE3148003F5061 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EF89F61FDE3148003F5061 /* Assets.xcassets */; };
 		55EF89FD1FDE3148003F5061 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EF89FC1FDE3148003F5061 /* main.m */; };
+		55F656D12045069F00F2FB2D /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F656CF2045069F00F2FB2D /* libXG-SDK.a */; };
+		55F656D3204506CE00F2FB2D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F656D2204506CE00F2FB2D /* CoreTelephony.framework */; };
+		55F656D5204506D700F2FB2D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F656D4204506D700F2FB2D /* SystemConfiguration.framework */; };
+		55F656D7204506EE00F2FB2D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F656D6204506EE00F2FB2D /* UserNotifications.framework */; };
+		55F656D92045070A00F2FB2D /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F656D82045070A00F2FB2D /* libsqlite3.0.tbd */; };
 		55FEDD6E1FDF66DC005BD966 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD4D1FDF66DC005BD966 /* AFHTTPSessionManager.m */; };
 		55FEDD6F1FDF66DC005BD966 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD501FDF66DC005BD966 /* AFNetworkReachabilityManager.m */; };
 		55FEDD701FDF66DC005BD966 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD521FDF66DC005BD966 /* AFSecurityPolicy.m */; };
@@ -269,6 +274,13 @@
 		55EF8A021FDE3148003F5061 /* ElecSafelyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ElecSafelyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EF8A0D1FDE3149003F5061 /* ElecSafelyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ElecSafelyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EF8A4C1FDE348A003F5061 /* ModuleDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModuleDef.h; sourceTree = "<group>"; };
+		55F656CE2045069F00F2FB2D /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
+		55F656CF2045069F00F2FB2D /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
+		55F656D2204506CE00F2FB2D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		55F656D4204506D700F2FB2D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		55F656D6204506EE00F2FB2D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		55F656D82045070A00F2FB2D /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		55F656DC2045072000F2FB2D /* ElecSafely.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElecSafely.entitlements; sourceTree = "<group>"; };
 		55FEDD4C1FDF66DC005BD966 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		55FEDD4D1FDF66DC005BD966 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		55FEDD4E1FDF66DC005BD966 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -309,7 +321,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55F656D92045070A00F2FB2D /* libsqlite3.0.tbd in Frameworks */,
+				55F656D7204506EE00F2FB2D /* UserNotifications.framework in Frameworks */,
+				55F656D5204506D700F2FB2D /* SystemConfiguration.framework in Frameworks */,
+				55F656D3204506CE00F2FB2D /* CoreTelephony.framework in Frameworks */,
 				551569A72022A5B900B80642 /* libPrivateFunction.a in Frameworks */,
+				55F656D12045069F00F2FB2D /* libXG-SDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +612,7 @@
 		55EF89E91FDE3148003F5061 /* ElecSafely */ = {
 			isa = PBXGroup;
 			children = (
+				55F656DC2045072000F2FB2D /* ElecSafely.entitlements */,
 				55EF89EA1FDE3148003F5061 /* AppDelegate.h */,
 				55EF89EB1FDE3148003F5061 /* AppDelegate.m */,
 				55EF8A4B1FDE346C003F5061 /* CommonCapability */,
@@ -616,6 +634,7 @@
 		55EF8A201FDE320D003F5061 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				55F656CC2045067C00F2FB2D /* XgPushSDK */,
 				551569B9202312AC00B80642 /* DGActivityIndicatorView */,
 				553D386D2004E54E00FCC58F /* PrivateFunction */,
 				553D384B2004E42D00FCC58F /* DesEncrypt */,
@@ -629,6 +648,10 @@
 		55EF8A461FDE32F2003F5061 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55F656D82045070A00F2FB2D /* libsqlite3.0.tbd */,
+				55F656D6204506EE00F2FB2D /* UserNotifications.framework */,
+				55F656D4204506D700F2FB2D /* SystemConfiguration.framework */,
+				55F656D2204506CE00F2FB2D /* CoreTelephony.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -650,6 +673,15 @@
 				55EF8A4C1FDE348A003F5061 /* ModuleDef.h */,
 			);
 			path = CommonCapability;
+			sourceTree = "<group>";
+		};
+		55F656CC2045067C00F2FB2D /* XgPushSDK */ = {
+			isa = PBXGroup;
+			children = (
+				55F656CE2045069F00F2FB2D /* XGPush.h */,
+				55F656CF2045069F00F2FB2D /* libXG-SDK.a */,
+			);
+			path = XgPushSDK;
 			sourceTree = "<group>";
 		};
 		55FEDD4B1FDF66DC005BD966 /* AFNetworking */ = {
@@ -767,6 +799,17 @@
 					55EF89E61FDE3148003F5061 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.VPNLite = {
+								enabled = 0;
+							};
+						};
 					};
 					55EF8A011FDE3148003F5061 = {
 						CreatedOnToolsVersion = 9.0;
@@ -1057,6 +1100,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ElecSafely/ElecSafely.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8RDZLRPEAS;
@@ -1073,7 +1117,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/PrivateFunction",
+					"$(PROJECT_DIR)/Vendor/XgPushSDK",
 				);
+				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a153c6fe-be80-4e9c-bd2e-6b52a834b96f";
@@ -1086,6 +1132,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ElecSafely/ElecSafely.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8RDZLRPEAS;
@@ -1102,7 +1149,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/PrivateFunction",
+					"$(PROJECT_DIR)/Vendor/XgPushSDK",
 				);
+				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a153c6fe-be80-4e9c-bd2e-6b52a834b96f";

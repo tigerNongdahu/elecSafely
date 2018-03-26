@@ -10,10 +10,13 @@
 #import "TFLaunchViewController.h"
 #import "XGPush.h"
 #import "TFLoginViewController.h"
+#import "XWSNavigationController.h"
+#import "XWSMainViewController.h"
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
 #endif
+
 
 @interface AppDelegate ()<XGPushDelegate>
 
@@ -31,26 +34,53 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-//    TFLaunchViewController *launchVC = [[TFLaunchViewController alloc] init];
-    TFLoginViewController *launchVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
-    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:launchVC];
+    TFLaunchViewController *launchVC = [[TFLaunchViewController alloc] init];
+//    TFLoginViewController *launchVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+    XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:launchVC];
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
     
+    //注册通知（自己的通知）
+    [self regesterNotification];
     
-    
+    //注册推送
     [[XGPush defaultManager] setEnableDebug:YES];
     XGNotificationAction *action1 = [XGNotificationAction actionWithIdentifier:@"xgaction001" title:@"xgAction1" options:XGNotificationActionOptionNone];
     XGNotificationAction *action2 = [XGNotificationAction actionWithIdentifier:@"xgaction002" title:@"xgAction2" options:XGNotificationActionOptionDestructive];
     XGNotificationCategory *category = [XGNotificationCategory categoryWithIdentifier:@"xgCategory" actions:@[action1, action2] intentIdentifiers:@[] options:XGNotificationCategoryOptionNone];
     XGNotificationConfigure *configure = [XGNotificationConfigure configureNotificationWithCategories:[NSSet setWithObject:category] types:XGUserNotificationTypeAlert|XGUserNotificationTypeBadge|XGUserNotificationTypeSound];
     [[XGPush defaultManager] setNotificationConfigure:configure];
-    [[XGPush defaultManager] startXGWithAppID:2200262432 appKey:@"I89WTUY132GJ" delegate:self];
+    
+    //如果没有操作过，则默认是可以进行接受推送
+    if (IS_OPEN_NOTI) {
+        [[XGPush defaultManager] startXGWithAppID:XG_PUSH_APPID appKey:XG_PUSH_APPKEY delegate:self];
+    }
+    
     [[XGPush defaultManager] setXgApplicationBadgeNumber:0];
     [[XGPush defaultManager] reportXGNotificationInfo:launchOptions];
     return YES;
+}
+
+- (void)openNoti:(NSNotification *)noti{
+    //打开推送
+    if (IS_EQUAL_TO_OP) {
+         [[XGPush defaultManager] startXGWithAppID:XG_PUSH_APPID appKey:XG_PUSH_APPKEY delegate:self];
+    }else{//停止推送
+        [[XGPush defaultManager] stopXGNotification];
+    }
+}
+
+//注册通知
+- (void)regesterNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openNoti:) name:TRUN_ON_OR_OFF_NOTI object:nil];
+}
+
+//取消通知
+- (void)UnRegesterNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -63,11 +93,17 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    //取消通知
+    [self UnRegesterNotification];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    //注册通知（自己的通知）
+    [self regesterNotification];
 }
 
 

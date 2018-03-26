@@ -14,6 +14,21 @@
 #import "ElecHTTPManager.h"
 #import "ElecTipsView.h"
 
+//信鸽AppId和AppKey
+#define XG_PUSH_APPID  2200262432
+#define XG_PUSH_APPKEY  @"I89WTUY132GJ"
+
+//设置是否接受推送
+#define NOTI_KEY @"NOTI_KEY"
+#define OPEN_NOTI @"OPEN_NOTI"
+#define CLOSE_NOTI @"CLOSE_NOTI"
+#define TRUN_ON_OR_OFF_NOTI @"TRUN_ON_OR_OFF_NOTI"
+#define NOTI_RESULT_KEY @"NOTI_RESULT_KEY"
+
+#define IS_EQUAL_TO_OP ([[[NSUserDefaults standardUserDefaults] objectForKey:NOTI_KEY] isEqualToString:OPEN_NOTI])
+
+#define IS_OPEN_NOTI ([[[NSUserDefaults standardUserDefaults] objectForKey:NOTI_KEY] isEqualToString:OPEN_NOTI] || [[[NSUserDefaults standardUserDefaults] objectForKey:NOTI_KEY] isEqualToString:@""] || [[NSUserDefaults standardUserDefaults] objectForKey:NOTI_KEY] == nil)
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

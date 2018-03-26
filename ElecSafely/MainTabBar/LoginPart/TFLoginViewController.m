@@ -13,6 +13,8 @@
 #import "DESCrypt.h"
 #import "TFLoginProgram.h"
 #import "ElecProgressHUD.h"
+#import "XWSMainViewController.h"
+#import "XWSNavigationController.h"
 
 @interface TFLoginViewController ()<UITextFieldDelegate,TFLoginProgramDelegate>
 
@@ -43,9 +45,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(FieldDidChange) name:UITextFieldTextDidChangeNotification object:nil];
-    ElecProgressHUD *a = [[ElecProgressHUD alloc] init];
-    
-    [a showHUD:self.view Offset:0 animation:18];
+//    ElecProgressHUD *a = [[ElecProgressHUD alloc] init];
+//
+//    [a showHUD:self.view Offset:0 animation:18];
     
 
 }
@@ -59,6 +61,8 @@
     
     [self.view addSubview:backImage];
     [self.view addSubview:logoView];
+//    account = @"demo";
+//    password = @"88888888";
 
     [logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(101);
@@ -79,7 +83,7 @@
             }];
             _userNameTF.userInteractionEnabled = YES;
             _passWordTF.userInteractionEnabled = YES;
-            
+
             if (_userNameTF.text.length == 0) {
                 [_userNameTF becomeFirstResponder];
             }
@@ -122,7 +126,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         [self.view addSubview:loginSquare];
         
         [loginSquare mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.view.mas_bottom).offset(0);
+            make.top.mas_equalTo(self.view.mas_top).equalTo(168);
             make.centerX.mas_equalTo(self.view.centerX);
             make.height.mas_equalTo(276);
             make.width.mas_equalTo(SquareWith);
@@ -130,6 +134,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         
         // 登陆按钮
         [loginSquare addSubview:self.loginBtn];
+
         [_loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(SquareWith);
             make.height.mas_equalTo(40);
@@ -147,7 +152,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
             make.bottom.mas_equalTo(_loginBtn.mas_top).offset(-67);
             make.height.mas_equalTo(0.8f);
         }];
-        
+
         // 密码输入框
         [loginSquare addSubview:self.passWordTF];
         [_passWordTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -155,7 +160,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
             make.bottom.mas_equalTo(passWordLine.mas_top).offset(-14);
             make.centerX.mas_equalTo(loginSquare.mas_centerX);
         }];
-        
+
         // 账号行
         UIView *userNameLine = [[UIView alloc] initWithFrame:CGRectZero];
         userNameLine.backgroundColor = UIColorRGB(0x525252);
@@ -165,8 +170,9 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
             make.centerX.mas_equalTo(loginSquare.centerX);
             make.bottom.mas_equalTo(passWordLine.mas_top).offset(-67);
             make.height.mas_equalTo(0.5f);
+
         }];
-        
+
         // 用户名输入框
         [loginSquare addSubview:self.userNameTF];
         [_userNameTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -184,7 +190,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [loginBtn setTitle:@"登陆" forState:UIControlStateNormal];
         loginBtn.backgroundColor = UIColorRGB(0xacacac);
-        loginBtn.userInteractionEnabled = NO;
+        loginBtn.userInteractionEnabled = YES;
         [loginBtn addTarget:self action:@selector(sureAction) forControlEvents:UIControlEventTouchUpInside];
         loginBtn.titleLabel.font = PingFangRegular(17);
 //        loginBtn.titleLabel.textColor = RGBA(85, 85, 85, 1);
@@ -218,6 +224,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         userNameTF.backgroundColor = [UIColor clearColor];
         userNameTF.textColor = RGBA(221, 221, 221, 1);
         _userNameTF = userNameTF;
+        _userNameTF.text = @"demo";
     }
     return _userNameTF;
 }
@@ -242,6 +249,8 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         passWordTF.backgroundColor = [UIColor clearColor];
         passWordTF.textColor = RGBA(221, 221, 221, 1);
         _passWordTF = passWordTF;
+        _passWordTF.text = @"88888888";
+       
     }
     return _passWordTF;
 }
@@ -270,10 +279,18 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
 #pragma mark loginProgramDelegate
 - (void)loginProgram:(TFLoginProgram *)program DidLoginSuccess:(NSString *)account passWord:(NSString *)password {
     [ElecTipsView showTips:@"登陆成功"];
+    XWSMainViewController *vc = [[XWSMainViewController alloc] init];
+    XWSNavigationController *nv = [[XWSNavigationController alloc] initWithRootViewController:vc];
+    
+    [UIApplication sharedApplication].keyWindow.rootViewController = nv;
 }
 
 - (void)loginProgram:(TFLoginProgram *)program DidLoginFailed:(NSString *)error {
     [ElecTipsView showTips:error];
+}
+
+- (void)dealloc{
+    NSLog(@"%s",__func__);
 }
 
 - (void)didReceiveMemoryWarning {

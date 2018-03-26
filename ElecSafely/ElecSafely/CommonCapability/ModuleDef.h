@@ -32,6 +32,8 @@
 #define STRONGSELF(x)   typeof(x) __strong strongSelf = x;
 
 #define DarkBack UIColorRGB(0x0e0f12)
+#define NavColor UIColorRGB(0x191b27)
+#define BackColor UIColorRGB(0x11121b)
 #define PingFangRegular(x) [UIFont fontWithName:@"PingFangSC-Regular" size:x]
 #define PingFangLight(x) [UIFont fontWithName:@"PingFangSC-Light" size:x]
 #define PingFangMedium(x) [UIFont fontWithName:@"PingFangSC-Medium" size:x]

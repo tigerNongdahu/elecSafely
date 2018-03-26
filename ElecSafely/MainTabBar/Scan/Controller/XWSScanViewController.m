@@ -1,0 +1,208 @@
+//
+//  XWSScanViewController.m
+//  ElecSafely
+//
+//  Created by TigerNong on 2018/3/23.
+//  Copyright © 2018年 Tianfu. All rights reserved.
+//
+
+#import "XWSScanViewController.h"
+#import "XWSScanView.h"
+#import <AVFoundation/AVFoundation.h>
+
+#define ScanViewWidth 274.0f
+#define ScanViewHeight ScanViewWidth
+
+#define TOP 204
+#define LEFT (ScreenWidth - ScanViewWidth)/2
+
+#define kScanRect CGRectMake(LEFT, TOP, ScanViewWidth, ScanViewHeight)
+
+@interface XWSScanViewController ()<AVCaptureMetadataOutputObjectsDelegate>{
+    CAShapeLayer *cropLayer;
+}
+@property (strong,nonatomic)AVCaptureDevice * device;
+@property (strong,nonatomic)AVCaptureDeviceInput * input;
+@property (strong,nonatomic)AVCaptureMetadataOutput * output;
+@property (strong,nonatomic)AVCaptureSession * session;
+@property (strong,nonatomic)AVCaptureVideoPreviewLayer * preview;
+@end
+
+@implementation XWSScanViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.title = @"扫一扫";
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self configView];
+    
+    [self setCropRect:kScanRect];
+    
+    [self setupCamera];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
+#pragma mark - 设置扫描框和提示语
+-(void)configView{
+    XWSScanView *scanView = [[XWSScanView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:scanView];
+    [scanView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.top.mas_equalTo(TOP);
+        make.width.height.mas_equalTo(ScanViewHeight);
+    }];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+     [self.view addSubview:label];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.height.mas_equalTo(30);
+        make.width.mas_equalTo(164);
+        make.top.mas_equalTo(scanView.mas_bottom).mas_equalTo(34);
+    }];
+    
+    label.text = @"放入框内，自动扫描";
+    label.font = PingFangMedium(14);
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = RGBA(221,221,221,1.0);
+    label.textAlignment = NSTextAlignmentCenter;
+    label.layer.borderColor = UIColorRGB(0x8a8b90).CGColor;
+    label.layer.borderWidth = 1;
+    label.layer.cornerRadius = 15;
+    label.layer.masksToBounds = YES;
+}
+
+- (void)setCropRect:(CGRect)cropRect{
+    cropLayer = [[CAShapeLayer alloc] init];
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, nil, cropRect);
+    CGPathAddRect(path, nil, self.view.bounds);
+    
+    [cropLayer setFillRule:kCAFillRuleEvenOdd];
+    [cropLayer setPath:path];
+    [cropLayer setFillColor:UIColorRGB(0x000000).CGColor];
+    [cropLayer setOpacity:0.5];
+    
+    [cropLayer setNeedsDisplay];
+    
+    [self.view.layer addSublayer:cropLayer];
+}
+
+- (void)setupCamera
+{
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (device==nil) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"设备没有摄像头" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    // Device
+    _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    // Input
+    _input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
+    
+    // Output
+    _output = [[AVCaptureMetadataOutput alloc]init];
+    [_output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    
+    //设置扫描区域
+    CGFloat top = TOP/ScreenHeight;
+    CGFloat left = LEFT/ScreenWidth;
+    CGFloat width = ScanViewWidth/ScreenWidth;
+    CGFloat height = ScanViewHeight/ScreenHeight;
+    ///top 与 left 互换  width 与 height 互换
+    [_output setRectOfInterest:CGRectMake(top,left, height, width)];
+    
+    
+    // Session
+    _session = [[AVCaptureSession alloc]init];
+    [_session setSessionPreset:AVCaptureSessionPresetHigh];
+    if ([_session canAddInput:self.input])
+    {
+        [_session addInput:self.input];
+    }
+    
+    if ([_session canAddOutput:self.output])
+    {
+        [_session addOutput:self.output];
+    }
+    
+    // 条码类型 AVMetadataObjectTypeQRCode
+    [_output setMetadataObjectTypes:[NSArray arrayWithObjects:AVMetadataObjectTypeQRCode, nil]];
+    
+    // Preview
+    _preview =[AVCaptureVideoPreviewLayer layerWithSession:_session];
+    _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    _preview.frame =self.view.layer.bounds;
+    [self.view.layer insertSublayer:_preview atIndex:0];
+    
+    // Start
+    [_session startRunning];
+}
+
+#pragma mark AVCaptureMetadataOutputObjectsDelegate
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
+{
+    NSString *stringValue;
+    
+    if ([metadataObjects count] >0)
+    {
+        //停止扫描
+        [_session stopRunning];
+        
+        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
+        stringValue = metadataObject.stringValue;
+        NSLog(@"扫描结果：%@",stringValue);
+        
+        NSArray *arry = metadataObject.corners;
+        for (id temp in arry) {
+            NSLog(@"%@",temp);
+        }
+        
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"扫描结果" message:stringValue preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (_session != nil) {
+                [_session startRunning];
+            }
+            
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    } else {
+        NSLog(@"无扫描信息");
+        return;
+    }
+}
+
+
+- (void)dealloc{
+    NSLog(@"dealloc:%s",__func__);
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

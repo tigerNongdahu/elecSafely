@@ -50,6 +50,7 @@
         _containerView.layer.masksToBounds = NO;
         [self addSubview:_containerView];
         
+        //画格子
         [self renderTileViews];
         
 //        _logoLabel = [self generateLogoLabel];

@@ -33,11 +33,10 @@ static TFLoginProgram *loginProgram = nil;
 //    password = @"88888888";
     password = [self md5:password];
     if (account.length > 0 && password.length > 0) {
-        
+
         [_requestManager POST:FrigateAPI_Login_Check parameters:@{@"name":account,@"pwd":password} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
             NSString *checkId =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
-            
+
             if ([checkId isEqualToString:@"-1"]) {
                 if (self.delegate && [self.delegate respondsToSelector:@selector(loginProgram: DidLoginSuccess: passWord:)]) {
                     [self.delegate loginProgram:loginProgram DidLoginSuccess:account passWord:password];
@@ -50,7 +49,7 @@ static TFLoginProgram *loginProgram = nil;
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
+            NSLog(@"error:%@",error);
             if (self.delegate && [self.delegate respondsToSelector:@selector(loginProgram: DidLoginFailed:)]) {
                 [self.delegate loginProgram:loginProgram DidLoginFailed:@"登陆失败"];
             }

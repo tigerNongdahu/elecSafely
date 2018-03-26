@@ -101,6 +101,23 @@
 		55FEDD7A1FDF66DC005BD966 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD691FDF66DC005BD966 /* UIProgressView+AFNetworking.m */; };
 		55FEDD7B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m */; };
 		55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */; };
+		EE50AEC22064A4160068FBC1 /* XWSLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE50AEC12064A4160068FBC1 /* XWSLeftView.m */; };
+		EE50AECB2064A7C40068FBC1 /* left_help@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC42064A7C40068FBC1 /* left_help@3x.png */; };
+		EE50AECC2064A7C40068FBC1 /* left_scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC52064A7C40068FBC1 /* left_scan@3x.png */; };
+		EE50AECD2064A7C40068FBC1 /* left_setting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC62064A7C40068FBC1 /* left_setting@3x.png */; };
+		EE50AECE2064A7C40068FBC1 /* left_alarm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC72064A7C40068FBC1 /* left_alarm@3x.png */; };
+		EE50AECF2064A7C40068FBC1 /* left_feedback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC82064A7C40068FBC1 /* left_feedback@3x.png */; };
+		EE50AED02064A7C40068FBC1 /* left_devices_list@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC92064A7C40068FBC1 /* left_devices_list@3x.png */; };
+		EE50AED12064A7C40068FBC1 /* left_statistics@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AECA2064A7C40068FBC1 /* left_statistics@3x.png */; };
+		EE50AEDA206504A90068FBC1 /* XWSScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE50AED9206504A90068FBC1 /* XWSScanView.m */; };
+		EE50AEDD206504EA0068FBC1 /* XWSScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE50AEDC206504EA0068FBC1 /* XWSScanViewController.m */; };
+		EEA2FF4020674AD300E5D192 /* XWSBasrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2FF3F20674AD300E5D192 /* XWSBasrViewController.m */; };
+		EEA2FF492067691D00E5D192 /* UIView+HGCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2FF472067691C00E5D192 /* UIView+HGCorner.m */; };
+		EEC53B3B2063CE0E00EE3900 /* XWSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC53B3A2063CE0E00EE3900 /* XWSNavigationController.m */; };
+		EEC53B402063CFCB00EE3900 /* XWSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC53B3F2063CFCB00EE3900 /* XWSSettingViewController.m */; };
+		EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73383206532A700FFB99B /* XWSMainViewController.m */; };
+		EEF73387206537F500FFB99B /* XWSRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73386206537F500FFB99B /* XWSRightView.m */; };
+		EEF7338F20663EC700FFB99B /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = EEF7338E20663EC700FFB99B /* json.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -316,6 +333,32 @@
 		55FEDD6B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		55FEDD6C1FDF66DC005BD966 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		EE50AEC02064A4160068FBC1 /* XWSLeftView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSLeftView.h; sourceTree = "<group>"; };
+		EE50AEC12064A4160068FBC1 /* XWSLeftView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSLeftView.m; sourceTree = "<group>"; };
+		EE50AEC42064A7C40068FBC1 /* left_help@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_help@3x.png"; sourceTree = "<group>"; };
+		EE50AEC52064A7C40068FBC1 /* left_scan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_scan@3x.png"; sourceTree = "<group>"; };
+		EE50AEC62064A7C40068FBC1 /* left_setting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_setting@3x.png"; sourceTree = "<group>"; };
+		EE50AEC72064A7C40068FBC1 /* left_alarm@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_alarm@3x.png"; sourceTree = "<group>"; };
+		EE50AEC82064A7C40068FBC1 /* left_feedback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_feedback@3x.png"; sourceTree = "<group>"; };
+		EE50AEC92064A7C40068FBC1 /* left_devices_list@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_devices_list@3x.png"; sourceTree = "<group>"; };
+		EE50AECA2064A7C40068FBC1 /* left_statistics@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_statistics@3x.png"; sourceTree = "<group>"; };
+		EE50AED8206504A90068FBC1 /* XWSScanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSScanView.h; sourceTree = "<group>"; };
+		EE50AED9206504A90068FBC1 /* XWSScanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSScanView.m; sourceTree = "<group>"; };
+		EE50AEDB206504EA0068FBC1 /* XWSScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSScanViewController.h; sourceTree = "<group>"; };
+		EE50AEDC206504EA0068FBC1 /* XWSScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSScanViewController.m; sourceTree = "<group>"; };
+		EEA2FF3E20674AD300E5D192 /* XWSBasrViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSBasrViewController.h; sourceTree = "<group>"; };
+		EEA2FF3F20674AD300E5D192 /* XWSBasrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSBasrViewController.m; sourceTree = "<group>"; };
+		EEA2FF472067691C00E5D192 /* UIView+HGCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HGCorner.m"; sourceTree = "<group>"; };
+		EEA2FF482067691D00E5D192 /* UIView+HGCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HGCorner.h"; sourceTree = "<group>"; };
+		EEC53B392063CE0E00EE3900 /* XWSNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSNavigationController.h; sourceTree = "<group>"; };
+		EEC53B3A2063CE0E00EE3900 /* XWSNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNavigationController.m; sourceTree = "<group>"; };
+		EEC53B3E2063CFCB00EE3900 /* XWSSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSSettingViewController.h; sourceTree = "<group>"; };
+		EEC53B3F2063CFCB00EE3900 /* XWSSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSSettingViewController.m; sourceTree = "<group>"; };
+		EEF73382206532A700FFB99B /* XWSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSMainViewController.h; sourceTree = "<group>"; };
+		EEF73383206532A700FFB99B /* XWSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSMainViewController.m; sourceTree = "<group>"; };
+		EEF73385206537F500FFB99B /* XWSRightView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSRightView.h; sourceTree = "<group>"; };
+		EEF73386206537F500FFB99B /* XWSRightView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSRightView.m; sourceTree = "<group>"; };
+		EEF7338E20663EC700FFB99B /* json.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = json.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,6 +405,7 @@
 		551569AA2022A68100B80642 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EE50AEC32064A7C30068FBC1 /* LeftMenu */,
 				55EC947F1FEDF90C000D21F4 /* logo_min.png */,
 				553D35E3200465FF00FCC58F /* bg@3x.png */,
 				553D35E4200465FF00FCC58F /* logo@3x.png */,
@@ -504,6 +548,8 @@
 				551569B1202305BF00B80642 /* ElecHTTPManager.m */,
 				551569B62023129000B80642 /* ElecProgressHUD.h */,
 				551569B72023129000B80642 /* ElecProgressHUD.m */,
+				EEA2FF482067691D00E5D192 /* UIView+HGCorner.h */,
+				EEA2FF472067691C00E5D192 /* UIView+HGCorner.m */,
 			);
 			path = ToolView;
 			sourceTree = "<group>";
@@ -628,6 +674,11 @@
 		55EF8A1F1FDE320D003F5061 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				EEA2FF3D20674AC400E5D192 /* Base */,
+				EE50AED5206504920068FBC1 /* Scan */,
+				EE50AEBD2064A3C10068FBC1 /* Main */,
+				EEC53B3D2063CFA800EE3900 /* Setting */,
+				EEC53B382063CDE900EE3900 /* Navi */,
 				55EC947A1FEDF8C7000D21F4 /* LaunchAnimation */,
 				55EC94931FEDFD35000D21F4 /* LoginPart */,
 			);
@@ -735,6 +786,105 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		EE50AEBD2064A3C10068FBC1 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				EE50AEBE2064A3C10068FBC1 /* Controller */,
+				EE50AEBF2064A3C10068FBC1 /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		EE50AEBE2064A3C10068FBC1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EEF73382206532A700FFB99B /* XWSMainViewController.h */,
+				EEF73383206532A700FFB99B /* XWSMainViewController.m */,
+				EEF7338E20663EC700FFB99B /* json.json */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EE50AEBF2064A3C10068FBC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EE50AEC02064A4160068FBC1 /* XWSLeftView.h */,
+				EE50AEC12064A4160068FBC1 /* XWSLeftView.m */,
+				EEF73385206537F500FFB99B /* XWSRightView.h */,
+				EEF73386206537F500FFB99B /* XWSRightView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EE50AEC32064A7C30068FBC1 /* LeftMenu */ = {
+			isa = PBXGroup;
+			children = (
+				EE50AEC42064A7C40068FBC1 /* left_help@3x.png */,
+				EE50AEC52064A7C40068FBC1 /* left_scan@3x.png */,
+				EE50AEC62064A7C40068FBC1 /* left_setting@3x.png */,
+				EE50AEC72064A7C40068FBC1 /* left_alarm@3x.png */,
+				EE50AEC82064A7C40068FBC1 /* left_feedback@3x.png */,
+				EE50AEC92064A7C40068FBC1 /* left_devices_list@3x.png */,
+				EE50AECA2064A7C40068FBC1 /* left_statistics@3x.png */,
+			);
+			name = LeftMenu;
+			path = Resources/LeftMenu;
+			sourceTree = SOURCE_ROOT;
+		};
+		EE50AED5206504920068FBC1 /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				EE50AED6206504920068FBC1 /* Controller */,
+				EE50AED7206504920068FBC1 /* View */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
+		EE50AED6206504920068FBC1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EE50AEDB206504EA0068FBC1 /* XWSScanViewController.h */,
+				EE50AEDC206504EA0068FBC1 /* XWSScanViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EE50AED7206504920068FBC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EE50AED8206504A90068FBC1 /* XWSScanView.h */,
+				EE50AED9206504A90068FBC1 /* XWSScanView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EEA2FF3D20674AC400E5D192 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EEA2FF3E20674AD300E5D192 /* XWSBasrViewController.h */,
+				EEA2FF3F20674AD300E5D192 /* XWSBasrViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		EEC53B382063CDE900EE3900 /* Navi */ = {
+			isa = PBXGroup;
+			children = (
+				EEC53B392063CE0E00EE3900 /* XWSNavigationController.h */,
+				EEC53B3A2063CE0E00EE3900 /* XWSNavigationController.m */,
+			);
+			path = Navi;
+			sourceTree = "<group>";
+		};
+		EEC53B3D2063CFA800EE3900 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				EEC53B3E2063CFCB00EE3900 /* XWSSettingViewController.h */,
+				EEC53B3F2063CFCB00EE3900 /* XWSSettingViewController.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -802,7 +952,7 @@
 				TargetAttributes = {
 					55EF89E61FDE3148003F5061 = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -852,10 +1002,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE50AED02064A7C40068FBC1 /* left_devices_list@3x.png in Resources */,
 				553D35E5200465FF00FCC58F /* bg@3x.png in Resources */,
+				EE50AECD2064A7C40068FBC1 /* left_setting@3x.png in Resources */,
+				EEF7338F20663EC700FFB99B /* json.json in Resources */,
+				EE50AED12064A7C40068FBC1 /* left_statistics@3x.png in Resources */,
 				55EF89F71FDE3148003F5061 /* Assets.xcassets in Resources */,
 				553D35E6200465FF00FCC58F /* logo@3x.png in Resources */,
+				EE50AECB2064A7C40068FBC1 /* left_help@3x.png in Resources */,
 				55EC94861FEDF90C000D21F4 /* logo_min.png in Resources */,
+				EE50AECF2064A7C40068FBC1 /* left_feedback@3x.png in Resources */,
+				EE50AECE2064A7C40068FBC1 /* left_alarm@3x.png in Resources */,
+				EE50AECC2064A7C40068FBC1 /* left_scan@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,6 +1038,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF73387206537F500FFB99B /* XWSRightView.m in Sources */,
 				55E1E8141FF5D9CD00964CFB /* AnimatedULogoView.m in Sources */,
 				55156A02202312AC00B80642 /* DGActivityIndicatorAnimation.m in Sources */,
 				55156A0C202312AC00B80642 /* DGActivityIndicatorBallScaleAnimation.m in Sources */,
@@ -898,6 +1057,7 @@
 				55156A0A202312AC00B80642 /* DGActivityIndicatorBallPulseSyncAnimation.m in Sources */,
 				55FEDD6E1FDF66DC005BD966 /* AFHTTPSessionManager.m in Sources */,
 				55FEDD731FDF66DC005BD966 /* AFURLSessionManager.m in Sources */,
+				EEA2FF492067691D00E5D192 /* UIView+HGCorner.m in Sources */,
 				55FEDD771FDF66DC005BD966 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				55EF89FD1FDE3148003F5061 /* main.m in Sources */,
 				55156A07202312AC00B80642 /* DGActivityIndicatorBallGridBeatAnimation.m in Sources */,
@@ -910,14 +1070,18 @@
 				553D386A2004E47300FCC58F /* DESCrypt.m in Sources */,
 				55156A1B202312AC00B80642 /* DGActivityIndicatorNineDotsAnimation.m in Sources */,
 				553D386C2004E47300FCC58F /* Base64.m in Sources */,
+				EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */,
 				553D384A2004E0D100FCC58F /* ElecTipsView.m in Sources */,
 				55E1E8161FF5D9CD00964CFB /* Contans.m in Sources */,
 				55EC94961FEDFD83000D21F4 /* TFLoginViewController.m in Sources */,
 				55156A1D202312AC00B80642 /* DGActivityIndicatorRotatingSquaresAnimation.m in Sources */,
+				EE50AEDA206504A90068FBC1 /* XWSScanView.m in Sources */,
 				55156A08202312AC00B80642 /* DGActivityIndicatorBallGridPulseAnimation.m in Sources */,
+				EEA2FF4020674AD300E5D192 /* XWSBasrViewController.m in Sources */,
 				55156A0D202312AC00B80642 /* DGActivityIndicatorBallScaleMultipleAnimation.m in Sources */,
 				55156A11202312AC00B80642 /* DGActivityIndicatorBallTrianglePathAnimation.m in Sources */,
 				553D38352004716500FCC58F /* MASConstraint.m in Sources */,
+				EEC53B3B2063CE0E00EE3900 /* XWSNavigationController.m in Sources */,
 				55FEDD6F1FDF66DC005BD966 /* AFNetworkReachabilityManager.m in Sources */,
 				553D38392004716500FCC58F /* MASViewConstraint.m in Sources */,
 				55156A09202312AC00B80642 /* DGActivityIndicatorBallPulseAnimation.m in Sources */,
@@ -940,6 +1104,7 @@
 				55156A03202312AC00B80642 /* DGActivityIndicatorBallBeatAnimation.m in Sources */,
 				55E1E8131FF5D9CD00964CFB /* TileGridView.m in Sources */,
 				553D383B2004716500FCC58F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				EEC53B402063CFCB00EE3900 /* XWSSettingViewController.m in Sources */,
 				553D38662004E47300FCC58F /* NSData+CommonCrypto.m in Sources */,
 				55FEDD781FDF66DC005BD966 /* UIButton+AFNetworking.m in Sources */,
 				55E1E8151FF5D9CD00964CFB /* TileView.m in Sources */,
@@ -952,6 +1117,7 @@
 				55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */,
 				55156A16202312AC00B80642 /* DGActivityIndicatorFiveDotsAnimation.m in Sources */,
 				55156A0F202312AC00B80642 /* DGActivityIndicatorBallScaleRippleMultipleAnimation.m in Sources */,
+				EE50AEDD206504EA0068FBC1 /* XWSScanViewController.m in Sources */,
 				55156A12202312AC00B80642 /* DGActivityIndicatorBallZigZagAnimation.m in Sources */,
 				55156A1A202312AC00B80642 /* DGActivityIndicatorLineScalePulseOutRapidAnimation.m in Sources */,
 				553D38372004716500FCC58F /* MASLayoutConstraint.m in Sources */,
@@ -959,6 +1125,7 @@
 				551569B82023129000B80642 /* ElecProgressHUD.m in Sources */,
 				55156A10202312AC00B80642 /* DGActivityIndicatorBallSpinFadeLoader.m in Sources */,
 				55FEDD741FDF66DC005BD966 /* AFAutoPurgingImageCache.m in Sources */,
+				EE50AEC22064A4160068FBC1 /* XWSLeftView.m in Sources */,
 				553D383D2004716500FCC58F /* ViewController+MASAdditions.m in Sources */,
 				553D38692004E47300FCC58F /* AESCrypt.m in Sources */,
 				55FEDD751FDF66DC005BD966 /* AFImageDownloader.m in Sources */,
@@ -1106,8 +1273,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ElecSafely/ElecSafely.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 8RDZLRPEAS;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TA7V5557XR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1124,10 +1291,10 @@
 					"$(PROJECT_DIR)/Vendor/XgPushSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youjiagou.daling.iSmartIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a153c6fe-be80-4e9c-bd2e-6b52a834b96f";
-				PROVISIONING_PROFILE_SPECIFIER = elecProvisioning;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1138,8 +1305,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ElecSafely/ElecSafely.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 8RDZLRPEAS;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TA7V5557XR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1156,10 +1323,10 @@
 					"$(PROJECT_DIR)/Vendor/XgPushSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youjiagou.daling.iSmartIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a153c6fe-be80-4e9c-bd2e-6b52a834b96f";
-				PROVISIONING_PROFILE_SPECIFIER = elecProvisioning;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

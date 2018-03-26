@@ -13,6 +13,7 @@
 #import "ElecAPIHeader.h"
 #import "ElecHTTPManager.h"
 #import "ElecTipsView.h"
+#import "XWSTipsView.h"
 
 //信鸽AppId和AppKey
 #define XG_PUSH_APPID  2200262432

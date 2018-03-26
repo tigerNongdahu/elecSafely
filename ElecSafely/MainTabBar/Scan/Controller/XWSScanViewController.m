@@ -13,10 +13,13 @@
 #define ScanViewWidth 274.0f
 #define ScanViewHeight ScanViewWidth
 
-#define TOP 204
+#define TOP 204.0
 #define LEFT (ScreenWidth - ScanViewWidth)/2
 
 #define kScanRect CGRectMake(LEFT, TOP, ScanViewWidth, ScanViewHeight)
+
+#define ScanRepeatInterval 0.01
+#define PerChangeHeight 1
 
 @interface XWSScanViewController ()<AVCaptureMetadataOutputObjectsDelegate>{
     CAShapeLayer *cropLayer;
@@ -26,9 +29,15 @@
 @property (strong,nonatomic)AVCaptureMetadataOutput * output;
 @property (strong,nonatomic)AVCaptureSession * session;
 @property (strong,nonatomic)AVCaptureVideoPreviewLayer * preview;
+/*滚动条定时器*/
+@property (nonatomic, strong) NSTimer *timer;
+
+@property (nonatomic, strong) UIImageView *lineIamgeView;
+@property (nonatomic, assign) CGFloat scanTop;
 @end
 
 @implementation XWSScanViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,15 +50,29 @@
     [self setCropRect:kScanRect];
     
     [self setupCamera];
+    
+    //扫描二维码的出生位置
+    self.scanTop = TOP;
+    
+    //延迟
+    [self performSelector:@selector(startTimer) withObject:nil afterDelay:0.3];
 
 }
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self stopTimer];
+}
+
+
 #pragma mark - 设置扫描框和提示语
 -(void)configView{
+    
     XWSScanView *scanView = [[XWSScanView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:scanView];
     [scanView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,6 +99,11 @@
     label.layer.borderWidth = 1;
     label.layer.cornerRadius = 15;
     label.layer.masksToBounds = YES;
+    
+    self.lineIamgeView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scan"]];
+    self.lineIamgeView.frame = CGRectMake(LEFT, TOP, ScanViewWidth, 2);
+    self.lineIamgeView.hidden = YES;
+    [self.view addSubview:self.lineIamgeView];
 }
 
 - (void)setCropRect:(CGRect)cropRect{
@@ -159,6 +187,7 @@
     {
         //停止扫描
         [_session stopRunning];
+        [self stopTimer];
         
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
@@ -174,6 +203,7 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if (_session != nil) {
                 [_session startRunning];
+                [self startTimer];
             }
             
         }]];
@@ -185,9 +215,43 @@
     }
 }
 
+#pragma mark 横线的动画
+- (void)stopTimer{
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+        CGRect frame = self.lineIamgeView.frame;
+        frame.origin.y = self.scanTop;
+        self.lineIamgeView.frame = frame;
+        _lineIamgeView.hidden = YES;
+        self.scanTop = TOP;
+    }
+}
+
+- (void)startTimer{
+    _lineIamgeView.hidden = NO;
+    if (!_timer) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:ScanRepeatInterval target:self selector:@selector(scanQR) userInfo:nil repeats:YES];
+        
+        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    }
+}
+- (void)scanQR{
+    self.scanTop += PerChangeHeight;
+    if (self.scanTop / (TOP + ScanViewWidth) >= 1.0) {
+        self.scanTop = TOP;
+    }
+    CGRect frame = self.lineIamgeView.frame;
+    frame.origin.y = self.scanTop;
+    self.lineIamgeView.frame = frame;
+}
+
+
 
 - (void)dealloc{
     NSLog(@"dealloc:%s",__func__);
+    
+    [self stopTimer];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,5 +11,8 @@
 
 #define FrigateAPI_Login_Check @"http://www.frigate-iot.com/data/login_chk.php"
 
+/*加载热点问题的url*/
+#define FrigateAPI_Help_AnswerForAsk @"www.frigate-iot.com/MonitoringCentre/QA/AnswerForAsk.php"
+
 
 #endif /* ElecAPIHeader_h */

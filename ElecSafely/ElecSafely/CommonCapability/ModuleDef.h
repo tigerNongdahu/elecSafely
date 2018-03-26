@@ -28,6 +28,11 @@
 #define IS_IOS10 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) ? YES : NO)
 #define IS_IOS11 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) ? YES : NO)
 
+#define IPHONE_X_WIDTH 375
+#define IPHONE_X_HEIGHT 812
+#define IS_IPHINE_X (ScreenWidth == IPHONE_X_WIDTH && ScreenHeight == IPHONE_X_HEIGHT)
+
+
 #define WEAKSELF        typeof(self) __weak weakSelf = self;
 #define STRONGSELF(x)   typeof(x) __strong strongSelf = x;
 
@@ -43,6 +48,7 @@
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define NavibarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height + 44)
+
 
 #define UserAccount @"userAccount"
 #define UserPassword @"userPassword"

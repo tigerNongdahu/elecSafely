@@ -113,6 +113,11 @@
 		EE50AEDD206504EA0068FBC1 /* XWSScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE50AEDC206504EA0068FBC1 /* XWSScanViewController.m */; };
 		EEA2FF4020674AD300E5D192 /* XWSBasrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2FF3F20674AD300E5D192 /* XWSBasrViewController.m */; };
 		EEA2FF492067691D00E5D192 /* UIView+HGCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2FF472067691C00E5D192 /* UIView+HGCorner.m */; };
+		EEB699E12068A4410078A3F5 /* scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEB699E02068A4410078A3F5 /* scan@3x.png */; };
+		EEB699E52068AFF70078A3F5 /* XWSHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB699E42068AFF70078A3F5 /* XWSHelpViewController.m */; };
+		EEB699E82068C6000078A3F5 /* XWSDetailHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB699E72068C6000078A3F5 /* XWSDetailHelpViewController.m */; };
+		EEB699EF2068DD540078A3F5 /* XWSFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB699EE2068DD540078A3F5 /* XWSFeedbackViewController.m */; };
+		EEB699F22068E5FF0078A3F5 /* XWSTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB699F12068E5FF0078A3F5 /* XWSTipsView.m */; };
 		EEC53B3B2063CE0E00EE3900 /* XWSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC53B3A2063CE0E00EE3900 /* XWSNavigationController.m */; };
 		EEC53B402063CFCB00EE3900 /* XWSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC53B3F2063CFCB00EE3900 /* XWSSettingViewController.m */; };
 		EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73383206532A700FFB99B /* XWSMainViewController.m */; };
@@ -350,6 +355,15 @@
 		EEA2FF3F20674AD300E5D192 /* XWSBasrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSBasrViewController.m; sourceTree = "<group>"; };
 		EEA2FF472067691C00E5D192 /* UIView+HGCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HGCorner.m"; sourceTree = "<group>"; };
 		EEA2FF482067691D00E5D192 /* UIView+HGCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HGCorner.h"; sourceTree = "<group>"; };
+		EEB699E02068A4410078A3F5 /* scan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan@3x.png"; sourceTree = "<group>"; };
+		EEB699E32068AFF70078A3F5 /* XWSHelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSHelpViewController.h; sourceTree = "<group>"; };
+		EEB699E42068AFF70078A3F5 /* XWSHelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSHelpViewController.m; sourceTree = "<group>"; };
+		EEB699E62068C6000078A3F5 /* XWSDetailHelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSDetailHelpViewController.h; sourceTree = "<group>"; };
+		EEB699E72068C6000078A3F5 /* XWSDetailHelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSDetailHelpViewController.m; sourceTree = "<group>"; };
+		EEB699ED2068DD540078A3F5 /* XWSFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFeedbackViewController.h; sourceTree = "<group>"; };
+		EEB699EE2068DD540078A3F5 /* XWSFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFeedbackViewController.m; sourceTree = "<group>"; };
+		EEB699F02068E5FF0078A3F5 /* XWSTipsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSTipsView.h; sourceTree = "<group>"; };
+		EEB699F12068E5FF0078A3F5 /* XWSTipsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSTipsView.m; sourceTree = "<group>"; };
 		EEC53B392063CE0E00EE3900 /* XWSNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSNavigationController.h; sourceTree = "<group>"; };
 		EEC53B3A2063CE0E00EE3900 /* XWSNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNavigationController.m; sourceTree = "<group>"; };
 		EEC53B3E2063CFCB00EE3900 /* XWSSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSSettingViewController.h; sourceTree = "<group>"; };
@@ -409,6 +423,7 @@
 				55EC947F1FEDF90C000D21F4 /* logo_min.png */,
 				553D35E3200465FF00FCC58F /* bg@3x.png */,
 				553D35E4200465FF00FCC58F /* logo@3x.png */,
+				EEB699E02068A4410078A3F5 /* scan@3x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -550,6 +565,8 @@
 				551569B72023129000B80642 /* ElecProgressHUD.m */,
 				EEA2FF482067691D00E5D192 /* UIView+HGCorner.h */,
 				EEA2FF472067691C00E5D192 /* UIView+HGCorner.m */,
+				EEB699F02068E5FF0078A3F5 /* XWSTipsView.h */,
+				EEB699F12068E5FF0078A3F5 /* XWSTipsView.m */,
 			);
 			path = ToolView;
 			sourceTree = "<group>";
@@ -674,6 +691,8 @@
 		55EF8A1F1FDE320D003F5061 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				EEB699EC2068DD3A0078A3F5 /* Feedback */,
+				EEB699E22068AFA80078A3F5 /* Help */,
 				EEA2FF3D20674AC400E5D192 /* Base */,
 				EE50AED5206504920068FBC1 /* Scan */,
 				EE50AEBD2064A3C10068FBC1 /* Main */,
@@ -867,6 +886,26 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		EEB699E22068AFA80078A3F5 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				EEB699E32068AFF70078A3F5 /* XWSHelpViewController.h */,
+				EEB699E42068AFF70078A3F5 /* XWSHelpViewController.m */,
+				EEB699E62068C6000078A3F5 /* XWSDetailHelpViewController.h */,
+				EEB699E72068C6000078A3F5 /* XWSDetailHelpViewController.m */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		EEB699EC2068DD3A0078A3F5 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				EEB699ED2068DD540078A3F5 /* XWSFeedbackViewController.h */,
+				EEB699EE2068DD540078A3F5 /* XWSFeedbackViewController.m */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
 		EEC53B382063CDE900EE3900 /* Navi */ = {
 			isa = PBXGroup;
 			children = (
@@ -947,6 +986,7 @@
 		55EF89DF1FDE3148003F5061 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = XWS;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Tianfu;
 				TargetAttributes = {
@@ -1010,6 +1050,7 @@
 				55EF89F71FDE3148003F5061 /* Assets.xcassets in Resources */,
 				553D35E6200465FF00FCC58F /* logo@3x.png in Resources */,
 				EE50AECB2064A7C40068FBC1 /* left_help@3x.png in Resources */,
+				EEB699E12068A4410078A3F5 /* scan@3x.png in Resources */,
 				55EC94861FEDF90C000D21F4 /* logo_min.png in Resources */,
 				EE50AECF2064A7C40068FBC1 /* left_feedback@3x.png in Resources */,
 				EE50AECE2064A7C40068FBC1 /* left_alarm@3x.png in Resources */,
@@ -1065,6 +1106,7 @@
 				55FEDD7A1FDF66DC005BD966 /* UIProgressView+AFNetworking.m in Sources */,
 				55156A1F202312AC00B80642 /* DGActivityIndicatorThreeDotsAnimation.m in Sources */,
 				55156A06202312AC00B80642 /* DGActivityIndicatorBallClipRotatePulseAnimation.m in Sources */,
+				EEB699EF2068DD540078A3F5 /* XWSFeedbackViewController.m in Sources */,
 				55156A0E202312AC00B80642 /* DGActivityIndicatorBallScaleRippleAnimation.m in Sources */,
 				55156A1E202312AC00B80642 /* DGActivityIndicatorRotatingTrigonAnimation.m in Sources */,
 				553D386A2004E47300FCC58F /* DESCrypt.m in Sources */,
@@ -1074,6 +1116,7 @@
 				553D384A2004E0D100FCC58F /* ElecTipsView.m in Sources */,
 				55E1E8161FF5D9CD00964CFB /* Contans.m in Sources */,
 				55EC94961FEDFD83000D21F4 /* TFLoginViewController.m in Sources */,
+				EEB699F22068E5FF0078A3F5 /* XWSTipsView.m in Sources */,
 				55156A1D202312AC00B80642 /* DGActivityIndicatorRotatingSquaresAnimation.m in Sources */,
 				EE50AEDA206504A90068FBC1 /* XWSScanView.m in Sources */,
 				55156A08202312AC00B80642 /* DGActivityIndicatorBallGridPulseAnimation.m in Sources */,
@@ -1111,6 +1154,7 @@
 				553D38682004E47300FCC58F /* RSA.m in Sources */,
 				55FEDD7B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m in Sources */,
 				55156A19202312AC00B80642 /* DGActivityIndicatorLineScalePulseOutAnimation.m in Sources */,
+				EEB699E52068AFF70078A3F5 /* XWSHelpViewController.m in Sources */,
 				55156A0B202312AC00B80642 /* DGActivityIndicatorBallRotateAnimation.m in Sources */,
 				551569B2202305BF00B80642 /* ElecHTTPManager.m in Sources */,
 				55156A1C202312AC00B80642 /* DGActivityIndicatorRotatingSandglassAnimation.m in Sources */,
@@ -1130,6 +1174,7 @@
 				553D38692004E47300FCC58F /* AESCrypt.m in Sources */,
 				55FEDD751FDF66DC005BD966 /* AFImageDownloader.m in Sources */,
 				55156A13202312AC00B80642 /* DGActivityIndicatorBallZigZagDeflectAnimation.m in Sources */,
+				EEB699E82068C6000078A3F5 /* XWSDetailHelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

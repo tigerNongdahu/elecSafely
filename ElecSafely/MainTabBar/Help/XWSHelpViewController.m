@@ -10,7 +10,7 @@
 #import "XWSDetailHelpViewController.h"
 
 #define TableViewRowHeight 54.0f
-#define TableViewHeaderHeight 40.0f
+#define TableViewHeaderHeight 41.0f
 
 @interface XWSHelpViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -86,7 +86,7 @@
         [cell addSubview:titleLabel];
         titleLabel.tag = 100 + indexPath.row;
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(14);
+            make.left.mas_equalTo(18);
             make.height.mas_equalTo(30);
             make.top.mas_equalTo((TableViewRowHeight - 30) * 0.5);
         }];
@@ -125,7 +125,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [headView addSubview:titleLabel];
-    titleLabel.frame = CGRectMake(14, 11, headView.frame.size.width - 14 * 2, headView.frame.size.height - 11 * 2);
+    titleLabel.frame = CGRectMake(18, 11, headView.frame.size.width - 18 * 2, headView.frame.size.height - 11 * 2);
     titleLabel.text = @"热点问题";
     titleLabel.font = PingFangMedium(13);
     titleLabel.textColor = RGBA(153, 153, 153, 1);

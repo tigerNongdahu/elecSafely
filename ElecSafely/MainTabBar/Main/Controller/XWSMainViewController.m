@@ -143,8 +143,8 @@
             break;
         case XWSTouchItemFeedback:
         {
-            XWSFeedbackViewController *feedVC = [[XWSFeedbackViewController alloc] init];
-            vc = feedVC;
+//            XWSFeedbackViewController *feedVC = [[XWSFeedbackViewController alloc] init];
+//            vc = feedVC;
         }
             break;
         case XWSTouchItemHelp:

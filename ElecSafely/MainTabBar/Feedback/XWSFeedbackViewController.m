@@ -7,11 +7,12 @@
 //
 
 #import "XWSFeedbackViewController.h"
+#import "XWSFeedImageCell.h"
 #define TableViewRowHeight 150.0
 #define MAX_LIMIT_NUMS 300
 #define MIN_LIMIT_NUMS 9
 
-@interface XWSFeedbackViewController ()<UITextViewDelegate>
+@interface XWSFeedbackViewController ()<UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 /*站位字符标签*/
 @property (nonatomic, strong) UILabel *place;
 /*字数提示标签*/
@@ -20,14 +21,30 @@
 @property (nonatomic, strong) UIButton *sendBtn;
 /*输入框*/
 @property (nonatomic, strong) UITextView *textView;
+/*显示图片的view*/
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) NSMutableArray *images;
+
 @end
 
 @implementation XWSFeedbackViewController
+
+- (NSMutableArray *)images{
+    if (!_images) {
+        _images = [NSMutableArray array];
+    }
+    return _images;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavi];
     [self initView];
+    self.view.backgroundColor = BackColor;
+    
+//    [self.images addObject:[UIImage imageNamed:@"left_help"]];
+//    [self.images addObject:[UIImage imageNamed:@"left_setting"]];
+
 }
 
 - (void)setUpNavi{
@@ -48,14 +65,14 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.view addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(17);
+        make.left.mas_equalTo(18);
         make.top.mas_equalTo(0);
-        make.right.mas_equalTo(-17);
+        make.right.mas_equalTo(-18);
         make.height.mas_equalTo(40);
     }];
     
-    titleLabel.font = PingFangLight(13);
-    titleLabel.textColor = RGBA(153, 153, 153, 1);
+    titleLabel.font = PingFangMedium(13);
+    titleLabel.textColor = RGBA(102, 102, 102, 1);
     titleLabel.text = @"请补充详细问题和意见";
     
     UIView *textContentView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -64,84 +81,104 @@
     [textContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(titleLabel.mas_bottom).mas_equalTo(0);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(200);
+        make.height.mas_equalTo(138);
     }];
     
     self.place = [[UILabel alloc] initWithFrame:CGRectZero];
     
     [textContentView addSubview:self.place];
     [self.place mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(12);
-        make.left.mas_equalTo(17);
+        make.top.mas_equalTo(20);
+        make.left.mas_equalTo(18);
         make.height.mas_equalTo(30);
     }];
     self.place.text = @"请输入不少于10个字的描述";
-    self.place.textColor = RGBA(153, 153, 153, 1);
-    self.place.font = PingFangLight(17);
+    self.place.textColor = RGBA(102, 102, 102, 1);
+    self.place.font = PingFangRegular(17);
     
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
-    textView.font = PingFangMedium(17);
+    textView.font = PingFangRegular(17);
     textView.delegate = self;
     textView.textColor = RGBA(221, 221, 221, 1);
     textView.backgroundColor = [UIColor clearColor];
     [textContentView addSubview:textView];
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(12);
         make.left.mas_equalTo(10);
-        make.top.mas_equalTo(5);
-        make.right.mas_equalTo(-5);
-        make.bottom.mas_equalTo(10);
+        make.right.mas_equalTo(-10);
+        make.bottom.mas_equalTo(-12);
     }];
     
     self.numLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [textContentView addSubview:self.numLabel];
-    self.numLabel.textColor = RGBA(153, 153, 153, 1);
-    self.numLabel.font = PingFangLight(13);
-    self.numLabel.text = @"0/300";
+    self.numLabel.textColor = RGBA(102, 102, 102, 1);
+    self.numLabel.font = PingFangMedium(13);
+    self.numLabel.text = @"300/300";
     self.numLabel.textAlignment = NSTextAlignmentRight;
     [self.numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-10);
-        make.right.mas_equalTo(-17);
+        make.bottom.mas_equalTo(-12);
+        make.right.mas_equalTo(-15);
     }];
     
     UIView *imageContentView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    CGFloat ch = (ScreenWidth - 84) / 4.0 + 67 + 17;
+    
     [self.view addSubview:imageContentView];
     imageContentView.backgroundColor = NavColor;
     [imageContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(textContentView.mas_bottom).mas_equalTo(20);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(200);
+        make.height.mas_equalTo(ch);
     }];
     
     UILabel *imageTitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [imageContentView addSubview:imageTitleLabel];
     [imageTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(12);
-        make.left.mas_equalTo(17);
-        make.height.mas_equalTo(30);
-        make.width.mas_equalTo(250);
+        make.top.mas_equalTo(0);
+        make.left.mas_equalTo(18);
+        make.height.mas_equalTo(57);
+
     }];
     imageTitleLabel.text = @"请提供相关问题的截图或相片";
     imageTitleLabel.textColor = RGBA(221, 221, 221, 1);
-    imageTitleLabel.font = PingFangLight(17);
+    imageTitleLabel.font = PingFangRegular(17);
     
     UILabel *imageCountLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [imageContentView addSubview:imageCountLabel];
-    imageCountLabel.font = PingFangLight(13);
-    imageCountLabel.textColor = RGBA(153, 153, 153, 1);
+    imageCountLabel.font = PingFangMedium(12);
+    imageCountLabel.textColor = RGBA(102, 102, 102, 1);
     imageCountLabel.text = @"0/4";
     imageCountLabel.textAlignment = NSTextAlignmentRight;
     [imageCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(10);
+        make.centerY.mas_equalTo(imageTitleLabel.mas_centerY);
         make.right.mas_equalTo(-17);
         make.width.mas_equalTo(60);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(50);
     }];
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+
+    flowLayout.itemSize = CGSizeMake((ScreenWidth - 36 - 50)/ 4, (ScreenWidth - 36 - 50)/ 4);
+
+    //设置CollectionView的属性
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(17, 63, ScreenWidth - 36, (ScreenWidth - 86) / 4 ) collectionViewLayout:flowLayout];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.scrollEnabled = YES;
+    self.collectionView.backgroundColor = NavColor;
+    //注册Cell
+    [self.collectionView registerClass:[XWSFeedImageCell class] forCellWithReuseIdentifier:@"XWSFeedImageCell"];
+    [imageContentView addSubview:self.collectionView];
+
 }
 
 #pragma mark - 发送异常情况
 - (void)sendFeedBack{
     NSLog(@"send");
-    
+     [self.textView resignFirstResponder];
+    [self.textView endEditing:YES];
     NSString *t = [self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     if (t.length < 10) {
@@ -201,7 +238,59 @@
     
 }
 
+#pragma mark - UICollectionViewDelegate,UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.images.count + 1;
+}
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    XWSFeedImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"XWSFeedImageCell" forIndexPath:indexPath];
+    
+//    if (indexPath.row == self.images.count) {
+//        cell.imageView.image = [UIImage imageNamed:@"left_scan"];
+//        cell.close.hidden = YES;
+//    }else{
+//        NSLog(@"ddd");
+//        cell.imageView.image = self.images[indexPath.row];
+//        cell.close.hidden = NO;
+//    }
+    
+    cell.imageView.image = [UIImage imageNamed:@"left_scan"];
+    
+    cell.close.tag = 100 + indexPath.row;
+    [cell.close addTarget:self action:@selector(deletePhotos:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"ss");
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return  CGSizeMake((ScreenWidth - 86)/ 4, (ScreenWidth - 86)/ 4);
+}
+
+- (void)deletePhotos:(UIButton *)sender{
+    [self.images removeObjectAtIndex:sender.tag - 100];
+
+    [_collectionView performBatchUpdates:^{
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:sender.tag-100 inSection:0];
+        [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
+    } completion:^(BOOL finished) {
+        [_collectionView reloadData];
+    }];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.textView resignFirstResponder];
+    [self.textView endEditing:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

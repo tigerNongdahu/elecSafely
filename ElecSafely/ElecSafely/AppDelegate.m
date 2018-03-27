@@ -13,6 +13,8 @@
 #import "XWSNavigationController.h"
 #import "XWSMainViewController.h"
 
+#import "XWSFeedbackViewController.h"
+
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
 #endif
@@ -39,6 +41,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     TFLaunchViewController *launchVC = [[TFLaunchViewController alloc] init];
 //    TFLoginViewController *launchVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+//    XWSFeedbackViewController *launchVC = [[XWSFeedbackViewController alloc] init];
     XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:launchVC];
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];

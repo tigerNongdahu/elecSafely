@@ -102,8 +102,6 @@
 		55FEDD7B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m */; };
 		55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */; };
 		EE36A37720691C2300E71A54 /* XWSFeedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */; };
-		EE36A37D20693D8B00E71A54 /* AlbumAddBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE36A37B20693D8B00E71A54 /* AlbumAddBtn@2x.png */; };
-		EE36A37E20693D8B00E71A54 /* photo_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE36A37C20693D8B00E71A54 /* photo_delete@2x.png */; };
 		EE50AEC22064A4160068FBC1 /* XWSLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE50AEC12064A4160068FBC1 /* XWSLeftView.m */; };
 		EE50AECB2064A7C40068FBC1 /* left_help@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC42064A7C40068FBC1 /* left_help@3x.png */; };
 		EE50AECC2064A7C40068FBC1 /* left_scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC52064A7C40068FBC1 /* left_scan@3x.png */; };
@@ -343,8 +341,6 @@
 		55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		EE36A37520691C2300E71A54 /* XWSFeedImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFeedImageCell.h; sourceTree = "<group>"; };
 		EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFeedImageCell.m; sourceTree = "<group>"; };
-		EE36A37B20693D8B00E71A54 /* AlbumAddBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlbumAddBtn@2x.png"; sourceTree = "<group>"; };
-		EE36A37C20693D8B00E71A54 /* photo_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_delete@2x.png"; sourceTree = "<group>"; };
 		EE50AEC02064A4160068FBC1 /* XWSLeftView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSLeftView.h; sourceTree = "<group>"; };
 		EE50AEC12064A4160068FBC1 /* XWSLeftView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSLeftView.m; sourceTree = "<group>"; };
 		EE50AEC42064A7C40068FBC1 /* left_help@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_help@3x.png"; sourceTree = "<group>"; };
@@ -911,8 +907,6 @@
 				EEB699EE2068DD540078A3F5 /* XWSFeedbackViewController.m */,
 				EE36A37520691C2300E71A54 /* XWSFeedImageCell.h */,
 				EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */,
-				EE36A37B20693D8B00E71A54 /* AlbumAddBtn@2x.png */,
-				EE36A37C20693D8B00E71A54 /* photo_delete@2x.png */,
 			);
 			path = Feedback;
 			sourceTree = "<group>";
@@ -1058,10 +1052,8 @@
 				EE50AECD2064A7C40068FBC1 /* left_setting@3x.png in Resources */,
 				EEF7338F20663EC700FFB99B /* json.json in Resources */,
 				EE50AED12064A7C40068FBC1 /* left_statistics@3x.png in Resources */,
-				EE36A37D20693D8B00E71A54 /* AlbumAddBtn@2x.png in Resources */,
 				55EF89F71FDE3148003F5061 /* Assets.xcassets in Resources */,
 				553D35E6200465FF00FCC58F /* logo@3x.png in Resources */,
-				EE36A37E20693D8B00E71A54 /* photo_delete@2x.png in Resources */,
 				EE50AECB2064A7C40068FBC1 /* left_help@3x.png in Resources */,
 				EEB699E12068A4410078A3F5 /* scan@3x.png in Resources */,
 				55EC94861FEDF90C000D21F4 /* logo_min.png in Resources */,

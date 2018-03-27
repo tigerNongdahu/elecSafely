@@ -17,26 +17,17 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        [_imageView removeFromSuperview];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake((frame.size.width - 56) * 0.5, (frame.size.height - 56) * 0.5, 56, 56)];
         [self addSubview:_imageView];
-        [self addSubview:_close];
-        _imageView.backgroundColor = [UIColor redColor];
-    }
-    return self;
-}
 
-- (UIImageView *)imageView{
-    if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-    }
-    return _imageView;
-}
-- (UIButton *)close{
-    if (!_close) {
+        [_close removeFromSuperview];
         _close = [UIButton buttonWithType:UIButtonTypeCustom];
         _close.frame = CGRectMake(CGRectGetWidth(self.bounds)-20, 0, 20, 20);
         [_close setBackgroundImage:[UIImage imageNamed:@"photo_delete"] forState:UIControlStateNormal];
+         [self addSubview:_close];
     }
-    return _close;
+    return self;
 }
 
 

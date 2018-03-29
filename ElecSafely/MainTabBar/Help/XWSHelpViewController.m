@@ -37,11 +37,14 @@
 - (void)loadHelpData{
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"ask"] = @"";
     [manager POST:FrigateAPI_Help_AnswerForAsk parameters:@"" progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         NSLog(@"responseObject:%@",responseObject);
+//        [XWSTipsView hideTipViewWithSuperView:self.view];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -87,6 +90,7 @@
         titleLabel.tag = 100 + indexPath.row;
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(18);
+            make.right.mas_equalTo(-38);
             make.height.mas_equalTo(30);
             make.top.mas_equalTo((TableViewRowHeight - 30) * 0.5);
         }];
@@ -106,7 +110,7 @@
     
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:100 + indexPath.row];
     
-    titleLabel.text = [NSString stringWithFormat:@"热点问题%ld",indexPath.row];
+    titleLabel.text = [NSString stringWithFormat:@"热点问题热点问题热点问题热点问题热点问题热点问题热点问题热点问题%ld",indexPath.row];
     titleLabel.font = PingFangMedium(17);
     titleLabel.textColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

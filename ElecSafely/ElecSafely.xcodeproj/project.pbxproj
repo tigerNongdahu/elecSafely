@@ -102,6 +102,10 @@
 		55FEDD7B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m */; };
 		55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */; };
 		EE36A37720691C2300E71A54 /* XWSFeedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */; };
+		EE47D3C1206C9A6E006FEA3C /* XWSAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C0206C9A6E006FEA3C /* XWSAboutViewController.m */; };
+		EE47D3C4206CA46C006FEA3C /* XWSSettingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C3206CA46C006FEA3C /* XWSSettingPasswordViewController.m */; };
+		EE47D3C8206CA63F006FEA3C /* XWSPwdInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C7206CA63F006FEA3C /* XWSPwdInputCell.m */; };
+		EE47D3CB206CC2FC006FEA3C /* NSString+XWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3CA206CC2FC006FEA3C /* NSString+XWSManager.m */; };
 		EE50AEC22064A4160068FBC1 /* XWSLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE50AEC12064A4160068FBC1 /* XWSLeftView.m */; };
 		EE50AECB2064A7C40068FBC1 /* left_help@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC42064A7C40068FBC1 /* left_help@3x.png */; };
 		EE50AECC2064A7C40068FBC1 /* left_scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC52064A7C40068FBC1 /* left_scan@3x.png */; };
@@ -341,6 +345,14 @@
 		55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		EE36A37520691C2300E71A54 /* XWSFeedImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFeedImageCell.h; sourceTree = "<group>"; };
 		EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFeedImageCell.m; sourceTree = "<group>"; };
+		EE47D3BF206C9A6E006FEA3C /* XWSAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAboutViewController.h; sourceTree = "<group>"; };
+		EE47D3C0206C9A6E006FEA3C /* XWSAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSAboutViewController.m; sourceTree = "<group>"; };
+		EE47D3C2206CA46C006FEA3C /* XWSSettingPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSSettingPasswordViewController.h; sourceTree = "<group>"; };
+		EE47D3C3206CA46C006FEA3C /* XWSSettingPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSSettingPasswordViewController.m; sourceTree = "<group>"; };
+		EE47D3C6206CA63F006FEA3C /* XWSPwdInputCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSPwdInputCell.h; sourceTree = "<group>"; };
+		EE47D3C7206CA63F006FEA3C /* XWSPwdInputCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSPwdInputCell.m; sourceTree = "<group>"; };
+		EE47D3C9206CC2FC006FEA3C /* NSString+XWSManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+XWSManager.h"; sourceTree = "<group>"; };
+		EE47D3CA206CC2FC006FEA3C /* NSString+XWSManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+XWSManager.m"; sourceTree = "<group>"; };
 		EE50AEC02064A4160068FBC1 /* XWSLeftView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSLeftView.h; sourceTree = "<group>"; };
 		EE50AEC12064A4160068FBC1 /* XWSLeftView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSLeftView.m; sourceTree = "<group>"; };
 		EE50AEC42064A7C40068FBC1 /* left_help@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_help@3x.png"; sourceTree = "<group>"; };
@@ -570,6 +582,8 @@
 				EEA2FF472067691C00E5D192 /* UIView+HGCorner.m */,
 				EEB699F02068E5FF0078A3F5 /* XWSTipsView.h */,
 				EEB699F12068E5FF0078A3F5 /* XWSTipsView.m */,
+				EE47D3C9206CC2FC006FEA3C /* NSString+XWSManager.h */,
+				EE47D3CA206CC2FC006FEA3C /* NSString+XWSManager.m */,
 			);
 			path = ToolView;
 			sourceTree = "<group>";
@@ -808,6 +822,15 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		EE47D3C5206CA624006FEA3C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EE47D3C6206CA63F006FEA3C /* XWSPwdInputCell.h */,
+				EE47D3C7206CA63F006FEA3C /* XWSPwdInputCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		EE50AEBD2064A3C10068FBC1 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,8 +946,13 @@
 		EEC53B3D2063CFA800EE3900 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				EE47D3C5206CA624006FEA3C /* View */,
 				EEC53B3E2063CFCB00EE3900 /* XWSSettingViewController.h */,
 				EEC53B3F2063CFCB00EE3900 /* XWSSettingViewController.m */,
+				EE47D3C2206CA46C006FEA3C /* XWSSettingPasswordViewController.h */,
+				EE47D3C3206CA46C006FEA3C /* XWSSettingPasswordViewController.m */,
+				EE47D3BF206C9A6E006FEA3C /* XWSAboutViewController.h */,
+				EE47D3C0206C9A6E006FEA3C /* XWSAboutViewController.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -997,7 +1025,7 @@
 				TargetAttributes = {
 					55EF89E61FDE3148003F5061 = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1099,6 +1127,7 @@
 				55EF89F51FDE3148003F5061 /* ElecSafely.xcdatamodeld in Sources */,
 				55EC94921FEDFADE000D21F4 /* TFLaunchViewController.m in Sources */,
 				55156A18202312AC00B80642 /* DGActivityIndicatorLineScalePartyAnimation.m in Sources */,
+				EE47D3C4206CA46C006FEA3C /* XWSSettingPasswordViewController.m in Sources */,
 				553D38632004E47300FCC58F /* GTMBase64.m in Sources */,
 				55156A0A202312AC00B80642 /* DGActivityIndicatorBallPulseSyncAnimation.m in Sources */,
 				55FEDD6E1FDF66DC005BD966 /* AFHTTPSessionManager.m in Sources */,
@@ -1158,7 +1187,9 @@
 				55FEDD781FDF66DC005BD966 /* UIButton+AFNetworking.m in Sources */,
 				55E1E8151FF5D9CD00964CFB /* TileView.m in Sources */,
 				553D38682004E47300FCC58F /* RSA.m in Sources */,
+				EE47D3CB206CC2FC006FEA3C /* NSString+XWSManager.m in Sources */,
 				55FEDD7B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m in Sources */,
+				EE47D3C1206C9A6E006FEA3C /* XWSAboutViewController.m in Sources */,
 				55156A19202312AC00B80642 /* DGActivityIndicatorLineScalePulseOutAnimation.m in Sources */,
 				EEB699E52068AFF70078A3F5 /* XWSHelpViewController.m in Sources */,
 				55156A0B202312AC00B80642 /* DGActivityIndicatorBallRotateAnimation.m in Sources */,
@@ -1179,6 +1210,7 @@
 				553D383D2004716500FCC58F /* ViewController+MASAdditions.m in Sources */,
 				553D38692004E47300FCC58F /* AESCrypt.m in Sources */,
 				55FEDD751FDF66DC005BD966 /* AFImageDownloader.m in Sources */,
+				EE47D3C8206CA63F006FEA3C /* XWSPwdInputCell.m in Sources */,
 				55156A13202312AC00B80642 /* DGActivityIndicatorBallZigZagDeflectAnimation.m in Sources */,
 				EEB699E82068C6000078A3F5 /* XWSDetailHelpViewController.m in Sources */,
 			);
@@ -1324,8 +1356,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ElecSafely/ElecSafely.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TA7V5557XR;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 8RDZLRPEAS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1342,10 +1374,10 @@
 					"$(PROJECT_DIR)/Vendor/XgPushSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.youjiagou.daling.iSmartIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "bfb0fbd3-b83b-4db0-8bd6-e85666b28091";
+				PROVISIONING_PROFILE_SPECIFIER = elecProvisioning;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1356,8 +1388,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ElecSafely/ElecSafely.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TA7V5557XR;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 8RDZLRPEAS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1374,10 +1406,10 @@
 					"$(PROJECT_DIR)/Vendor/XgPushSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.youjiagou.daling.iSmartIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "bfb0fbd3-b83b-4db0-8bd6-e85666b28091";
+				PROVISIONING_PROFILE_SPECIFIER = elecProvisioning;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

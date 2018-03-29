@@ -198,7 +198,6 @@
             NSLog(@"%@",temp);
         }
         
-        
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"扫描结果" message:stringValue preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if (_session != nil) {
@@ -246,11 +245,8 @@
     self.lineIamgeView.frame = frame;
 }
 
-
-
 - (void)dealloc{
     NSLog(@"dealloc:%s",__func__);
-    
     [self stopTimer];
 }
 

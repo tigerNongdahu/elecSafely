@@ -44,11 +44,11 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         NSLog(@"responseObject:%@",responseObject);
-//        [XWSTipsView hideTipViewWithSuperView:self.view];
+        [XWSTipsView hideTipViewWithSuperView:self.view];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-//        [XWSTipsView showTipViewWithType:XWSShowViewTypeError inSuperView:self.view];
+        [XWSTipsView showTipViewWithType:XWSShowViewTypeError inSuperView:self.view];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
     }];
 }

@@ -63,7 +63,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 3;
+        return 2;
     }else if(section == 1){
         return 1;
     }else{
@@ -100,9 +100,6 @@
                 cell.textLabel.text = @"账号与安全";
                 break;
             case 1:
-                cell.textLabel.text = @"隐私";
-                break;
-            case 2:
                 cell.textLabel.text = @"关于";
                 break;
             default:
@@ -171,9 +168,6 @@
             }
                 break;
             case 1:
-                
-                break;
-            case 2:
             {
                 XWSAboutViewController *aboutVC = [[XWSAboutViewController alloc] init];
                  vc = aboutVC;

@@ -35,7 +35,7 @@
         comLabel.textAlignment = NSTextAlignmentCenter;
         comLabel.text = @"福瑞特科技产业有限公司";
         comLabel.textColor = UIColorRGB(0xAAAAAA);
-        comLabel.font = PingFangRegular(18);
+        comLabel.font = PingFangRegular(17);
         _footerView = footerView;
     }
     return _footerView;
@@ -58,7 +58,7 @@
         NSDictionary *dict = [[NSBundle mainBundle] infoDictionary];
         NSString *version = [dict objectForKey:@"CFBundleShortVersionString"];
         title.text = [NSString stringWithFormat:@"v%@",version];
-        title.font = PingFangRegular(18);
+        title.font = PingFangRegular(17);
         title.textColor = UIColorRGB(0xAAAAAA);
         [headView addSubview:title];
         [title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -125,7 +125,7 @@
     
     cell.textLabel.text = @"去评分";
     cell.textLabel.textColor = RGBA(221, 221, 221, 1);
-    cell.textLabel.font = PingFangRegular(18);
+    cell.textLabel.font = PingFangRegular(17);
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

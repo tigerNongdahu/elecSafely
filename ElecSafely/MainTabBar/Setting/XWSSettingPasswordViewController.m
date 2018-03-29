@@ -12,6 +12,7 @@
 #import "PrivateFunction.h"
 #import "DESCrypt.h"
 #import "TFLoginViewController.h"
+#import "XWSNavigationController.h"
 #define RowHeight  54.0f
 
 @interface XWSSettingPasswordViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
@@ -75,7 +76,9 @@
 #pragma mark - 修改密码
 - (void)savePwd{
     
-    [self checkParam];
+    if (![self checkParam]) {
+        return;
+    }
 
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -87,38 +90,45 @@
     [manager POST:FrigateAPI_ChangePW parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"responseObject:%@",responseObject);
         
+        [ElecTipsView showTips:@"修改成功" during:2.0];
         
-        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            TFLoginViewController *loginVC = [[TFLoginViewController alloc] init];
+            XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
+            [UIApplication sharedApplication].keyWindow.rootViewController = navi;
+        });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
     }];
 }
 
-- (void)checkParam{
+- (BOOL)checkParam{
     [self.oldTextField resignFirstResponder];
     [self.neTextField resignFirstResponder];
     [self.conTextField resignFirstResponder];
     
     if (![self checkPwd:self.oldTextField.text]) {
         [ElecTipsView showTips:@"请输入6~16位的原密码" during:2.0];
-        return;
+        return NO;
     }
     
     if (![self checkPwd:self.neTextField.text]) {
         [ElecTipsView showTips:@"请输入6~16位的新密码" during:2.0];
-        return;
+        return NO;
     }
     
     if (![self checkPwd:self.conTextField.text]) {
         [ElecTipsView showTips:@"请输入6~16位的新密码" during:2.0];
-        return;
+        return NO;
     }
     
     if (![self.neTextField.text isEqualToString:self.conTextField.text]) {
         [ElecTipsView showTips:@"新密码与确认密码不一致" during:2.0];
-        return;
+        return NO;
     }
+    
+    return YES;
 }
 
 

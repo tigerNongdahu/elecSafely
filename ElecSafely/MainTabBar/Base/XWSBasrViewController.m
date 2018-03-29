@@ -9,7 +9,9 @@
 #import "XWSBasrViewController.h"
 
 @interface XWSBasrViewController ()
-
+@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *titleLabel;
 @end
 
 @implementation XWSBasrViewController
@@ -20,6 +22,14 @@
     if (@available(iOS 11.0, *)) {
         UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+    
+    self.view.backgroundColor = BackColor;
+    
+}
+
+
+
+- (void)showErrorViewWithType:(XWSShowViewType)type{
     
 }
 

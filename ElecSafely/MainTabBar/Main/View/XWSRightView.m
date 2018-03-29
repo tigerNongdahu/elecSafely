@@ -172,24 +172,34 @@
         _navView = [[UIView alloc] initWithFrame:CGRectZero];
         [self addSubview:_navView];
         _navView.backgroundColor = rightBackColor;
+        
+        CGFloat h = NavibarHeight;
+        CGFloat t = 0;
+        CGFloat t1 = 27;
+        //适配iPhoneX
+        if (IS_IPHINE_X) {
+            t = 44;
+            h = 44;
+            t1 = 7;
+        }
         [_navView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
+            make.top.mas_equalTo(t);
             make.right.mas_equalTo(0);
-            make.height.mas_equalTo(NavibarHeight);
+            make.height.mas_equalTo(h);
             make.width.mas_equalTo(ScreenWidth - leftMarginWidth);
         }];
-       
+    
         [_navView addSubview:self.closeBtn];
         [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(17);
-            make.top.mas_equalTo(27);
+            make.top.mas_equalTo(t1);
             make.width.height.mas_equalTo(30);
         }];
         
         [_navView addSubview:self.sureBtn];
         [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-17);
-            make.top.mas_equalTo(27);
+            make.top.mas_equalTo(_closeBtn.mas_top);
             make.width.mas_equalTo(50);
             make.height.mas_equalTo(self.closeBtn.mas_height);
         }];

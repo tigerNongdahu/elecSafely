@@ -11,6 +11,8 @@
 #import "XWSLeftView.h"
 #import "XWSScanViewController.h"
 #import "XWSRightView.h"
+#import "XWSHelpViewController.h"
+#import "XWSFeedbackViewController.h"
 
 #define AnimationTime 0.35
 #define CoverAlphaValue 0.5
@@ -30,6 +32,12 @@
     [self setUpNav];
     [self setUpLeftView];
     [self setUpRightView];
+    
+    NSLog(@"size:%@",NSStringFromCGSize([UIScreen mainScreen].bounds.size));
+    if (ScreenWidth == IPHONE_X_WIDTH && ScreenHeight == IPHONE_X_HEIGHT) {
+        NSLog(@"DDD");
+    }
+    
 }
 
 
@@ -135,12 +143,14 @@
             break;
         case XWSTouchItemFeedback:
         {
-            
+            XWSFeedbackViewController *feedVC = [[XWSFeedbackViewController alloc] init];
+            vc = feedVC;
         }
             break;
         case XWSTouchItemHelp:
         {
-            
+            XWSHelpViewController *helpVC = [[XWSHelpViewController alloc] init];
+            vc = helpVC;
         }
             break;
         case XWSTouchItemScan:

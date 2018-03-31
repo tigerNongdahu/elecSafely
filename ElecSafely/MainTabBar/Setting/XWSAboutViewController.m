@@ -137,9 +137,14 @@
     NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=APPID&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"];
     
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
-        [[UIApplication sharedApplication] openURL:url options:0 completionHandler:^(BOOL success) {
-            NSLog(@"打开去评分");
-        }];
+        
+        if (@available(iOS 10.0, *)) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+                NSLog(@"打开去评分");
+            }];
+        } else {
+            [[UIApplication sharedApplication] openURL:url];
+        }
     }else{
         NSLog(@"无法打开该URL");
     }

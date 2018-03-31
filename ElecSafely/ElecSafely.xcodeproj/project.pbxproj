@@ -106,6 +106,7 @@
 		EE47D3C4206CA46C006FEA3C /* XWSSettingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C3206CA46C006FEA3C /* XWSSettingPasswordViewController.m */; };
 		EE47D3C8206CA63F006FEA3C /* XWSPwdInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C7206CA63F006FEA3C /* XWSPwdInputCell.m */; };
 		EE47D3CB206CC2FC006FEA3C /* NSString+XWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3CA206CC2FC006FEA3C /* NSString+XWSManager.m */; };
+		EE47D3CE206CFC1D006FEA3C /* XWSScanInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3CD206CFC1D006FEA3C /* XWSScanInfoViewController.m */; };
 		EE50AEC22064A4160068FBC1 /* XWSLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE50AEC12064A4160068FBC1 /* XWSLeftView.m */; };
 		EE50AECB2064A7C40068FBC1 /* left_help@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC42064A7C40068FBC1 /* left_help@3x.png */; };
 		EE50AECC2064A7C40068FBC1 /* left_scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AEC52064A7C40068FBC1 /* left_scan@3x.png */; };
@@ -353,6 +354,8 @@
 		EE47D3C7206CA63F006FEA3C /* XWSPwdInputCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSPwdInputCell.m; sourceTree = "<group>"; };
 		EE47D3C9206CC2FC006FEA3C /* NSString+XWSManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+XWSManager.h"; sourceTree = "<group>"; };
 		EE47D3CA206CC2FC006FEA3C /* NSString+XWSManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+XWSManager.m"; sourceTree = "<group>"; };
+		EE47D3CC206CFC1D006FEA3C /* XWSScanInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSScanInfoViewController.h; sourceTree = "<group>"; };
+		EE47D3CD206CFC1D006FEA3C /* XWSScanInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSScanInfoViewController.m; sourceTree = "<group>"; };
 		EE50AEC02064A4160068FBC1 /* XWSLeftView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSLeftView.h; sourceTree = "<group>"; };
 		EE50AEC12064A4160068FBC1 /* XWSLeftView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSLeftView.m; sourceTree = "<group>"; };
 		EE50AEC42064A7C40068FBC1 /* left_help@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_help@3x.png"; sourceTree = "<group>"; };
@@ -890,6 +893,8 @@
 			children = (
 				EE50AEDB206504EA0068FBC1 /* XWSScanViewController.h */,
 				EE50AEDC206504EA0068FBC1 /* XWSScanViewController.m */,
+				EE47D3CC206CFC1D006FEA3C /* XWSScanInfoViewController.h */,
+				EE47D3CD206CFC1D006FEA3C /* XWSScanInfoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1198,6 +1203,7 @@
 				55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */,
 				55156A16202312AC00B80642 /* DGActivityIndicatorFiveDotsAnimation.m in Sources */,
 				55156A0F202312AC00B80642 /* DGActivityIndicatorBallScaleRippleMultipleAnimation.m in Sources */,
+				EE47D3CE206CFC1D006FEA3C /* XWSScanInfoViewController.m in Sources */,
 				EE50AEDD206504EA0068FBC1 /* XWSScanViewController.m in Sources */,
 				55156A12202312AC00B80642 /* DGActivityIndicatorBallZigZagAnimation.m in Sources */,
 				55156A1A202312AC00B80642 /* DGActivityIndicatorLineScalePulseOutRapidAnimation.m in Sources */,
@@ -1376,9 +1382,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-
 				PROVISIONING_PROFILE = "a153c6fe-be80-4e9c-bd2e-6b52a834b96f";
-
 				PROVISIONING_PROFILE_SPECIFIER = elecProvisioning;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1410,9 +1414,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.frigate.ElecSafely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-
 				PROVISIONING_PROFILE = "a153c6fe-be80-4e9c-bd2e-6b52a834b96f";
-
 				PROVISIONING_PROFILE_SPECIFIER = elecProvisioning;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

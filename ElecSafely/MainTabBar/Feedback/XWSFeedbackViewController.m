@@ -41,10 +41,17 @@
 @property (nonatomic, strong) UIView *imageContentView;
 /*图片内容标题*/
 @property (nonatomic, strong) UILabel *imageTitleLabel;
+
+@property (nonatomic, strong) ElecProgressHUD *progressHUD;
 @end
 
 @implementation XWSFeedbackViewController
-
+- (ElecProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[ElecProgressHUD alloc] init];
+    }
+    return _progressHUD;
+}
 #pragma mark - 懒加载
 - (NSMutableArray *)images{
     if (!_images) {
@@ -209,11 +216,17 @@
     return _collectionView;
 }
 
+#pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavi];
     [self initView];
     self.view.backgroundColor = BackColor;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.progressHUD dismiss];
 }
 
 #pragma mark - 设置导航栏
@@ -257,14 +270,19 @@
         [ElecTipsView showTips:@"请输入不小于10个字的描述字符"];
         return;
     }
-     ElecHTTPManager *manager = [ElecHTTPManager manager];
+    
+    [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
+    
+    ElecHTTPManager *manager = [ElecHTTPManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"ask"] = self.textView.text;
     [manager POST:FrigateAPI_SubmitAsk parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self.progressHUD dismiss];
         [ElecTipsView showTips:@"提交成功，谢谢您的反馈"];
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
+        [self.progressHUD dismiss];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
     }];
 }

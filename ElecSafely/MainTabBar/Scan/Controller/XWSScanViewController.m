@@ -73,7 +73,7 @@
         _autoBtn.layer.cornerRadius = AutoBtnHeight * 0.5;
         _autoBtn.layer.masksToBounds = YES;
         
-        [_autoBtn addTarget:self action:@selector(gotoAutoInput) forControlEvents:UIControlEventTouchUpInside];
+        [_autoBtn addTarget:self action:@selector(gotoAutoInput:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _autoBtn;
 }
@@ -156,6 +156,7 @@
     [self label];
     [self autoBtn];
     [self lineIamgeView];
+    _autoBtn.enabled = YES;
 }
 
 - (void)setCropRect:(CGRect)cropRect{
@@ -302,7 +303,8 @@
 }
 
 #pragma mark - 点击手动输入
-- (void)gotoAutoInput{
+- (void)gotoAutoInput:(UIButton *)sender{
+    sender.enabled = NO;
     [_session stopRunning];
     [self stopTimer];
     [self gotoDeviceInfoVCWithType:XWSDeviceInputTypeManual withDic:nil];

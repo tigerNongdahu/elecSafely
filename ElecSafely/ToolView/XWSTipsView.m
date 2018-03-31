@@ -70,7 +70,7 @@
     }
 }
 
-+ (void)hideTipViewWithSuperView:(UIView *)superView{
++ (void)dismissTipViewWithSuperView:(UIView *)superView{
     if (superView.subviews.count > 0) {
         for (id obj in superView.subviews) {
             if ([obj isKindOfClass:[XWSTipsView class]]) {
@@ -83,6 +83,11 @@
             }
         }
     }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    /*提供点击时可以进行一些操作*/
+    [[NSNotificationCenter defaultCenter] postNotificationName:XWSTipViewClickTipViewNotification object:nil];
 }
 
 

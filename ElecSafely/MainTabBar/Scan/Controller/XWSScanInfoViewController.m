@@ -40,9 +40,18 @@
 @property (nonatomic, copy) NSString *Password;
 //上级客户名称
 @property (nonatomic, copy) NSString *ParentName;
+
+@property (nonatomic, strong) ElecProgressHUD *progressHUD;
 @end
 
 @implementation XWSScanInfoViewController
+
+- (ElecProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[ElecProgressHUD alloc] init];
+    }
+    return _progressHUD;
+}
 
 - (NSMutableArray *)titles{
     if (!_titles) {
@@ -83,6 +92,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.textField resignFirstResponder];
+    [self.progressHUD dismiss];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -110,6 +120,8 @@
         return;
     }
     
+    [self.progressHUD showHUD:self.view Offset:- NavibarHeight animation:18];
+    
     NSLog(@"CRCID:%@ SimCard:%@ DevName:%@ GroupName:%@ CustName:%@ LoginName:%@ Password:%@ ParentName:%@",self.CRCID,self.SimCard,self.DevName,self.GroupName,self.CustName,self.LoginName,self.Password,self.ParentName);
     
     ElecHTTPManager *manager = [ElecHTTPManager manager];
@@ -122,6 +134,7 @@
     param[@"LoginName"] = self.LoginName;
     param[@"Password"] = self.Password;
     param[@"ParentName"] = self.ParentName;
+    param[@"AppendFlag"] = @"1";
     
     [manager POST:FrigateAPI_Register parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"responseObject:%@",responseObject);
@@ -214,12 +227,16 @@
             self.CRCID = self.deviceId;
             cell.textField.enabled = NO;
         }else{
-            [cell.textField becomeFirstResponder];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [cell.textField becomeFirstResponder];
+            });
         }
     }
     
     if (self.type == XWSDeviceInputTypeAuto && indexPath.row == 1) {
-        [cell.textField becomeFirstResponder];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [cell.textField becomeFirstResponder];
+        });
     }
     
     if (indexPath.row == 6) {
@@ -287,27 +304,28 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
 
+    NSString *text = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     switch (textField.tag - 100) {
         case 0:
-            self.CRCID = textField.text;
+            self.CRCID = text;
             break;
         case 1:
-            self.SimCard = textField.text;
+            self.SimCard = text;
             break;
         case 2:
-            self.DevName = textField.text;
+            self.DevName = text;
             break;
         case 3:
-            self.GroupName = textField.text;
+            self.GroupName = text;
             break;
         case 4:
-            self.CustName = textField.text;
+            self.CustName = text;
             break;
         case 5:
-            self.LoginName = textField.text;
+            self.LoginName = text;
             break;
         case 6:
-            self.Password = textField.text;
+            self.Password = text;
             break;
         case 7:
             self.ParentName = textField.text;

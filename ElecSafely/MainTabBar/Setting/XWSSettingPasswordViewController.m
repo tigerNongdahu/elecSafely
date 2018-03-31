@@ -21,9 +21,18 @@
 @property (nonatomic, weak) UITextField *neTextField;
 @property (nonatomic, weak) UITextField *conTextField;
 @property (nonatomic, strong) UIButton *sendBtn;
+
+@property (nonatomic, strong) ElecProgressHUD *progressHUD;
 @end
 
 @implementation XWSSettingPasswordViewController
+
+- (ElecProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[ElecProgressHUD alloc] init];
+    }
+    return _progressHUD;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,6 +89,7 @@
         return;
     }
 
+    [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     NSString *old = [self.oldTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -87,9 +97,12 @@
     param[@"OldPW"] = [NSString md5:old];
     param[@"NldPW"] = [NSString md5:nP];
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     [manager POST:FrigateAPI_ChangePW parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"responseObject:%@",responseObject);
-        
+        [self.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"修改成功" during:2.0];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -99,6 +112,8 @@
         });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
+        [self.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
     }];
 }

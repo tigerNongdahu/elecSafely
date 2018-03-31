@@ -126,6 +126,7 @@
 		EEB699F22068E5FF0078A3F5 /* XWSTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB699F12068E5FF0078A3F5 /* XWSTipsView.m */; };
 		EEC53B3B2063CE0E00EE3900 /* XWSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC53B3A2063CE0E00EE3900 /* XWSNavigationController.m */; };
 		EEC53B402063CFCB00EE3900 /* XWSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC53B3F2063CFCB00EE3900 /* XWSSettingViewController.m */; };
+		EED9196B206F10A8002CF969 /* net_error.png in Resources */ = {isa = PBXBuildFile; fileRef = EED9196A206F10A8002CF969 /* net_error.png */; };
 		EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73383206532A700FFB99B /* XWSMainViewController.m */; };
 		EEF73387206537F500FFB99B /* XWSRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73386206537F500FFB99B /* XWSRightView.m */; };
 		EEF7338F20663EC700FFB99B /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = EEF7338E20663EC700FFB99B /* json.json */; };
@@ -386,6 +387,7 @@
 		EEC53B3A2063CE0E00EE3900 /* XWSNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNavigationController.m; sourceTree = "<group>"; };
 		EEC53B3E2063CFCB00EE3900 /* XWSSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSSettingViewController.h; sourceTree = "<group>"; };
 		EEC53B3F2063CFCB00EE3900 /* XWSSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSSettingViewController.m; sourceTree = "<group>"; };
+		EED9196A206F10A8002CF969 /* net_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = net_error.png; sourceTree = "<group>"; };
 		EEF73382206532A700FFB99B /* XWSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSMainViewController.h; sourceTree = "<group>"; };
 		EEF73383206532A700FFB99B /* XWSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSMainViewController.m; sourceTree = "<group>"; };
 		EEF73385206537F500FFB99B /* XWSRightView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSRightView.h; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				553D35E3200465FF00FCC58F /* bg@3x.png */,
 				553D35E4200465FF00FCC58F /* logo@3x.png */,
 				EEB699E02068A4410078A3F5 /* scan@3x.png */,
+				EED9196A206F10A8002CF969 /* net_error.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1080,6 +1083,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EED9196B206F10A8002CF969 /* net_error.png in Resources */,
 				EE50AED02064A7C40068FBC1 /* left_devices_list@3x.png in Resources */,
 				553D35E5200465FF00FCC58F /* bg@3x.png in Resources */,
 				EE50AECD2064A7C40068FBC1 /* left_setting@3x.png in Resources */,

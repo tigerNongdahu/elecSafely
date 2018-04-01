@@ -11,6 +11,7 @@
 #import "XWSScanInfoViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "UIView+HGCorner.h"
+#import "LCQRCodeUtil.h"
 
 #define FRIGATE @"frigate"
 #define FRIGATE_LENGHT FRIGATE.length
@@ -30,7 +31,7 @@
 #define ScanRepeatInterval 0.01
 #define PerChangeHeight 1
 
-@interface XWSScanViewController ()<AVCaptureMetadataOutputObjectsDelegate>{
+@interface XWSScanViewController ()<AVCaptureMetadataOutputObjectsDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
     CAShapeLayer *cropLayer;
 }
 @property (strong,nonatomic)AVCaptureDevice * device;
@@ -38,18 +39,35 @@
 @property (strong,nonatomic)AVCaptureMetadataOutput * output;
 @property (strong,nonatomic)AVCaptureSession * session;
 @property (strong,nonatomic)AVCaptureVideoPreviewLayer * preview;
+
+/*扫描框*/
+@property (nonatomic, strong) XWSScanView *scanView;
+/*提示标签*/
+@property (nonatomic, strong) UILabel *label;
+/*手动按钮*/
+@property (nonatomic, strong) UIButton *autoBtn;
+/* 扫描条*/
+@property (nonatomic, strong) UIImageView *lineIamgeView;
+
 /*滚动条定时器*/
 @property (nonatomic, strong) NSTimer *timer;
-
-@property (nonatomic, strong) UIImageView *lineIamgeView;
+/*扫描条的y值*/
 @property (nonatomic, assign) CGFloat scanTop;
 
-@property (nonatomic, strong) XWSScanView *scanView;
-@property (nonatomic, strong) UILabel *label;
-@property (nonatomic, strong) UIButton *autoBtn;
+/*选择图片*/
+@property (nonatomic, strong) UIImagePickerController *ipc;
+
+@property (nonatomic, strong) ElecProgressHUD *progressHUD;
 @end
 
 @implementation XWSScanViewController
+
+- (ElecProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[ElecProgressHUD alloc] init];
+    }
+    return _progressHUD;
+}
 
 - (UIButton *)autoBtn{
     if (!_autoBtn) {
@@ -131,11 +149,13 @@
     self.title = @"扫一扫";
     self.view.backgroundColor = [UIColor whiteColor];
     self.scanTop = TOP;
+//    [self setUpNavi];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     //扫描二维码的出生位置
     [self configView];
     [self setCropRect:kScanRect];
@@ -149,6 +169,64 @@
     [self stopTimer];
 }
 
+- (void)setUpNavi{
+    
+    UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
+    [sendBtn setTitle:@"相册" forState:UIControlStateNormal];
+    [sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+    sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    sendBtn.titleLabel.font = PingFangMedium(15);
+    [sendBtn addTarget:self action:@selector(openPhotoLib) forControlEvents:UIControlEventTouchUpInside];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sendBtn];
+
+}
+
+#pragma mark - 打开相册
+- (void)openPhotoLib{
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) return;
+    
+    if (!_ipc) {
+        _ipc = [[UIImagePickerController alloc] init];
+        _ipc.delegate = self;
+        _ipc.allowsEditing = YES;
+        _ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    //停止扫描
+    [_session stopRunning];
+    [self stopTimer];
+    
+    [self presentViewController:_ipc animated:YES completion:nil];
+}
+
+#pragma mark - uiimagePicke
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    //如果是拍照，则拍照后把图片保存在相册
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSString *imageStr = [LCQRCodeUtil readQRCodeFromImage:image];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_progressHUD dismiss];
+                [self showScanResultWithStr:imageStr];
+            });
+        });
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        //继续扫描
+        if (_session != nil) {
+            [_session startRunning];
+            [self startTimer];
+        }
+    }];
+}
 
 #pragma mark - 设置扫描框和提示语
 -(void)configView{
@@ -260,7 +338,7 @@
 
 /*扫描到符合规则的二维码数据*/
 - (void)showScanResultWithStr:(NSString *)str{
-   
+
     str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
     //二维码的规则必须是frigate+id+卡号，其他id的长度是16位
     if (str.length >= FRIGATE_LENGHT + FRIGATE_CRCID_LENGHT) {

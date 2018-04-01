@@ -10,7 +10,9 @@
 #import "XWSDeviceInfoCell.h"
 #import "NSString+XWSManager.h"
 
-#define RowHeight 65.0f
+#define DEVICE_REGISTER_SUCCESS_CODE @"1"
+
+#define RowHeight 54.0f
 
 @interface XWSScanInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic, assign) NSTimeInterval duration;
@@ -45,6 +47,18 @@
 @end
 
 @implementation XWSScanInfoViewController
+
+- (UIButton *)sendBtn{
+    if (!_sendBtn) {
+        _sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
+        [_sendBtn setTitle:@"完成" forState:UIControlStateNormal];
+        [_sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+        _sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        _sendBtn.titleLabel.font = PingFangMedium(15);
+        [_sendBtn addTarget:self action:@selector(sendRegister) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _sendBtn;
+}
 
 - (ElecProgressHUD *)progressHUD{
     if (!_progressHUD) {
@@ -81,12 +95,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    [self registerNoti];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self registerNoti];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -102,13 +115,6 @@
 
 - (void)initView{
     self.title = @"设备注册";
-    self.sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
-    [self.sendBtn setTitle:@"完成" forState:UIControlStateNormal];
-    [self.sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
-    self.sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    self.sendBtn.titleLabel.font = PingFangMedium(15);
-    [self.sendBtn addTarget:self action:@selector(sendRegister) forControlEvents:UIControlEventTouchUpInside];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.sendBtn];
     
     [self tableView];
@@ -116,6 +122,7 @@
 
 - (void)sendRegister{
     [self.textField resignFirstResponder];
+
     if (![self checkParam]) {
         return;
     }
@@ -137,7 +144,16 @@
     param[@"AppendFlag"] = @"1";
     
     [manager POST:FrigateAPI_Register parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject:%@",responseObject);
+        
+         NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
+        if ([resultStr isEqualToString:DEVICE_REGISTER_SUCCESS_CODE]) {
+             [self showNotiView];
+        }else{
+            
+        }
+        
+        NSLog(@"resultStr:%@",resultStr);
+       
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况" during:2.0];
@@ -145,8 +161,8 @@
 }
 
 - (BOOL)checkParam{
-    if (![self checkStr:self.CRCID]) {
-        [ElecTipsView showTips:@"请输入设备注册码!" during:2.0];
+    if (![self checkStr:self.CRCID] || [self.CRCID stringByReplacingOccurrencesOfString:@" " withString:@""].length != 16) {
+        [ElecTipsView showTips:@"请输入正确格式的16位设备注册码!" during:2.0];
         return NO;
     }
     
@@ -227,19 +243,16 @@
             self.CRCID = self.deviceId;
             cell.textField.enabled = NO;
         }else{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [cell.textField becomeFirstResponder];
-            });
+            [cell.textField becomeFirstResponder];
         }
     }
     
     if (self.type == XWSDeviceInputTypeAuto && indexPath.row == 1) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [cell.textField becomeFirstResponder];
-        });
+        [cell.textField becomeFirstResponder];
     }
     
     if (indexPath.row == 6) {
+        cell.textField.secureTextEntry = YES;
         cell.textField.placeholder = @"6-16位英文字母、数据和下划线";
     }
     
@@ -288,9 +301,14 @@
     NSInteger tag = textField.tag - 100;
     CGFloat h = (tag + 1) * RowHeight;
     
+    //在这里+45的意思是因为前一个输入框因为是密码输入，所以他的键盘高度比其他的小45，所以在tag为7的时候为了在点击“NEXT”时不遮挡住输入框必须的+45
+    if (tag == 7) {
+        self.keyBoardHeight = self.keyBoardHeight + 45;
+    }
     
     //获取是否需要滚动来避免输入框被键盘挡住
     CGFloat offSet = ScreenHeight - NavibarHeight - (self.keyBoardHeight + h) - 10;
+
     if (offSet < 0) {
         [UIView animateWithDuration:self.duration delay:0 options:self.option animations:^{
             self.tableView.transform = CGAffineTransformMakeTranslation(0, offSet);
@@ -371,6 +389,23 @@
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"%s",__func__);
+}
+
+- (void)showNotiView{
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"注册成功！" message:@"用户可以访问平台（www.frigate-iot.com）进行修改密码、客户地址、报警联系人等信息，并可通过关注“福瑞特”公众号设置接收报警信息。" preferredStyle:UIAlertControllerStyleAlert];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"确定，并退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //获取导航控制中子控制器的个数
+        NSArray *naviChilds = self.navigationController.childViewControllers;
+        NSMutableArray *arr = [NSMutableArray array];
+        //只获取第一个
+        if (naviChilds.count >= 3) {
+             [arr addObject:naviChilds[0]];
+        }
+        [self.navigationController setViewControllers:arr animated:YES];
+        
+    }]];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

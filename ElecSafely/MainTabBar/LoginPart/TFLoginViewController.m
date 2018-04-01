@@ -276,6 +276,8 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
 
         [_progressHUD showHUD:self.view Offset:0 animation:18];
         
+        NSLog(@"passWordStr:%@ %ld",passWordStr,passWordStr.length);
+        
         [[TFLoginProgram sharedInstance] userLoginWithAccount:nameStr passWord:passWordStr];
         [TFLoginProgram sharedInstance].delegate = self;
     }

@@ -15,6 +15,8 @@
 #import "XWSNavigationController.h"
 #define RowHeight  54.0f
 
+#define OLD_PASSWORD_ERROR_STRING @"原始密码错误"
+#define MODIFY_PASSWORD_SUCCESS_STRING @"密码修改成功"
 @interface XWSSettingPasswordViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, weak) UITextField *oldTextField;
@@ -92,30 +94,49 @@
     [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    NSString *old = [self.oldTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *nP = [self.neTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSString *old = [self.oldTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *nP = [self.neTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSLog(@"old:%@ %ld",old,old.length);
+    
     param[@"OldPW"] = [NSString md5:old];
     param[@"NldPW"] = [NSString md5:nP];
-    
+    // password:8ddcff3a80f4189ca1c9d4d902c3c909
+    //          8ddcff3a80f4189ca1c9d4d902c3c909
+     NSLog(@"[NSString md5:old]:%@",param[@"OldPW"]);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     [manager POST:FrigateAPI_ChangePW parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject:%@",responseObject);
+
         [self.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        [ElecTipsView showTips:@"修改成功" during:2.0];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            TFLoginViewController *loginVC = [[TFLoginViewController alloc] init];
-            XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
-            [UIApplication sharedApplication].keyWindow.rootViewController = navi;
-        });
+        NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
+        
+        [ElecTipsView showTips:resultStr during:2.0];
+         NSLog(@"checkId:%@",resultStr);
+        // 如果放回的是“密码修改成功”，则退出到登录页面
+        if ([resultStr containsString:MODIFY_PASSWORD_SUCCESS_STRING]) {
+            [self logOut];
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [self.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
     }];
+}
+
+- (void)logOut{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+            XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
+            [UIApplication sharedApplication].keyWindow.rootViewController = navi;
+        });
+    });
 }
 
 - (BOOL)checkParam{
@@ -239,14 +260,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

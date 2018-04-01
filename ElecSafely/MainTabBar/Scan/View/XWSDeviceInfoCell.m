@@ -9,7 +9,7 @@
 #import "XWSDeviceInfoCell.h"
 #import "NSString+XWSManager.h"
 @interface XWSDeviceInfoCell()
-
+@property (nonatomic, strong)  UIView *line;
 @end
 
 @implementation XWSDeviceInfoCell
@@ -32,6 +32,7 @@
         
         //底部的线
         UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
+        self.line = line;
         [self addSubview:line];
         line.backgroundColor = DarkBack;
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,10 +53,10 @@
         [self addSubview:self.titleLabel];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(17);
-            make.bottom.mas_equalTo(line.mas_top).mas_equalTo(-10);
+            make.centerY.mas_equalTo(self.mas_centerY);
             make.width.mas_equalTo(titleSize.width + 17);
         }];
-        
+
         //输入框
         self.textField = [[UITextField alloc] initWithFrame:CGRectZero];
         [self addSubview:self.textField];
@@ -75,6 +76,10 @@
     return self;
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

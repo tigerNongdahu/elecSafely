@@ -205,6 +205,7 @@
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
         XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
+        
         [UIApplication sharedApplication].keyWindow.rootViewController = navi;
     }];
     

@@ -15,7 +15,6 @@
     NSMutableSet *newSet = [NSMutableSet set];
     newSet.set = manager.responseSerializer.acceptableContentTypes;
     [newSet addObject:@"text/html"];
-    [newSet addObject:@"json/application"];
     manager.responseSerializer.acceptableContentTypes = newSet;
     
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

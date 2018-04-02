@@ -8,6 +8,7 @@
 
 #import "XWSHelpViewController.h"
 #import "XWSDetailHelpViewController.h"
+#import "XWSHelpModel.h"
 
 #define TableViewRowHeight 54.0f
 #define TableViewHeaderHeight 41.0f
@@ -71,12 +72,25 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"ask"] = @"";
     __weak typeof(self) weakVC = self;
-    [manager POST:FrigateAPI_Help_AnswerForAsk parameters:@"" progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:FrigateAPI_Help_AnswerForAsk parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [weakVC dismissNoti];
-        NSLog(@"responseObject:%@",responseObject);
         [XWSTipsView dismissTipViewWithSuperView:weakVC.view];
+
+        NSArray *results = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        [weakVC.quetions removeAllObjects];
+        
+        for (NSDictionary *dic in results) {
+            XWSHelpModel *model = [[XWSHelpModel alloc] init];
+            model.Title = dic[@"Title"];
+            model.Content = dic[@"Content"];
+            
+            [weakVC.quetions addObject:model];
+            
+            NSLog(@"title:%@ %@",model.Title,model.Content);
+        }
+        
+        [weakVC.tableView reloadData];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [weakVC dismissNoti];
@@ -111,7 +125,7 @@
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.quetions.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -147,7 +161,8 @@
     
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:100 + indexPath.row];
     
-    titleLabel.text = [NSString stringWithFormat:@"热点问题热点问题热点问题热点问题热点问题热点问题热点问题热点问题%ld",indexPath.row];
+    XWSHelpModel *model = self.quetions[indexPath.row];
+    titleLabel.text = model.Title;
     titleLabel.font = PingFangMedium(17);
     titleLabel.textColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -175,11 +190,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UILabel *titleLabel = (UILabel *)[cell viewWithTag:100 + indexPath.row];
+    
+    XWSHelpModel *model = self.quetions[indexPath.row];
+    NSString *content = model.Content;
+    NSString *title = model.Title;
     XWSDetailHelpViewController *vc = [[XWSDetailHelpViewController alloc] init];
-    vc.title = titleLabel.text;
-    vc.url = @"http://www.baidu.com";
+    vc.title = title;
+    vc.url = content;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

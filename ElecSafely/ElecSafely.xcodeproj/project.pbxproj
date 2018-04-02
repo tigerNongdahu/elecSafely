@@ -127,6 +127,7 @@
 		EEB699F22068E5FF0078A3F5 /* XWSTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB699F12068E5FF0078A3F5 /* XWSTipsView.m */; };
 		EEC53B3B2063CE0E00EE3900 /* XWSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC53B3A2063CE0E00EE3900 /* XWSNavigationController.m */; };
 		EEC53B402063CFCB00EE3900 /* XWSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC53B3F2063CFCB00EE3900 /* XWSSettingViewController.m */; };
+		EED14DAF20726AA3008D0114 /* XWSHelpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EED14DAE20726AA3008D0114 /* XWSHelpModel.m */; };
 		EED9196B206F10A8002CF969 /* net_error.png in Resources */ = {isa = PBXBuildFile; fileRef = EED9196A206F10A8002CF969 /* net_error.png */; };
 		EED9196E206F93A4002CF969 /* XWSDeviceInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED9196D206F93A4002CF969 /* XWSDeviceInfoCell.m */; };
 		EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73383206532A700FFB99B /* XWSMainViewController.m */; };
@@ -391,6 +392,8 @@
 		EEC53B3A2063CE0E00EE3900 /* XWSNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNavigationController.m; sourceTree = "<group>"; };
 		EEC53B3E2063CFCB00EE3900 /* XWSSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSSettingViewController.h; sourceTree = "<group>"; };
 		EEC53B3F2063CFCB00EE3900 /* XWSSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSSettingViewController.m; sourceTree = "<group>"; };
+		EED14DAD20726AA3008D0114 /* XWSHelpModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSHelpModel.h; sourceTree = "<group>"; };
+		EED14DAE20726AA3008D0114 /* XWSHelpModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSHelpModel.m; sourceTree = "<group>"; };
 		EED9196A206F10A8002CF969 /* net_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = net_error.png; sourceTree = "<group>"; };
 		EED9196C206F93A4002CF969 /* XWSDeviceInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSDeviceInfoCell.h; sourceTree = "<group>"; };
 		EED9196D206F93A4002CF969 /* XWSDeviceInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSDeviceInfoCell.m; sourceTree = "<group>"; };
@@ -937,6 +940,7 @@
 				EEB699E42068AFF70078A3F5 /* XWSHelpViewController.m */,
 				EEB699E62068C6000078A3F5 /* XWSDetailHelpViewController.h */,
 				EEB699E72068C6000078A3F5 /* XWSDetailHelpViewController.m */,
+				EED14DAC20726A8E008D0114 /* Model */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -973,6 +977,15 @@
 				EE47D3C0206C9A6E006FEA3C /* XWSAboutViewController.m */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		EED14DAC20726A8E008D0114 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EED14DAD20726AA3008D0114 /* XWSHelpModel.h */,
+				EED14DAE20726AA3008D0114 /* XWSHelpModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1232,6 +1245,7 @@
 				553D383D2004716500FCC58F /* ViewController+MASAdditions.m in Sources */,
 				553D38692004E47300FCC58F /* AESCrypt.m in Sources */,
 				55FEDD751FDF66DC005BD966 /* AFImageDownloader.m in Sources */,
+				EED14DAF20726AA3008D0114 /* XWSHelpModel.m in Sources */,
 				EE47D3C8206CA63F006FEA3C /* XWSPwdInputCell.m in Sources */,
 				55156A13202312AC00B80642 /* DGActivityIndicatorBallZigZagDeflectAnimation.m in Sources */,
 				EEB699E82068C6000078A3F5 /* XWSDetailHelpViewController.m in Sources */,

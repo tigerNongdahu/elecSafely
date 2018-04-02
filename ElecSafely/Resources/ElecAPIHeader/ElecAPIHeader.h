@@ -12,10 +12,10 @@
 #define FrigateAPI_Login_Check @"http://www.frigate-iot.com/data/login_chk.php"
 
 /*加载热点问题的url*/
-#define FrigateAPI_Help_AnswerForAsk @"http://www.frigate-iot.com/API/TopicAsk.php"
+#define FrigateAPI_Help_AnswerForAsk @"http://www.frigate-iot.com/MonitoringCentre/MsgCenter/InformationList.php"
 
 /*意见反馈的url*/
-#define FrigateAPI_SubmitAsk @"http://www.frigate-iot.com/MonitoringCentre/QA/SubmitAsk.php"
+#define FrigateAPI_SubmitAsk @"http://www.frigate-iot.com/MonitoringCentre/MsgCenter/SubmitAsk.php"
 
 /*修改密码*/
 #define FrigateAPI_ChangePW @"http://www.frigate-iot.com/MonitoringCentre/Data/ChangePW.php"

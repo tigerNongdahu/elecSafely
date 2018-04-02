@@ -12,7 +12,7 @@
 
 #define DEVICE_REGISTER_SUCCESS_CODE @"1"
 
-#define RowHeight 54.0f
+#define RowHeight 66.0f
 
 @interface XWSScanInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic, assign) NSTimeInterval duration;
@@ -52,7 +52,9 @@
     if (!_sendBtn) {
         _sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
         [_sendBtn setTitle:@"完成" forState:UIControlStateNormal];
-        [_sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+        [_sendBtn setTitleColor:RGBA(153, 153, 153, 1) forState:UIControlStateNormal];
+        _sendBtn.enabled = NO;
+        _sendBtn.userInteractionEnabled = NO;
         _sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         _sendBtn.titleLabel.font = PingFangMedium(15);
         [_sendBtn addTarget:self action:@selector(sendRegister) forControlEvents:UIControlEventTouchUpInside];
@@ -78,7 +80,7 @@
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
         [self.view addSubview:_tableView];
-        _tableView.backgroundColor = NavColor;
+        _tableView.backgroundColor = BackColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.rowHeight = RowHeight;
@@ -350,6 +352,16 @@
             break;
         default:
             break;
+    }
+    
+    if ([self checkStr:self.CRCID] && [self checkStr:self.SimCard] && [self checkStr:self.DevName] && [self checkStr:self.GroupName] && [self checkStr:self.CustName] && [self checkStr:self.LoginName] && [self checkStr:self.Password] && [self checkStr:self.ParentName]) {
+        [_sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+        _sendBtn.enabled = YES;
+        _sendBtn.userInteractionEnabled = YES;
+    } else {
+        [_sendBtn setTitleColor:RGBA(153, 153, 153, 1) forState:UIControlStateNormal];
+        _sendBtn.enabled = NO;
+        _sendBtn.userInteractionEnabled = NO;
     }
 }
 

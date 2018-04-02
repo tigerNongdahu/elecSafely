@@ -18,6 +18,8 @@
 #define ITEM_SIZE_WIDTH ((ScreenWidth - 2 * SIDE_MARGIN - 5 * IMAGE_MARGIN)/ 4)
 #define ITEM_SIZE_HEIGHT ITEM_SIZE_WIDTH
 
+#define SUBMIT_SUCCESS_CODE @"1"
+
 @interface XWSFeedbackViewController ()<UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 /*站位字符标签*/
 @property (nonatomic, strong) UILabel *place;
@@ -277,9 +279,14 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"ask"] = self.textView.text;
     [manager POST:FrigateAPI_SubmitAsk parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [self.progressHUD dismiss];
-        [ElecTipsView showTips:@"提交成功，谢谢您的反馈"];
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
+        if ([resultStr isEqualToString:SUBMIT_SUCCESS_CODE]) {
+            [self.progressHUD dismiss];
+            [ElecTipsView showTips:@"提交成功，谢谢您的反馈"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [self.progressHUD dismiss];

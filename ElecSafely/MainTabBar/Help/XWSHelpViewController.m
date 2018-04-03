@@ -8,6 +8,7 @@
 
 #import "XWSHelpViewController.h"
 #import "XWSDetailHelpViewController.h"
+#import "XWSHelpModel.h"
 
 #define TableViewRowHeight 54.0f
 #define TableViewHeaderHeight 41.0f
@@ -16,9 +17,19 @@
 @property (nonatomic, strong) UITableView *tableView;
 /*返回的热点问题数组*/
 @property (nonatomic, strong) NSMutableArray *quetions;
+
+@property (nonatomic, strong) ElecProgressHUD *progressHUD;
+
 @end
 
 @implementation XWSHelpViewController
+
+- (ElecProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[ElecProgressHUD alloc] init];
+    }
+    return _progressHUD;
+}
 
 - (NSMutableArray *)quetions{
     if (!_quetions) {
@@ -27,27 +38,70 @@
     return _quetions;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    /*获取点击网络错误或者无数据view的点击*/
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clickTipView) name:XWSTipViewClickTipViewNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.progressHUD dismiss];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"帮助";
     [self initView];
     [self loadHelpData];
 }
+
+- (void)clickTipView{
+    [XWSTipsView dismissTipViewWithSuperView:self.view];
+    [self loadHelpData];
+}
+
 #pragma mark - 加载网络数据
 - (void)loadHelpData{
+    [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [manager POST:FrigateAPI_Help_AnswerForAsk parameters:@"" progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"ask"] = @"";
+    __weak typeof(self) weakVC = self;
+    [manager GET:FrigateAPI_Help_AnswerForAsk parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [weakVC dismissNoti];
+        [XWSTipsView dismissTipViewWithSuperView:weakVC.view];
+
+        NSArray *results = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        [weakVC.quetions removeAllObjects];
         
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        NSLog(@"responseObject:%@",responseObject);
+        for (NSDictionary *dic in results) {
+            XWSHelpModel *model = [[XWSHelpModel alloc] init];
+            model.Title = dic[@"Title"];
+            model.Content = dic[@"Content"];
+            
+            [weakVC.quetions addObject:model];
+            
+            NSLog(@"title:%@ %@",model.Title,model.Content);
+        }
+        
+        [weakVC.tableView reloadData];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-//        [XWSTipsView showTipViewWithType:XWSShowViewTypeError inSuperView:self.view];
+        [weakVC dismissNoti];
+        [XWSTipsView showTipViewWithType:XWSShowViewTypeError inSuperView:weakVC.view];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
     }];
+}
+
+- (void)dismissNoti{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [self.progressHUD dismiss];
 }
 
 #pragma mark - 设置UI
@@ -71,7 +125,7 @@
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.quetions.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -87,6 +141,7 @@
         titleLabel.tag = 100 + indexPath.row;
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(18);
+            make.right.mas_equalTo(-38);
             make.height.mas_equalTo(30);
             make.top.mas_equalTo((TableViewRowHeight - 30) * 0.5);
         }];
@@ -106,7 +161,8 @@
     
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:100 + indexPath.row];
     
-    titleLabel.text = [NSString stringWithFormat:@"热点问题%ld",indexPath.row];
+    XWSHelpModel *model = self.quetions[indexPath.row];
+    titleLabel.text = model.Title;
     titleLabel.font = PingFangMedium(17);
     titleLabel.textColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -134,11 +190,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UILabel *titleLabel = (UILabel *)[cell viewWithTag:100 + indexPath.row];
+    
+    XWSHelpModel *model = self.quetions[indexPath.row];
+    NSString *content = model.Content;
+    NSString *title = model.Title;
     XWSDetailHelpViewController *vc = [[XWSDetailHelpViewController alloc] init];
-    vc.title = titleLabel.text;
-    vc.url = @"http://www.baidu.com";
+    vc.title = title;
+    vc.url = content;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

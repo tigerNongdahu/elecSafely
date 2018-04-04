@@ -141,9 +141,11 @@
     param[@"GroupName"] = self.GroupName;
     param[@"CustName"] = self.CustName;
     param[@"LoginName"] = self.LoginName;
-    param[@"Password"] = self.Password;
+    param[@"Password"] = [NSString md5:self.Password];
     param[@"ParentName"] = self.ParentName;
     param[@"AppendFlag"] = @"1";
+    
+    NSLog(@"param:%@",param);
     
     [manager POST:FrigateAPI_Register parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -153,7 +155,7 @@
         }else{
             
         }
-        
+
         NSLog(@"resultStr:%@",resultStr);
        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -204,9 +206,10 @@
     }
     
     if (![self checkStr:self.Password]) {
-        [ElecTipsView showTips:@"请输入客户登录密码!" during:2.0];
+        [ElecTipsView showTips:@"请输入6~16位客户登录密码!" during:2.0];
         return NO;
     }
+    
     
     if (![self checkStr:self.ParentName]) {
         [ElecTipsView showTips:@"请输入上级客户名称!" during:2.0];

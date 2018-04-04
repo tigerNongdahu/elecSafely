@@ -95,6 +95,7 @@
         
         _rightTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _rightTableView.rowHeight = RightTableViewRowHeight;
+        _rightTableView.estimatedRowHeight = RightTableViewRowHeight;
         [self addSubview:_rightTableView];
         
         [_rightTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -118,6 +119,7 @@
         _leftTableView.showsVerticalScrollIndicator = NO;
         _leftTableView.showsHorizontalScrollIndicator = NO;
         _leftTableView.rowHeight = LeftTableViewRowHeight;
+        _leftTableView.estimatedRowHeight = LeftTableViewRowHeight;
         [self addSubview:_leftTableView];
 
         [_leftTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -292,6 +294,7 @@
             line.backgroundColor = DarkBack;
             [cell addSubview:line];
             /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
+
             [line mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.right.mas_equalTo(0);
                 make.left.mas_equalTo(17);

@@ -82,6 +82,12 @@
     [XWSTipsView showTipViewWithType:XWSShowViewTypeError inSuperView:self.view];
 }
 
+- (void)dealloc{
+    NSLog(@"%s",__func__);
+    //移除kvo的监听
+    [self.webview removeObserver:self forKeyPath:@"estimatedProgress"];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -52,10 +52,9 @@
 
 #pragma mark - 设置页面
 - (void)initView{
-    self.view.backgroundColor = [UIColor whiteColor];
     [self setUpNav];
     [self setUpLeftView];
-    [self setUpRightView];
+//    [self setUpRightView];
     [self setUpSingleListRightView];
 }
 
@@ -64,9 +63,10 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_devices_list"] style:0 target:self action:@selector(showLeftView)];
     
     [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]} forState:UIControlStateNormal];
-    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_setting"] style:0 target:self action:@selector(showRightView)];
+//    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_setting"] style:0 target:self action:@selector(showRightView)];
     UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_scan"] style:0 target:self action:@selector(showSingleListRightView)];
-    self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
+    self.navigationItem.rightBarButtonItems = @[rightItem2];
+//    self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
 }
 
 #pragma - mark 设置左边
@@ -244,7 +244,7 @@
 
 #pragma mark - XWSRightViewDelegate
 - (void)clickRightView:(XWSRightView *)rightView getLeftText:(NSString *)leftText getRightText:(NSString *)rightText{
-    NSLog(@"leftText:%@ rightText:%@",leftText,rightText);
+
     [self hideRightView];
 }
 

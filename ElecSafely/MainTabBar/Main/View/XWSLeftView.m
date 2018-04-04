@@ -93,11 +93,12 @@
        
         _tableView.backgroundColor = leftLeftBackColor;
         [self addSubview:_tableView];
-        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-            make.left.bottom.mas_equalTo(0);
-            make.right.mas_equalTo(-TableViewMarginRightWidth);
-        }];
+        _tableView.frame = CGRectMake(0, 0, ScreenWidth - TableViewMarginRightWidth, ScreenHeight);
+//        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(0);
+//            make.left.bottom.mas_equalTo(0);
+//            make.right.mas_equalTo(-TableViewMarginRightWidth);
+//        }];
 
         UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 187)];
         [self setUpHeadView:headView];

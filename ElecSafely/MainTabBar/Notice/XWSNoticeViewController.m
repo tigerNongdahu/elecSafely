@@ -14,10 +14,19 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *contentlabel;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) ElecProgressHUD *progressHUD;
 @end
 
 @implementation XWSNoticeViewController
 #pragma mark - 懒加载
+
+- (ElecProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[ElecProgressHUD alloc] init];
+    }
+    return _progressHUD;
+}
+
 - (UIScrollView *)contentScrollView{
     if (!_contentScrollView) {
         _contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavibarHeight)];
@@ -161,10 +170,16 @@
 
 #pragma mark - 加载数据
 - (void)loadData{
+    
+    [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     
     __weak typeof(self) weakVC = self;
     [manager POST:FrigateAPI_noticeContent(self.noticeId) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
@@ -179,6 +194,8 @@
         });
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况" during:2.0];
         [XWSTipsView showTipViewWithType:XWSShowViewTypeError inSuperView:weakVC.view];
     }];

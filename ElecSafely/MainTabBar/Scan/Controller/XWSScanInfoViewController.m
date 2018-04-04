@@ -130,6 +130,7 @@
     }
     
     [self.progressHUD showHUD:self.view Offset:- NavibarHeight animation:18];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSLog(@"CRCID:%@ SimCard:%@ DevName:%@ GroupName:%@ CustName:%@ LoginName:%@ Password:%@ ParentName:%@",self.CRCID,self.SimCard,self.DevName,self.GroupName,self.CustName,self.LoginName,self.Password,self.ParentName);
     
@@ -148,7 +149,8 @@
     NSLog(@"param:%@",param);
     
     [manager POST:FrigateAPI_Register parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+        [self.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
          NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
         if ([resultStr isEqualToString:DEVICE_REGISTER_SUCCESS_CODE]) {
              [self showNotiView];
@@ -160,6 +162,8 @@
        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
+        [self.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况" during:2.0];
     }];
 }

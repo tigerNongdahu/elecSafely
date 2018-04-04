@@ -235,7 +235,7 @@
             UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
             line.backgroundColor = DarkBack;
             [cell addSubview:line];
-            /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
+
             [line mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.right.mas_equalTo(0);
                 make.left.mas_equalTo(17);

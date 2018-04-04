@@ -155,7 +155,7 @@
         if ([resultStr isEqualToString:DEVICE_REGISTER_SUCCESS_CODE]) {
              [self showNotiView];
         }else{
-            
+            [ElecTipsView showTips:@"提交失败" during:2.0];
         }
 
         NSLog(@"resultStr:%@",resultStr);
@@ -241,7 +241,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSString *title = self.titles[indexPath.row];
-    XWSDeviceInfoCell *cell = [XWSDeviceInfoCell cellWithTableView:tableView withTitle:title withPlaceHolder:@"请输入..."];
+    XWSDeviceInfoCell *cell = [XWSDeviceInfoCell cellWithTableView:tableView withTitle:title withPlaceHolder:@"请输入"];
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row + 100;
     

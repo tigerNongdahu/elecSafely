@@ -70,13 +70,15 @@
 
 #pragma -mark 设置导航栏
 - (void)setUpNav{
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_devices_list"] style:0 target:self action:@selector(showLeftView)];
     
-    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]} forState:UIControlStateNormal];
-    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_setting"] style:0 target:self action:@selector(showRightView)];
-    UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_scan"] style:0 target:self action:@selector(showSingleListRightView)];
-//    self.navigationItem.rightBarButtonItems = @[rightItem2];
-    self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_menu"] style:0 target:self action:@selector(showLeftView)];
+//
+//    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]} forState:UIControlStateNormal];
+//    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_setting"] style:0 target:self action:@selector(showRightView)];
+    
+    UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"right_notice"] style:0 target:self action:@selector(showSingleListRightView)];
+    self.navigationItem.rightBarButtonItems = @[rightItem2];
+//    self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
 }
 
 #pragma - mark 设置左边
@@ -86,7 +88,7 @@
     NSString *account = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"account"] = account;
-    dic[@"icon"] = @"left_setting";
+    dic[@"icon"] = @"logo_icon";
     
     if (!_leftView) {
         //目前里面设置的icon暂时没有实现加载网络图片，要实现可以自己到leftView里面去添加

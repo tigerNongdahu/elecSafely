@@ -67,7 +67,7 @@
             make.top.mas_equalTo(297);
             
         }];
-        tipLabel.text = @"暂时公告";
+        tipLabel.text = @"暂无公告";
     }
     return _NoDataView;
 }

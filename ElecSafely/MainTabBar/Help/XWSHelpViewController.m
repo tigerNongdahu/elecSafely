@@ -69,8 +69,7 @@
     [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"ask"] = @"";
+
     __weak typeof(self) weakVC = self;
     [manager GET:FrigateAPI_Help_AnswerForAsk parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [weakVC dismissNoti];

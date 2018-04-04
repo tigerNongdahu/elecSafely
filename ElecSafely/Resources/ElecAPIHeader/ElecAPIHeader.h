@@ -23,4 +23,10 @@
 /*设备注册*/
 #define FrigateAPI_Register @"http://www.frigate-iot.com/API/Register.php"
 
+/*公告列表*/
+#define FrigateAPI_loadNotice @"http://www.frigate-iot.com/MonitoringCentre/Data/loadNewNotice.php"
+
+/*公告内容*/
+#define FrigateAPI_noticeContent(noticeID) ([NSString stringWithFormat:@"http://www.frigate-iot.com/MonitoringCentre/Data/loadNoticeContent.php?ID=%@",noticeID])
+
 #endif /* ElecAPIHeader_h */

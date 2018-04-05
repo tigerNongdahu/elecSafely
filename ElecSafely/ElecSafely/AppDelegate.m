@@ -39,8 +39,8 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    TFLaunchViewController *launchVC = [[TFLaunchViewController alloc] init];
-//    TFLoginViewController *launchVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+//    TFLaunchViewController *launchVC = [[TFLaunchViewController alloc] init];
+    TFLoginViewController *launchVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
 //    XWSFeedbackViewController *launchVC = [[XWSFeedbackViewController alloc] init];
     XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:launchVC];
     self.window.rootViewController = navi;

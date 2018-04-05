@@ -22,4 +22,6 @@
 
 /*检查是否只存在字母和数字的合法字符*/
 + (BOOL)judgeTheillegalCharacterWithoutChinese:(NSString *)content;
+/*检查字符串是否为空*/
++ (BOOL)checkIsNilWithStr:(NSString *)str;
 @end

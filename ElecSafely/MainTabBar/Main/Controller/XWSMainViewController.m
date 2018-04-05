@@ -359,7 +359,6 @@
         XWSNoticeModel *model = (XWSNoticeModel *)obj;
         
         XWSNoticeViewController *noticeVC = [[XWSNoticeViewController alloc] init];
-        noticeVC.titleStr = model.Title;
         noticeVC.noticeId = model.ID;
         
         XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:noticeVC];

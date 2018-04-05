@@ -23,6 +23,7 @@
     [self initView];
 }
 
+
 - (void)initView{
     
     // 进度条

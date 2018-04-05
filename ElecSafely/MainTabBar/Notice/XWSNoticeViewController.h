@@ -9,6 +9,6 @@
 #import "XWSBasrViewController.h"
 
 @interface XWSNoticeViewController : XWSBasrViewController
-@property (nonatomic, copy) NSString *titleStr;
+
 @property (nonatomic, copy) NSString *noticeId;
 @end

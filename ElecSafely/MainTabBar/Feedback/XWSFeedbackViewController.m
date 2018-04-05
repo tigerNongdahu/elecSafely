@@ -280,18 +280,19 @@
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"ask"] = self.textView.text;
+    __weak typeof(self) weakVC = self;
     [manager POST:FrigateAPI_SubmitAsk parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
         if ([resultStr isEqualToString:SUBMIT_SUCCESS_CODE]) {
-            [self.progressHUD dismiss];
+            [weakVC.progressHUD dismiss];
             [ElecTipsView showTips:@"提交成功，谢谢您的反馈"];
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakVC.navigationController popViewControllerAnimated:YES];
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
-        [self.progressHUD dismiss];
+        [weakVC.progressHUD dismiss];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
     }];
 }

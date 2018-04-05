@@ -42,7 +42,6 @@
     tipLabel.font = PingFangRegular(16);
     tipLabel.textColor = RGBA(170, 170, 170, 1);
     
-    
     if (type == XWSShowViewTypeError) {
         //添加图片视图
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];

@@ -23,6 +23,7 @@
     [self initView];
 }
 
+
 - (void)initView{
     
     // 进度条
@@ -80,6 +81,12 @@
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
     NSLog(@"error++++:%@",error);
     [XWSTipsView showTipViewWithType:XWSShowViewTypeError inSuperView:self.view];
+}
+
+- (void)dealloc{
+    NSLog(@"%s",__func__);
+    //移除kvo的监听
+    [self.webview removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
 - (void)didReceiveMemoryWarning {

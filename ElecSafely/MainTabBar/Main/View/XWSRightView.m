@@ -41,23 +41,52 @@
 @property (nonatomic, copy) NSString *leftTitle;
 /*右侧当前选中的行的标题，这个以后可以根据传值的需要进行修改，可以改成模型或者基本数据类型*/
 @property (nonatomic, copy) NSString *rightTitle;
+
+/*没有功能View*/
+@property (nonatomic, strong) UIView *NoDataView;
 @end
 
 @implementation XWSRightView
 
-- (instancetype)initWithFrame:(CGRect)frame withDatas:(NSArray *)datas{
+- (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
         self.leftArr = [NSMutableArray array];
-        
-        //给左边数据列表赋值
-        [self.leftArr addObjectsFromArray:datas];
-
         [self setUpUI];
     }
     return self;
 }
 #pragma mark - 懒加载
+
+
+- (UIView *)NoDataView{
+    if (!_NoDataView) {
+        _NoDataView = [[UIView alloc] initWithFrame:CGRectZero];
+        [self addSubview:_NoDataView];
+        _NoDataView.backgroundColor = NavColor;
+        [_NoDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.navView.mas_bottom);
+            make.width.mas_equalTo(ScreenWidth - leftMarginWidth);
+            make.bottom.mas_equalTo(0);
+            make.right.mas_equalTo(0);
+        }];
+        
+        //添加标题
+        UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        [_NoDataView addSubview:tipLabel];
+        tipLabel.textAlignment = NSTextAlignmentCenter;
+        tipLabel.font = PingFangRegular(16);
+        tipLabel.textColor = RGBA(170, 170, 170, 1);
+        [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(_NoDataView.mas_centerX);
+            make.top.mas_equalTo(297);
+            
+        }];
+        tipLabel.text = @"暂无数据";
+    }
+    return _NoDataView;
+}
+
 - (UIView *)coverView{
     if (!_coverView) {
         _coverView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -95,6 +124,7 @@
         
         _rightTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _rightTableView.rowHeight = RightTableViewRowHeight;
+        _rightTableView.estimatedRowHeight = RightTableViewRowHeight;
         [self addSubview:_rightTableView];
         
         [_rightTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -118,6 +148,7 @@
         _leftTableView.showsVerticalScrollIndicator = NO;
         _leftTableView.showsHorizontalScrollIndicator = NO;
         _leftTableView.rowHeight = LeftTableViewRowHeight;
+        _leftTableView.estimatedRowHeight = LeftTableViewRowHeight;
         [self addSubview:_leftTableView];
 
         [_leftTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -233,13 +264,8 @@
     [self coverView];
     [self leftTableView];
     [self rightTableView];
+    [self NoDataView];
     
-    //默认选中第一行
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.leftTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    [self tableView:self.leftTableView didSelectRowAtIndexPath:indexPath];
-    [self.rightTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    [self tableView:self.rightTableView didSelectRowAtIndexPath:indexPath];
 }
 
 #pragma mark - 根据传入的数据，获取对应的值（可以在这里进行修改）
@@ -292,6 +318,7 @@
             line.backgroundColor = DarkBack;
             [cell addSubview:line];
             /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
+
             [line mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.right.mas_equalTo(0);
                 make.left.mas_equalTo(17);
@@ -409,6 +436,31 @@
 - (void)cancelCoverViewOpacity{
     [_coverView.layer removeAllAnimations];
     _coverView.alpha = 0;
+}
+
+#pragma mark - 传进来的数据
+- (void)setDatas:(NSMutableArray *)datas{
+    _datas = datas;
+    
+    [self.leftArr removeAllObjects];
+    //给左边数据列表赋值
+    [self.leftArr addObjectsFromArray:_datas];
+    
+    if (self.leftArr.count != 0) {
+        self.NoDataView.hidden = YES;
+        self.leftTableView.hidden = NO;
+        self.rightTableView.hidden = NO;
+        //默认选中第一行
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.leftTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [self tableView:self.leftTableView didSelectRowAtIndexPath:indexPath];
+        [self.rightTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [self tableView:self.rightTableView didSelectRowAtIndexPath:indexPath];
+    }else{
+        self.NoDataView.hidden = NO;
+        self.leftTableView.hidden = YES;
+        self.rightTableView.hidden = YES;
+    }
 }
 
 @end

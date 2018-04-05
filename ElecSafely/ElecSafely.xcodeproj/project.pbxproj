@@ -118,6 +118,9 @@
 		EE50AED12064A7C40068FBC1 /* left_statistics@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE50AECA2064A7C40068FBC1 /* left_statistics@3x.png */; };
 		EE50AEDA206504A90068FBC1 /* XWSScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE50AED9206504A90068FBC1 /* XWSScanView.m */; };
 		EE50AEDD206504EA0068FBC1 /* XWSScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE50AEDC206504EA0068FBC1 /* XWSScanViewController.m */; };
+		EE936EFC20750AA700D3BD54 /* left_menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE936EFB20750AA700D3BD54 /* left_menu@3x.png */; };
+		EE936EFE20750C5A00D3BD54 /* right_notice@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE936EFD20750C5A00D3BD54 /* right_notice@3x.png */; };
+		EE936F0020750EAD00D3BD54 /* logo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE936EFF20750EAD00D3BD54 /* logo_icon@3x.png */; };
 		EEA2FF4020674AD300E5D192 /* XWSBasrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2FF3F20674AD300E5D192 /* XWSBasrViewController.m */; };
 		EEA2FF492067691D00E5D192 /* UIView+HGCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA2FF472067691C00E5D192 /* UIView+HGCorner.m */; };
 		EEB699E12068A4410078A3F5 /* scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEB699E02068A4410078A3F5 /* scan@3x.png */; };
@@ -130,6 +133,9 @@
 		EED14DAF20726AA3008D0114 /* XWSHelpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EED14DAE20726AA3008D0114 /* XWSHelpModel.m */; };
 		EED9196B206F10A8002CF969 /* net_error.png in Resources */ = {isa = PBXBuildFile; fileRef = EED9196A206F10A8002CF969 /* net_error.png */; };
 		EED9196E206F93A4002CF969 /* XWSDeviceInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED9196D206F93A4002CF969 /* XWSDeviceInfoCell.m */; };
+		EEEF713D20746E8F00ABD711 /* XWSNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF713C20746E8F00ABD711 /* XWSNoticeViewController.m */; };
+		EEEF714020746EE600ABD711 /* XWSSingleListRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF713F20746EE600ABD711 /* XWSSingleListRightView.m */; };
+		EEEF714420749E9800ABD711 /* XWSNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF714320749E9800ABD711 /* XWSNoticeModel.m */; };
 		EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73383206532A700FFB99B /* XWSMainViewController.m */; };
 		EEF73387206537F500FFB99B /* XWSRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73386206537F500FFB99B /* XWSRightView.m */; };
 		EEF7338F20663EC700FFB99B /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = EEF7338E20663EC700FFB99B /* json.json */; };
@@ -375,6 +381,9 @@
 		EE50AED9206504A90068FBC1 /* XWSScanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSScanView.m; sourceTree = "<group>"; };
 		EE50AEDB206504EA0068FBC1 /* XWSScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSScanViewController.h; sourceTree = "<group>"; };
 		EE50AEDC206504EA0068FBC1 /* XWSScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSScanViewController.m; sourceTree = "<group>"; };
+		EE936EFB20750AA700D3BD54 /* left_menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_menu@3x.png"; sourceTree = "<group>"; };
+		EE936EFD20750C5A00D3BD54 /* right_notice@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_notice@3x.png"; sourceTree = "<group>"; };
+		EE936EFF20750EAD00D3BD54 /* logo_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@3x.png"; sourceTree = "<group>"; };
 		EEA2FF3E20674AD300E5D192 /* XWSBasrViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSBasrViewController.h; sourceTree = "<group>"; };
 		EEA2FF3F20674AD300E5D192 /* XWSBasrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSBasrViewController.m; sourceTree = "<group>"; };
 		EEA2FF472067691C00E5D192 /* UIView+HGCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HGCorner.m"; sourceTree = "<group>"; };
@@ -397,6 +406,12 @@
 		EED9196A206F10A8002CF969 /* net_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = net_error.png; sourceTree = "<group>"; };
 		EED9196C206F93A4002CF969 /* XWSDeviceInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSDeviceInfoCell.h; sourceTree = "<group>"; };
 		EED9196D206F93A4002CF969 /* XWSDeviceInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSDeviceInfoCell.m; sourceTree = "<group>"; };
+		EEEF713B20746E8F00ABD711 /* XWSNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSNoticeViewController.h; sourceTree = "<group>"; };
+		EEEF713C20746E8F00ABD711 /* XWSNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNoticeViewController.m; sourceTree = "<group>"; };
+		EEEF713E20746EE600ABD711 /* XWSSingleListRightView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSSingleListRightView.h; sourceTree = "<group>"; };
+		EEEF713F20746EE600ABD711 /* XWSSingleListRightView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSSingleListRightView.m; sourceTree = "<group>"; };
+		EEEF714220749E9800ABD711 /* XWSNoticeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSNoticeModel.h; sourceTree = "<group>"; };
+		EEEF714320749E9800ABD711 /* XWSNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNoticeModel.m; sourceTree = "<group>"; };
 		EEF73382206532A700FFB99B /* XWSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSMainViewController.h; sourceTree = "<group>"; };
 		EEF73383206532A700FFB99B /* XWSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSMainViewController.m; sourceTree = "<group>"; };
 		EEF73385206537F500FFB99B /* XWSRightView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSRightView.h; sourceTree = "<group>"; };
@@ -450,9 +465,12 @@
 			children = (
 				EE50AEC32064A7C30068FBC1 /* LeftMenu */,
 				55EC947F1FEDF90C000D21F4 /* logo_min.png */,
+				EE936EFF20750EAD00D3BD54 /* logo_icon@3x.png */,
+				EE936EFB20750AA700D3BD54 /* left_menu@3x.png */,
 				553D35E3200465FF00FCC58F /* bg@3x.png */,
 				553D35E4200465FF00FCC58F /* logo@3x.png */,
 				EEB699E02068A4410078A3F5 /* scan@3x.png */,
+				EE936EFD20750C5A00D3BD54 /* right_notice@3x.png */,
 				EED9196A206F10A8002CF969 /* net_error.png */,
 			);
 			path = Images;
@@ -725,6 +743,7 @@
 		55EF8A1F1FDE320D003F5061 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				EEEF713A20746E5B00ABD711 /* Notice */,
 				EEB699EC2068DD3A0078A3F5 /* Feedback */,
 				EEB699E22068AFA80078A3F5 /* Help */,
 				EEA2FF3D20674AC400E5D192 /* Base */,
@@ -851,6 +870,7 @@
 		EE50AEBD2064A3C10068FBC1 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				EEEF714120749E8500ABD711 /* Model */,
 				EE50AEBE2064A3C10068FBC1 /* Controller */,
 				EE50AEBF2064A3C10068FBC1 /* View */,
 			);
@@ -874,6 +894,8 @@
 				EE50AEC12064A4160068FBC1 /* XWSLeftView.m */,
 				EEF73385206537F500FFB99B /* XWSRightView.h */,
 				EEF73386206537F500FFB99B /* XWSRightView.m */,
+				EEEF713E20746EE600ABD711 /* XWSSingleListRightView.h */,
+				EEEF713F20746EE600ABD711 /* XWSSingleListRightView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -984,6 +1006,24 @@
 			children = (
 				EED14DAD20726AA3008D0114 /* XWSHelpModel.h */,
 				EED14DAE20726AA3008D0114 /* XWSHelpModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EEEF713A20746E5B00ABD711 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				EEEF713B20746E8F00ABD711 /* XWSNoticeViewController.h */,
+				EEEF713C20746E8F00ABD711 /* XWSNoticeViewController.m */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		EEEF714120749E8500ABD711 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EEEF714220749E9800ABD711 /* XWSNoticeModel.h */,
+				EEEF714320749E9800ABD711 /* XWSNoticeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1106,10 +1146,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE936EFE20750C5A00D3BD54 /* right_notice@3x.png in Resources */,
 				EED9196B206F10A8002CF969 /* net_error.png in Resources */,
 				EE50AED02064A7C40068FBC1 /* left_devices_list@3x.png in Resources */,
 				553D35E5200465FF00FCC58F /* bg@3x.png in Resources */,
 				EE50AECD2064A7C40068FBC1 /* left_setting@3x.png in Resources */,
+				EE936F0020750EAD00D3BD54 /* logo_icon@3x.png in Resources */,
 				EEF7338F20663EC700FFB99B /* json.json in Resources */,
 				EE50AED12064A7C40068FBC1 /* left_statistics@3x.png in Resources */,
 				55EF89F71FDE3148003F5061 /* Assets.xcassets in Resources */,
@@ -1118,6 +1160,7 @@
 				EEB699E12068A4410078A3F5 /* scan@3x.png in Resources */,
 				55EC94861FEDF90C000D21F4 /* logo_min.png in Resources */,
 				EE50AECF2064A7C40068FBC1 /* left_feedback@3x.png in Resources */,
+				EE936EFC20750AA700D3BD54 /* left_menu@3x.png in Resources */,
 				EE50AECE2064A7C40068FBC1 /* left_alarm@3x.png in Resources */,
 				EE50AECC2064A7C40068FBC1 /* left_scan@3x.png in Resources */,
 			);
@@ -1172,6 +1215,7 @@
 				55FEDD7A1FDF66DC005BD966 /* UIProgressView+AFNetworking.m in Sources */,
 				55156A1F202312AC00B80642 /* DGActivityIndicatorThreeDotsAnimation.m in Sources */,
 				55156A06202312AC00B80642 /* DGActivityIndicatorBallClipRotatePulseAnimation.m in Sources */,
+				EEEF714420749E9800ABD711 /* XWSNoticeModel.m in Sources */,
 				EEB699EF2068DD540078A3F5 /* XWSFeedbackViewController.m in Sources */,
 				55156A0E202312AC00B80642 /* DGActivityIndicatorBallScaleRippleAnimation.m in Sources */,
 				55156A1E202312AC00B80642 /* DGActivityIndicatorRotatingTrigonAnimation.m in Sources */,
@@ -1185,6 +1229,7 @@
 				EEB699F22068E5FF0078A3F5 /* XWSTipsView.m in Sources */,
 				EED9196E206F93A4002CF969 /* XWSDeviceInfoCell.m in Sources */,
 				55156A1D202312AC00B80642 /* DGActivityIndicatorRotatingSquaresAnimation.m in Sources */,
+				EEEF713D20746E8F00ABD711 /* XWSNoticeViewController.m in Sources */,
 				EE50AEDA206504A90068FBC1 /* XWSScanView.m in Sources */,
 				55156A08202312AC00B80642 /* DGActivityIndicatorBallGridPulseAnimation.m in Sources */,
 				EEA2FF4020674AD300E5D192 /* XWSBasrViewController.m in Sources */,
@@ -1210,6 +1255,7 @@
 				55156A14202312AC00B80642 /* DGActivityIndicatorCookieTerminatorAnimation.m in Sources */,
 				553D38652004E47300FCC58F /* SecurityUtil.m in Sources */,
 				55FEDD791FDF66DC005BD966 /* UIImageView+AFNetworking.m in Sources */,
+				EEEF714020746EE600ABD711 /* XWSSingleListRightView.m in Sources */,
 				55156A23202312AC00B80642 /* DGActivityIndicatorTwoDotsAnimation.m in Sources */,
 				55156A03202312AC00B80642 /* DGActivityIndicatorBallBeatAnimation.m in Sources */,
 				EE36A37720691C2300E71A54 /* XWSFeedImageCell.m in Sources */,

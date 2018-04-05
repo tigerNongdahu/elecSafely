@@ -378,6 +378,8 @@
         cell.close.hidden = NO;
     }
     
+    
+    
     cell.close.tag = 100 + indexPath.row;
     [cell.close addTarget:self action:@selector(deletePhotos:) forControlEvents:UIControlEventTouchUpInside];
     

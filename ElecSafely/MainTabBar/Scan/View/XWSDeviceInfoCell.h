@@ -12,5 +12,5 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UITextField *textField;
 
-+ (id)cellWithTableView:(UITableView *)tableView withTitle:(NSString *)title withPlaceHolder:(NSString *)placeholder;
++ (id)cellWithTableView:(UITableView *)tableView withTitle:(NSString *)title withPlaceHolder:(NSString *)placeholder withStandardTextLength:(NSInteger)length withStandardString:(NSString *)string;
 @end

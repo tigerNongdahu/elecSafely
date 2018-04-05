@@ -13,6 +13,8 @@
 #define DEVICE_REGISTER_SUCCESS_CODE @"1"
 
 #define RowHeight 66.0f
+/*小于5个中文字符的，就于5个的为标准*/
+#define StandardLength 5
 
 @interface XWSScanInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic, assign) NSTimeInterval duration;
@@ -22,6 +24,8 @@
 @property (nonatomic, weak) UITextField *textField;
 /*标题数组*/
 @property (nonatomic, strong) NSMutableArray *titles;
+/*标题数组*/
+@property (nonatomic, strong) NSMutableArray *places;
 
 /*键盘的高度*/
 @property (nonatomic, assign) CGFloat keyBoardHeight;
@@ -74,6 +78,13 @@
         _titles = [NSMutableArray arrayWithObjects:@"设备注册码",@"物联网卡号",@"设备名称",@"设备分组",@"客户名称",@"登录账号",@"客户登录密码",@"上级客户名称", nil];
     }
     return _titles;
+}
+
+- (NSMutableArray *)places{
+    if (!_places) {
+        _places = [NSMutableArray arrayWithObjects:@"16位英文字母和数字",@"英文字母和数字",@"请输入",@"请输入",@"请输入",@"请输入",@"6-16位英文字母、数据和下划线",@"请输入", nil];
+    }
+    return _places;
 }
 
 - (UITableView *)tableView{
@@ -130,8 +141,7 @@
     }
     
     [self.progressHUD showHUD:self.view Offset:- NavibarHeight animation:18];
-    
-    NSLog(@"CRCID:%@ SimCard:%@ DevName:%@ GroupName:%@ CustName:%@ LoginName:%@ Password:%@ ParentName:%@",self.CRCID,self.SimCard,self.DevName,self.GroupName,self.CustName,self.LoginName,self.Password,self.ParentName);
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -146,25 +156,32 @@
     param[@"AppendFlag"] = @"1";
     
     NSLog(@"param:%@",param);
-    
+    __weak typeof(self) weakVC = self;
     [manager POST:FrigateAPI_Register parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+        [weakVC.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
          NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
         if ([resultStr isEqualToString:DEVICE_REGISTER_SUCCESS_CODE]) {
-             [self showNotiView];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakVC showNotiView];
+            });
         }else{
-            
+            [ElecTipsView showTips:@"提交失败" during:2.0];
         }
 
         NSLog(@"resultStr:%@",resultStr);
        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
+        [weakVC.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况" during:2.0];
     }];
 }
 
 - (BOOL)checkParam{
+    
+    
     if (![self checkStr:self.CRCID] || [self.CRCID stringByReplacingOccurrencesOfString:@" " withString:@""].length != 16) {
         [ElecTipsView showTips:@"请输入正确格式的16位设备注册码!" during:2.0];
         return NO;
@@ -237,7 +254,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSString *title = self.titles[indexPath.row];
-    XWSDeviceInfoCell *cell = [XWSDeviceInfoCell cellWithTableView:tableView withTitle:title withPlaceHolder:@"请输入..."];
+    NSString *palce = self.places[indexPath.row];
+    XWSDeviceInfoCell *cell = [XWSDeviceInfoCell cellWithTableView:tableView withTitle:title withPlaceHolder:palce withStandardTextLength:StandardLength withStandardString:@"设备注册码"];
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row + 100;
     
@@ -258,11 +276,12 @@
     
     if (indexPath.row == 6) {
         cell.textField.secureTextEntry = YES;
-        cell.textField.placeholder = @"6-16位英文字母、数据和下划线";
     }
     
     if (indexPath.row != 7) {
         cell.textField.returnKeyType = UIReturnKeyNext;
+    }else{
+        cell.textField.returnKeyType = UIReturnKeyDone;
     }
     
     return cell;
@@ -325,10 +344,11 @@
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
 
-    NSString *text = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    switch (textField.tag - 100) {
+- (void)textFieldDidChange{
+    
+    NSString *text = [self.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    switch (self.textField.tag - 100) {
         case 0:
             self.CRCID = text;
             break;
@@ -351,7 +371,7 @@
             self.Password = text;
             break;
         case 7:
-            self.ParentName = textField.text;
+            self.ParentName = text;
             break;
         default:
             break;
@@ -374,7 +394,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     //增加监听，当键退出时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
+    //监控输入的情况
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange) name:UITextFieldTextDidChangeNotification object:nil];
 }
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {

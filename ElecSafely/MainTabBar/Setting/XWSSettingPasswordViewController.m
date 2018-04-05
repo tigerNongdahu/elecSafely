@@ -9,11 +9,10 @@
 #import "XWSSettingPasswordViewController.h"
 #import "NSString+XWSManager.h"
 #import "XWSPwdInputCell.h"
-#import "PrivateFunction.h"
-#import "DESCrypt.h"
+#import "XWSDeviceInfoCell.h"
 #import "TFLoginViewController.h"
 #import "XWSNavigationController.h"
-#define RowHeight  54.0f
+#define RowHeight  66.0f
 
 #define OLD_PASSWORD_ERROR_STRING @"原始密码错误"
 #define MODIFY_PASSWORD_SUCCESS_STRING @"密码修改成功"
@@ -25,9 +24,29 @@
 @property (nonatomic, strong) UIButton *sendBtn;
 
 @property (nonatomic, strong) ElecProgressHUD *progressHUD;
+@property (nonatomic, strong) NSMutableArray *titles;
+@property (nonatomic, strong) NSMutableArray *places;
+
+@property (nonatomic, copy) NSString *OldPwd;
+@property (nonatomic, copy) NSString *NewPwd;
+@property (nonatomic, copy) NSString *conPwd;
 @end
 
 @implementation XWSSettingPasswordViewController
+
+- (NSMutableArray *)places{
+    if (!_places) {
+        _places = [NSMutableArray arrayWithObjects:@"请输入6-16位原密码",@"请输入6-16位新密码",@"请重复输入新密码", nil];
+    }
+    return _places;
+}
+
+- (NSMutableArray *)titles{
+    if (!_titles) {
+        _titles = [NSMutableArray arrayWithObjects:@"原密码",@"新密码",@"确认密码", nil];
+    }
+    return _titles;
+}
 
 - (ElecProgressHUD *)progressHUD{
     if (!_progressHUD) {
@@ -43,8 +62,14 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange) name:UITextFieldTextDidChangeNotification object:nil];
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [self.oldTextField resignFirstResponder];
     [self.neTextField resignFirstResponder];
@@ -57,9 +82,10 @@
     self.title = @"账号与安全";
     self.sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 30)];
     [self.sendBtn setTitle:@"提交" forState:UIControlStateNormal];
-    [self.sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+    _sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [self.sendBtn setTitleColor:RGBA(153, 153, 153, 1) forState:UIControlStateNormal];
     self.sendBtn.titleLabel.font = PingFangMedium(15);
-    self.sendBtn.enabled = NO;
+    self.sendBtn.userInteractionEnabled = NO;
     [self.sendBtn addTarget:self action:@selector(savePwd) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.sendBtn];
@@ -71,7 +97,8 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(0);
+        make.left.right.bottom.mas_equalTo(0);
+        make.top.mas_equalTo(0.3);
     }];
     
     self.tableView.dataSource = self;
@@ -90,16 +117,16 @@
     if (![self checkParam]) {
         return;
     }
-
-    [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
-    ElecHTTPManager *manager = [ElecHTTPManager manager];
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    
+     [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
     
     NSString *old = [self.oldTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *nP = [self.neTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    NSLog(@"old:%@ %ld",old,old.length);
-    
+
+   
+    ElecHTTPManager *manager = [ElecHTTPManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+
     param[@"OldPW"] = [NSString md5:old];
     param[@"NldPW"] = [NSString md5:nP];
     // password:8ddcff3a80f4189ca1c9d4d902c3c909
@@ -107,9 +134,10 @@
      NSLog(@"[NSString md5:old]:%@",param[@"OldPW"]);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
+    __weak typeof(self) weakVC = self;
     [manager POST:FrigateAPI_ChangePW parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
-        [self.progressHUD dismiss];
+        [weakVC.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
         NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
@@ -118,11 +146,11 @@
          NSLog(@"checkId:%@",resultStr);
         // 如果放回的是“密码修改成功”，则退出到登录页面
         if ([resultStr containsString:MODIFY_PASSWORD_SUCCESS_STRING]) {
-            [self logOut];
+            [weakVC logOut];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
-        [self.progressHUD dismiss];
+        [weakVC.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
     }];
@@ -182,58 +210,48 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
-
+    return self.titles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    XWSPwdInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"XWSPwdInputCell"];
     
-    if (cell == nil) {
-        cell = [[XWSPwdInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"XWSPwdInputCell"];
-    }
+    NSString *title = self.titles[indexPath.row];
+    NSString *place = self.places[indexPath.row];
     
+    XWSDeviceInfoCell *cell = [XWSDeviceInfoCell cellWithTableView:tableView withTitle:title withPlaceHolder:place withStandardTextLength:4 withStandardString:@"确认密码"];
     cell.textField.delegate = self;
-    cell.textField.tag = indexPath.row;
+    cell.textField.secureTextEntry = YES;
+    cell.textField.returnKeyType = UIReturnKeyNext;
+    
     switch (indexPath.row) {
         case 0:
         {
-            cell.titleLabel.text = @"原密码:";
-            cell.textField.returnKeyType = UIReturnKeyNext;
             self.oldTextField = cell.textField;
         }
             break;
         case 1:
         {
-            cell.titleLabel.text = @"新密码:";
-            cell.textField.returnKeyType = UIReturnKeyNext;
             self.neTextField = cell.textField;
         }
             break;
         case 2:
         {
-            cell.titleLabel.text = @"确认密码:";
+            cell.textField.returnKeyType = UIReturnKeyDone;
             self.conTextField = cell.textField;
-            cell.textField.placeholder = @"请重复输入新密码";
         }
             break;
             
         default:
             break;
     }
+    
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 17.0f;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    CGFloat he = [self tableView:tableView heightForHeaderInSection:section];
-    
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.height,he)];
-    headView.backgroundColor = BackColor;
-    return headView;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.oldTextField resignFirstResponder];
+    [self.neTextField resignFirstResponder];
+    [self.conTextField resignFirstResponder];
 }
 
 #pragma mark - UItextField
@@ -248,11 +266,24 @@
     return YES;
 }
 
+
+- (void)textFieldDidChange{
+    if (![NSString checkIsNilWithStr:self.neTextField.text] && ![NSString checkIsNilWithStr:self.oldTextField.text] && ![NSString checkIsNilWithStr:self.conTextField.text]) {
+        self.sendBtn.userInteractionEnabled = YES;
+        [self.sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+    }else{
+        self.sendBtn.userInteractionEnabled = NO;
+        [self.sendBtn setTitleColor:RGBA(153, 153, 153, 1) forState:UIControlStateNormal];
+    }
+}
+
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.oldTextField resignFirstResponder];
     [self.neTextField resignFirstResponder];
     [self.conTextField resignFirstResponder];
 }
+
 
 
 - (void)didReceiveMemoryWarning {

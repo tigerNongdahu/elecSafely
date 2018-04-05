@@ -25,10 +25,10 @@
         self.backgroundColor = NavColor;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
          CGFloat y = (self.frame.size.height - 30) * 0.5;
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, y, 100, 30)];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, y, 80, 30)];
         [self addSubview:self.titleLabel];
        
-        self.titleLabel.font = PingFangRegular(17);
+        self.titleLabel.font = PingFangRegular(16);
         self.titleLabel.textColor = RGBA(153, 153, 153, 1);
         self.titleLabel.text = @"密码";
         
@@ -36,11 +36,11 @@
         [self addSubview:self.textField];
         
         self.textField.textColor = RGBA(255, 255, 255, 1);
-        self.textField.font = PingFangRegular(17);
+        self.textField.font = PingFangRegular(16);
         self.textField.secureTextEntry = YES;
         self.textField.placeholder = @"请输入6~16位的密码";
         [self.textField setValue:RGBA(102, 102, 102, 1) forKeyPath:@"_placeholderLabel.textColor"];
-        [self.textField setValue:PingFangRegular(15) forKeyPath:@"_placeholderLabel.font"];
+        [self.textField setValue:PingFangRegular(16) forKeyPath:@"_placeholderLabel.font"];
         self.textField.tintColor = self.textField.textColor;
         self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         

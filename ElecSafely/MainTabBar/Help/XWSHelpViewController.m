@@ -40,14 +40,10 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    /*获取点击网络错误或者无数据view的点击*/
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clickTipView) name:XWSTipViewClickTipViewNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.progressHUD dismiss];
 }
 

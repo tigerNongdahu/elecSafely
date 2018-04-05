@@ -18,7 +18,7 @@
 @property (nonatomic, weak) id<XWSRightViewDelegate> delegate;
 @property (nonatomic, strong) UIView *coverView;
 
-- (instancetype)initWithFrame:(CGRect)frame withDatas:(NSArray *)datas;
+@property (nonatomic, strong) NSMutableArray *datas;
 
 /*开启蒙版透明度动画*/
 /**

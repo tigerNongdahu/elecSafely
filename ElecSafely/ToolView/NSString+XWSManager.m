@@ -61,4 +61,11 @@
     return NO;
 }
 
++ (BOOL)checkIsNilWithStr:(NSString *)str{
+    if (str == nil || [str isEqualToString:@" "] || str.length == 0) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

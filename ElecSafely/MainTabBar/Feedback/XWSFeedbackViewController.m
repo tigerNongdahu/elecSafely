@@ -125,6 +125,7 @@
             make.right.mas_equalTo(-10);
             make.bottom.mas_equalTo(-12);
         }];
+        [_textView becomeFirstResponder];
     }
     return _textView;
 }
@@ -237,9 +238,10 @@
     
     self.sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 30)];
     [self.sendBtn setTitle:@"提交" forState:UIControlStateNormal];
-    [self.sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [self.sendBtn setTitleColor:RGBA(153, 153, 153, 1) forState:UIControlStateNormal];
     self.sendBtn.titleLabel.font = PingFangMedium(15);
-    self.sendBtn.enabled = NO;
+    self.sendBtn.userInteractionEnabled = NO;
     [self.sendBtn addTarget:self action:@selector(sendFeedBack) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.sendBtn];
@@ -252,8 +254,8 @@
     [self titleLabel];
     [self textContentView];
     [self place];
-    [self numLabel];
     [self textView];
+    [self numLabel];
     
     //图片部分
 //    [self imageContentView];
@@ -278,18 +280,19 @@
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"ask"] = self.textView.text;
+    __weak typeof(self) weakVC = self;
     [manager POST:FrigateAPI_SubmitAsk parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
         if ([resultStr isEqualToString:SUBMIT_SUCCESS_CODE]) {
-            [self.progressHUD dismiss];
+            [weakVC.progressHUD dismiss];
             [ElecTipsView showTips:@"提交成功，谢谢您的反馈"];
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakVC.navigationController popViewControllerAnimated:YES];
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
-        [self.progressHUD dismiss];
+        [weakVC.progressHUD dismiss];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
     }];
 }
@@ -300,6 +303,14 @@
         self.place.hidden = YES;
     }else{
         self.place.hidden = NO;
+    }
+    
+    if (textView.text.length < 10) {
+        self.sendBtn.userInteractionEnabled = NO;
+        [self.sendBtn setTitleColor:RGBA(153, 153, 153, 1) forState:UIControlStateNormal];
+    }else{
+        self.sendBtn.userInteractionEnabled = YES;
+        [self.sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
     }
     
     NSString  *nsTextContent = textView.text;
@@ -366,6 +377,8 @@
         cell.imageView.image = self.images[indexPath.row];
         cell.close.hidden = NO;
     }
+    
+    
     
     cell.close.tag = 100 + indexPath.row;
     [cell.close addTarget:self action:@selector(deletePhotos:) forControlEvents:UIControlEventTouchUpInside];
@@ -460,6 +473,10 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.textView resignFirstResponder];
+}
+
+- (void)dealloc{
+    NSLog(@"%s",__func__);
 }
 
 /*

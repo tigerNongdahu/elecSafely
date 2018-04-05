@@ -14,10 +14,10 @@
 
 @implementation XWSDeviceInfoCell
 
-+ (id)cellWithTableView:(UITableView *)tableView withTitle:(NSString *)title withPlaceHolder:(NSString *)placeholder{
++ (id)cellWithTableView:(UITableView *)tableView withTitle:(NSString *)title withPlaceHolder:(NSString *)placeholder withStandardTextLength:(NSInteger)length withStandardString:(NSString *)string{
     XWSDeviceInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"XWSDeviceInfoCell"];
     if (!cell) {
-        cell = [[XWSDeviceInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"XWSDeviceInfoCell" withTitle:title withPlaceHolder:placeholder];
+        cell = [[XWSDeviceInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"XWSDeviceInfoCell" withTitle:title withPlaceHolder:placeholder withStandardTextLength:length withStandardString:string];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -25,7 +25,7 @@
     return cell;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *)title withPlaceHolder:(NSString *)placeholder{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *)title withPlaceHolder:(NSString *)placeholder withStandardTextLength:(NSInteger)length withStandardString:(NSString *)string{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         self.backgroundColor = NavColor;
@@ -38,7 +38,7 @@
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(17);
             make.height.mas_equalTo(0.3);
-            make.right.mas_equalTo(0);
+            make.right.mas_equalTo(-17);
             make.bottom.mas_equalTo(-0.3);
         }];
         
@@ -50,8 +50,8 @@
         self.titleLabel.textColor = RGBA(153, 153, 153, 1);
         self.titleLabel.text = title;
 
-        if (title.length <= 5) {
-            NSString *ti = @"设备注册码";
+        if (title.length <= length) {
+            NSString *ti = string;
             titleSize = [NSString getStringSizeWith:ti withStringFont:PingFangRegular(16)];
         }
         

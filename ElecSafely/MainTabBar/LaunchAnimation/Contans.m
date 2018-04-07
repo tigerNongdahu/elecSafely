@@ -8,7 +8,7 @@
 
 #import "Contans.h"
 
-const NSTimeInterval kAnimationDuration = 30.0;
+const NSTimeInterval kAnimationDuration = 3.0;
 const NSTimeInterval kAnimationDurationDelay = 0.5;
 const NSTimeInterval kAnimationTimeOffset = 0.035 * kAnimationDuration;
 const NSTimeInterval kRippleMagnitudeMultiplier = 0.025;

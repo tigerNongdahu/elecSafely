@@ -30,14 +30,14 @@
     
     self.view.backgroundColor = DarkBack;
     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
-//        CATransition *tration = [CATransition animation];
-//        tration.duration = 0.3f;
-//        tration.type = kCATransitionFade;
-//        [self.navigationController.view.layer addAnimation:tration forKey:nil];
-//        [self.navigationController pushViewController:loginVC animated:NO];
-//    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+        CATransition *tration = [CATransition animation];
+        tration.duration = 0.3f;
+        tration.type = kCATransitionFade;
+        [self.navigationController.view.layer addAnimation:tration forKey:nil];
+        [self.navigationController pushViewController:loginVC animated:NO];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated {

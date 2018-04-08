@@ -203,6 +203,7 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"确定退出?" preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
         TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
         XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
         

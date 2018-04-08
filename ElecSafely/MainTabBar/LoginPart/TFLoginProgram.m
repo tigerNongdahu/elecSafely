@@ -30,8 +30,8 @@ static TFLoginProgram *loginProgram = nil;
 }
 
 - (void)userLoginWithAccount:(NSString *)account passWord:(NSString *)password {
-//    account = @"demo";
-//    password = @"88888888";
+    account = @"kefu02";
+    password = @"88888888";
     password = [NSString md5:password];
     
     NSLog(@"password:%@",password);

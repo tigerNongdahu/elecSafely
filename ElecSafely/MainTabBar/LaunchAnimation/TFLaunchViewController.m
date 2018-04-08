@@ -11,9 +11,10 @@
 #import "TileGridView.h"
 #import "TileView.h"
 #import "TFLoginViewController.h"
+#import "TFLoginProgram.h"
 
 
-@interface TFLaunchViewController ()
+@interface TFLaunchViewController () <TFLoginProgramDelegate>
 @property (nonatomic,strong) TileGridView *tileGridView;
 
 @end
@@ -30,6 +31,17 @@
     
     self.view.backgroundColor = DarkBack;
     
+    NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:userAccount];
+    NSString *passWord = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
+    if (userAccount.length > 0 && passWord.length > 0) {
+        // to check login
+        [[TFLoginProgram sharedInstance] userLoginWithAccount:userAccount passWord:passWord];
+    }
+    else {
+        
+    }
+    
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
         CATransition *tration = [CATransition animation];
@@ -39,6 +51,21 @@
         [self.navigationController pushViewController:loginVC animated:NO];
     });
 }
+
+// 验证成功跳转mainVC
+- (void)loginProgram:(TFLoginProgram *)program
+     DidLoginSuccess:(NSString *)account
+            passWord:(NSString *)password {
+    
+}
+
+// 验证失败跳转登录页面
+- (void)loginProgram:(TFLoginProgram *)program
+      DidLoginFailed:(NSString *)error {
+    
+}
+
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

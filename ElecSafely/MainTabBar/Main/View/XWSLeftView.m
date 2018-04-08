@@ -137,6 +137,15 @@
     }];
 }
 
+- (void)setAccountLabelText:(NSString *)accountName {
+    if (accountName.length > 0) {
+        self.accountLabel.text = accountName;
+    }
+    else {
+        self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+    }
+    
+}
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

@@ -67,12 +67,14 @@
         [self addSubview:self.textField];
         self.textField.font = PingFangRegular(16);
         self.textField.textColor = RGBA(221, 221, 221, 1);
+
         self.textField.placeholder = placeholder;
-        self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//        self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self.textField setValue:RGBA(102, 102, 102, 1) forKeyPath:@"_placeholderLabel.textColor"];
+
         [self.textField setValue:PingFangRegular(16) forKeyPath:@"_placeholderLabel.font"];
         self.textField.tintColor = self.textField.textColor;
-        
+    
         [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.titleLabel.mas_right).mas_equalTo(0);
             make.bottom.mas_equalTo(self.titleLabel.mas_bottom).mas_equalTo(0);

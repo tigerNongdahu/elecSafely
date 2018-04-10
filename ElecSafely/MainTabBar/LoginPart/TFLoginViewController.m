@@ -109,8 +109,13 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
 - (void)FieldDidChange {
     if (_userNameTF.text.length > 0 && _passWordTF.text.length > 0) {
         
-        _loginBtn.backgroundColor = UIColorRGB(0x2061f6);
-        _loginBtn.userInteractionEnabled = YES;
+        if (_passWordTF.text.length < 6 || _passWordTF.text.length > 16) {
+            _loginBtn.backgroundColor = UIColorRGB(0xacacac);
+            _loginBtn.userInteractionEnabled = NO;
+        }else{
+            _loginBtn.backgroundColor = UIColorRGB(0x2061f6);
+            _loginBtn.userInteractionEnabled = YES;
+        }
     }
     else if (_userNameTF.text.length == 0 || _passWordTF.text.length == 0) {
         
@@ -226,7 +231,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         userNameTF.backgroundColor = [UIColor clearColor];
         userNameTF.textColor = RGBA(221, 221, 221, 1);
         _userNameTF = userNameTF;
-        _userNameTF.text = @"demo";
+        _userNameTF.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
     }
     return _userNameTF;
 }
@@ -251,8 +256,6 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         passWordTF.backgroundColor = [UIColor clearColor];
         passWordTF.textColor = RGBA(221, 221, 221, 1);
         _passWordTF = passWordTF;
-        _passWordTF.text = @"88888888";
-       
     }
     return _passWordTF;
 }
@@ -275,9 +278,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         [_progressHUD showHUD:self.view Offset:0 animation:18];
-        
-        NSLog(@"passWordStr:%@ %ld",passWordStr,passWordStr.length);
-        
+
         [[TFLoginProgram sharedInstance] userLoginWithAccount:nameStr passWord:passWordStr];
         [TFLoginProgram sharedInstance].delegate = self;
     }

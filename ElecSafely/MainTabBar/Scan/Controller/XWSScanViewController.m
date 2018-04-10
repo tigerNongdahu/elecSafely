@@ -15,7 +15,7 @@
 
 #define FRIGATE @"frigate"
 #define FRIGATE_LENGHT FRIGATE.length
-#define FRIGATE_CRCID_LENGHT 16
+#define FRIGATE_CRCID_LENGHT 15
 
 #define ScanViewWidth 274.0f
 #define ScanViewHeight ScanViewWidth
@@ -338,27 +338,38 @@
 
 /*扫描到符合规则的二维码数据*/
 - (void)showScanResultWithStr:(NSString *)str{
+    //http://www.frigate-iot.com/API/Register.php?code=frigate+ID+SIMCARD
 
-    str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
-    //二维码的规则必须是frigate+id+卡号，其他id的长度是16位
-    if (str.length >= FRIGATE_LENGHT + FRIGATE_CRCID_LENGHT) {
-        if ([str hasPrefix:FRIGATE]) {
-            //截取ID
-            NSRange r = {FRIGATE_LENGHT,FRIGATE_CRCID_LENGHT};
-            NSString *IdStr = [str substringWithRange:r];
-            [self gotoDeviceInfoVCWithType:XWSDeviceInputTypeAuto withDic:IdStr];
+    NSArray *strs = [str componentsSeparatedByString:@"="];
+    if (strs.count == 2) {
+        NSString *QRstr = strs[1];
+        //二维码的规则必须是frigate+id+卡号，其他id的长度是16位
+        if (QRstr.length >= FRIGATE_LENGHT + FRIGATE_CRCID_LENGHT) {
+            if ([QRstr hasPrefix:FRIGATE]) {
+                //截取ID
+                NSRange r = {FRIGATE_LENGHT,FRIGATE_CRCID_LENGHT};
+                NSString *IdStr = [QRstr substringWithRange:r];
+                //截取卡号
+                
+                NSString *simCardStr = [QRstr substringFromIndex:FRIGATE_LENGHT + FRIGATE_CRCID_LENGHT];
+                simCardStr = [simCardStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+                simCardStr = [simCardStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                
+                [self gotoDeviceInfoVCWithType:XWSDeviceInputTypeAuto withDeviceId:IdStr withSimCardId:simCardStr];
+            }else{
+                [self showErrorNoti];
+            }
         }else{
             [self showErrorNoti];
         }
-    }else{
-        [self showErrorNoti];
     }
 }
 
-- (void)gotoDeviceInfoVCWithType:(XWSDeviceInputType)type withDic:(NSString *)dic{
+- (void)gotoDeviceInfoVCWithType:(XWSDeviceInputType)type withDeviceId:(NSString *)deviceId withSimCardId:(NSString *)simCardId{
 
     XWSScanInfoViewController *vc = [[XWSScanInfoViewController alloc] init];
-    vc.deviceId = dic;
+    vc.deviceId = deviceId;
+    vc.simCardId = simCardId;
     vc.type = type;
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -385,7 +396,7 @@
     sender.enabled = NO;
     [_session stopRunning];
     [self stopTimer];
-    [self gotoDeviceInfoVCWithType:XWSDeviceInputTypeManual withDic:nil];
+    [self gotoDeviceInfoVCWithType:XWSDeviceInputTypeManual withDeviceId:nil withSimCardId:nil];
 }
 
 #pragma mark 横线的动画

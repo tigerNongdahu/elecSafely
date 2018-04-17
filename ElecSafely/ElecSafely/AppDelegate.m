@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "TFLaunchViewController.h"
-#import "XGPush.h"
 #import "TFLoginViewController.h"
 #import "XWSNavigationController.h"
 #import "XWSMainViewController.h"
@@ -40,8 +39,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     TFLaunchViewController *launchVC = [[TFLaunchViewController alloc] init];
-//    TFLoginViewController *launchVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
-//    XWSFeedbackViewController *launchVC = [[XWSFeedbackViewController alloc] init];
     XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:launchVC];
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
@@ -70,8 +67,9 @@
 - (void)openNoti:(NSNotification *)noti{
     //打开推送
     if (IS_EQUAL_TO_OP) {
-         [[XGPush defaultManager] startXGWithAppID:XG_PUSH_APPID appKey:XG_PUSH_APPKEY delegate:self];
-    }else{//停止推送
+        [[XGPush defaultManager] startXGWithAppID:XG_PUSH_APPID appKey:XG_PUSH_APPKEY delegate:self];
+    }
+    else{//停止推送
         [[XGPush defaultManager] stopXGNotification];
     }
 }
@@ -152,6 +150,12 @@
     [[XGPush defaultManager] reportXGNotificationInfo:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
+
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[XGPushTokenManager defaultTokenManager] registerDeviceToken:deviceToken];
+}
+
 
 // iOS 10 新增 API
 // iOS 10 会走新 API, iOS 10 以前会走到老 API

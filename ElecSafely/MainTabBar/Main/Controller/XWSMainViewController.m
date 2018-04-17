@@ -30,6 +30,12 @@
 @property (nonatomic, strong) NSMutableArray *notices;
 /*筛选的数据*/
 @property (nonatomic, strong) NSMutableArray *screens;
+
+@property (nonatomic, strong) UIImageView *mainBackImageView;
+
+@property (nonatomic, strong) UILabel *todayLabel;
+
+@property (nonatomic, strong) UILabel *dateLable;
 @end
 
 @implementation XWSMainViewController
@@ -55,6 +61,7 @@
     self.view.backgroundColor = [UIColor blackColor];
     [self loadData];
     [self initView];
+    
 }
 
 #pragma mark - 加载数据
@@ -67,7 +74,62 @@
     [self setUpNav];
     [self setUpLeftView];
     [self setUpSingleListRightView];
+    [self createMainView];
 }
+
+#pragma mark -设置主页面
+- (void)createMainView {
+    _mainBackImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:_mainBackImageView];
+    [_mainBackImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.mas_equalTo(0);
+    }];
+    
+    _todayLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    _todayLabel.textColor = [UIColor whiteColor];
+    _todayLabel.textAlignment = NSTextAlignmentLeft;
+    _todayLabel.font = [UIFont systemFontOfSize:30];
+    _todayLabel.text = @"今天";
+    [_mainBackImageView addSubview:_todayLabel];
+    [_todayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ScreenHeight / 6 - 50);
+        make.leading.mas_equalTo(30);
+    }];
+    
+    _dateLable = [[UILabel alloc] initWithFrame:CGRectZero];
+    _dateLable.textColor = [UIColor whiteColor];
+    _dateLable.textAlignment = NSTextAlignmentLeft;
+    _dateLable.font = [UIFont systemFontOfSize:18];
+    _dateLable.text = [self getNowDate];
+    [_mainBackImageView addSubview:_dateLable];
+    [_dateLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_todayLabel.mas_bottom).offset(10);
+        make.leading.mas_equalTo(_todayLabel.mas_leading).offset(0);
+    }];
+}
+
+- (NSString *)getNowDate {
+    unsigned unitFlags = NSCalendarUnitYear |NSCalendarUnitMonth |NSCalendarUnitDay;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:unitFlags fromDate:[NSDate date]];
+    NSLog(@"%ld, %ld, %ld", (long)components.year, (long)components.month, (long)components.day);
+    NSString *dateStr = [NSString stringWithFormat:@"%ld月%ld日",(long)components.month,(long)components.day];
+    NSString *weekStr = [self weekdayStringFromDate:[NSDate date]];
+    
+    return [NSString stringWithFormat:@"%@ %@",dateStr,weekStr];
+}
+
+- (NSString*)weekdayStringFromDate:(NSDate*)inputDate {
+    
+    NSArray *weekdays = [NSArray arrayWithObjects: [NSNull null], @"星期日", @"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六", nil];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+    [calendar setTimeZone: timeZone];
+    NSCalendarUnit calendarUnit = NSCalendarUnitWeekday;
+    NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
+    return [weekdays objectAtIndex:theComponents.weekday];
+}
+
 
 #pragma -mark 设置导航栏
 - (void)setUpNav{

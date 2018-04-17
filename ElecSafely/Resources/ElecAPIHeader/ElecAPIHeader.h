@@ -10,7 +10,9 @@
 #define ElecAPIHeader_h
 
 /*设备查询 设备复位*/
-#define FrigateAPI_QueryReset @"http://www.frigate-iot.com/MonitoringCentre/API/Query.php"
+#define FrigateAPI_Query @"http://www.frigate-iot.com/MonitoringCentre/API/Query.php"
+
+#define FrigateAPI_Reset @"http://www.frigate-iot.com/MonitoringCentre/API/Reset.php"
 /*设备实时信息*/
 #define FrigateAPI_DeviceStatus @"http://www.frigate-iot.com/MonitoringCentre/Data/DevStatus.php"
 /*获取设备最近7天设备查询数据信息*/
@@ -26,8 +28,12 @@
 
 #define FrigateAPI_Login_Check @"http://www.frigate-iot.com/data/login_chk.php"
 
-/*加载热点问题的url*/
-#define FrigateAPI_Help_AnswerForAsk @"http://www.frigate-iot.com/MonitoringCentre/MsgCenter/InformationList.php"
+/*热点问题的url*/
+#define FrigateAPI_Help_AnswerForAsk @"http://www.frigate-iot.com/MonitoringCentre/MsgCenter/HotCareList.php"
+
+/*资讯列表*/
+#define FrigateAPI_Help_InformationList @"http://www.frigate-iot.com/MonitoringCentre/MsgCenter/InformationList.php"
+
 
 /*意见反馈的url*/
 #define FrigateAPI_SubmitAsk @"http://www.frigate-iot.com/MonitoringCentre/MsgCenter/SubmitAsk.php"

@@ -28,17 +28,7 @@
     _tileGridView = [[TileGridView alloc] initWithTileFileName:@"Chimes2"];
     [self.view addSubview:_tileGridView];
     _tileGridView.frame = [UIScreen mainScreen].bounds;
-    
     self.view.backgroundColor = DarkBack;
-    NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
-    NSString *passWord = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
-    if (userAccount.length > 0 && passWord.length > 0) {
-        // to check login
-        [[TFLoginProgram sharedInstance] userLoginWithAccount:userAccount passWord:passWord];
-    }
-    else {
-        
-    }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];

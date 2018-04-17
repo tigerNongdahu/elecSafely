@@ -201,7 +201,6 @@
      [self.navigationController pushViewController:vc animated:YES];
 }
 
-
 #pragma mark - 公告
 - (void)loadNoticeData{
     ElecHTTPManager *noticeMgr = [ElecHTTPManager manager];

@@ -30,7 +30,6 @@
     _tileGridView.frame = [UIScreen mainScreen].bounds;
     
     self.view.backgroundColor = DarkBack;
-    
     NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
     NSString *passWord = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
     if (userAccount.length > 0 && passWord.length > 0) {
@@ -40,7 +39,6 @@
     else {
         
     }
-    
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];

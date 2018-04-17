@@ -19,7 +19,9 @@
 - (void)requestDeviceChartHistoryDataWithDeviceID:(NSString *)deviceID success:(void(^)(NSArray *))success;
 
 /*设备查询  设备复位*/
-- (void)requestDeviceQueryResetDataWithDeviceID:(NSString *)deviceID success:(void(^)(BOOL))success;
+- (void)requestDeviceQueryDataWithDeviceID:(NSString *)deviceID success:(void(^)(BOOL))success;
 
+/* 设备复位*/
+- (void)requestDeviceResetDataWithDeviceID:(NSString *)deviceID success:(void(^)(BOOL))success;
 
 @end

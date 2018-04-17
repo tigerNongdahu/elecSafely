@@ -105,20 +105,27 @@
 
 #pragma mark - ESDeviceViewDelegate
 - (void)clickDeviceViewQueryData:(ESDeviceView *)deviceView{
-    [self queryResetDeviceData];
+    [self queryDeviceData];
 }
 
 - (void)clickDeviceViewResetData:(ESDeviceView *)deviceView{
-    [self queryResetDeviceData];
+    [self resetDeviceData];
 }
 
-- (void)queryResetDeviceData{
+- (void)resetDeviceData{
     __weak typeof(self) weakSelf = self;
-    [self.dataProcessor requestDeviceQueryResetDataWithDeviceID:self.deviceID success:^(BOOL success) {
+    [self.dataProcessor requestDeviceResetDataWithDeviceID:self.deviceID success:^(BOOL success) {
         [weakSelf requestDeviceDetailData];
     }];
 }
 
+
+- (void)queryDeviceData{
+    __weak typeof(self) weakSelf = self;
+    [self.dataProcessor requestDeviceQueryDataWithDeviceID:self.deviceID success:^(BOOL success) {
+        [weakSelf requestDeviceDetailData];
+    }];
+}
 
 - (void)clickDeviceViewIntoBaseInfoVC:(ESDeviceView *)deviceView{
     XWSDeviceBaseInfoVC *baseInfoVC = [[XWSDeviceBaseInfoVC alloc] init];

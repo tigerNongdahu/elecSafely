@@ -258,10 +258,10 @@
     [self numLabel];
     
     //图片部分
-//    [self imageContentView];
-//    [self imageTitleLabel];
-//    [self imageCountLabel];
-//    [self collectionView];
+    [self imageContentView];
+    [self imageTitleLabel];
+    [self imageCountLabel];
+    [self collectionView];
    
 }
 
@@ -371,14 +371,12 @@
     XWSFeedImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"XWSFeedImageCell" forIndexPath:indexPath];
     
     if (indexPath.row == self.images.count) {
-        cell.imageView.image = [UIImage imageNamed:@"left_setting"];
+        cell.imageView.image = [UIImage imageNamed:@"add-img"];
         cell.close.hidden = YES;
     }else{
         cell.imageView.image = self.images[indexPath.row];
         cell.close.hidden = NO;
     }
-    
-    
     
     cell.close.tag = 100 + indexPath.row;
     [cell.close addTarget:self action:@selector(deletePhotos:) forControlEvents:UIControlEventTouchUpInside];
@@ -391,7 +389,8 @@
     
     XWSFeedImageCell *cell = (XWSFeedImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (self.images.count == indexPath.item && cell.close.hidden == YES) {
-        [self addFeedImage];
+        [ElecTipsView showTips:@"暂不支持提交图片，敬请谅解" during:2.0];
+//        [self addFeedImage];
     }
 }
 
@@ -410,6 +409,7 @@
 #pragma mark - 添加图片
 //点击头像获取图片
 - (void)addFeedImage{
+    
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     //图片选自控制器

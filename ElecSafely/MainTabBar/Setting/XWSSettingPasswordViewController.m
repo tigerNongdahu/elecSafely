@@ -126,12 +126,11 @@
    
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"OldPW"] = old;
+    param[@"NewPW"] = nP;
+//    param[@"OldPW"] = [NSString md5:old];
+//    param[@"NewPW"] = [NSString md5:nP];
 
-    param[@"OldPW"] = [NSString md5:old];
-    param[@"NldPW"] = [NSString md5:nP];
-    // password:8ddcff3a80f4189ca1c9d4d902c3c909
-    //          8ddcff3a80f4189ca1c9d4d902c3c909
-     NSLog(@"[NSString md5:old]:%@",param[@"OldPW"]);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     __weak typeof(self) weakVC = self;
@@ -227,6 +226,7 @@
         case 0:
         {
             self.oldTextField = cell.textField;
+            [cell.textField becomeFirstResponder];
         }
             break;
         case 1:
@@ -278,7 +278,7 @@
 }
 
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.oldTextField resignFirstResponder];
     [self.neTextField resignFirstResponder];
     [self.conTextField resignFirstResponder];

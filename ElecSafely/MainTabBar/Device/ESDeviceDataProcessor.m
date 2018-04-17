@@ -84,18 +84,30 @@
 }
 
 /*设备查询  设备复位*/
-- (void)requestDeviceQueryResetDataWithDeviceID:(NSString *)deviceID success:(void(^)(BOOL))success{
+- (void)requestDeviceQueryDataWithDeviceID:(NSString *)deviceID success:(void(^)(BOOL))success{
     
-    [_httpManager POST:FrigateAPI_QueryReset parameters:@{@"ID":deviceID?:@""} progress:^(NSProgress * _Nonnull uploadProgress) {
+    [_httpManager POST:FrigateAPI_Query parameters:@{@"ID":deviceID?:@""} progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
             success(YES);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [ElecTipsView showTips:@"查询失败"];
+    }];
+}
+
+- (void)requestDeviceResetDataWithDeviceID:(NSString *)deviceID success:(void(^)(BOOL))success{
+    
+    [_httpManager POST:FrigateAPI_Reset parameters:@{@"ID":deviceID?:@""} progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
-            success(NO);
+            success(YES);
         }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [ElecTipsView showTips:@"复位失败"];
     }];
 }
 

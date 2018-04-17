@@ -82,7 +82,7 @@
 
 - (NSMutableArray *)places{
     if (!_places) {
-        _places = [NSMutableArray arrayWithObjects:@"16位英文字母和数字",@"英文字母和数字",@"请输入",@"请输入",@"请输入",@"请输入",@"6-16位英文字母、数据和下划线",@"请输入", nil];
+        _places = [NSMutableArray arrayWithObjects:@"15位英文字母和数字",@"英文字母和数字",@"请您输入",@"请您输入",@"请您输入",@"请您输入",@"6-16位英文字母、数据和下划线",@"请您输入", nil];
     }
     return _places;
 }
@@ -135,6 +135,19 @@
 
 - (void)sendRegister{
     [self.textField resignFirstResponder];
+    
+    NSMutableDictionary *param1 = [NSMutableDictionary dictionary];
+    param1[@"CRCID"] = self.CRCID;
+    param1[@"SimCard"] = self.SimCard;
+    param1[@"DevName"] = self.DevName;
+    param1[@"GroupName"] = self.GroupName;
+    param1[@"CustName"] = self.CustName;
+    param1[@"LoginName"] = self.LoginName;
+    //    param[@"Password"] = self.Password;
+    param1[@"Password"] = [NSString md5:self.Password];
+    param1[@"ParentName"] = self.ParentName;
+    param1[@"AppendFlag"] = @"1";
+    NSLog(@"param1:%@",param1);
 
     if (![self checkParam]) {
         return;
@@ -151,6 +164,7 @@
     param[@"GroupName"] = self.GroupName;
     param[@"CustName"] = self.CustName;
     param[@"LoginName"] = self.LoginName;
+//    param[@"Password"] = self.Password;
     param[@"Password"] = [NSString md5:self.Password];
     param[@"ParentName"] = self.ParentName;
     param[@"AppendFlag"] = @"1";
@@ -182,8 +196,8 @@
 - (BOOL)checkParam{
     
     
-    if (![self checkStr:self.CRCID] || [self.CRCID stringByReplacingOccurrencesOfString:@" " withString:@""].length != 16) {
-        [ElecTipsView showTips:@"请输入正确格式的16位设备注册码!" during:2.0];
+    if (![self checkStr:self.CRCID] || [self.CRCID stringByReplacingOccurrencesOfString:@" " withString:@""].length != 15) {
+        [ElecTipsView showTips:@"请输入正确格式的15位设备注册码!" during:2.0];
         return NO;
     }
     
@@ -228,11 +242,6 @@
     }
     
     
-    if (![self checkStr:self.ParentName]) {
-        [ElecTipsView showTips:@"请输入上级客户名称!" during:2.0];
-        return NO;
-    }
-    
     return YES;
 }
 
@@ -258,19 +267,30 @@
     XWSDeviceInfoCell *cell = [XWSDeviceInfoCell cellWithTableView:tableView withTitle:title withPlaceHolder:palce withStandardTextLength:StandardLength withStandardString:@"设备注册码"];
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row + 100;
+    cell.textField.textAlignment = NSTextAlignmentRight;
     
-    if (indexPath.row == 0) {
+    if (indexPath.row < 2) {
         if (self.type == XWSDeviceInputTypeAuto) {
-            cell.textField.text = self.deviceId;
+            if (indexPath.row == 0) {
+                cell.textField.text = self.deviceId;
+                self.CRCID = self.deviceId;
+            }else{
+                cell.textField.text = self.simCardId;
+                self.SimCard = self.simCardId;
+            }
+            
             cell.textField.textColor = RGBA(102, 102, 102, 1);
-            self.CRCID = self.deviceId;
+            
             cell.textField.enabled = NO;
         }else{
-            [cell.textField becomeFirstResponder];
+            if (indexPath.row == 0) {
+                [cell.textField becomeFirstResponder];
+            }
         }
     }
     
-    if (self.type == XWSDeviceInputTypeAuto && indexPath.row == 1) {
+    
+    if (self.type == XWSDeviceInputTypeAuto && indexPath.row == 2) {
         [cell.textField becomeFirstResponder];
     }
     
@@ -377,7 +397,7 @@
             break;
     }
     
-    if ([self checkStr:self.CRCID] && [self checkStr:self.SimCard] && [self checkStr:self.DevName] && [self checkStr:self.GroupName] && [self checkStr:self.CustName] && [self checkStr:self.LoginName] && [self checkStr:self.Password] && [self checkStr:self.ParentName]) {
+    if ([self checkStr:self.CRCID] && [self checkStr:self.SimCard] && [self checkStr:self.DevName] && [self checkStr:self.GroupName] && [self checkStr:self.CustName] && [self checkStr:self.LoginName] && [self checkStr:self.Password]) {
         [_sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
         _sendBtn.enabled = YES;
         _sendBtn.userInteractionEnabled = YES;
@@ -442,6 +462,10 @@
     }]];
     
     [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.textField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XGPush.h"
 
 @interface TFLoginViewController : UIViewController
 - (instancetype)initWithFrame:(CGRect)frame;

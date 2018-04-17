@@ -16,5 +16,6 @@ typedef NS_ENUM(NSInteger, XWSDeviceInputType) {
 @interface XWSScanInfoViewController : XWSBasrViewController
 /*扫描出来的数据*/
 @property (nonatomic, copy) NSString *deviceId;
+@property (nonatomic, copy) NSString *simCardId;
 @property (nonatomic, assign) XWSDeviceInputType type;
 @end

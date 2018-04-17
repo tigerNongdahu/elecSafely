@@ -108,8 +108,13 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
 - (void)FieldDidChange {
     if (_userNameTF.text.length > 0 && _passWordTF.text.length > 0) {
         
-        _loginBtn.backgroundColor = UIColorRGB(0x2061f6);
-        _loginBtn.userInteractionEnabled = YES;
+        if (_passWordTF.text.length < 6 || _passWordTF.text.length > 16) {
+            _loginBtn.backgroundColor = UIColorRGB(0xacacac);
+            _loginBtn.userInteractionEnabled = NO;
+        }else{
+            _loginBtn.backgroundColor = UIColorRGB(0x2061f6);
+            _loginBtn.userInteractionEnabled = YES;
+        }
     }
     else if (_userNameTF.text.length == 0 || _passWordTF.text.length == 0) {
         
@@ -251,7 +256,6 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         passWordTF.textColor = RGBA(221, 221, 221, 1);
         _passWordTF = passWordTF;
         _passWordTF.text = [[self class] getW3Password] ;
-       
     }
     return _passWordTF;
 }
@@ -274,9 +278,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         [_progressHUD showHUD:self.view Offset:0 animation:18];
-        
-        NSLog(@"passWordStr:%@ %ld",passWordStr,passWordStr.length);
-        
+
         [[TFLoginProgram sharedInstance] userLoginWithAccount:nameStr passWord:passWordStr];
         [TFLoginProgram sharedInstance].delegate = self;
     }
@@ -287,87 +289,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
     [ElecTipsView showTips:@"登陆成功"];
     [_progressHUD dismiss];
     
-    ElecHTTPManager *requestManager = [ElecHTTPManager manager];
-    
-    [[ElecHTTPManager manager] GET:@"http://www.frigate-iot.com/MonitoringCentre/Data/SelectCustomerData.php" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"1");
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-
-        NSLog(@"2");
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
-    
-    //    CustomerID  客户ID
-    //
-    //    GroupID        分组ID
-    //
-    //    Status            设备状态，枚举 0-全部 1-正常 2-报警 3-离线
-    //
-    //    Search            设备名称模糊匹配
-    [[ElecHTTPManager manager] GET:@"http://www.frigate-iot.com/MonitoringCentre/DList/Data/DList-Data.php" parameters:@{@"CustomerID":@"4750",@"GroupID":@"0",@"Status":@"0"} progress:nil  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"1");
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"2");
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(error);
-    }];
-    
-    [requestManager GET:@"http://www.frigate-iot.com/MonitoringCentre/Data/Pop-LoadGroup.php" parameters:@{@"CustomerID":@"4750"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"1");
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"2");
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
-    
-    [requestManager GET:@"http://www.frigate-iot.com/MonitoringCentre/Data/DevStatus.php" parameters:@{@"ID":@"4294901760"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"1");
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        
-        NSLog(@"2");
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
-    
-    
-    [requestManager GET:@"http://www.frigate-iot.com/MonitoringCentre/Data/DevDataHistory.php" parameters:@{@"ID":@"203681"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"1");
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        NSLog(@"2");
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
-    
-//CustomerID:客户ID
-//GroupID:分组ID
-//DetectorID:设备ID
-//AT:报警类型，枚举，alarm-报警，offline-离线，默认为离线记录
-//SD:起始日期，格式Y-m-d，示例 2017-01-03
-//ED:结束日期，格式Y-m-d
-    
-    [requestManager GET:@"http://www.frigate-iot.com/MonitoringCentre/Log/Data/Log-Data.php"
-             parameters:@{@"CustormerID":@"4750",
-                          @"GroupID":@"0",
-                          @"DetectorID":@"203681",
-                          @"AT":@"alarm",
-                          @"SD":@"2018-02-01",
-                          @"ED":@""
-                          }
-               progress:nil
-                success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                    NSLog(@"1");
-                    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-                    NSArray *row = dic[@"rows"];
-                    NSDictionary *temp = row[0];
-                    NSString *name = temp[@"Name"];
-                    NSLog(@"2");
-    }
-                failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-                }];
-    
+    [[XGPushTokenManager defaultTokenManager] bindWithIdentifier:account type:XGPushTokenBindTypeAccount];
     XWSMainViewController *vc = [[XWSMainViewController alloc] init];
     XWSNavigationController *nv = [[XWSNavigationController alloc] initWithRootViewController:vc];
     

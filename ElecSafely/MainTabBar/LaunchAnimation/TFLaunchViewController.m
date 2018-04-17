@@ -25,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.hidden = YES;
-    _tileGridView = [[TileGridView alloc] initWithTileFileName:@"Chimes2"];
+    _tileGridView = [[TileGridView alloc] initWithTileFileName:@"Chimes"];
     [self.view addSubview:_tileGridView];
     _tileGridView.frame = [UIScreen mainScreen].bounds;
     self.view.backgroundColor = DarkBack;

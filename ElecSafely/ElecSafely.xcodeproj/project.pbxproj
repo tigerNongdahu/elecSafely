@@ -139,6 +139,7 @@
 		EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73383206532A700FFB99B /* XWSMainViewController.m */; };
 		EEF73387206537F500FFB99B /* XWSRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73386206537F500FFB99B /* XWSRightView.m */; };
 		EEF7338F20663EC700FFB99B /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = EEF7338E20663EC700FFB99B /* json.json */; };
+		EEFB698120862BBC0060C076 /* add-img.png in Resources */ = {isa = PBXBuildFile; fileRef = EEFB698020862BBC0060C076 /* add-img.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -417,6 +418,7 @@
 		EEF73385206537F500FFB99B /* XWSRightView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSRightView.h; sourceTree = "<group>"; };
 		EEF73386206537F500FFB99B /* XWSRightView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSRightView.m; sourceTree = "<group>"; };
 		EEF7338E20663EC700FFB99B /* json.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = json.json; sourceTree = "<group>"; };
+		EEFB698020862BBC0060C076 /* add-img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-img.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -472,6 +474,7 @@
 				EEB699E02068A4410078A3F5 /* scan@3x.png */,
 				EE936EFD20750C5A00D3BD54 /* right_notice@3x.png */,
 				EED9196A206F10A8002CF969 /* net_error.png */,
+				EEFB698020862BBC0060C076 /* add-img.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1153,6 +1156,7 @@
 				EE50AECD2064A7C40068FBC1 /* left_setting@3x.png in Resources */,
 				EE936F0020750EAD00D3BD54 /* logo_icon@3x.png in Resources */,
 				EEF7338F20663EC700FFB99B /* json.json in Resources */,
+				EEFB698120862BBC0060C076 /* add-img.png in Resources */,
 				EE50AED12064A7C40068FBC1 /* left_statistics@3x.png in Resources */,
 				55EF89F71FDE3148003F5061 /* Assets.xcassets in Resources */,
 				553D35E6200465FF00FCC58F /* logo@3x.png in Resources */,

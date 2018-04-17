@@ -1,12 +1,13 @@
 //
-//  XWSRightView.m
+//  XWSFliterView.m
 //  ElecSafely
 //
-//  Created by TigerNong on 2018/3/23.
+//  Created by lhb on 2018/3/23.
 //  Copyright © 2018年 Tianfu. All rights reserved.
 //
 
-#import "XWSRightView.h"
+#import "XWSFliterView.h"
+
 //#define rightBackColor RGBA(20, 25, 33, 1)
 
 #define rightBackColor NavColor
@@ -17,7 +18,11 @@
 #define LeftTableViewRowHeight 54.0
 #define RightTableViewRowHeight LeftTableViewRowHeight
 
-@interface XWSRightView()<UITableViewDelegate,UITableViewDataSource>
+@interface XWSFliterView()<UITableViewDelegate,UITableViewDataSource,XWSFliterDataAdapterDelegate>
+{
+    FliterEnterType _fliterType;
+}
+@property (nonatomic, strong) UIView *coverView;
 /*左侧的数据表*/
 @property (nonatomic, strong) UITableView *leftTableView;
 /*右侧的数据表*/
@@ -31,33 +36,42 @@
 /*导航栏标题*/
 @property (nonatomic, strong) UILabel *titleLabel;
 
-/*左侧显示数据数组*/
-@property (nonatomic, strong) NSMutableArray *leftArr;
+/*左侧当前选中的model*/
+@property (nonatomic, strong) XWSFliterConditionModel *selectLeftModel;
 /*左侧当前选中的行*/
 @property (nonatomic, assign) NSInteger selectLeftRow;
-/*右侧当前选中的行*/
-@property (nonatomic, assign) NSInteger selectRightRow;
-/*左侧当前选中的行的标题，这个以后可以根据传值的需要进行修改，可以改成模型或者基本数据类型*/
-@property (nonatomic, copy) NSString *leftTitle;
-/*右侧当前选中的行的标题，这个以后可以根据传值的需要进行修改，可以改成模型或者基本数据类型*/
-@property (nonatomic, copy) NSString *rightTitle;
 
 /*没有功能View*/
 @property (nonatomic, strong) UIView *NoDataView;
+
+
 @end
 
-@implementation XWSRightView
+@implementation XWSFliterView
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame type:(FliterEnterType)type{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
-        self.leftArr = [NSMutableArray array];
         [self setUpUI];
+        
+        _fliterType = type;
+        
+        [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor clearColor];
+        [[UIApplication sharedApplication].keyWindow addSubview:self];
+        [self mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.top.mas_equalTo(0);
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(ScreenWidth);
+        }];
+        self.hidden = YES;
+        self.selectLeftRow = 0;
+        self.dataAdapter = [[XWSFliterDataAdapter alloc] initWithType:type];
+        self.dataAdapter.delegate = self;
+        [self.dataAdapter requestCustomerList];
     }
     return self;
 }
 #pragma mark - 懒加载
-
 
 - (UIView *)NoDataView{
     if (!_NoDataView) {
@@ -265,46 +279,38 @@
     [self leftTableView];
     [self rightTableView];
     [self NoDataView];
-    
 }
 
-#pragma mark - 根据传入的数据，获取对应的值（可以在这里进行修改）
-//获取左侧标题
-- (NSString *)getLeftDataWithIndex:(NSInteger)index{
-    NSDictionary *dic = self.leftArr[index];
-    //这里使用name是因为假数据里面的关键字是name，可以根据数据的值在改动
-    NSString *title = dic[@"name"];
-    return title;
-}
-
-//这里是获取右边的数组，主要使用来给tableView显示多少行的
-- (NSArray *)getRightDataArrWithLeftSelectIndex:(NSInteger)index{
-    if (self.leftArr.count == 0) {
-        return nil;
-    }
-    NSDictionary *dic = self.leftArr[index];
-    NSArray *areas = dic[@"area"];
-    return areas;
-}
-
-//获取右侧标题
-- (NSString *)getRightTitleNameWithRightIndex:(NSInteger)index withLeftSelectIndex:(NSInteger)leftSelectIndex{
-    NSArray *rights = [self getRightDataArrWithLeftSelectIndex:leftSelectIndex];
-    if (rights.count == 0) {
-        return nil;
-    }
-    NSString *area = rights[index];
-    return area;
-}
-
-
-#pragma mark - tableView
+#pragma mark - tableView delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == _leftTableView) {
-        return self.leftArr.count;
+        return self.dataAdapter.leftArr.count;
     }
 
-    return (self.leftArr.count ? [self getRightDataArrWithLeftSelectIndex:self.selectLeftRow].count : 0);
+    //默认第一个
+    if (_selectLeftModel == nil) {
+        _selectLeftModel = self.dataAdapter.leftArr.firstObject;
+    }
+    
+    if (tableView == _rightTableView) {
+        if ([_selectLeftModel.leftKeyName isEqualToString:KeyCustomerName]
+            ||[_selectLeftModel.leftKeyName isEqualToString:KeyCustomerGroup]) {
+            return _selectLeftModel.rightArr.count;
+        }
+        if ([_selectLeftModel.leftKeyName isEqualToString:KeyDeviceStatus]) {
+            return _selectLeftModel.statusArr.count;
+        }
+        
+        if ([_selectLeftModel.leftKeyName isEqualToString:KeyDeviceName]) {
+            return _selectLeftModel.rightArr.count;
+        }
+        
+        if ([_selectLeftModel.leftKeyName isEqualToString:KeyAlarmType]) {
+            return _selectLeftModel.alarmArr.count;
+        }
+    }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -341,11 +347,11 @@
 
 - (UITableViewCell *)setUpRightCellWithTableViewCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
     
-    cell.textLabel.text = [self getRightTitleNameWithRightIndex:indexPath.row withLeftSelectIndex:self.selectLeftRow];
+    cell.textLabel.text = [self getRightDataWithIndex:indexPath.row];
     
-    if (indexPath.row == self.selectRightRow) {
+    if (indexPath.row == _selectLeftModel.selectRightRow) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-         cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
         cell.tintColor = [UIColor whiteColor];
     }else{
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -360,7 +366,6 @@
 - (UITableViewCell *)setUpLeftCellWithTableViewCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
     
     NSString *name = [self getLeftDataWithIndex:indexPath.row];
-    
     cell.textLabel.text = name;
     if (indexPath.row == self.selectLeftRow) {
         cell.backgroundColor = rightBackColor;
@@ -375,53 +380,115 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
     if (tableView == self.leftTableView) {
         //设置左侧
-        self.leftTitle = cell.textLabel.text;
-        cell.backgroundColor = rightBackColor;
+        _selectLeftModel = self.dataAdapter.leftArr[indexPath.row];
         self.selectLeftRow = indexPath.row;
-        
-        //设置右侧(这个时候必须得使用leftArr来再次计算，不能直接使用rightArr，因为这个默认选中第一个row的时候rightArr还没有值)
-        self.selectRightRow = 0;
-        NSString *rightTitle = [self getRightTitleNameWithRightIndex:self.selectRightRow withLeftSelectIndex:self.selectLeftRow];
-        self.rightTitle = rightTitle;
         [self.leftTableView reloadData];
+        [self clickLeftCell];
     }else{
-        self.selectRightRow = indexPath.row;
-        self.rightTitle = cell.textLabel.text;
+        _selectLeftModel.selectRightRow = indexPath.row;
     }
     
+    [self clickRightCellIndex:_selectLeftModel.selectRightRow];
     [self.rightTableView reloadData];
 }
 
-#pragma mark - 点击以及手势事件
-- (void)clickCloseBtn:(UIButton *)btn{
-    if ([self.delegate respondsToSelector:@selector(clickRightView:getLeftText:getRightText:)]) {
-        NSString *left = nil;
-        NSString *right = nil;
-        if (btn.tag == SureBtnTag) {
-            left = self.leftTitle;
-            right = self.rightTitle;
-        }
-        
-        [self.delegate clickRightView:self getLeftText:left getRightText:right];
-    }
-}
-- (void)swipeCover:(UISwipeGestureRecognizer *)tap{
+/*点击左边cell*/
+- (void)clickLeftCell{
     
-    if ([self.delegate respondsToSelector:@selector(clickRightView:getLeftText:getRightText:)]) {
-        [self.delegate clickRightView:self getLeftText:nil getRightText:nil];
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyCustomerName]) {
+        if (_selectLeftModel.rightArr.count == 0) {/*右边为空才去请求*/
+            [self.dataAdapter requestCustomerList];
+        }
     }
-}
-- (void)clickCover:(UITapGestureRecognizer *)tap{
-    if ([self.delegate respondsToSelector:@selector(clickRightView:getLeftText:getRightText:)]) {
-        [self.delegate clickRightView:self getLeftText:nil getRightText:nil];
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyCustomerGroup]) {
+        if (_selectLeftModel.rightArr.count == 0) {
+            XWSFliterConditionModel *model = [self.dataAdapter getModel:KeyCustomerName];
+            [self.dataAdapter requestGroupList:model.customerID];
+        }
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyDeviceName]) {
+        if (_selectLeftModel.rightArr.count == 0) {
+            [self.dataAdapter requestDevicesList];
+        }
     }
 }
 
+/*点击右边cell*/
+- (void)clickRightCellIndex:(NSInteger)index{
+    
+    /*修改被选中筛选条件的各个id*/
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyCustomerName]) {
+        XWSFliterCustomer *customer = _selectLeftModel.rightArr[index];
+        if (![_selectLeftModel.customerID isEqualToString:customer.customerID]) {
+            _selectLeftModel.customerID = customer.customerID;//记录选中了哪个客户
+            [self.dataAdapter requestGroupList:customer.customerID];//选中的客户名称发生改变，下属客户分组和客户设备更新
+        }
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyCustomerGroup]) {
+        XWSFliterGroup *group = _selectLeftModel.rightArr[index];
+        if (![_selectLeftModel.groupID isEqualToString:group.groupID]) {
+            _selectLeftModel.groupID = group.groupID;//记录选中了哪个客户分组
+            if (_fliterType == AlarmLog || _fliterType == Statistic) {
+                [self.dataAdapter requestDevicesList];//在警报页面，选中的客户分组发生改变，下属客户设备更新
+            }
+        }
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyDeviceStatus]) {
+        _selectLeftModel.status = [NSString stringWithFormat:@"%@",@(index)];
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyDeviceName]) {
+        XWSDeviceListModel *device = _selectLeftModel.rightArr[index];
+        _selectLeftModel.deviceID = device.ID;
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyAlarmType]) {
+        _selectLeftModel.alarmType = _selectLeftModel.alarmArrEn[index];
+    }
+}
+
+
+#pragma mark - 点击以及手势事件
+- (void)clickCloseBtn:(UIButton *)btn{
+    [self dismiss];
+    if (btn.tag == SureBtnTag) {
+        if (_fliterType == DevicesMonitoring) {
+            
+            [self.dataAdapter requestDevicesList];
+            
+        }else if (_fliterType == AlarmLog){
+            
+            [self.dataAdapter requestAlarmList];
+            
+        }else if (_fliterType == Statistic){
+            XWSFliterConditionModel *device = [self.dataAdapter getModel:KeyDeviceName];
+            if ([self.delegate respondsToSelector:@selector(clickFliterView:dataSource:)]) {
+                [self.delegate clickFliterView:self dataSource:@{@"deviceID":device.deviceID?:@""}];
+            }
+        }else{
+            
+        }
+    }
+}
+- (void)swipeCover:(UISwipeGestureRecognizer *)tap{
+    [self dismiss];
+}
+- (void)clickCover:(UITapGestureRecognizer *)tap{
+    [self dismiss];
+}
+
 #pragma mark - 动画
+/*开启蒙版透明度动画*/
+/**
+ 设置alpha值
+ 动画是时间 duration
+ **/
 - (void)startCoverViewOpacityWithAlpha:(CGFloat)alpha withDuration:(CGFloat)duration{
     CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     opacityAnimation.fromValue = [NSNumber numberWithFloat:0];
@@ -432,35 +499,114 @@
     [_coverView.layer addAnimation:opacityAnimation forKey:@"opacity"];
     _coverView.alpha = alpha;
 }
-
+/*取消门板透明度动画*/
 - (void)cancelCoverViewOpacity{
     [_coverView.layer removeAllAnimations];
     _coverView.alpha = 0;
 }
 
-#pragma mark - 传进来的数据
-- (void)setDatas:(NSMutableArray *)datas{
-    _datas = datas;
+#pragma mark - XWSFliterDataAdapterDelegate
+//筛选条件
+- (void)getFliterDataReloadTable:(XWSFliterDataAdapter *)dataAdapter{
     
-    [self.leftArr removeAllObjects];
-    //给左边数据列表赋值
-    [self.leftArr addObjectsFromArray:_datas];
-    
-    if (self.leftArr.count != 0) {
+    if (self.dataAdapter.leftArr.count != 0) {
         self.NoDataView.hidden = YES;
         self.leftTableView.hidden = NO;
         self.rightTableView.hidden = NO;
-        //默认选中第一行
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.leftTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-        [self tableView:self.leftTableView didSelectRowAtIndexPath:indexPath];
-        [self.rightTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-        [self tableView:self.rightTableView didSelectRowAtIndexPath:indexPath];
+    
+        [self.leftTableView reloadData];
+        [self.rightTableView reloadData];
+    
     }else{
         self.NoDataView.hidden = NO;
         self.leftTableView.hidden = YES;
         self.rightTableView.hidden = YES;
     }
 }
+- (void)getStatisticDeviceFirst{
+    [self clickCloseBtn:self.sureBtn];
+}
+#pragma mark - 回调筛选结果
+- (void)getFliterDeviceList:(NSDictionary *)devices{
+    
+    if ([self.delegate respondsToSelector:@selector(clickFliterView:dataSource:)]) {
+        [self.delegate clickFliterView:self dataSource:devices];
+    }
+}
+
+#pragma mark - 根据传入的数据，获取对应cell的值（可以在这里进行修改）
+//获取左侧标题
+- (NSString *)getLeftDataWithIndex:(NSInteger)index{
+    
+    XWSFliterConditionModel *model = self.dataAdapter.leftArr[index];
+    NSString *title = model.leftKeyName;
+    return title;
+}
+//获取右侧标题
+- (NSString *)getRightDataWithIndex:(NSInteger)index{
+    
+    NSString *title = @"";
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyCustomerName]) {
+        XWSFliterCustomer *customer = _selectLeftModel.rightArr[index];
+        title = customer.customerName;
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyCustomerGroup]) {
+        XWSFliterGroup *group = _selectLeftModel.rightArr[index];
+        title = group.groupName;
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyDeviceStatus]) {
+        return _selectLeftModel.statusArr[index];
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyDeviceName]) {
+        XWSDeviceListModel *device = _selectLeftModel.rightArr[index];
+        title = device.Name;
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyAlarmType]) {
+        return _selectLeftModel.alarmArr[index];
+    }
+    
+    return title;
+}
+
+#pragma mark - Show and Dismiss
+- (void)show{
+    
+    self.hidden = NO;
+    [UIView animateWithDuration:AnimationTime animations:^{
+        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(0);
+            make.left.mas_equalTo(-ScreenWidth);
+        }];
+        [[UIApplication sharedApplication].keyWindow layoutIfNeeded];
+    } completion:^(BOOL finished) {
+    }];
+    
+        //设置颜色渐变动画
+    [self startCoverViewOpacityWithAlpha:CoverAlphaValue withDuration:AnimationTime];
+}
+
+- (void)dismiss{
+        //把盖板颜色的alpha值至为0
+    [self cancelCoverViewOpacity];
+    
+        //移动侧边栏回到原来的位置
+    [UIView animateWithDuration:AnimationTime animations:^{
+        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(ScreenWidth);
+        }];
+        
+        [[UIApplication sharedApplication].keyWindow layoutIfNeeded];
+        
+    }completion:^(BOOL finished) {
+        self.hidden = YES;
+    }];
+}
+
 
 @end

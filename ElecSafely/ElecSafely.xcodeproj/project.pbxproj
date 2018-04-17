@@ -137,8 +137,74 @@
 		EEEF714020746EE600ABD711 /* XWSSingleListRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF713F20746EE600ABD711 /* XWSSingleListRightView.m */; };
 		EEEF714420749E9800ABD711 /* XWSNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF714320749E9800ABD711 /* XWSNoticeModel.m */; };
 		EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73383206532A700FFB99B /* XWSMainViewController.m */; };
-		EEF73387206537F500FFB99B /* XWSRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73386206537F500FFB99B /* XWSRightView.m */; };
 		EEF7338F20663EC700FFB99B /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = EEF7338E20663EC700FFB99B /* json.json */; };
+		EF112779207E5A41006A3709 /* XWSBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF112778207E5A41006A3709 /* XWSBaseModel.m */; };
+		EF45C02B207770ED0074990E /* ESBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C026207770ED0074990E /* ESBaseNavigationController.m */; };
+		EF45C02C207770ED0074990E /* ESBaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C028207770ED0074990E /* ESBaseTabBarController.m */; };
+		EF45C02D207770ED0074990E /* ESBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C02A207770ED0074990E /* ESBaseViewController.m */; };
+		EF45C03F207770F70074990E /* ESDeviceDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C030207770F70074990E /* ESDeviceDataProcessor.m */; };
+		EF45C040207770F70074990E /* ESDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C032207770F70074990E /* ESDeviceViewController.m */; };
+		EF45C041207770F70074990E /* ESDeviceData.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C035207770F70074990E /* ESDeviceData.m */; };
+		EF45C043207770F70074990E /* ESDeviceBasicInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C03A207770F70074990E /* ESDeviceBasicInfoView.m */; };
+		EF45C044207770F70074990E /* ESDeviceLoopTypeValueView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C03C207770F70074990E /* ESDeviceLoopTypeValueView.m */; };
+		EF45C045207770F70074990E /* ESDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C03E207770F70074990E /* ESDeviceView.m */; };
+		EF45C04F2077710B0074990E /* dianliu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF45C0482077710B0074990E /* dianliu@3x.png */; };
+		EF45C0502077710B0074990E /* dianya@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF45C0492077710B0074990E /* dianya@3x.png */; };
+		EF45C0512077710B0074990E /* loudian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF45C04A2077710B0074990E /* loudian@3x.png */; };
+		EF45C0522077710B0074990E /* XWSDeviceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C04C2077710B0074990E /* XWSDeviceListModel.m */; };
+		EF45C0532077710B0074990E /* XWSDeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C04E2077710B0074990E /* XWSDeviceListViewController.m */; };
+		EF45C05F207771300074990E /* ESStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C056207771300074990E /* ESStatisticViewController.m */; };
+		EF45C060207771300074990E /* ESStatisticCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C05A207771300074990E /* ESStatisticCircleView.m */; };
+		EF45C061207771300074990E /* ESStatisticGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C05C207771300074990E /* ESStatisticGridView.m */; };
+		EF45C062207771300074990E /* ESStatisticView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C05E207771300074990E /* ESStatisticView.m */; };
+		EF45C0682077715D0074990E /* UILabel+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0652077715D0074990E /* UILabel+Create.m */; };
+		EF45C0692077715D0074990E /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0672077715D0074990E /* UIView+Layout.m */; };
+		EF45C06D207771720074990E /* MXNCircleCharts.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C06C207771720074990E /* MXNCircleCharts.m */; };
+		EF45C0A2207771910074990E /* UIColor+SLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C071207771910074990E /* UIColor+SLExtension.m */; };
+		EF45C0A3207771910074990E /* SLAccelerator.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C075207771910074990E /* SLAccelerator.m */; };
+		EF45C0A4207771910074990E /* BaseCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C077207771910074990E /* BaseCurveView.m */; };
+		EF45C0A5207771910074990E /* ChartAxisBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C07A207771910074990E /* ChartAxisBase.m */; };
+		EF45C0A6207771910074990E /* ChartBaseLine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C07C207771910074990E /* ChartBaseLine.m */; };
+		EF45C0A7207771910074990E /* ChartComponentBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C07E207771910074990E /* ChartComponentBase.m */; };
+		EF45C0A8207771910074990E /* ChartHighlight.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C080207771910074990E /* ChartHighlight.m */; };
+		EF45C0A9207771910074990E /* CurveChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C082207771910074990E /* CurveChartView.m */; };
+		EF45C0AA207771910074990E /* SLChartBaseDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C085207771910074990E /* SLChartBaseDataSet.m */; };
+		EF45C0AB207771910074990E /* SLLineChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C087207771910074990E /* SLLineChartData.m */; };
+		EF45C0AC207771910074990E /* SLLineChartDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C089207771910074990E /* SLLineChartDataSet.m */; };
+		EF45C0AD207771910074990E /* ChartDataEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C08C207771910074990E /* ChartDataEntry.m */; };
+		EF45C0AE207771910074990E /* ChartDataEntryBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C08E207771910074990E /* ChartDataEntryBase.m */; };
+		EF45C0AF207771910074990E /* HighLightFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C091207771910074990E /* HighLightFormatter.m */; };
+		EF45C0B0207771910074990E /* XAxisFormtter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C093207771910074990E /* XAxisFormtter.m */; };
+		EF45C0B1207771910074990E /* YAxisFormtter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C095207771910074990E /* YAxisFormtter.m */; };
+		EF45C0B2207771910074990E /* YRightAxisFormtter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C097207771910074990E /* YRightAxisFormtter.m */; };
+		EF45C0B3207771910074990E /* statistics_data_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = EF45C09D207771910074990E /* statistics_data_bg.png */; };
+		EF45C0B4207771910074990E /* SLGCDTimerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0A1207771910074990E /* SLGCDTimerTool.m */; };
+		EF45C0BF2077B1BE0074990E /* XWSFliterView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0BD2077B1BD0074990E /* XWSFliterView.m */; };
+		EF45C0C22077B2190074990E /* XWSFliterDataAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0C12077B2190074990E /* XWSFliterDataAdapter.m */; };
+		EF45C0C52077BFC10074990E /* XWSFliterConditionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0C42077BFC10074990E /* XWSFliterConditionModel.m */; };
+		EF45C0C92079090A0074990E /* XWSAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0C82079090A0074990E /* XWSAlarmViewController.m */; };
+		EF45C0CC207992820074990E /* XWSAlarmDeviceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0CB207992820074990E /* XWSAlarmDeviceListModel.m */; };
+		EFED1AA72083508B00179276 /* XWSDeviceBaseInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AA62083508B00179276 /* XWSDeviceBaseInfoVC.m */; };
+		EFED1AD7208523A600179276 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AAB208523A600179276 /* MJRefreshAutoFooter.m */; };
+		EFED1AD8208523A600179276 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AAD208523A600179276 /* MJRefreshBackFooter.m */; };
+		EFED1AD9208523A600179276 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AAF208523A600179276 /* MJRefreshComponent.m */; };
+		EFED1ADA208523A600179276 /* MJRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AB1208523A600179276 /* MJRefreshFooter.m */; };
+		EFED1ADB208523A600179276 /* MJRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AB3208523A600179276 /* MJRefreshHeader.m */; };
+		EFED1ADC208523A600179276 /* MJRefreshAutoGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AB8208523A600179276 /* MJRefreshAutoGifFooter.m */; };
+		EFED1ADD208523A600179276 /* MJRefreshAutoNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1ABA208523A600179276 /* MJRefreshAutoNormalFooter.m */; };
+		EFED1ADE208523A600179276 /* MJRefreshAutoStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1ABC208523A600179276 /* MJRefreshAutoStateFooter.m */; };
+		EFED1ADF208523A600179276 /* MJRefreshBackGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1ABF208523A600179276 /* MJRefreshBackGifFooter.m */; };
+		EFED1AE0208523A600179276 /* MJRefreshBackNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AC1208523A600179276 /* MJRefreshBackNormalFooter.m */; };
+		EFED1AE1208523A600179276 /* MJRefreshBackStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AC3208523A600179276 /* MJRefreshBackStateFooter.m */; };
+		EFED1AE2208523A600179276 /* MJRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AC6208523A600179276 /* MJRefreshGifHeader.m */; };
+		EFED1AE3208523A600179276 /* MJRefreshNormalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AC8208523A600179276 /* MJRefreshNormalHeader.m */; };
+		EFED1AE4208523A600179276 /* MJRefreshStateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1ACA208523A600179276 /* MJRefreshStateHeader.m */; };
+		EFED1AE5208523A600179276 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFED1ACB208523A600179276 /* MJRefresh.bundle */; };
+		EFED1AE6208523A600179276 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1ACE208523A600179276 /* MJRefreshConst.m */; };
+		EFED1AE7208523A600179276 /* NSBundle+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AD0208523A600179276 /* NSBundle+MJRefresh.m */; };
+		EFED1AE8208523A600179276 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AD2208523A600179276 /* UIScrollView+MJExtension.m */; };
+		EFED1AE9208523A600179276 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AD4208523A600179276 /* UIScrollView+MJRefresh.m */; };
+		EFED1AEA208523A600179276 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AD6208523A600179276 /* UIView+MJExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -414,9 +480,141 @@
 		EEEF714320749E9800ABD711 /* XWSNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNoticeModel.m; sourceTree = "<group>"; };
 		EEF73382206532A700FFB99B /* XWSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSMainViewController.h; sourceTree = "<group>"; };
 		EEF73383206532A700FFB99B /* XWSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSMainViewController.m; sourceTree = "<group>"; };
-		EEF73385206537F500FFB99B /* XWSRightView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSRightView.h; sourceTree = "<group>"; };
-		EEF73386206537F500FFB99B /* XWSRightView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSRightView.m; sourceTree = "<group>"; };
 		EEF7338E20663EC700FFB99B /* json.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = json.json; sourceTree = "<group>"; };
+		EF112777207E5A41006A3709 /* XWSBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSBaseModel.h; sourceTree = "<group>"; };
+		EF112778207E5A41006A3709 /* XWSBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSBaseModel.m; sourceTree = "<group>"; };
+		EF45C025207770ED0074990E /* ESBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESBaseNavigationController.h; sourceTree = "<group>"; };
+		EF45C026207770ED0074990E /* ESBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESBaseNavigationController.m; sourceTree = "<group>"; };
+		EF45C027207770ED0074990E /* ESBaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESBaseTabBarController.h; sourceTree = "<group>"; };
+		EF45C028207770ED0074990E /* ESBaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESBaseTabBarController.m; sourceTree = "<group>"; };
+		EF45C029207770ED0074990E /* ESBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESBaseViewController.h; sourceTree = "<group>"; };
+		EF45C02A207770ED0074990E /* ESBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESBaseViewController.m; sourceTree = "<group>"; };
+		EF45C02F207770F70074990E /* ESDeviceDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDeviceDataProcessor.h; sourceTree = "<group>"; };
+		EF45C030207770F70074990E /* ESDeviceDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESDeviceDataProcessor.m; sourceTree = "<group>"; };
+		EF45C031207770F70074990E /* ESDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDeviceViewController.h; sourceTree = "<group>"; };
+		EF45C032207770F70074990E /* ESDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESDeviceViewController.m; sourceTree = "<group>"; };
+		EF45C034207770F70074990E /* ESDeviceData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDeviceData.h; sourceTree = "<group>"; };
+		EF45C035207770F70074990E /* ESDeviceData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESDeviceData.m; sourceTree = "<group>"; };
+		EF45C039207770F70074990E /* ESDeviceBasicInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDeviceBasicInfoView.h; sourceTree = "<group>"; };
+		EF45C03A207770F70074990E /* ESDeviceBasicInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESDeviceBasicInfoView.m; sourceTree = "<group>"; };
+		EF45C03B207770F70074990E /* ESDeviceLoopTypeValueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDeviceLoopTypeValueView.h; sourceTree = "<group>"; };
+		EF45C03C207770F70074990E /* ESDeviceLoopTypeValueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESDeviceLoopTypeValueView.m; sourceTree = "<group>"; };
+		EF45C03D207770F70074990E /* ESDeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESDeviceView.h; sourceTree = "<group>"; };
+		EF45C03E207770F70074990E /* ESDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESDeviceView.m; sourceTree = "<group>"; };
+		EF45C0482077710B0074990E /* dianliu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dianliu@3x.png"; sourceTree = "<group>"; };
+		EF45C0492077710B0074990E /* dianya@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dianya@3x.png"; sourceTree = "<group>"; };
+		EF45C04A2077710B0074990E /* loudian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loudian@3x.png"; sourceTree = "<group>"; };
+		EF45C04B2077710B0074990E /* XWSDeviceListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWSDeviceListModel.h; sourceTree = "<group>"; };
+		EF45C04C2077710B0074990E /* XWSDeviceListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWSDeviceListModel.m; sourceTree = "<group>"; };
+		EF45C04D2077710B0074990E /* XWSDeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWSDeviceListViewController.h; sourceTree = "<group>"; };
+		EF45C04E2077710B0074990E /* XWSDeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWSDeviceListViewController.m; sourceTree = "<group>"; };
+		EF45C055207771300074990E /* ESStatisticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESStatisticViewController.h; sourceTree = "<group>"; };
+		EF45C056207771300074990E /* ESStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESStatisticViewController.m; sourceTree = "<group>"; };
+		EF45C059207771300074990E /* ESStatisticCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESStatisticCircleView.h; sourceTree = "<group>"; };
+		EF45C05A207771300074990E /* ESStatisticCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESStatisticCircleView.m; sourceTree = "<group>"; };
+		EF45C05B207771300074990E /* ESStatisticGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESStatisticGridView.h; sourceTree = "<group>"; };
+		EF45C05C207771300074990E /* ESStatisticGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESStatisticGridView.m; sourceTree = "<group>"; };
+		EF45C05D207771300074990E /* ESStatisticView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESStatisticView.h; sourceTree = "<group>"; };
+		EF45C05E207771300074990E /* ESStatisticView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESStatisticView.m; sourceTree = "<group>"; };
+		EF45C0642077715D0074990E /* UILabel+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Create.h"; sourceTree = "<group>"; };
+		EF45C0652077715D0074990E /* UILabel+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Create.m"; sourceTree = "<group>"; };
+		EF45C0662077715D0074990E /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
+		EF45C0672077715D0074990E /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		EF45C06B207771720074990E /* MXNCircleCharts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXNCircleCharts.h; sourceTree = "<group>"; };
+		EF45C06C207771720074990E /* MXNCircleCharts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXNCircleCharts.m; sourceTree = "<group>"; };
+		EF45C070207771910074990E /* UIColor+SLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SLExtension.h"; sourceTree = "<group>"; };
+		EF45C071207771910074990E /* UIColor+SLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SLExtension.m"; sourceTree = "<group>"; };
+		EF45C074207771910074990E /* SLAccelerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLAccelerator.h; sourceTree = "<group>"; };
+		EF45C075207771910074990E /* SLAccelerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLAccelerator.m; sourceTree = "<group>"; };
+		EF45C076207771910074990E /* BaseCurveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCurveView.h; sourceTree = "<group>"; };
+		EF45C077207771910074990E /* BaseCurveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCurveView.m; sourceTree = "<group>"; };
+		EF45C079207771910074990E /* ChartAxisBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartAxisBase.h; sourceTree = "<group>"; };
+		EF45C07A207771910074990E /* ChartAxisBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartAxisBase.m; sourceTree = "<group>"; };
+		EF45C07B207771910074990E /* ChartBaseLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartBaseLine.h; sourceTree = "<group>"; };
+		EF45C07C207771910074990E /* ChartBaseLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartBaseLine.m; sourceTree = "<group>"; };
+		EF45C07D207771910074990E /* ChartComponentBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartComponentBase.h; sourceTree = "<group>"; };
+		EF45C07E207771910074990E /* ChartComponentBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartComponentBase.m; sourceTree = "<group>"; };
+		EF45C07F207771910074990E /* ChartHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartHighlight.h; sourceTree = "<group>"; };
+		EF45C080207771910074990E /* ChartHighlight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartHighlight.m; sourceTree = "<group>"; };
+		EF45C081207771910074990E /* CurveChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveChartView.h; sourceTree = "<group>"; };
+		EF45C082207771910074990E /* CurveChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveChartView.m; sourceTree = "<group>"; };
+		EF45C084207771910074990E /* SLChartBaseDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLChartBaseDataSet.h; sourceTree = "<group>"; };
+		EF45C085207771910074990E /* SLChartBaseDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLChartBaseDataSet.m; sourceTree = "<group>"; };
+		EF45C086207771910074990E /* SLLineChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLLineChartData.h; sourceTree = "<group>"; };
+		EF45C087207771910074990E /* SLLineChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLLineChartData.m; sourceTree = "<group>"; };
+		EF45C088207771910074990E /* SLLineChartDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLLineChartDataSet.h; sourceTree = "<group>"; };
+		EF45C089207771910074990E /* SLLineChartDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLLineChartDataSet.m; sourceTree = "<group>"; };
+		EF45C08B207771910074990E /* ChartDataEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDataEntry.h; sourceTree = "<group>"; };
+		EF45C08C207771910074990E /* ChartDataEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataEntry.m; sourceTree = "<group>"; };
+		EF45C08D207771910074990E /* ChartDataEntryBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDataEntryBase.h; sourceTree = "<group>"; };
+		EF45C08E207771910074990E /* ChartDataEntryBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataEntryBase.m; sourceTree = "<group>"; };
+		EF45C090207771910074990E /* HighLightFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighLightFormatter.h; sourceTree = "<group>"; };
+		EF45C091207771910074990E /* HighLightFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighLightFormatter.m; sourceTree = "<group>"; };
+		EF45C092207771910074990E /* XAxisFormtter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAxisFormtter.h; sourceTree = "<group>"; };
+		EF45C093207771910074990E /* XAxisFormtter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAxisFormtter.m; sourceTree = "<group>"; };
+		EF45C094207771910074990E /* YAxisFormtter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YAxisFormtter.h; sourceTree = "<group>"; };
+		EF45C095207771910074990E /* YAxisFormtter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAxisFormtter.m; sourceTree = "<group>"; };
+		EF45C096207771910074990E /* YRightAxisFormtter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YRightAxisFormtter.h; sourceTree = "<group>"; };
+		EF45C097207771910074990E /* YRightAxisFormtter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YRightAxisFormtter.m; sourceTree = "<group>"; };
+		EF45C099207771910074990E /* SLChartAxisValueFormatterPotocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLChartAxisValueFormatterPotocol.h; sourceTree = "<group>"; };
+		EF45C09A207771910074990E /* SLChartDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLChartDataProtocol.h; sourceTree = "<group>"; };
+		EF45C09B207771910074990E /* SLChartFormatterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLChartFormatterProtocol.h; sourceTree = "<group>"; };
+		EF45C09D207771910074990E /* statistics_data_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = statistics_data_bg.png; sourceTree = "<group>"; };
+		EF45C09E207771910074990E /* SLCurveChartLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCurveChartLib.h; sourceTree = "<group>"; };
+		EF45C0A0207771910074990E /* SLGCDTimerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLGCDTimerTool.h; sourceTree = "<group>"; };
+		EF45C0A1207771910074990E /* SLGCDTimerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLGCDTimerTool.m; sourceTree = "<group>"; };
+		EF45C0BD2077B1BD0074990E /* XWSFliterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWSFliterView.m; sourceTree = "<group>"; };
+		EF45C0BE2077B1BE0074990E /* XWSFliterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWSFliterView.h; sourceTree = "<group>"; };
+		EF45C0C02077B2190074990E /* XWSFliterDataAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFliterDataAdapter.h; sourceTree = "<group>"; };
+		EF45C0C12077B2190074990E /* XWSFliterDataAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFliterDataAdapter.m; sourceTree = "<group>"; };
+		EF45C0C32077BFC10074990E /* XWSFliterConditionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFliterConditionModel.h; sourceTree = "<group>"; };
+		EF45C0C42077BFC10074990E /* XWSFliterConditionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFliterConditionModel.m; sourceTree = "<group>"; };
+		EF45C0C72079090A0074990E /* XWSAlarmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAlarmViewController.h; sourceTree = "<group>"; };
+		EF45C0C82079090A0074990E /* XWSAlarmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSAlarmViewController.m; sourceTree = "<group>"; };
+		EF45C0CA207992820074990E /* XWSAlarmDeviceListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAlarmDeviceListModel.h; sourceTree = "<group>"; };
+		EF45C0CB207992820074990E /* XWSAlarmDeviceListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSAlarmDeviceListModel.m; sourceTree = "<group>"; };
+		EFED1AA52083508B00179276 /* XWSDeviceBaseInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSDeviceBaseInfoVC.h; sourceTree = "<group>"; };
+		EFED1AA62083508B00179276 /* XWSDeviceBaseInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSDeviceBaseInfoVC.m; sourceTree = "<group>"; };
+		EFED1AAA208523A600179276 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
+		EFED1AAB208523A600179276 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
+		EFED1AAC208523A600179276 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
+		EFED1AAD208523A600179276 /* MJRefreshBackFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackFooter.m; sourceTree = "<group>"; };
+		EFED1AAE208523A600179276 /* MJRefreshComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshComponent.h; sourceTree = "<group>"; };
+		EFED1AAF208523A600179276 /* MJRefreshComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshComponent.m; sourceTree = "<group>"; };
+		EFED1AB0208523A600179276 /* MJRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooter.h; sourceTree = "<group>"; };
+		EFED1AB1208523A600179276 /* MJRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooter.m; sourceTree = "<group>"; };
+		EFED1AB2208523A600179276 /* MJRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeader.h; sourceTree = "<group>"; };
+		EFED1AB3208523A600179276 /* MJRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeader.m; sourceTree = "<group>"; };
+		EFED1AB7208523A600179276 /* MJRefreshAutoGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoGifFooter.h; sourceTree = "<group>"; };
+		EFED1AB8208523A600179276 /* MJRefreshAutoGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoGifFooter.m; sourceTree = "<group>"; };
+		EFED1AB9208523A600179276 /* MJRefreshAutoNormalFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoNormalFooter.h; sourceTree = "<group>"; };
+		EFED1ABA208523A600179276 /* MJRefreshAutoNormalFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoNormalFooter.m; sourceTree = "<group>"; };
+		EFED1ABB208523A600179276 /* MJRefreshAutoStateFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoStateFooter.h; sourceTree = "<group>"; };
+		EFED1ABC208523A600179276 /* MJRefreshAutoStateFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoStateFooter.m; sourceTree = "<group>"; };
+		EFED1ABE208523A600179276 /* MJRefreshBackGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackGifFooter.h; sourceTree = "<group>"; };
+		EFED1ABF208523A600179276 /* MJRefreshBackGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackGifFooter.m; sourceTree = "<group>"; };
+		EFED1AC0208523A600179276 /* MJRefreshBackNormalFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackNormalFooter.h; sourceTree = "<group>"; };
+		EFED1AC1208523A600179276 /* MJRefreshBackNormalFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackNormalFooter.m; sourceTree = "<group>"; };
+		EFED1AC2208523A600179276 /* MJRefreshBackStateFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackStateFooter.h; sourceTree = "<group>"; };
+		EFED1AC3208523A600179276 /* MJRefreshBackStateFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackStateFooter.m; sourceTree = "<group>"; };
+		EFED1AC5208523A600179276 /* MJRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshGifHeader.h; sourceTree = "<group>"; };
+		EFED1AC6208523A600179276 /* MJRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshGifHeader.m; sourceTree = "<group>"; };
+		EFED1AC7208523A600179276 /* MJRefreshNormalHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshNormalHeader.h; sourceTree = "<group>"; };
+		EFED1AC8208523A600179276 /* MJRefreshNormalHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshNormalHeader.m; sourceTree = "<group>"; };
+		EFED1AC9208523A600179276 /* MJRefreshStateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshStateHeader.h; sourceTree = "<group>"; };
+		EFED1ACA208523A600179276 /* MJRefreshStateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshStateHeader.m; sourceTree = "<group>"; };
+		EFED1ACB208523A600179276 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		EFED1ACC208523A600179276 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		EFED1ACD208523A600179276 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		EFED1ACE208523A600179276 /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		EFED1ACF208523A600179276 /* NSBundle+MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+MJRefresh.h"; sourceTree = "<group>"; };
+		EFED1AD0208523A600179276 /* NSBundle+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+MJRefresh.m"; sourceTree = "<group>"; };
+		EFED1AD1208523A600179276 /* UIScrollView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJExtension.h"; sourceTree = "<group>"; };
+		EFED1AD2208523A600179276 /* UIScrollView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJExtension.m"; sourceTree = "<group>"; };
+		EFED1AD3208523A600179276 /* UIScrollView+MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefresh.h"; sourceTree = "<group>"; };
+		EFED1AD4208523A600179276 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
+		EFED1AD5208523A600179276 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
+		EFED1AD6208523A600179276 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -605,6 +803,7 @@
 		553D38442004E07D00FCC58F /* ToolView */ = {
 			isa = PBXGroup;
 			children = (
+				EF45C0632077715D0074990E /* Category */,
 				EE250EC020705ECA0021FA80 /* LCQRCodeUtil.h */,
 				EE250EBF20705ECA0021FA80 /* LCQrcodeUtil.m */,
 				553D38482004E0D100FCC58F /* ElecTipsView.h */,
@@ -743,6 +942,12 @@
 		55EF8A1F1FDE320D003F5061 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				EF45C0C6207907840074990E /* Waring */,
+				EF45C0B92077B1750074990E /* Fliter */,
+				EF45C024207770ED0074990E /* BaseVC */,
+				EF45C02E207770F70074990E /* Device */,
+				EF45C0462077710B0074990E /* DevicList */,
+				EF45C054207771300074990E /* Statistics */,
 				EEEF713A20746E5B00ABD711 /* Notice */,
 				EEB699EC2068DD3A0078A3F5 /* Feedback */,
 				EEB699E22068AFA80078A3F5 /* Help */,
@@ -760,6 +965,9 @@
 		55EF8A201FDE320D003F5061 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				EFED1AA8208523A600179276 /* MJRefresh */,
+				EF45C06E207771910074990E /* SLCurveChartLib */,
+				EF45C06A207771720074990E /* CircleChart */,
 				55F656CC2045067C00F2FB2D /* XgPushSDK */,
 				551569B9202312AC00B80642 /* DGActivityIndicatorView */,
 				553D386D2004E54E00FCC58F /* PrivateFunction */,
@@ -892,8 +1100,6 @@
 			children = (
 				EE50AEC02064A4160068FBC1 /* XWSLeftView.h */,
 				EE50AEC12064A4160068FBC1 /* XWSLeftView.m */,
-				EEF73385206537F500FFB99B /* XWSRightView.h */,
-				EEF73386206537F500FFB99B /* XWSRightView.m */,
 				EEEF713E20746EE600ABD711 /* XWSSingleListRightView.h */,
 				EEEF713F20746EE600ABD711 /* XWSSingleListRightView.m */,
 			);
@@ -1028,6 +1234,378 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		EF45C024207770ED0074990E /* BaseVC */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C025207770ED0074990E /* ESBaseNavigationController.h */,
+				EF45C026207770ED0074990E /* ESBaseNavigationController.m */,
+				EF45C027207770ED0074990E /* ESBaseTabBarController.h */,
+				EF45C028207770ED0074990E /* ESBaseTabBarController.m */,
+				EF45C029207770ED0074990E /* ESBaseViewController.h */,
+				EF45C02A207770ED0074990E /* ESBaseViewController.m */,
+			);
+			path = BaseVC;
+			sourceTree = "<group>";
+		};
+		EF45C02E207770F70074990E /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C02F207770F70074990E /* ESDeviceDataProcessor.h */,
+				EF45C030207770F70074990E /* ESDeviceDataProcessor.m */,
+				EF45C031207770F70074990E /* ESDeviceViewController.h */,
+				EF45C032207770F70074990E /* ESDeviceViewController.m */,
+				EFED1AA52083508B00179276 /* XWSDeviceBaseInfoVC.h */,
+				EFED1AA62083508B00179276 /* XWSDeviceBaseInfoVC.m */,
+				EF45C033207770F70074990E /* model */,
+				EF45C038207770F70074990E /* view */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
+		EF45C033207770F70074990E /* model */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C034207770F70074990E /* ESDeviceData.h */,
+				EF45C035207770F70074990E /* ESDeviceData.m */,
+				EF112777207E5A41006A3709 /* XWSBaseModel.h */,
+				EF112778207E5A41006A3709 /* XWSBaseModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		EF45C038207770F70074990E /* view */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C039207770F70074990E /* ESDeviceBasicInfoView.h */,
+				EF45C03A207770F70074990E /* ESDeviceBasicInfoView.m */,
+				EF45C03B207770F70074990E /* ESDeviceLoopTypeValueView.h */,
+				EF45C03C207770F70074990E /* ESDeviceLoopTypeValueView.m */,
+				EF45C03D207770F70074990E /* ESDeviceView.h */,
+				EF45C03E207770F70074990E /* ESDeviceView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		EF45C0462077710B0074990E /* DevicList */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C0472077710B0074990E /* image */,
+				EF45C04B2077710B0074990E /* XWSDeviceListModel.h */,
+				EF45C04C2077710B0074990E /* XWSDeviceListModel.m */,
+				EF45C04D2077710B0074990E /* XWSDeviceListViewController.h */,
+				EF45C04E2077710B0074990E /* XWSDeviceListViewController.m */,
+			);
+			path = DevicList;
+			sourceTree = "<group>";
+		};
+		EF45C0472077710B0074990E /* image */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C0482077710B0074990E /* dianliu@3x.png */,
+				EF45C0492077710B0074990E /* dianya@3x.png */,
+				EF45C04A2077710B0074990E /* loudian@3x.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		EF45C054207771300074990E /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C055207771300074990E /* ESStatisticViewController.h */,
+				EF45C056207771300074990E /* ESStatisticViewController.m */,
+				EF45C057207771300074990E /* model */,
+				EF45C058207771300074990E /* view */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		EF45C057207771300074990E /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		EF45C058207771300074990E /* view */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C059207771300074990E /* ESStatisticCircleView.h */,
+				EF45C05A207771300074990E /* ESStatisticCircleView.m */,
+				EF45C05B207771300074990E /* ESStatisticGridView.h */,
+				EF45C05C207771300074990E /* ESStatisticGridView.m */,
+				EF45C05D207771300074990E /* ESStatisticView.h */,
+				EF45C05E207771300074990E /* ESStatisticView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		EF45C0632077715D0074990E /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C0642077715D0074990E /* UILabel+Create.h */,
+				EF45C0652077715D0074990E /* UILabel+Create.m */,
+				EF45C0662077715D0074990E /* UIView+Layout.h */,
+				EF45C0672077715D0074990E /* UIView+Layout.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		EF45C06A207771720074990E /* CircleChart */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C06B207771720074990E /* MXNCircleCharts.h */,
+				EF45C06C207771720074990E /* MXNCircleCharts.m */,
+			);
+			path = CircleChart;
+			sourceTree = "<group>";
+		};
+		EF45C06E207771910074990E /* SLCurveChartLib */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C06F207771910074990E /* Category */,
+				EF45C072207771910074990E /* ChartView */,
+				EF45C078207771910074990E /* Components */,
+				EF45C081207771910074990E /* CurveChartView.h */,
+				EF45C082207771910074990E /* CurveChartView.m */,
+				EF45C083207771910074990E /* Data */,
+				EF45C08F207771910074990E /* Format */,
+				EF45C098207771910074990E /* Interface */,
+				EF45C09C207771910074990E /* Resource */,
+				EF45C09E207771910074990E /* SLCurveChartLib.h */,
+				EF45C09F207771910074990E /* UtilTool */,
+			);
+			path = SLCurveChartLib;
+			sourceTree = "<group>";
+		};
+		EF45C06F207771910074990E /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C070207771910074990E /* UIColor+SLExtension.h */,
+				EF45C071207771910074990E /* UIColor+SLExtension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		EF45C072207771910074990E /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C073207771910074990E /* accelerator */,
+				EF45C076207771910074990E /* BaseCurveView.h */,
+				EF45C077207771910074990E /* BaseCurveView.m */,
+			);
+			path = ChartView;
+			sourceTree = "<group>";
+		};
+		EF45C073207771910074990E /* accelerator */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C074207771910074990E /* SLAccelerator.h */,
+				EF45C075207771910074990E /* SLAccelerator.m */,
+			);
+			path = accelerator;
+			sourceTree = "<group>";
+		};
+		EF45C078207771910074990E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C079207771910074990E /* ChartAxisBase.h */,
+				EF45C07A207771910074990E /* ChartAxisBase.m */,
+				EF45C07B207771910074990E /* ChartBaseLine.h */,
+				EF45C07C207771910074990E /* ChartBaseLine.m */,
+				EF45C07D207771910074990E /* ChartComponentBase.h */,
+				EF45C07E207771910074990E /* ChartComponentBase.m */,
+				EF45C07F207771910074990E /* ChartHighlight.h */,
+				EF45C080207771910074990E /* ChartHighlight.m */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EF45C083207771910074990E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C084207771910074990E /* SLChartBaseDataSet.h */,
+				EF45C085207771910074990E /* SLChartBaseDataSet.m */,
+				EF45C086207771910074990E /* SLLineChartData.h */,
+				EF45C087207771910074990E /* SLLineChartData.m */,
+				EF45C088207771910074990E /* SLLineChartDataSet.h */,
+				EF45C089207771910074990E /* SLLineChartDataSet.m */,
+				EF45C08A207771910074990E /* Standard */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		EF45C08A207771910074990E /* Standard */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C08B207771910074990E /* ChartDataEntry.h */,
+				EF45C08C207771910074990E /* ChartDataEntry.m */,
+				EF45C08D207771910074990E /* ChartDataEntryBase.h */,
+				EF45C08E207771910074990E /* ChartDataEntryBase.m */,
+			);
+			path = Standard;
+			sourceTree = "<group>";
+		};
+		EF45C08F207771910074990E /* Format */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C090207771910074990E /* HighLightFormatter.h */,
+				EF45C091207771910074990E /* HighLightFormatter.m */,
+				EF45C092207771910074990E /* XAxisFormtter.h */,
+				EF45C093207771910074990E /* XAxisFormtter.m */,
+				EF45C094207771910074990E /* YAxisFormtter.h */,
+				EF45C095207771910074990E /* YAxisFormtter.m */,
+				EF45C096207771910074990E /* YRightAxisFormtter.h */,
+				EF45C097207771910074990E /* YRightAxisFormtter.m */,
+			);
+			path = Format;
+			sourceTree = "<group>";
+		};
+		EF45C098207771910074990E /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C099207771910074990E /* SLChartAxisValueFormatterPotocol.h */,
+				EF45C09A207771910074990E /* SLChartDataProtocol.h */,
+				EF45C09B207771910074990E /* SLChartFormatterProtocol.h */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		EF45C09C207771910074990E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C09D207771910074990E /* statistics_data_bg.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		EF45C09F207771910074990E /* UtilTool */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C0A0207771910074990E /* SLGCDTimerTool.h */,
+				EF45C0A1207771910074990E /* SLGCDTimerTool.m */,
+			);
+			path = UtilTool;
+			sourceTree = "<group>";
+		};
+		EF45C0B92077B1750074990E /* Fliter */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C0BE2077B1BE0074990E /* XWSFliterView.h */,
+				EF45C0BD2077B1BD0074990E /* XWSFliterView.m */,
+				EF45C0C02077B2190074990E /* XWSFliterDataAdapter.h */,
+				EF45C0C12077B2190074990E /* XWSFliterDataAdapter.m */,
+				EF45C0C32077BFC10074990E /* XWSFliterConditionModel.h */,
+				EF45C0C42077BFC10074990E /* XWSFliterConditionModel.m */,
+			);
+			path = Fliter;
+			sourceTree = "<group>";
+		};
+		EF45C0C6207907840074990E /* Waring */ = {
+			isa = PBXGroup;
+			children = (
+				EF45C0C72079090A0074990E /* XWSAlarmViewController.h */,
+				EF45C0C82079090A0074990E /* XWSAlarmViewController.m */,
+				EF45C0CA207992820074990E /* XWSAlarmDeviceListModel.h */,
+				EF45C0CB207992820074990E /* XWSAlarmDeviceListModel.m */,
+			);
+			path = Waring;
+			sourceTree = "<group>";
+		};
+		EFED1AA8208523A600179276 /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				EFED1AA9208523A600179276 /* Base */,
+				EFED1AB4208523A600179276 /* Custom */,
+				EFED1ACB208523A600179276 /* MJRefresh.bundle */,
+				EFED1ACC208523A600179276 /* MJRefresh.h */,
+				EFED1ACD208523A600179276 /* MJRefreshConst.h */,
+				EFED1ACE208523A600179276 /* MJRefreshConst.m */,
+				EFED1ACF208523A600179276 /* NSBundle+MJRefresh.h */,
+				EFED1AD0208523A600179276 /* NSBundle+MJRefresh.m */,
+				EFED1AD1208523A600179276 /* UIScrollView+MJExtension.h */,
+				EFED1AD2208523A600179276 /* UIScrollView+MJExtension.m */,
+				EFED1AD3208523A600179276 /* UIScrollView+MJRefresh.h */,
+				EFED1AD4208523A600179276 /* UIScrollView+MJRefresh.m */,
+				EFED1AD5208523A600179276 /* UIView+MJExtension.h */,
+				EFED1AD6208523A600179276 /* UIView+MJExtension.m */,
+			);
+			path = MJRefresh;
+			sourceTree = "<group>";
+		};
+		EFED1AA9208523A600179276 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EFED1AAA208523A600179276 /* MJRefreshAutoFooter.h */,
+				EFED1AAB208523A600179276 /* MJRefreshAutoFooter.m */,
+				EFED1AAC208523A600179276 /* MJRefreshBackFooter.h */,
+				EFED1AAD208523A600179276 /* MJRefreshBackFooter.m */,
+				EFED1AAE208523A600179276 /* MJRefreshComponent.h */,
+				EFED1AAF208523A600179276 /* MJRefreshComponent.m */,
+				EFED1AB0208523A600179276 /* MJRefreshFooter.h */,
+				EFED1AB1208523A600179276 /* MJRefreshFooter.m */,
+				EFED1AB2208523A600179276 /* MJRefreshHeader.h */,
+				EFED1AB3208523A600179276 /* MJRefreshHeader.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		EFED1AB4208523A600179276 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				EFED1AB5208523A600179276 /* Footer */,
+				EFED1AC4208523A600179276 /* Header */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		EFED1AB5208523A600179276 /* Footer */ = {
+			isa = PBXGroup;
+			children = (
+				EFED1AB6208523A600179276 /* Auto */,
+				EFED1ABD208523A600179276 /* Back */,
+			);
+			path = Footer;
+			sourceTree = "<group>";
+		};
+		EFED1AB6208523A600179276 /* Auto */ = {
+			isa = PBXGroup;
+			children = (
+				EFED1AB7208523A600179276 /* MJRefreshAutoGifFooter.h */,
+				EFED1AB8208523A600179276 /* MJRefreshAutoGifFooter.m */,
+				EFED1AB9208523A600179276 /* MJRefreshAutoNormalFooter.h */,
+				EFED1ABA208523A600179276 /* MJRefreshAutoNormalFooter.m */,
+				EFED1ABB208523A600179276 /* MJRefreshAutoStateFooter.h */,
+				EFED1ABC208523A600179276 /* MJRefreshAutoStateFooter.m */,
+			);
+			path = Auto;
+			sourceTree = "<group>";
+		};
+		EFED1ABD208523A600179276 /* Back */ = {
+			isa = PBXGroup;
+			children = (
+				EFED1ABE208523A600179276 /* MJRefreshBackGifFooter.h */,
+				EFED1ABF208523A600179276 /* MJRefreshBackGifFooter.m */,
+				EFED1AC0208523A600179276 /* MJRefreshBackNormalFooter.h */,
+				EFED1AC1208523A600179276 /* MJRefreshBackNormalFooter.m */,
+				EFED1AC2208523A600179276 /* MJRefreshBackStateFooter.h */,
+				EFED1AC3208523A600179276 /* MJRefreshBackStateFooter.m */,
+			);
+			path = Back;
+			sourceTree = "<group>";
+		};
+		EFED1AC4208523A600179276 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				EFED1AC5208523A600179276 /* MJRefreshGifHeader.h */,
+				EFED1AC6208523A600179276 /* MJRefreshGifHeader.m */,
+				EFED1AC7208523A600179276 /* MJRefreshNormalHeader.h */,
+				EFED1AC8208523A600179276 /* MJRefreshNormalHeader.m */,
+				EFED1AC9208523A600179276 /* MJRefreshStateHeader.h */,
+				EFED1ACA208523A600179276 /* MJRefreshStateHeader.m */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1146,6 +1724,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF45C0502077710B0074990E /* dianya@3x.png in Resources */,
 				EE936EFE20750C5A00D3BD54 /* right_notice@3x.png in Resources */,
 				EED9196B206F10A8002CF969 /* net_error.png in Resources */,
 				EE50AED02064A7C40068FBC1 /* left_devices_list@3x.png in Resources */,
@@ -1156,10 +1735,14 @@
 				EE50AED12064A7C40068FBC1 /* left_statistics@3x.png in Resources */,
 				55EF89F71FDE3148003F5061 /* Assets.xcassets in Resources */,
 				553D35E6200465FF00FCC58F /* logo@3x.png in Resources */,
+				EF45C04F2077710B0074990E /* dianliu@3x.png in Resources */,
+				EF45C0512077710B0074990E /* loudian@3x.png in Resources */,
 				EE50AECB2064A7C40068FBC1 /* left_help@3x.png in Resources */,
 				EEB699E12068A4410078A3F5 /* scan@3x.png in Resources */,
+				EF45C0B3207771910074990E /* statistics_data_bg.png in Resources */,
 				55EC94861FEDF90C000D21F4 /* logo_min.png in Resources */,
 				EE50AECF2064A7C40068FBC1 /* left_feedback@3x.png in Resources */,
+				EFED1AE5208523A600179276 /* MJRefresh.bundle in Resources */,
 				EE936EFC20750AA700D3BD54 /* left_menu@3x.png in Resources */,
 				EE50AECE2064A7C40068FBC1 /* left_alarm@3x.png in Resources */,
 				EE50AECC2064A7C40068FBC1 /* left_scan@3x.png in Resources */,
@@ -1187,28 +1770,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEF73387206537F500FFB99B /* XWSRightView.m in Sources */,
+				EFED1AE8208523A600179276 /* UIScrollView+MJExtension.m in Sources */,
 				55E1E8141FF5D9CD00964CFB /* AnimatedULogoView.m in Sources */,
 				55156A02202312AC00B80642 /* DGActivityIndicatorAnimation.m in Sources */,
+				EF45C02D207770ED0074990E /* ESBaseViewController.m in Sources */,
 				55156A0C202312AC00B80642 /* DGActivityIndicatorBallScaleAnimation.m in Sources */,
 				55FEDD701FDF66DC005BD966 /* AFSecurityPolicy.m in Sources */,
+				EFED1AE0208523A600179276 /* MJRefreshBackNormalFooter.m in Sources */,
+				EF45C0B2207771910074990E /* YRightAxisFormtter.m in Sources */,
 				553D38642004E47300FCC58F /* NSData+AES.m in Sources */,
 				55156A15202312AC00B80642 /* DGActivityIndicatorDoubleBounceAnimation.m in Sources */,
 				553D38382004716500FCC58F /* MASViewAttribute.m in Sources */,
 				553D38672004E47300FCC58F /* NSString+Base64.m in Sources */,
+				EFED1ADB208523A600179276 /* MJRefreshHeader.m in Sources */,
 				553D383A2004716500FCC58F /* NSArray+MASAdditions.m in Sources */,
+				EF45C0B1207771910074990E /* YAxisFormtter.m in Sources */,
 				55156A22202312AC00B80642 /* DGActivityIndicatorTripleRingsAnimation.m in Sources */,
 				55FEDD721FDF66DC005BD966 /* AFURLResponseSerialization.m in Sources */,
+				EFED1AD8208523A600179276 /* MJRefreshBackFooter.m in Sources */,
 				55EF89F51FDE3148003F5061 /* ElecSafely.xcdatamodeld in Sources */,
 				55EC94921FEDFADE000D21F4 /* TFLaunchViewController.m in Sources */,
 				55156A18202312AC00B80642 /* DGActivityIndicatorLineScalePartyAnimation.m in Sources */,
 				EE47D3C4206CA46C006FEA3C /* XWSSettingPasswordViewController.m in Sources */,
+				EF45C02B207770ED0074990E /* ESBaseNavigationController.m in Sources */,
+				EF45C060207771300074990E /* ESStatisticCircleView.m in Sources */,
 				553D38632004E47300FCC58F /* GTMBase64.m in Sources */,
 				55156A0A202312AC00B80642 /* DGActivityIndicatorBallPulseSyncAnimation.m in Sources */,
+				EF45C0BF2077B1BE0074990E /* XWSFliterView.m in Sources */,
+				EF45C0A2207771910074990E /* UIColor+SLExtension.m in Sources */,
 				55FEDD6E1FDF66DC005BD966 /* AFHTTPSessionManager.m in Sources */,
 				55FEDD731FDF66DC005BD966 /* AFURLSessionManager.m in Sources */,
 				EEA2FF492067691D00E5D192 /* UIView+HGCorner.m in Sources */,
 				55FEDD771FDF66DC005BD966 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				EF45C0692077715D0074990E /* UIView+Layout.m in Sources */,
 				55EF89FD1FDE3148003F5061 /* main.m in Sources */,
 				55156A07202312AC00B80642 /* DGActivityIndicatorBallGridBeatAnimation.m in Sources */,
 				55156A24202312AC00B80642 /* DGActivityIndicatorView.m in Sources */,
@@ -1216,30 +1810,45 @@
 				55156A1F202312AC00B80642 /* DGActivityIndicatorThreeDotsAnimation.m in Sources */,
 				55156A06202312AC00B80642 /* DGActivityIndicatorBallClipRotatePulseAnimation.m in Sources */,
 				EEEF714420749E9800ABD711 /* XWSNoticeModel.m in Sources */,
+				EF45C041207770F70074990E /* ESDeviceData.m in Sources */,
 				EEB699EF2068DD540078A3F5 /* XWSFeedbackViewController.m in Sources */,
 				55156A0E202312AC00B80642 /* DGActivityIndicatorBallScaleRippleAnimation.m in Sources */,
 				55156A1E202312AC00B80642 /* DGActivityIndicatorRotatingTrigonAnimation.m in Sources */,
 				553D386A2004E47300FCC58F /* DESCrypt.m in Sources */,
+				EFED1ADC208523A600179276 /* MJRefreshAutoGifFooter.m in Sources */,
+				EF45C0C52077BFC10074990E /* XWSFliterConditionModel.m in Sources */,
 				55156A1B202312AC00B80642 /* DGActivityIndicatorNineDotsAnimation.m in Sources */,
 				553D386C2004E47300FCC58F /* Base64.m in Sources */,
 				EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */,
+				EF45C0A6207771910074990E /* ChartBaseLine.m in Sources */,
 				553D384A2004E0D100FCC58F /* ElecTipsView.m in Sources */,
 				55E1E8161FF5D9CD00964CFB /* Contans.m in Sources */,
+				EF45C0A7207771910074990E /* ChartComponentBase.m in Sources */,
 				55EC94961FEDFD83000D21F4 /* TFLoginViewController.m in Sources */,
 				EEB699F22068E5FF0078A3F5 /* XWSTipsView.m in Sources */,
 				EED9196E206F93A4002CF969 /* XWSDeviceInfoCell.m in Sources */,
 				55156A1D202312AC00B80642 /* DGActivityIndicatorRotatingSquaresAnimation.m in Sources */,
 				EEEF713D20746E8F00ABD711 /* XWSNoticeViewController.m in Sources */,
+				EF45C0522077710B0074990E /* XWSDeviceListModel.m in Sources */,
+				EFED1ADF208523A600179276 /* MJRefreshBackGifFooter.m in Sources */,
 				EE50AEDA206504A90068FBC1 /* XWSScanView.m in Sources */,
 				55156A08202312AC00B80642 /* DGActivityIndicatorBallGridPulseAnimation.m in Sources */,
+				EF45C0A5207771910074990E /* ChartAxisBase.m in Sources */,
 				EEA2FF4020674AD300E5D192 /* XWSBasrViewController.m in Sources */,
 				55156A0D202312AC00B80642 /* DGActivityIndicatorBallScaleMultipleAnimation.m in Sources */,
+				EFED1AE7208523A600179276 /* NSBundle+MJRefresh.m in Sources */,
 				55156A11202312AC00B80642 /* DGActivityIndicatorBallTrianglePathAnimation.m in Sources */,
 				553D38352004716500FCC58F /* MASConstraint.m in Sources */,
 				EEC53B3B2063CE0E00EE3900 /* XWSNavigationController.m in Sources */,
 				55FEDD6F1FDF66DC005BD966 /* AFNetworkReachabilityManager.m in Sources */,
+				EF45C0CC207992820074990E /* XWSAlarmDeviceListModel.m in Sources */,
+				EF45C0A9207771910074990E /* CurveChartView.m in Sources */,
 				553D38392004716500FCC58F /* MASViewConstraint.m in Sources */,
+				EFED1AD9208523A600179276 /* MJRefreshComponent.m in Sources */,
 				55156A09202312AC00B80642 /* DGActivityIndicatorBallPulseAnimation.m in Sources */,
+				EFED1AE6208523A600179276 /* MJRefreshConst.m in Sources */,
+				EF45C05F207771300074990E /* ESStatisticViewController.m in Sources */,
+				EF45C0B0207771910074990E /* XAxisFormtter.m in Sources */,
 				553D383C2004716500FCC58F /* View+MASAdditions.m in Sources */,
 				551569AD2022A6D200B80642 /* TFLoginProgram.m in Sources */,
 				55156A04202312AC00B80642 /* DGActivityIndicatorBallClipRotateAnimation.m in Sources */,
@@ -1249,47 +1858,82 @@
 				55156A05202312AC00B80642 /* DGActivityIndicatorBallClipRotateMultipleAnimation.m in Sources */,
 				553D38342004716500FCC58F /* MASCompositeConstraint.m in Sources */,
 				55FEDD761FDF66DC005BD966 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				EF45C0C22077B2190074990E /* XWSFliterDataAdapter.m in Sources */,
+				EF45C02C207770ED0074990E /* ESBaseTabBarController.m in Sources */,
 				55156A20202312AC00B80642 /* DGActivityIndicatorTriangleSkewSpinAnimation.m in Sources */,
+				EF45C0A3207771910074990E /* SLAccelerator.m in Sources */,
 				55156A17202312AC00B80642 /* DGActivityIndicatorLineScaleAnimation.m in Sources */,
 				55156A21202312AC00B80642 /* DGActivityIndicatorTriplePulseAnimation.m in Sources */,
+				EF112779207E5A41006A3709 /* XWSBaseModel.m in Sources */,
+				EF45C0AE207771910074990E /* ChartDataEntryBase.m in Sources */,
 				55156A14202312AC00B80642 /* DGActivityIndicatorCookieTerminatorAnimation.m in Sources */,
 				553D38652004E47300FCC58F /* SecurityUtil.m in Sources */,
+				EF45C040207770F70074990E /* ESDeviceViewController.m in Sources */,
 				55FEDD791FDF66DC005BD966 /* UIImageView+AFNetworking.m in Sources */,
+				EF45C0C92079090A0074990E /* XWSAlarmViewController.m in Sources */,
+				EF45C0532077710B0074990E /* XWSDeviceListViewController.m in Sources */,
 				EEEF714020746EE600ABD711 /* XWSSingleListRightView.m in Sources */,
 				55156A23202312AC00B80642 /* DGActivityIndicatorTwoDotsAnimation.m in Sources */,
 				55156A03202312AC00B80642 /* DGActivityIndicatorBallBeatAnimation.m in Sources */,
 				EE36A37720691C2300E71A54 /* XWSFeedImageCell.m in Sources */,
 				55E1E8131FF5D9CD00964CFB /* TileGridView.m in Sources */,
+				EF45C0AF207771910074990E /* HighLightFormatter.m in Sources */,
+				EF45C045207770F70074990E /* ESDeviceView.m in Sources */,
 				553D383B2004716500FCC58F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				EF45C06D207771720074990E /* MXNCircleCharts.m in Sources */,
+				EF45C0A8207771910074990E /* ChartHighlight.m in Sources */,
+				EF45C0B4207771910074990E /* SLGCDTimerTool.m in Sources */,
 				EEC53B402063CFCB00EE3900 /* XWSSettingViewController.m in Sources */,
 				553D38662004E47300FCC58F /* NSData+CommonCrypto.m in Sources */,
 				55FEDD781FDF66DC005BD966 /* UIButton+AFNetworking.m in Sources */,
+				EFED1AE9208523A600179276 /* UIScrollView+MJRefresh.m in Sources */,
+				EF45C0AB207771910074990E /* SLLineChartData.m in Sources */,
 				55E1E8151FF5D9CD00964CFB /* TileView.m in Sources */,
+				EFED1ADA208523A600179276 /* MJRefreshFooter.m in Sources */,
 				553D38682004E47300FCC58F /* RSA.m in Sources */,
 				EE47D3CB206CC2FC006FEA3C /* NSString+XWSManager.m in Sources */,
 				55FEDD7B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m in Sources */,
 				EE47D3C1206C9A6E006FEA3C /* XWSAboutViewController.m in Sources */,
+				EFED1AA72083508B00179276 /* XWSDeviceBaseInfoVC.m in Sources */,
+				EF45C061207771300074990E /* ESStatisticGridView.m in Sources */,
+				EFED1AE3208523A600179276 /* MJRefreshNormalHeader.m in Sources */,
 				55156A19202312AC00B80642 /* DGActivityIndicatorLineScalePulseOutAnimation.m in Sources */,
 				EEB699E52068AFF70078A3F5 /* XWSHelpViewController.m in Sources */,
 				55156A0B202312AC00B80642 /* DGActivityIndicatorBallRotateAnimation.m in Sources */,
 				551569B2202305BF00B80642 /* ElecHTTPManager.m in Sources */,
 				55156A1C202312AC00B80642 /* DGActivityIndicatorRotatingSandglassAnimation.m in Sources */,
+				EF45C03F207770F70074990E /* ESDeviceDataProcessor.m in Sources */,
 				EE250EC120705ECA0021FA80 /* LCQrcodeUtil.m in Sources */,
+				EF45C0A4207771910074990E /* BaseCurveView.m in Sources */,
 				55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */,
 				55156A16202312AC00B80642 /* DGActivityIndicatorFiveDotsAnimation.m in Sources */,
+				EFED1AE2208523A600179276 /* MJRefreshGifHeader.m in Sources */,
+				EFED1AE1208523A600179276 /* MJRefreshBackStateFooter.m in Sources */,
+				EFED1AEA208523A600179276 /* UIView+MJExtension.m in Sources */,
 				55156A0F202312AC00B80642 /* DGActivityIndicatorBallScaleRippleMultipleAnimation.m in Sources */,
 				EE47D3CE206CFC1D006FEA3C /* XWSScanInfoViewController.m in Sources */,
+				EFED1AE4208523A600179276 /* MJRefreshStateHeader.m in Sources */,
+				EF45C0AA207771910074990E /* SLChartBaseDataSet.m in Sources */,
 				EE50AEDD206504EA0068FBC1 /* XWSScanViewController.m in Sources */,
+				EFED1AD7208523A600179276 /* MJRefreshAutoFooter.m in Sources */,
+				EF45C043207770F70074990E /* ESDeviceBasicInfoView.m in Sources */,
+				EFED1ADE208523A600179276 /* MJRefreshAutoStateFooter.m in Sources */,
 				55156A12202312AC00B80642 /* DGActivityIndicatorBallZigZagAnimation.m in Sources */,
 				55156A1A202312AC00B80642 /* DGActivityIndicatorLineScalePulseOutRapidAnimation.m in Sources */,
 				553D38372004716500FCC58F /* MASLayoutConstraint.m in Sources */,
+				EF45C062207771300074990E /* ESStatisticView.m in Sources */,
 				55FEDD711FDF66DC005BD966 /* AFURLRequestSerialization.m in Sources */,
 				551569B82023129000B80642 /* ElecProgressHUD.m in Sources */,
+				EF45C0AC207771910074990E /* SLLineChartDataSet.m in Sources */,
 				55156A10202312AC00B80642 /* DGActivityIndicatorBallSpinFadeLoader.m in Sources */,
 				55FEDD741FDF66DC005BD966 /* AFAutoPurgingImageCache.m in Sources */,
+				EF45C0682077715D0074990E /* UILabel+Create.m in Sources */,
 				EE50AEC22064A4160068FBC1 /* XWSLeftView.m in Sources */,
 				553D383D2004716500FCC58F /* ViewController+MASAdditions.m in Sources */,
+				EFED1ADD208523A600179276 /* MJRefreshAutoNormalFooter.m in Sources */,
 				553D38692004E47300FCC58F /* AESCrypt.m in Sources */,
+				EF45C0AD207771910074990E /* ChartDataEntry.m in Sources */,
+				EF45C044207770F70074990E /* ESDeviceLoopTypeValueView.m in Sources */,
 				55FEDD751FDF66DC005BD966 /* AFImageDownloader.m in Sources */,
 				EED14DAF20726AA3008D0114 /* XWSHelpModel.m in Sources */,
 				EE47D3C8206CA63F006FEA3C /* XWSPwdInputCell.m in Sources */,

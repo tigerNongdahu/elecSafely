@@ -261,6 +261,7 @@
 #pragma mark - XWSRightViewDelegate
 - (void)clickRightView:(XWSRightView *)rightView getLeftText:(NSString *)leftText getRightText:(NSString *)rightText{
     NSLog(@"leftText:%@ rightText:%@",leftText,rightText);
+    
     [self hideRightView];
 }
 

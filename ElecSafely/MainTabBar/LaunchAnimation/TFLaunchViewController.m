@@ -31,7 +31,7 @@
     
     self.view.backgroundColor = DarkBack;
     
-    NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:userAccount];
+    NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
     NSString *passWord = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
     if (userAccount.length > 0 && passWord.length > 0) {
         // to check login
@@ -52,6 +52,15 @@
     });
 }
 
+- (void)delayPushNextViewContoller {
+    TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+    CATransition *tration = [CATransition animation];
+    tration.duration = 0.3f;
+    tration.type = kCATransitionFade;
+    [self.navigationController.view.layer addAnimation:tration forKey:nil];
+    [self.navigationController pushViewController:loginVC animated:NO];
+}
+
 // 验证成功跳转mainVC
 - (void)loginProgram:(TFLoginProgram *)program
      DidLoginSuccess:(NSString *)account
@@ -64,8 +73,6 @@
       DidLoginFailed:(NSString *)error {
     
 }
-
-
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

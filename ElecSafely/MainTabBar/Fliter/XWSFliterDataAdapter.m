@@ -156,7 +156,10 @@
     paramDic[@"GroupID"] = group.groupID?:@"0";
     paramDic[@"Status"] = deviceStatus.status?:@"0";
     paramDic[@"page"] = @"1";
-    paramDic[@"rows"] = @"100";
+    paramDic[@"rows"] = @"15";
+    
+    self.requestDeviceListUrl = FrigateAPI_DeviceList;
+    self.requestDeviceListParam = paramDic;
     
     [_httpManager GET:FrigateAPI_DeviceList parameters:paramDic progress:^(NSProgress * _Nonnull downloadProgress) {
         

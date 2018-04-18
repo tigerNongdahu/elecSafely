@@ -10,9 +10,9 @@
 #import "XWSFliterConditionModel.h"
 
 typedef NS_ENUM(NSUInteger, FliterEnterType) {
-    DevicesMonitoring,
-    AlarmLog,
-    Statistic
+    DevicesMonitoring,  ///设备列表
+    AlarmLog, ///警报
+    Statistic ///统计
 };
 
 @class XWSFliterDataAdapter;
@@ -59,5 +59,8 @@ typedef NS_ENUM(NSUInteger, FliterEnterType) {
 @property (nonatomic, copy) NSString *requestAlarmUrl; // url
 @property (nonatomic, strong) NSDictionary *requestAlarmParam;// 参数
 
+/*用于设备列表上拉加载更多*/
+@property (nonatomic, copy) NSString *requestDeviceListUrl; // url
+@property (nonatomic, strong) NSDictionary *requestDeviceListParam;// 参数
 
 @end

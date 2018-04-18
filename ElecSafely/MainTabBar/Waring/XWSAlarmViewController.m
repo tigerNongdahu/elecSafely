@@ -30,6 +30,11 @@ static const CGFloat SectionHeight = 40.f;
 
 @implementation XWSAlarmViewController
 
+- (void)dealloc
+{
+    
+}
+
 - (ElecProgressHUD *)progressHUD{
     if (!_progressHUD) {
         _progressHUD = [[ElecProgressHUD alloc] init];
@@ -80,6 +85,7 @@ static const CGFloat SectionHeight = 40.f;
     if (![result isKindOfClass:[NSDictionary class]]) return;
     
     [_dataSource removeAllObjects];
+    [self.tableView.mj_footer resetNoMoreData];
     [self.progressHUD dismiss];
     
     NSArray *rows = result[@"rows"];
@@ -95,6 +101,7 @@ static const CGFloat SectionHeight = 40.f;
         [_dataSource addObject:model];
     }];
     
+    [self.tableView.mj_footer endRefreshing];
     [self.tableView reloadData];
 }
 
@@ -111,11 +118,16 @@ static const CGFloat SectionHeight = 40.f;
         NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject
                                                                   options:NSJSONReadingAllowFragments
                                                                     error:&error];
+        
+        _fliterView.dataAdapter.requestAlarmParam = [paramDic copy];
         if ([resultDic isKindOfClass:NSDictionary.class]) {
             NSArray *rows = resultDic[@"rows"];
-            [self addObject:rows];
+            if (rows.count == 0) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [self addObject:rows];
+            }
         }
-        [self.tableView.mj_footer endRefreshing];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.tableView.mj_footer endRefreshing];
     }];

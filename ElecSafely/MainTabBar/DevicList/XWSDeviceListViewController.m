@@ -19,6 +19,7 @@ static const CGFloat SectionHeight = 50.f;
 @interface XWSDeviceListViewController ()<UITableViewDelegate, UITableViewDataSource, XWSFliterViewDelegate>
 {
     NSMutableArray *_dataSource;
+    ElecHTTPManager *_httpManager;
 }
     
 @property (nonatomic,strong) UITableView *tableView;
@@ -28,6 +29,11 @@ static const CGFloat SectionHeight = 50.f;
 @end
 
 @implementation XWSDeviceListViewController
+
+- (void)dealloc{
+    
+    
+}
 
 - (ElecProgressHUD *)progressHUD{
     if (!_progressHUD) {
@@ -43,7 +49,8 @@ static const CGFloat SectionHeight = 50.f;
     self.title = @"设备列表";
     self.view.backgroundColor = CURRENT_VC_BACKCOLOR;
     _dataSource = [NSMutableArray array];
-    
+    _httpManager = [ElecHTTPManager manager];
+
     [self setUpFliterView];
     [self setUpNav];
     [self.progressHUD showHUD:self.view Offset:- NavibarHeight animation:18];
@@ -82,18 +89,47 @@ static const CGFloat SectionHeight = 50.f;
     [self.progressHUD dismiss];
 
     NSArray *rows = result[@"rows"];
+    [self addObject:rows];
+}
+
+- (void)addObject:(NSArray *)rows{
     [rows enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         XWSDeviceListModel *model = [[XWSDeviceListModel alloc] init];
         [model setValuesForKeysWithDictionary:obj];
         
         [_dataSource addObject:model];
     }];
-    
+    [self.tableView.mj_footer endRefreshing];
     [self.tableView reloadData];
 }
 
 - (void)pullUpLoadMore{
-    [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    
+    NSMutableDictionary *paramDic = [_fliterView.dataAdapter.requestDeviceListParam mutableCopy];
+    int page = [paramDic[@"page"] intValue] + 1;
+    paramDic[@"page"] = [NSString stringWithFormat:@"%d",page];
+    [_httpManager GET:_fliterView.dataAdapter.requestDeviceListUrl parameters:paramDic progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSError *error;
+        NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject
+                                                                  options:NSJSONReadingAllowFragments
+                                                                    error:&error];
+        
+        _fliterView.dataAdapter.requestDeviceListParam = [paramDic copy];
+        if ([resultDic isKindOfClass:NSDictionary.class]) {
+            
+            NSArray *rows = resultDic[@"rows"];
+            if (rows.count == 0) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                [self addObject:rows];
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.tableView.mj_footer endRefreshing];
+    }];
 }
 
 #pragma mark - tableView

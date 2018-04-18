@@ -180,6 +180,11 @@
     }
 }
 
+- (void)dealloc{
+    [self.shadowAnimation stop];
+    self.shadowAnimation = nil;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

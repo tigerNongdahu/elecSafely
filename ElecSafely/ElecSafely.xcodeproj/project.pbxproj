@@ -133,6 +133,8 @@
 		EED14DAF20726AA3008D0114 /* XWSHelpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EED14DAE20726AA3008D0114 /* XWSHelpModel.m */; };
 		EED9196B206F10A8002CF969 /* net_error.png in Resources */ = {isa = PBXBuildFile; fileRef = EED9196A206F10A8002CF969 /* net_error.png */; };
 		EED9196E206F93A4002CF969 /* XWSDeviceInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED9196D206F93A4002CF969 /* XWSDeviceInfoCell.m */; };
+		EEE78CDF2086D5A200CB05C0 /* JTSlideShadowAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE78CDD2086D5A100CB05C0 /* JTSlideShadowAnimation.m */; };
+		EEE78CE22086E1BB00CB05C0 /* XWSHelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE78CE12086E1BB00CB05C0 /* XWSHelpCell.m */; };
 		EEEF713D20746E8F00ABD711 /* XWSNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF713C20746E8F00ABD711 /* XWSNoticeViewController.m */; };
 		EEEF714020746EE600ABD711 /* XWSSingleListRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF713F20746EE600ABD711 /* XWSSingleListRightView.m */; };
 		EEEF714420749E9800ABD711 /* XWSNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF714320749E9800ABD711 /* XWSNoticeModel.m */; };
@@ -407,6 +409,10 @@
 		EED9196A206F10A8002CF969 /* net_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = net_error.png; sourceTree = "<group>"; };
 		EED9196C206F93A4002CF969 /* XWSDeviceInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSDeviceInfoCell.h; sourceTree = "<group>"; };
 		EED9196D206F93A4002CF969 /* XWSDeviceInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSDeviceInfoCell.m; sourceTree = "<group>"; };
+		EEE78CDD2086D5A100CB05C0 /* JTSlideShadowAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSlideShadowAnimation.m; sourceTree = "<group>"; };
+		EEE78CDE2086D5A100CB05C0 /* JTSlideShadowAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSlideShadowAnimation.h; sourceTree = "<group>"; };
+		EEE78CE02086E1BB00CB05C0 /* XWSHelpCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSHelpCell.h; sourceTree = "<group>"; };
+		EEE78CE12086E1BB00CB05C0 /* XWSHelpCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSHelpCell.m; sourceTree = "<group>"; };
 		EEEF713B20746E8F00ABD711 /* XWSNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSNoticeViewController.h; sourceTree = "<group>"; };
 		EEEF713C20746E8F00ABD711 /* XWSNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNoticeViewController.m; sourceTree = "<group>"; };
 		EEEF713E20746EE600ABD711 /* XWSSingleListRightView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSSingleListRightView.h; sourceTree = "<group>"; };
@@ -763,6 +769,7 @@
 		55EF8A201FDE320D003F5061 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				EEE78CDC2086D5A100CB05C0 /* JTSlideShadowAnimation */,
 				55F656CC2045067C00F2FB2D /* XgPushSDK */,
 				551569B9202312AC00B80642 /* DGActivityIndicatorView */,
 				553D386D2004E54E00FCC58F /* PrivateFunction */,
@@ -963,6 +970,8 @@
 			children = (
 				EEB699E32068AFF70078A3F5 /* XWSHelpViewController.h */,
 				EEB699E42068AFF70078A3F5 /* XWSHelpViewController.m */,
+				EEE78CE02086E1BB00CB05C0 /* XWSHelpCell.h */,
+				EEE78CE12086E1BB00CB05C0 /* XWSHelpCell.m */,
 				EEB699E62068C6000078A3F5 /* XWSDetailHelpViewController.h */,
 				EEB699E72068C6000078A3F5 /* XWSDetailHelpViewController.m */,
 				EED14DAC20726A8E008D0114 /* Model */,
@@ -1011,6 +1020,15 @@
 				EED14DAE20726AA3008D0114 /* XWSHelpModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		EEE78CDC2086D5A100CB05C0 /* JTSlideShadowAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				EEE78CDD2086D5A100CB05C0 /* JTSlideShadowAnimation.m */,
+				EEE78CDE2086D5A100CB05C0 /* JTSlideShadowAnimation.h */,
+			);
+			path = JTSlideShadowAnimation;
 			sourceTree = "<group>";
 		};
 		EEEF713A20746E5B00ABD711 /* Notice */ = {
@@ -1229,6 +1247,7 @@
 				EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */,
 				553D384A2004E0D100FCC58F /* ElecTipsView.m in Sources */,
 				55E1E8161FF5D9CD00964CFB /* Contans.m in Sources */,
+				EEE78CDF2086D5A200CB05C0 /* JTSlideShadowAnimation.m in Sources */,
 				55EC94961FEDFD83000D21F4 /* TFLoginViewController.m in Sources */,
 				EEB699F22068E5FF0078A3F5 /* XWSTipsView.m in Sources */,
 				EED9196E206F93A4002CF969 /* XWSDeviceInfoCell.m in Sources */,
@@ -1267,6 +1286,7 @@
 				553D383B2004716500FCC58F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				EEC53B402063CFCB00EE3900 /* XWSSettingViewController.m in Sources */,
 				553D38662004E47300FCC58F /* NSData+CommonCrypto.m in Sources */,
+				EEE78CE22086E1BB00CB05C0 /* XWSHelpCell.m in Sources */,
 				55FEDD781FDF66DC005BD966 /* UIButton+AFNetworking.m in Sources */,
 				55E1E8151FF5D9CD00964CFB /* TileView.m in Sources */,
 				553D38682004E47300FCC58F /* RSA.m in Sources */,

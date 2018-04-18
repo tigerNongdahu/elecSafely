@@ -151,13 +151,13 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
         cell.backgroundColor = NavColor;
+        cell.textLabel.textColor = RGBA(221, 221, 221, 1);
+        cell.textLabel.font = PingFangRegular(17);
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     cell.textLabel.text = @"去评分";
-    cell.textLabel.textColor = RGBA(221, 221, 221, 1);
-    cell.textLabel.font = PingFangRegular(17);
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }

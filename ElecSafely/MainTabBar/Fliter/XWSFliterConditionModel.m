@@ -14,6 +14,7 @@ NSString *const KeyDeviceStatus = @"设备状态";
 
 NSString *const KeyDeviceName = @"设备名称";
 NSString *const KeyAlarmType = @"报警类型";
+NSString *const KeyAlarmDateScope = @"日期范围";
 
 @interface XWSFliterConditionModel(){
     
@@ -50,7 +51,34 @@ NSString *const KeyAlarmType = @"报警类型";
         self.alarmType = @"alarm";
         self.selectRightRow = 0;
     }
+    
+    if ([leftKeyName isEqualToString:KeyAlarmDateScope]) {
+        self.startDate = [self startDateMin];
+        self.endDate = [self endDateMax];
+    }
 }
+
+//最大结束日期 今天
+- (NSString *)endDateMax{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
+}
+
+//最早开始日期
+- (NSString *)startDateMin{
+    
+    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval startTime = time - 3*30*24*60*60;
+    NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:startTime];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *str = [formatter stringFromDate:startDate];
+    return str;
+}
+
 
 
 @end

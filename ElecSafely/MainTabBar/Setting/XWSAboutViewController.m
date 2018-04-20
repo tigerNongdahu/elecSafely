@@ -135,6 +135,7 @@
     self.shadowAnimation.shadowBackgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.7];
     self.shadowAnimation.animatedView = self.comLabel;
     self.shadowAnimation.shadowWidth = 40.;
+    self.shadowAnimation.duration = 3.0;
     
 }
 

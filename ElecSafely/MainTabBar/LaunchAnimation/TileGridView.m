@@ -22,7 +22,7 @@
 
 @property (nonatomic,strong) UILabel *logoLabel;
 @property (nonatomic,strong) UILabel *newlogoLabel;
-@property (nonatomic,strong) UILabel *companyLabel;
+
 @property (nonatomic,strong) UIImageView *companyImage;
 @property (nonatomic,strong) NSMutableArray *tileViewRows;
 @property (nonatomic,assign) CFTimeInterval beginTime;

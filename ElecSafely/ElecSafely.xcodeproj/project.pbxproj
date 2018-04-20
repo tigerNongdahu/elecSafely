@@ -102,6 +102,7 @@
 		55FEDD7B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m */; };
 		55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */; };
 		EE250EC120705ECA0021FA80 /* LCQrcodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EE250EBF20705ECA0021FA80 /* LCQrcodeUtil.m */; };
+		EE2F2138208A54A900BB540D /* XWSLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2F2136208A54A900BB540D /* XWSLineView.m */; };
 		EE36A37720691C2300E71A54 /* XWSFeedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */; };
 		EE47D3C1206C9A6E006FEA3C /* XWSAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C0206C9A6E006FEA3C /* XWSAboutViewController.m */; };
 		EE47D3C4206CA46C006FEA3C /* XWSSettingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C3206CA46C006FEA3C /* XWSSettingPasswordViewController.m */; };
@@ -359,6 +360,8 @@
 		55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		EE250EBF20705ECA0021FA80 /* LCQrcodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCQrcodeUtil.m; sourceTree = "<group>"; };
 		EE250EC020705ECA0021FA80 /* LCQRCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCQRCodeUtil.h; sourceTree = "<group>"; };
+		EE2F2136208A54A900BB540D /* XWSLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWSLineView.m; sourceTree = "<group>"; };
+		EE2F2137208A54A900BB540D /* XWSLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWSLineView.h; sourceTree = "<group>"; };
 		EE36A37520691C2300E71A54 /* XWSFeedImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFeedImageCell.h; sourceTree = "<group>"; };
 		EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFeedImageCell.m; sourceTree = "<group>"; };
 		EE47D3BF206C9A6E006FEA3C /* XWSAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAboutViewController.h; sourceTree = "<group>"; };
@@ -900,6 +903,8 @@
 		EE50AEBF2064A3C10068FBC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EE2F2137208A54A900BB540D /* XWSLineView.h */,
+				EE2F2136208A54A900BB540D /* XWSLineView.m */,
 				EE50AEC02064A4160068FBC1 /* XWSLeftView.h */,
 				EE50AEC12064A4160068FBC1 /* XWSLeftView.m */,
 				EEF73385206537F500FFB99B /* XWSRightView.h */,
@@ -1265,6 +1270,7 @@
 				55156A09202312AC00B80642 /* DGActivityIndicatorBallPulseAnimation.m in Sources */,
 				553D383C2004716500FCC58F /* View+MASAdditions.m in Sources */,
 				551569AD2022A6D200B80642 /* TFLoginProgram.m in Sources */,
+				EE2F2138208A54A900BB540D /* XWSLineView.m in Sources */,
 				55156A04202312AC00B80642 /* DGActivityIndicatorBallClipRotateAnimation.m in Sources */,
 				553D38362004716500FCC58F /* MASConstraintMaker.m in Sources */,
 				55EF89EC1FDE3148003F5061 /* AppDelegate.m in Sources */,

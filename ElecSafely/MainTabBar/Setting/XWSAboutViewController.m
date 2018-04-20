@@ -7,15 +7,33 @@
 //
 
 #import "XWSAboutViewController.h"
+#import "JTSlideShadowAnimation.h"
 
 @interface XWSAboutViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UIView *headView;
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UIButton *scoreBtn;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UILabel *comLabel;
+@property (nonatomic, strong) JTSlideShadowAnimation *shadowAnimation;
 @end
 
 @implementation XWSAboutViewController
+
+- (UILabel *)comLabel{
+    if (!_comLabel) {
+        _comLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        [_footerView addSubview:_comLabel];
+        [_comLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.mas_equalTo(0);
+        }];
+        _comLabel.textAlignment = NSTextAlignmentCenter;
+        _comLabel.text = @"福瑞特科技产业有限公司";
+        _comLabel.textColor = UIColorRGB(0xAAAAAA);
+        _comLabel.font = PingFangRegular(17);
+    }
+    return _comLabel;
+}
 
 - (UIView *)footerView{
     if (!_footerView) {
@@ -26,16 +44,6 @@
             make.left.right.bottom.mas_equalTo(0);
             make.height.mas_equalTo(80);
         }];
-
-        UILabel *comLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [footerView addSubview:comLabel];
-        [comLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.bottom.mas_equalTo(0);
-        }];
-        comLabel.textAlignment = NSTextAlignmentCenter;
-        comLabel.text = @"福瑞特科技产业有限公司";
-        comLabel.textColor = UIColorRGB(0xAAAAAA);
-        comLabel.font = PingFangRegular(17);
         _footerView = footerView;
     }
     return _footerView;
@@ -97,6 +105,17 @@
     [self setUpView];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.shadowAnimation start];
+}
+
 - (void)setUpView{
     
     self.title = @"关于";
@@ -104,7 +123,18 @@
     
     [self headView];
     [self footerView];
+    [self comLabel];
     [self tableView];
+    
+    [self setCompanyAnimotion];
+}
+
+- (void)setCompanyAnimotion{
+    self.shadowAnimation = [JTSlideShadowAnimation new];
+    self.shadowAnimation.shadowForegroundColor = [UIColor whiteColor];
+    self.shadowAnimation.shadowBackgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.7];
+    self.shadowAnimation.animatedView = self.comLabel;
+    self.shadowAnimation.shadowWidth = 40.;
     
 }
 
@@ -121,13 +151,13 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
         cell.backgroundColor = NavColor;
+        cell.textLabel.textColor = RGBA(221, 221, 221, 1);
+        cell.textLabel.font = PingFangRegular(17);
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     cell.textLabel.text = @"去评分";
-    cell.textLabel.textColor = RGBA(221, 221, 221, 1);
-    cell.textLabel.font = PingFangRegular(17);
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -148,6 +178,11 @@
     }else{
         NSLog(@"无法打开该URL");
     }
+}
+
+- (void)dealloc{
+    [self.shadowAnimation stop];
+    self.shadowAnimation = nil;
 }
 
 - (void)didReceiveMemoryWarning {

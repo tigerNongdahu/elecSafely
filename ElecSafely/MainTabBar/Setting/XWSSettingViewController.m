@@ -190,7 +190,7 @@
 - (void)changeNoti:(UISwitch *)notiSwitch{
     if (notiSwitch.on) {
         [[NSUserDefaults standardUserDefaults] setObject:OPEN_NOTI forKey:NOTI_KEY];
-    }else{
+    }else {
         [[NSUserDefaults standardUserDefaults] setObject:CLOSE_NOTI forKey:NOTI_KEY];
     }
 
@@ -201,14 +201,12 @@
 #pragma mark - 退出登录
 - (void)logout{
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确定退出登录?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
         [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
         TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
         XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
-        
         [UIApplication sharedApplication].keyWindow.rootViewController = navi;
     }];
     

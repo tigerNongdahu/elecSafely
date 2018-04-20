@@ -61,7 +61,7 @@ static const CGFloat SectionHeight = 40.f;
 }
 #pragma mark - 设置导航、右边侧边栏
 - (void)setUpNav{
-    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_setting"] style:0 target:self action:@selector(showFliterView)];
+    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_icon_filter"] style:0 target:self action:@selector(showFliterView)];
     self.navigationItem.rightBarButtonItems = @[rightItem1];
 }
 

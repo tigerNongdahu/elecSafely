@@ -40,7 +40,7 @@ NSString *const KeyAlarmDateScope = @"日期范围";
     _leftKeyName = leftKeyName;
     
     if ([leftKeyName isEqualToString:KeyDeviceStatus]) {
-        self.statusArr = @[@"全部",@"正常",@"报警",@"离线"];
+        self.statusArr = @[@"全部",@"正常",@"报警",@"离线"];//0 1 2 3
         self.status = @"0";
         self.selectRightRow = 0;
     }

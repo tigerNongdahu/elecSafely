@@ -290,7 +290,6 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
     [ElecTipsView showTips:@"登陆成功"];
     [_progressHUD dismiss];
     
-    [[XGPushTokenManager defaultTokenManager] bindWithIdentifier:account type:XGPushTokenBindTypeAccount];
     XWSMainViewController *vc = [[XWSMainViewController alloc] init];
     XWSNavigationController *nv = [[XWSNavigationController alloc] initWithRootViewController:vc];
     

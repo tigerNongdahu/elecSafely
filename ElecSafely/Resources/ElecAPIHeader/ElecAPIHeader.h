@@ -11,6 +11,8 @@
 
 /*设备查询*/
 #define FrigateAPI_Query @"http://www.frigate-iot.com/MonitoringCentre/API/Query.php"
+/*设备录入*/
+#define FrigateAPI_BindApp @"http://www.frigate-iot.com/login/app/login_bind.php"
 /*设备复位*/
 #define FrigateAPI_Reset @"http://www.frigate-iot.com/MonitoringCentre/API/Reset.php"
 /*设备实时信息*/

@@ -21,9 +21,14 @@
 #import "XWSNoticeModel.h"
 #import "XWSHelpModel.h"
 #import "XWSDetailHelpViewController.h"
+#import "XWSLineView.h"
 
 #define AnimationTime 0.35
 #define CoverAlphaValue 0.5
+#define LineViewWidth 150.0
+#define LineViewStartX -(LineViewWidth + 50)
+#define LineViewTop 60.0
+#define LineViewHeight 1.0
 
 @interface XWSMainViewController ()<XWSLeftViewDelegate,XWSSingleListRightViewDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property (nonatomic, strong) XWSLeftView *leftView;
@@ -39,7 +44,9 @@
 @property (nonatomic, strong) NSMutableArray *quetions;
 @property (nonatomic, strong) NSTimer *timeScroll;
 @property (nonatomic, assign) NSInteger scrollIndex;
-\
+
+@property (nonatomic, strong) XWSLineView *firstLine;
+@property (nonatomic, strong) XWSLineView *secondLine;
 
 @end
 
@@ -62,11 +69,41 @@
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.view.backgroundColor = [UIColor whiteColor];
-//    self.view.backgroundColor = [UIColor blackColor];
+
+    self.view.backgroundColor = BackColor;
     [self loadData];
     [self initView];
     
+    //设置白天的动画
+    [self setCycleAnimation];
+}
+
+- (void)setCycleAnimation{
+    self.firstLine = [[XWSLineView alloc] initWithFrame:CGRectMake(LineViewStartX, LineViewTop, LineViewWidth, LineViewHeight)];
+    [self.view addSubview:self.firstLine];
+    
+    self.secondLine = [[XWSLineView alloc] initWithFrame:CGRectMake(LineViewStartX, LineViewTop + 50, LineViewWidth * 0.6, LineViewHeight)];
+    [self.view addSubview:self.secondLine];
+    
+    [self setAnimWithView:self.firstLine withAfter:2.0];
+    [self setAnimWithView:self.secondLine withAfter:3.0];
+}
+
+- (void)setAnimWithView:(UIView *)line withAfter:(CGFloat)time{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        __block CGRect frame = line.frame;
+        [UIView animateWithDuration:3.0 animations:^{
+            frame.origin.x = ScreenWidth;
+            line.frame = frame;
+        }completion:^(BOOL finished) {
+            CGRect newframe = line.frame;
+            newframe.origin.x = LineViewStartX;
+            line.frame = newframe;
+            
+            [self setAnimWithView:line withAfter:time];
+        }];
+    });
 }
 
 #pragma mark - 加载数据

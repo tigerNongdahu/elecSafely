@@ -75,6 +75,8 @@
 
 #pragma mark - XWSFliterViewDelegate
 - (void)clickFliterView:(XWSFliterView *)fliterView dataSource:(NSDictionary *)dataSource{
+    [self.progressHUD dismiss];
+    [self.progressHUD showHUD:self.view Offset:- NavibarHeight animation:18];
     
     __weak typeof(self) weakSelf = self;
     NSString *deviceID = dataSource[@"deviceID"];

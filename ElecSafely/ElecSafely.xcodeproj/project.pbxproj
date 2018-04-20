@@ -1353,17 +1353,9 @@
 			children = (
 				EF45C055207771300074990E /* ESStatisticViewController.h */,
 				EF45C056207771300074990E /* ESStatisticViewController.m */,
-				EF45C057207771300074990E /* model */,
 				EF45C058207771300074990E /* view */,
 			);
 			path = Statistics;
-			sourceTree = "<group>";
-		};
-		EF45C057207771300074990E /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		EF45C058207771300074990E /* view */ = {

@@ -80,13 +80,16 @@ static const CGFloat SectionHeight = 40.f;
 - (void)clickFliterView:(XWSFliterView *)fliterView dataSource:(NSDictionary *)dataSource{
     [self processData:dataSource];
 }
+- (void)showHudView{
+    [self.progressHUD dismiss];
+    [self.progressHUD showHUD:self.view Offset:- NavibarHeight animation:18];
+}
 
 - (void)processData:(NSDictionary *)result{
     if (![result isKindOfClass:[NSDictionary class]]) return;
     
     [_dataSource removeAllObjects];
     [self.tableView.mj_footer resetNoMoreData];
-    [self.progressHUD dismiss];
     
     NSArray *rows = result[@"rows"];
     [self addObject:rows];
@@ -103,6 +106,7 @@ static const CGFloat SectionHeight = 40.f;
     
     [self.tableView.mj_footer endRefreshing];
     [self.tableView reloadData];
+    [self.progressHUD dismiss];
 }
 
 - (void)pullUpLoadMore{

@@ -16,6 +16,10 @@
 
 @protocol XWSFliterViewDelegate <NSObject>
 - (void)clickFliterView:(XWSFliterView *)fliterView dataSource:(NSDictionary *)dataSource;
+
+@optional
+- (void)showHudView;
+
 @end
 
 @interface XWSFliterView : UIView

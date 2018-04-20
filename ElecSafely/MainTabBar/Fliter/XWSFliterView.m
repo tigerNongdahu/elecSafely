@@ -593,11 +593,15 @@
         if (_fliterType == DevicesMonitoring) {
             
             [self.dataAdapter requestDevicesList];
-            
+            if ([self.delegate respondsToSelector:@selector(showHudView)]) {
+                [self.delegate showHudView];
+            }
         }else if (_fliterType == AlarmLog){
             
             [self.dataAdapter requestAlarmList];
-            
+            if ([self.delegate respondsToSelector:@selector(showHudView)]) {
+                [self.delegate showHudView];
+            }
         }else if (_fliterType == Statistic){
             XWSFliterConditionModel *device = [self.dataAdapter getModel:KeyDeviceName];
             if ([self.delegate respondsToSelector:@selector(clickFliterView:dataSource:)]) {

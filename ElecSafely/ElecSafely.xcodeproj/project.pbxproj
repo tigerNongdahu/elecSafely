@@ -193,6 +193,7 @@
 		EF45C0C52077BFC10074990E /* XWSFliterConditionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0C42077BFC10074990E /* XWSFliterConditionModel.m */; };
 		EF45C0C92079090A0074990E /* XWSAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0C82079090A0074990E /* XWSAlarmViewController.m */; };
 		EF45C0CC207992820074990E /* XWSAlarmDeviceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0CB207992820074990E /* XWSAlarmDeviceListModel.m */; };
+		EF6E55C2208AACC700DC9120 /* XWSPrismaticView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6E55C1208AACC700DC9120 /* XWSPrismaticView.m */; };
 		EFED1AA72083508B00179276 /* XWSDeviceBaseInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AA62083508B00179276 /* XWSDeviceBaseInfoVC.m */; };
 		EFED1AD7208523A600179276 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AAB208523A600179276 /* MJRefreshAutoFooter.m */; };
 		EFED1AD8208523A600179276 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AAD208523A600179276 /* MJRefreshBackFooter.m */; };
@@ -596,6 +597,8 @@
 		EF45C0C82079090A0074990E /* XWSAlarmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSAlarmViewController.m; sourceTree = "<group>"; };
 		EF45C0CA207992820074990E /* XWSAlarmDeviceListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAlarmDeviceListModel.h; sourceTree = "<group>"; };
 		EF45C0CB207992820074990E /* XWSAlarmDeviceListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSAlarmDeviceListModel.m; sourceTree = "<group>"; };
+		EF6E55C0208AACC700DC9120 /* XWSPrismaticView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSPrismaticView.h; sourceTree = "<group>"; };
+		EF6E55C1208AACC700DC9120 /* XWSPrismaticView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSPrismaticView.m; sourceTree = "<group>"; };
 		EFED1AA52083508B00179276 /* XWSDeviceBaseInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSDeviceBaseInfoVC.h; sourceTree = "<group>"; };
 		EFED1AA62083508B00179276 /* XWSDeviceBaseInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSDeviceBaseInfoVC.m; sourceTree = "<group>"; };
 		EFED1AAA208523A600179276 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
@@ -1136,6 +1139,8 @@
 				5575DF5A2089D9AB001FE8C1 /* TFMainAnimationView.m */,
 				5575DF5C2089E380001FE8C1 /* TFCustomScrollView.h */,
 				5575DF5D2089E380001FE8C1 /* TFCustomScrollView.m */,
+				EF6E55C0208AACC700DC9120 /* XWSPrismaticView.h */,
+				EF6E55C1208AACC700DC9120 /* XWSPrismaticView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1911,6 +1916,7 @@
 				EF45C0AE207771910074990E /* ChartDataEntryBase.m in Sources */,
 				55156A14202312AC00B80642 /* DGActivityIndicatorCookieTerminatorAnimation.m in Sources */,
 				553D38652004E47300FCC58F /* SecurityUtil.m in Sources */,
+				EF6E55C2208AACC700DC9120 /* XWSPrismaticView.m in Sources */,
 				EF45C040207770F70074990E /* ESDeviceViewController.m in Sources */,
 				55FEDD791FDF66DC005BD966 /* UIImageView+AFNetworking.m in Sources */,
 				EF45C0C92079090A0074990E /* XWSAlarmViewController.m in Sources */,

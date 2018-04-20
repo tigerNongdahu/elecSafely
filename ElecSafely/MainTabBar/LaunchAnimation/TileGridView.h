@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TileGridView : UIView
+@property (nonatomic,strong) UILabel *companyLabel;
 -(instancetype)initWithTileFileName:(NSString *)name;
 - (void)startAnimating;
+
 @end

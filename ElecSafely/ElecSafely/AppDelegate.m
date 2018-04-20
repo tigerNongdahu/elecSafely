@@ -19,7 +19,7 @@
 #endif
 
 
-@interface AppDelegate ()<XGPushDelegate>
+@interface AppDelegate ()<XGPushDelegate,XGPushTokenManagerDelegate>
 
 @end
 
@@ -155,6 +155,15 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[XGPushTokenManager defaultTokenManager] registerDeviceToken:deviceToken];
 }
+
+#pragma mark - XGPushTokenManagerDelegate
+- (void)xgPushDidBindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
+}
+
+- (void)xgPushDidUnbindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
+}
+
+
 
 
 // iOS 10 新增 API

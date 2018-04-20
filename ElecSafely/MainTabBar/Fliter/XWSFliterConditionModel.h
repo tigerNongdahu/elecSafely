@@ -15,6 +15,7 @@ UIKIT_EXTERN NSString *const KeyDeviceStatus;
 
 UIKIT_EXTERN NSString *const KeyDeviceName;
 UIKIT_EXTERN NSString *const KeyAlarmType;
+UIKIT_EXTERN NSString *const KeyAlarmDateScope;
 
 
 /*用于筛选条件的通用model*/
@@ -53,6 +54,14 @@ UIKIT_EXTERN NSString *const KeyAlarmType;
 
 /*被选中的设备ID (当前对象是设备类型）*/
 @property (nonatomic, copy) NSString *deviceID;
+
+/*被选中的日期 (当前对象是日期范围）*/
+@property (nonatomic, copy) NSString *startDate;/// yyyy-MM-dd
+@property (nonatomic, copy) NSString *endDate;
+
+/// yyyy-MM-dd
+- (NSString *)startDateMin;
+- (NSString *)endDateMax;
 
 @end
 

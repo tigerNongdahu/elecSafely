@@ -64,7 +64,7 @@
 
 - (void)createRightBarItem{
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(filterData:)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_icon_filter"] style:UIBarButtonItemStyleDone target:self action:@selector(filterData:)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 

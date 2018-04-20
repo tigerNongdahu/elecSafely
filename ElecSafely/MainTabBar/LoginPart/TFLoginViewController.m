@@ -42,6 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -289,7 +290,6 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
     [ElecTipsView showTips:@"登陆成功"];
     [_progressHUD dismiss];
     
-    [[XGPushTokenManager defaultTokenManager] bindWithIdentifier:account type:XGPushTokenBindTypeAccount];
     XWSMainViewController *vc = [[XWSMainViewController alloc] init];
     XWSNavigationController *nv = [[XWSNavigationController alloc] initWithRootViewController:vc];
     

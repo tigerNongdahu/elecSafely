@@ -8,8 +8,8 @@
 
 #import "TFLoginProgram.h"
 #import <CommonCrypto/CommonDigest.h>
-#import "XGPush.h"
 #import "NSString+XWSManager.h"
+#import "AppDelegate.h"
 
 @interface TFLoginProgram ()<XGPushTokenManagerDelegate>
 
@@ -30,11 +30,7 @@ static TFLoginProgram *loginProgram = nil;
 }
 
 - (void)userLoginWithAccount:(NSString *)account passWord:(NSString *)password {
-    account = @"kefu02";
-    password = @"88888888";
     password = [NSString md5:password];
-    
-    NSLog(@"password:%@",password);
     if (account.length > 0 && password.length > 0) {
 
         [_requestManager POST:FrigateAPI_Login_Check parameters:@{@"name":account,@"pwd":password} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -57,22 +53,20 @@ static TFLoginProgram *loginProgram = nil;
                 [self.delegate loginProgram:loginProgram DidLoginFailed:@"登陆失败"];
             }
         }];
+        
+        [_requestManager POST:FrigateAPI_BindApp parameters:@{@"account":account,@"pwd":password,@"SourecType":@"02"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [self bindWithAccount:account];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // do nothing;
+        }];
+        
     }
 }
 
 //绑定信鸽推送
 - (void)bindWithAccount:(NSString *)account {
-    [XGPushTokenManager defaultTokenManager].delegatge = self;
+    [XGPushTokenManager defaultTokenManager].delegatge = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [[XGPushTokenManager defaultTokenManager] bindWithIdentifier:account type:XGPushTokenBindTypeAccount];
-}
-
-#pragma mark - XGPushTokenManagerDelegate
-- (void)xgPushDidBindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
-    NSLog(@"%s, id is %@, error %@", __FUNCTION__, identifier, error);
-}
-
-- (void)xgPushDidUnbindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
-    NSLog(@"%s, id is %@, error %@", __FUNCTION__, identifier, error);
 }
 
 

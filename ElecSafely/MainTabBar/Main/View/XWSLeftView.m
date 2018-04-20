@@ -95,7 +95,7 @@
         [self addSubview:_tableView];
         _tableView.frame = CGRectMake(0, 0, ScreenWidth - TableViewMarginRightWidth, ScreenHeight);
 
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 187)];
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 150)];
         [self setUpHeadView:headView];
         headView.userInteractionEnabled = YES;
         _tableView.tableHeaderView = headView;

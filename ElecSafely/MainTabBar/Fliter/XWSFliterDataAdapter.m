@@ -36,7 +36,7 @@
             case AlarmLog:
             {
                 //左边名字做key
-                NSArray *keyNames = @[KeyCustomerName,KeyCustomerGroup,KeyDeviceName,KeyAlarmType];
+                NSArray *keyNames = @[KeyCustomerName,KeyCustomerGroup,KeyDeviceName,KeyAlarmType,KeyAlarmDateScope];
                 [self createLeftArr:keyNames];
             }
                 break;
@@ -156,7 +156,10 @@
     paramDic[@"GroupID"] = group.groupID?:@"0";
     paramDic[@"Status"] = deviceStatus.status?:@"0";
     paramDic[@"page"] = @"1";
-    paramDic[@"rows"] = @"100";
+    paramDic[@"rows"] = @"15";
+    
+    self.requestDeviceListUrl = FrigateAPI_DeviceList;
+    self.requestDeviceListParam = paramDic;
     
     [_httpManager GET:FrigateAPI_DeviceList parameters:paramDic progress:^(NSProgress * _Nonnull downloadProgress) {
         
@@ -228,14 +231,15 @@
     XWSFliterConditionModel *group = [self getModel:KeyCustomerGroup];
     XWSFliterConditionModel *device = [self getModel:KeyDeviceName];
     XWSFliterConditionModel *alarmType = [self getModel:KeyAlarmType];
+    XWSFliterConditionModel *dateScope = [self getModel:KeyAlarmDateScope];
 
     NSMutableDictionary *paramDic = [NSMutableDictionary dictionary];
     paramDic[@"CustomerID"] = customer.customerID?:@"";
     paramDic[@"GroupID"] = group.groupID?:@"0";
     paramDic[@"DetectorID"] = device.deviceID?:@"0";
     paramDic[@"AT"] = alarmType.alarmType?:@"";
-    paramDic[@"SD"] = [self startDate]?:@"";
-    paramDic[@"ED"] = [self endDate]?:@"";
+    paramDic[@"SD"] = [dateScope startDate]?:@"";
+    paramDic[@"ED"] = [dateScope endDate]?:@"";
     paramDic[@"page"] = @"1";
     paramDic[@"rows"] = @"15";
 
@@ -260,26 +264,6 @@
         
     }];
 }
-
-- (NSString *)endDate{
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *str = [formatter stringFromDate:[NSDate date]];
-    return str;
-}
-
-- (NSString *)startDate{
-    
-    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
-    NSTimeInterval startTime = time - 3*30*24*60*60;
-    NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:startTime];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *str = [formatter stringFromDate:startDate];
-    return str;
-}
-
 
 /*根据 key 获取left 某一项*/
 - (XWSFliterConditionModel *)getModel:(NSString *)leftKeyName{

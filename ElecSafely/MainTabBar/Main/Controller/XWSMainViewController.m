@@ -22,8 +22,9 @@
 #import "XWSHelpModel.h"
 #import "XWSDetailHelpViewController.h"
 #import "XWSLineView.h"
+#import "TFCustomScrollView.h"
 
-#define AnimationTime 0.35
+#define AnimationTime 0.4
 #define CoverAlphaValue 0.5
 #define LineViewWidth 150.0
 #define LineViewStartX -(LineViewWidth + 50)
@@ -69,7 +70,6 @@
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.view.backgroundColor = BackColor;
     [self loadData];
     [self initView];
@@ -104,6 +104,7 @@
             [self setAnimWithView:line withAfter:time];
         }];
     });
+
 }
 
 #pragma mark - 加载数据
@@ -117,7 +118,12 @@
     [self setUpLeftView];
     [self setUpSingleListRightView];
     [self createMainView];
-    [self createTableView];
+//    [self createTableView];
+}
+
+- (void)createScrollView {
+    TFCustomScrollView *scrollView = [[TFCustomScrollView alloc] initWithFrame:CGRectMake(30, ScreenHeight - 140, ScreenWidth - 60, 140) delegate:self DataItems:self.quetions isAuto:YES];
+    [self.view addSubview:scrollView];
 }
 
 - (void)createTableView {
@@ -143,6 +149,7 @@
 #pragma mark -设置主页面
 - (void)createMainView {
     _mainBackImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
     [self.view addSubview:_mainBackImageView];
     [_mainBackImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.mas_equalTo(0);
@@ -457,10 +464,10 @@
             NSLog(@"title:%@ %@",model.Title,model.Content);
         }
         
-        [weakVC.tableView reloadData];
+        [self createScrollView];
+
+//        [weakVC.tableView reloadData];
         
-        
-        [_tableView reloadData];
         
         [self loadDataWithScroll];
         

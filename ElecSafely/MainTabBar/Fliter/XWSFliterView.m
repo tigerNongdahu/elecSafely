@@ -21,6 +21,8 @@
 @interface XWSFliterView()<UITableViewDelegate,UITableViewDataSource,XWSFliterDataAdapterDelegate>
 {
     FliterEnterType _fliterType;
+    
+    UIDatePicker *_datePicker;
 }
 @property (nonatomic, strong) UIView *coverView;
 /*左侧的数据表*/
@@ -308,6 +310,10 @@
         if ([_selectLeftModel.leftKeyName isEqualToString:KeyAlarmType]) {
             return _selectLeftModel.alarmArr.count;
         }
+        
+        if ([_selectLeftModel.leftKeyName isEqualToString:KeyAlarmDateScope]) {
+            return 2;
+        }
     }
     
     return 0;
@@ -388,9 +394,9 @@
         [self clickLeftCell];
     }else{
         _selectLeftModel.selectRightRow = indexPath.row;
+        [self clickRightCellIndex:_selectLeftModel.selectRightRow];
     }
     
-    [self clickRightCellIndex:_selectLeftModel.selectRightRow];
     [self.rightTableView reloadData];
 }
 
@@ -451,6 +457,132 @@
     if ([_selectLeftModel.leftKeyName isEqualToString:KeyAlarmType]) {
         _selectLeftModel.alarmType = _selectLeftModel.alarmArrEn[index];
     }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyAlarmDateScope]) {
+        [self showDatePicker];
+    }
+}
+
+#pragma mark - 选择日期
+- (void)showDatePicker{
+    
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd";
+    
+    if (_datePicker == nil) {
+        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, self.height_ES)];
+        [self addSubview:backView];
+        backView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
+        backView.hidden = YES;
+        backView.alpha = 0;
+        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelSelectDate)];
+        [backView addGestureRecognizer:tapGes];
+
+        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.height_ES - 168, ScreenWidth, 168)];
+        [backView addSubview:_datePicker];
+        _datePicker.backgroundColor = [UIColor whiteColor];
+        [_datePicker setDatePickerMode:UIDatePickerModeDate];
+        [_datePicker setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hans_CN"]];
+        [_datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+        //设置字体颜色
+//        [_datePicker setValue:kColor3C3C3C forKeyPath:@"textColor"];
+        NSDate *minDate = [fmt dateFromString:[_selectLeftModel startDateMin]];
+        NSDate *maxDate = [fmt dateFromString:[_selectLeftModel endDateMax]];
+        _datePicker.maximumDate = maxDate;
+        _datePicker.minimumDate = minDate;
+        
+        UIView *barV = [[UIView alloc] initWithFrame:CGRectMake(0, _datePicker.top_ES - 40, ScreenWidth, 40)];
+        [backView addSubview:barV];
+        barV.backgroundColor = [UIColor whiteColor];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, barV.height_ES - 0.3, barV.width_ES, 0.3)];
+        [barV addSubview:line];
+        line.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+        UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, barV.height_ES)];
+        [barV addSubview:cancelBtn];
+        UIButton *sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(barV.width_ES - 80, 0, 80, barV.height_ES)];
+        [barV addSubview:sureBtn];
+        [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [sureBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [cancelBtn addTarget:self action:@selector(cancelSelectDate) forControlEvents:UIControlEventTouchUpInside];
+        [sureBtn addTarget:self action:@selector(sureSelectDate) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    if (_selectLeftModel.selectRightRow == 0) {
+        [_datePicker setDate:[fmt dateFromString:_selectLeftModel.startDate]];
+    }else{
+        [_datePicker setDate:[fmt dateFromString:_selectLeftModel.endDate]];
+    }
+
+    [self animationDatePicker:YES];
+}
+
+/*日期发生改变*/
+- (void)dateChanged:(UIDatePicker *)datePicker{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    if (_selectLeftModel.selectRightRow == 0) {
+        NSDate *endDate = [formatter dateFromString:_selectLeftModel.endDate];
+        NSComparisonResult compare = [datePicker.date compare:endDate];
+        if (compare == NSOrderedDescending) {//开始日期不能大于结束日期
+            [datePicker setDate:endDate];
+        }
+    }else{
+        NSDate *startDate = [formatter dateFromString:_selectLeftModel.startDate];
+        NSComparisonResult compare = [datePicker.date compare:startDate];
+        if (compare == NSOrderedAscending) {//结束日期不能小于开始日期
+            [datePicker setDate:startDate];
+        }
+    }
+}
+
+- (void)animationDatePicker:(BOOL)show{
+    
+    if (show) {
+        _datePicker.superview.hidden = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            _datePicker.superview.alpha = 1;
+        }];
+    }else{
+        [UIView animateWithDuration:0.2 animations:^{
+            _datePicker.superview.alpha = 0;
+        } completion:^(BOOL finished) {
+            _datePicker.superview.hidden = YES;
+        }];
+    }
+}
+
+/*确认选择日期*/
+- (void)sureSelectDate{
+    
+    NSIndexPath *currentIndex = [NSIndexPath indexPathForRow:_selectLeftModel.selectRightRow inSection:0];
+    NSInteger rows = [self.rightTableView numberOfRowsInSection:0];
+    if (currentIndex.row >= rows) {
+        return;
+    }
+    UITableViewCell *cell = [self.rightTableView cellForRowAtIndexPath:currentIndex];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *str = [formatter stringFromDate:[_datePicker date]];
+    cell.textLabel.text = str;
+    
+    if (_selectLeftModel.selectRightRow == 0) {
+        _selectLeftModel.startDate = str;
+    }else{
+        _selectLeftModel.endDate = str;
+    }
+    
+    [self animationDatePicker:NO];
+}
+
+
+/*取消选择日期*/
+- (void)cancelSelectDate{
+    
+    [self animationDatePicker:NO];
 }
 
 
@@ -568,6 +700,14 @@
     
     if ([_selectLeftModel.leftKeyName isEqualToString:KeyAlarmType]) {
         return _selectLeftModel.alarmArr[index];
+    }
+    
+    if ([_selectLeftModel.leftKeyName isEqualToString:KeyAlarmDateScope]) {
+        if (index == 0) {
+            return _selectLeftModel.startDate;
+        }else{
+            return _selectLeftModel.endDate;
+        }
     }
     
     return title;

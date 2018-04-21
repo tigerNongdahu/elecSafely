@@ -95,7 +95,7 @@
         [self addSubview:_tableView];
         _tableView.frame = CGRectMake(0, 0, ScreenWidth - TableViewMarginRightWidth, ScreenHeight);
 
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 187)];
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 150)];
         [self setUpHeadView:headView];
         headView.userInteractionEnabled = YES;
         _tableView.tableHeaderView = headView;
@@ -137,6 +137,15 @@
     }];
 }
 
+- (void)setAccountLabelText:(NSString *)accountName {
+    if (accountName.length > 0) {
+        self.accountLabel.text = accountName;
+    }
+    else {
+        self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+    }
+    
+}
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

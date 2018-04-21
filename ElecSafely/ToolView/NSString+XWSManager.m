@@ -68,4 +68,25 @@
     return NO;
 }
 
++ (BOOL)isDayTime{
+    NSString *timeStr = [self.dateFormatter stringFromDate:[NSDate date]];
+    int time = [timeStr intValue];
+    if (time > 19 || time < 7) {
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+
+static NSDateFormatter *dateFormatter = nil;
++ (NSDateFormatter *)dateFormatter {
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setLocale:[NSLocale currentLocale]];
+        [dateFormatter setDateFormat:@"HH"];
+    }
+    return dateFormatter;
+}
+
 @end

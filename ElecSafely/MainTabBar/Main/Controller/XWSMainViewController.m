@@ -21,17 +21,16 @@
 #import "XWSNoticeModel.h"
 #import "XWSHelpModel.h"
 #import "XWSDetailHelpViewController.h"
-#import "XWSLineView.h"
 #import "TFCustomScrollView.h"
+#import "TFMainAnimationView.h"
+#import "NSString+XWSManager.h"
 
 #define AnimationTime 0.4
 #define CoverAlphaValue 0.5
-#define LineViewWidth 150.0
-#define LineViewStartX -(LineViewWidth + 50)
-#define LineViewTop 60.0
-#define LineViewHeight 1.0
+
 
 @interface XWSMainViewController ()<XWSLeftViewDelegate,XWSSingleListRightViewDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+
 @property (nonatomic, strong) XWSLeftView *leftView;
 @property (nonatomic, strong) XWSSingleListRightView *singleRighView;
 /*公告数组*/
@@ -46,12 +45,19 @@
 @property (nonatomic, strong) NSTimer *timeScroll;
 @property (nonatomic, assign) NSInteger scrollIndex;
 
-@property (nonatomic, strong) XWSLineView *firstLine;
-@property (nonatomic, strong) XWSLineView *secondLine;
-
+#warning 测试使用
+//@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
 @end
 
 @implementation XWSMainViewController
+#warning 测试使用
+//- (TFMainAnimationView *)mainAnimationView{
+//    if (!_mainAnimationView) {
+//        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
+//        [self.view addSubview:_mainAnimationView];
+//    }
+//    return _mainAnimationView;
+//}
 
 - (NSMutableArray *)screens{
     if (!_screens) {
@@ -74,37 +80,11 @@
     [self loadData];
     [self initView];
     
-    //设置白天的动画
-    [self setCycleAnimation];
-}
-
-- (void)setCycleAnimation{
-    self.firstLine = [[XWSLineView alloc] initWithFrame:CGRectMake(LineViewStartX, LineViewTop, LineViewWidth, LineViewHeight)];
-    [self.view addSubview:self.firstLine];
-    
-    self.secondLine = [[XWSLineView alloc] initWithFrame:CGRectMake(LineViewStartX, LineViewTop + 50, LineViewWidth * 0.6, LineViewHeight)];
-    [self.view addSubview:self.secondLine];
-    
-    [self setAnimWithView:self.firstLine withAfter:2.0];
-    [self setAnimWithView:self.secondLine withAfter:3.0];
-}
-
-- (void)setAnimWithView:(UIView *)line withAfter:(CGFloat)time{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        __block CGRect frame = line.frame;
-        [UIView animateWithDuration:3.0 animations:^{
-            frame.origin.x = ScreenWidth;
-            line.frame = frame;
-        }completion:^(BOOL finished) {
-            CGRect newframe = line.frame;
-            newframe.origin.x = LineViewStartX;
-            line.frame = newframe;
-            
-            [self setAnimWithView:line withAfter:time];
-        }];
-    });
-
+#warning 测试使用
+//    BOOL isDay = [NSString isDayTime];
+//    if (isDay) {
+//         [self mainAnimationView];
+//    }
 }
 
 #pragma mark - 加载数据
@@ -199,6 +179,8 @@
     NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
     return [weekdays objectAtIndex:theComponents.weekday];
 }
+
+
 
 
 #pragma -mark 设置导航栏

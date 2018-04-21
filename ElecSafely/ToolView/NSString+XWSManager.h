@@ -24,4 +24,7 @@
 + (BOOL)judgeTheillegalCharacterWithoutChinese:(NSString *)content;
 /*检查字符串是否为空*/
 + (BOOL)checkIsNilWithStr:(NSString *)str;
+
+/*判断当前时间是否为白天*/
++ (BOOL)isDayTime;
 @end

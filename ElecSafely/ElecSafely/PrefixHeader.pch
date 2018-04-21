@@ -8,6 +8,8 @@
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
+#import "UIView+Layout.h"
+#import "UILabel+Create.h"
 #import "ModuleDef.h"
 #import "Masonry.h"
 #import "ElecAPIHeader.h"
@@ -17,8 +19,8 @@
 #import "ElecProgressHUD.h"
 
 //信鸽AppId和AppKey
-#define XG_PUSH_APPID  2200262432
-#define XG_PUSH_APPKEY  @"I89WTUY132GJ"
+#define XG_PUSH_APPID  2200277516
+#define XG_PUSH_APPKEY  @"IYHZ23S7Y32V"
 
 //设置是否接受推送
 #define NOTI_KEY @"NOTI_KEY"

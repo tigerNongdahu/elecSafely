@@ -25,8 +25,6 @@
 
 + (instancetype)sharedInstance;
 
-- (BOOL)checkCacheLogin;
-
 - (void)userLoginWithAccount:(NSString *)account passWord:(NSString *)password;
 
 @end

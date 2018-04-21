@@ -42,6 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,6 +52,7 @@
 // 18 4 24
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self FieldDidChange];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(FieldDidChange) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
@@ -63,8 +65,6 @@
     
     [self.view addSubview:backImage];
     [self.view addSubview:logoView];
-//    account = @"demo";
-//    password = @"88888888";
 
     [logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(101);
@@ -256,6 +256,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         passWordTF.backgroundColor = [UIColor clearColor];
         passWordTF.textColor = RGBA(221, 221, 221, 1);
         _passWordTF = passWordTF;
+        _passWordTF.text = [[self class] getW3Password] ;
     }
     return _passWordTF;
 }
@@ -288,6 +289,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
 - (void)loginProgram:(TFLoginProgram *)program DidLoginSuccess:(NSString *)account passWord:(NSString *)password {
     [ElecTipsView showTips:@"登陆成功"];
     [_progressHUD dismiss];
+    
     XWSMainViewController *vc = [[XWSMainViewController alloc] init];
     XWSNavigationController *nv = [[XWSNavigationController alloc] initWithRootViewController:vc];
     

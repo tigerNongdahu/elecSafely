@@ -11,9 +11,10 @@
 #import "TileGridView.h"
 #import "TileView.h"
 #import "TFLoginViewController.h"
+#import "TFLoginProgram.h"
 #import "JTSlideShadowAnimation.h"
 
-@interface TFLaunchViewController ()
+@interface TFLaunchViewController () <TFLoginProgramDelegate>
 @property (nonatomic,strong) TileGridView *tileGridView;
 @property (nonatomic, strong) JTSlideShadowAnimation *shadowAnimation;
 @end
@@ -27,6 +28,7 @@
     _tileGridView = [[TileGridView alloc] initWithTileFileName:@"Chimes"];
     [self.view addSubview:_tileGridView];
     _tileGridView.frame = [UIScreen mainScreen].bounds;
+
     
 //    self.shadowAnimation = [JTSlideShadowAnimation new];
 //    self.shadowAnimation.shadowForegroundColor = [UIColor whiteColor];
@@ -45,7 +47,6 @@
         [self.navigationController pushViewController:loginVC animated:NO];
     });
 }
-
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

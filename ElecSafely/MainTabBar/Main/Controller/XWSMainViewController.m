@@ -7,42 +7,57 @@
 //
 
 #import "XWSMainViewController.h"
+#import "ESStatisticViewController.h"
+#import "XWSDeviceListViewController.h"
+#import "XWSAlarmViewController.h"
 #import "XWSSettingViewController.h"
 #import "XWSLeftView.h"
 #import "XWSScanViewController.h"
-#import "XWSRightView.h"
 #import "XWSHelpViewController.h"
 #import "XWSFeedbackViewController.h"
 #import "XWSSingleListRightView.h"
 #import "XWSNoticeViewController.h"
 #import "XWSNavigationController.h"
 #import "XWSNoticeModel.h"
-#import "XWSLineView.h"
+#import "XWSHelpModel.h"
+#import "XWSDetailHelpViewController.h"
+#import "TFCustomScrollView.h"
+#import "TFMainAnimationView.h"
+#import "NSString+XWSManager.h"
 
-#define AnimationTime 0.35
+#define AnimationTime 0.4
 #define CoverAlphaValue 0.5
-#define LineViewWidth 150.0
-#define LineViewStartX -(LineViewWidth + 50)
-#define LineViewTop 60.0
-#define LineViewHeight 1.0
 
 
+@interface XWSMainViewController ()<XWSLeftViewDelegate,XWSSingleListRightViewDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
-@interface XWSMainViewController ()<XWSLeftViewDelegate,XWSRightViewDelegate,XWSSingleListRightViewDelegate>
 @property (nonatomic, strong) XWSLeftView *leftView;
-@property (nonatomic, strong) XWSRightView *rightView;
 @property (nonatomic, strong) XWSSingleListRightView *singleRighView;
 /*公告数组*/
 @property (nonatomic, strong) NSMutableArray *notices;
 /*筛选的数据*/
 @property (nonatomic, strong) NSMutableArray *screens;
+@property (nonatomic, strong) UIImageView *mainBackImageView;
+@property (nonatomic, strong) UILabel *todayLabel;
+@property (nonatomic, strong) UILabel *dateLable;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *quetions;
+@property (nonatomic, strong) NSTimer *timeScroll;
+@property (nonatomic, assign) NSInteger scrollIndex;
 
-@property (nonatomic, strong) XWSLineView *firstLine;
-@property (nonatomic, strong) XWSLineView *secondLine;
-
+#warning 测试使用
+//@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
 @end
 
 @implementation XWSMainViewController
+#warning 测试使用
+//- (TFMainAnimationView *)mainAnimationView{
+//    if (!_mainAnimationView) {
+//        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
+//        [self.view addSubview:_mainAnimationView];
+//    }
+//    return _mainAnimationView;
+//}
 
 - (NSMutableArray *)screens{
     if (!_screens) {
@@ -65,36 +80,11 @@
     [self loadData];
     [self initView];
     
-    //设置白天的动画
-    [self setCycleAnimation];
-}
-
-- (void)setCycleAnimation{
-    self.firstLine = [[XWSLineView alloc] initWithFrame:CGRectMake(LineViewStartX, LineViewTop, LineViewWidth, LineViewHeight)];
-    [self.view addSubview:self.firstLine];
-    
-    self.secondLine = [[XWSLineView alloc] initWithFrame:CGRectMake(LineViewStartX, LineViewTop + 50, LineViewWidth * 0.6, LineViewHeight)];
-    [self.view addSubview:self.secondLine];
-    
-    [self setAnimWithView:self.firstLine withAfter:2.0];
-    [self setAnimWithView:self.secondLine withAfter:3.0];
-}
-
-- (void)setAnimWithView:(UIView *)line withAfter:(CGFloat)time{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        __block CGRect frame = line.frame;
-        [UIView animateWithDuration:3.0 animations:^{
-            frame.origin.x = ScreenWidth;
-            line.frame = frame;
-        }completion:^(BOOL finished) {
-            CGRect newframe = line.frame;
-            newframe.origin.x = LineViewStartX;
-            line.frame = newframe;
-            
-            [self setAnimWithView:line withAfter:time];
-        }];
-    });
+#warning 测试使用
+//    BOOL isDay = [NSString isDayTime];
+//    if (isDay) {
+//         [self mainAnimationView];
+//    }
 }
 
 #pragma mark - 加载数据
@@ -106,21 +96,99 @@
 - (void)initView{
     [self setUpNav];
     [self setUpLeftView];
-    [self setUpRightView];
     [self setUpSingleListRightView];
+    [self createMainView];
+//    [self createTableView];
 }
+
+- (void)createScrollView {
+    TFCustomScrollView *scrollView = [[TFCustomScrollView alloc] initWithFrame:CGRectMake(30, ScreenHeight - 140, ScreenWidth - 60, 140) delegate:self DataItems:self.quetions isAuto:YES];
+    [self.view addSubview:scrollView];
+}
+
+- (void)createTableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableFooterView = [[UIView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.rowHeight = 70;
+        _tableView.backgroundColor = BackColor;
+        [self.view addSubview:_tableView];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(30);
+            make.trailing.mas_equalTo(-30);
+            make.bottom.mas_equalTo(0);
+            make.height.mas_equalTo(170);
+        }];
+        _tableView.tableFooterView = [[UIView alloc] init];
+    }
+}
+
+#pragma mark -设置主页面
+- (void)createMainView {
+    _mainBackImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
+    [self.view addSubview:_mainBackImageView];
+    [_mainBackImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.mas_equalTo(0);
+    }];
+    
+    _todayLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    _todayLabel.textColor = [UIColor whiteColor];
+    _todayLabel.textAlignment = NSTextAlignmentLeft;
+    _todayLabel.font = [UIFont systemFontOfSize:30];
+    _todayLabel.text = @"今天";
+    [_mainBackImageView addSubview:_todayLabel];
+    [_todayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ScreenHeight / 6 - 50);
+        make.leading.mas_equalTo(30);
+    }];
+    
+    _dateLable = [[UILabel alloc] initWithFrame:CGRectZero];
+    _dateLable.textColor = [UIColor whiteColor];
+    _dateLable.textAlignment = NSTextAlignmentLeft;
+    _dateLable.font = [UIFont systemFontOfSize:18];
+    _dateLable.text = [self getNowDate];
+    [_mainBackImageView addSubview:_dateLable];
+    [_dateLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_todayLabel.mas_bottom).offset(10);
+        make.leading.mas_equalTo(_todayLabel.mas_leading).offset(0);
+    }];
+}
+
+- (NSString *)getNowDate {
+    unsigned unitFlags = NSCalendarUnitYear |NSCalendarUnitMonth |NSCalendarUnitDay;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:unitFlags fromDate:[NSDate date]];
+    NSLog(@"%ld, %ld, %ld", (long)components.year, (long)components.month, (long)components.day);
+    NSString *dateStr = [NSString stringWithFormat:@"%ld月%ld日",(long)components.month,(long)components.day];
+    NSString *weekStr = [self weekdayStringFromDate:[NSDate date]];
+    
+    return [NSString stringWithFormat:@"%@ %@",dateStr,weekStr];
+}
+
+- (NSString*)weekdayStringFromDate:(NSDate*)inputDate {
+    
+    NSArray *weekdays = [NSArray arrayWithObjects: [NSNull null], @"星期日", @"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六", nil];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+    [calendar setTimeZone: timeZone];
+    NSCalendarUnit calendarUnit = NSCalendarUnitWeekday;
+    NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
+    return [weekdays objectAtIndex:theComponents.weekday];
+}
+
+
+
 
 #pragma -mark 设置导航栏
 - (void)setUpNav{
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_menu"] style:0 target:self action:@selector(showLeftView)];
-//
-//    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]} forState:UIControlStateNormal];
-//    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"left_setting"] style:0 target:self action:@selector(showRightView)];
-    
     UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"right_notice"] style:0 target:self action:@selector(showSingleListRightView)];
     self.navigationItem.rightBarButtonItems = @[rightItem2];
-//    self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
 }
 
 #pragma - mark 设置左边
@@ -177,6 +245,91 @@
     }];
 }
 
+#pragma mark - UITableViewDataSource,UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.quetions.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *ID = @"helpCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        cell.backgroundColor = NavColor;
+        cell.textLabel.font = PingFangMedium(15);
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
+    XWSHelpModel *model = self.quetions[indexPath.row];
+    cell.textLabel.text = model.Title;
+//        //label
+//        UILabel *titleLabel = [[UILabel alloc]init];
+//        [cell addSubview:titleLabel];
+//        titleLabel.tag = 100 + indexPath.row;
+//        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(18);
+//            make.right.mas_equalTo(-38);
+//            make.height.mas_equalTo(30);
+//            make.top.mas_equalTo((70 - 30) * 0.5);
+//        }];
+//
+//        //线条
+//        UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
+//        line.backgroundColor = DarkBack;
+//        [cell addSubview:line];
+//        /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
+//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.mas_equalTo(0);
+//            make.left.mas_equalTo(17);
+//            make.bottom.mas_equalTo(-0.3);
+//            make.height.mas_equalTo(0.3);
+//        }];
+//    }
+    
+//    UILabel *titleLabel = (UILabel *)[cell viewWithTag:100 + indexPath.row];
+    
+//    XWSHelpModel *model = self.quetions[indexPath.row];
+//    titleLabel.text = model.Title;
+//    titleLabel.font = PingFangMedium(17);
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 30;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70;
+};
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, [self tableView:tableView heightForHeaderInSection:section])];
+    headView.backgroundColor = BackColor;
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [headView addSubview:titleLabel];
+    titleLabel.frame = CGRectMake(18, 11, headView.frame.size.width - 18 * 2, headView.frame.size.height - 11 * 2);
+    titleLabel.text = @"最新资讯";
+    titleLabel.font = PingFangMedium(13);
+    titleLabel.textColor = RGBA(153, 153, 153, 1);
+    
+    return headView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    XWSHelpModel *model = self.quetions[indexPath.row];
+    NSString *content = model.Content;
+    NSString *title = model.Title;
+    XWSDetailHelpViewController *vc = [[XWSDetailHelpViewController alloc] init];
+    vc.title = title;
+    vc.url = content;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 #pragma mark - XWSLeftViewDelegate
 - (void)touchLeftView:(XWSLeftView *)leftView byType:(XWSTouchItem)type{
     
@@ -192,17 +345,20 @@
             break;
         case XWSTouchItemDevicesList:
         {
-            
+            XWSDeviceListViewController *deviceList = [[XWSDeviceListViewController alloc] init];
+            vc = deviceList;
         }
             break;
         case XWSTouchItemAlarm:
         {
-            
+            XWSAlarmViewController *alarm = [[XWSAlarmViewController alloc] init];
+            vc = alarm;
         }
             break;
         case XWSTouchItemStatistics:
         {
-            
+            ESStatisticViewController *statisticVC = [[ESStatisticViewController alloc] init];
+            vc = statisticVC;
         }
             break;
         case XWSTouchItemFeedback:
@@ -241,76 +397,10 @@
      [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - 设置右边侧边栏
-- (void)setUpRightView{
-    
-    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"json" ofType:@"json"]];
-    
-    NSArray *dataArray = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-    [self.screens removeAllObjects];
-    [self.screens addObjectsFromArray:dataArray];
-    
-    if (!_rightView) {
-        _rightView = [[XWSRightView alloc] initWithFrame:CGRectZero];
-        _rightView.delegate = self;
-        _rightView.hidden = YES;
-        [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor clearColor];
-        [[UIApplication sharedApplication].keyWindow addSubview:_rightView];
-        [_rightView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.top.mas_equalTo(0);
-            make.left.mas_equalTo(0);
-            make.right.mas_equalTo(ScreenWidth);
-        }];
-    }
-}
-
-- (void)showRightView{
-    
-    _rightView.datas = self.screens;
-    _rightView.hidden = NO;
-    [UIView animateWithDuration:AnimationTime animations:^{
-        [_rightView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(0);
-            make.left.mas_equalTo(-ScreenWidth);
-        }];
-        [[UIApplication sharedApplication].keyWindow layoutIfNeeded];
-    } completion:^(BOOL finished) {
-    }];
-    
-    //设置颜色渐变动画
-    [_rightView startCoverViewOpacityWithAlpha:CoverAlphaValue withDuration:AnimationTime];
-}
-
-- (void)hideRightView{
-
-    //把盖板颜色的alpha值至为0
-    [_rightView cancelCoverViewOpacity];
-    
-    //移动侧边栏回到原来的位置
-    [UIView animateWithDuration:AnimationTime animations:^{
-        [_rightView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.right.mas_equalTo(ScreenWidth);
-        }];
-        
-        [[UIApplication sharedApplication].keyWindow layoutIfNeeded];
-        
-    }completion:^(BOOL finished) {
-        _rightView.hidden = YES;
-    }];
-}
-
-#pragma mark - XWSRightViewDelegate
-- (void)clickRightView:(XWSRightView *)rightView getLeftText:(NSString *)leftText getRightText:(NSString *)rightText{
-    NSLog(@"leftText:%@ rightText:%@",leftText,rightText);
-    
-    [self hideRightView];
-}
-
-
 #pragma mark - 公告
 - (void)loadNoticeData{
     ElecHTTPManager *noticeMgr = [ElecHTTPManager manager];
+    self.quetions = [[NSMutableArray alloc] initWithCapacity:0];
     __weak typeof(self) weakVC = self;
     [noticeMgr GET:FrigateAPI_loadNotice parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -340,7 +430,104 @@
         NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
     }];
+    
+    [noticeMgr GET:FrigateAPI_Help_InformationList parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSArray *results = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        [weakVC.quetions removeAllObjects];
+        
+        for (NSDictionary *dic in results) {
+            XWSHelpModel *model = [[XWSHelpModel alloc] init];
+            model.Title = dic[@"Title"];
+            model.Content = dic[@"Content"];
+            
+            [weakVC.quetions addObject:model];
+            
+            NSLog(@"title:%@ %@",model.Title,model.Content);
+        }
+        
+        [self createScrollView];
+
+//        [weakVC.tableView reloadData];
+        
+        
+        [self loadDataWithScroll];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error:%@",error);
+        [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
+    }];
 }
+
+- (void)loadDataWithScroll {
+    if ([_timeScroll isValid]) {
+        [_timeScroll invalidate];
+        _timeScroll = nil;
+    }
+
+    _scrollIndex = 0;
+    if (!_timeScroll) { // [[self currentViewController] isKindOfClass:NSClassFromString(@"IMSSChatKnowledgeViewController")] &&
+        _timeScroll = [[NSTimer alloc]initWithFireDate:[NSDate date] interval:5 target:self selector:@selector(startScroll) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timeScroll forMode:NSDefaultRunLoopMode];
+    }
+    
+
+}
+
+- (void)startScroll {
+    if (_quetions.count > 2) {
+        /*
+         末次滚动后需要重新定位到Table表头第一个cell
+         奇数个数据时：
+         1  2  2  3  1  2
+         ∆
+         1  2  2  3  1  2
+         ∆
+         偶数个数据时：
+         1  2  3  4  1  2
+         ∆
+         1  2  3  4  1  2
+         ∆
+         */
+        // 向上滚动2条数据
+        _scrollIndex += 2;
+        if (_scrollIndex < [self.tableView numberOfRowsInSection:0]) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_scrollIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
+        else {
+            _scrollIndex = 0;
+            [self.tableView reloadData];
+        }
+    }
+    else {
+        _scrollIndex = 0;
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if (_scrollIndex == _quetions.count) {
+        _scrollIndex = 0;
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+    else if (_scrollIndex == _quetions.count - 1) {
+//        [_timeScroll invalidate];
+//        _timeScroll = nil;
+//
+//
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_scrollIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//            _scrollIndex = 0;
+//            if (!_timeScroll) { // [[self currentViewController] isKindOfClass:NSClassFromString(@"IMSSChatKnowledgeViewController")] &&
+//                _timeScroll = [[NSTimer alloc]initWithFireDate:[NSDate date] interval:5 target:self selector:@selector(startScroll) userInfo:nil repeats:YES];
+//                [[NSRunLoop currentRunLoop] addTimer:_timeScroll forMode:NSDefaultRunLoopMode];
+//            }
+//
+//        });
+    }
+}
+
+
 
 - (void)setUpSingleListRightView{
     if (!_singleRighView) {

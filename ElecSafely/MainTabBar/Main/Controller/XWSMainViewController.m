@@ -26,6 +26,8 @@
 #define LineViewTop 60.0
 #define LineViewHeight 1.0
 
+
+
 @interface XWSMainViewController ()<XWSLeftViewDelegate,XWSRightViewDelegate,XWSSingleListRightViewDelegate>
 @property (nonatomic, strong) XWSLeftView *leftView;
 @property (nonatomic, strong) XWSRightView *rightView;

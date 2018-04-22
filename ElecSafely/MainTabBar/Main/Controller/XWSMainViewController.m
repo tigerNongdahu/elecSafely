@@ -42,19 +42,11 @@
 @property (nonatomic, strong) UILabel *dateLable;
 @property (nonatomic, strong) NSMutableArray *quetions;
 
-#warning 测试使用
-//@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
+@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
 @end
 
 @implementation XWSMainViewController
-#warning 测试使用
-//- (TFMainAnimationView *)mainAnimationView{
-//    if (!_mainAnimationView) {
-//        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
-//        [self.view addSubview:_mainAnimationView];
-//    }
-//    return _mainAnimationView;
-//}
+
 
 - (NSMutableArray *)screens{
     if (!_screens) {
@@ -76,12 +68,11 @@
     self.view.backgroundColor = BackColor;
     [self loadData];
     [self initView];
-    
-#warning 测试使用
-//    BOOL isDay = [NSString isDayTime];
-//    if (isDay) {
-//         [self mainAnimationView];
-//    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self checkBackImage];
 }
 
 #pragma mark - 加载数据
@@ -152,11 +143,23 @@
 #pragma mark -设置主页面
 - (void)createMainView {
     _mainBackImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
     [self.view addSubview:_mainBackImageView];
     [_mainBackImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.mas_equalTo(0);
     }];
+    
+    NSString *moment = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
+    if ([moment isEqualToString:@"baitian"]) {
+        _mainBackImageView.image = [UIImage imageNamed:@"baitian"];
+        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
+
+    }
+    else if ([moment isEqualToString:@"yewan"]) {
+        _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
+        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
+
+    }
+    [self.view addSubview:_mainAnimationView];
     
     _todayLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _todayLabel.textColor = [UIColor whiteColor];
@@ -179,6 +182,17 @@
         make.top.mas_equalTo(_todayLabel.mas_bottom).offset(10);
         make.leading.mas_equalTo(_todayLabel.mas_leading).offset(0);
     }];
+}
+
+- (void)checkBackImage {
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.3;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    [_mainBackImageView.layer addAnimation:transition forKey:@"a"];
+    NSString *imageName = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
+    [_mainBackImageView setImage:[UIImage imageNamed:imageName]];
+
 }
 
 - (NSString *)getNowDate {

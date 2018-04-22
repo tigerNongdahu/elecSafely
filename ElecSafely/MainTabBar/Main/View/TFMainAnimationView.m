@@ -48,7 +48,7 @@
     }
     // 闪亮动画
     else if (animationType == TFAnimationTypeOfDayNight) {
-        
+        [self stopDayAnimation];
     }
 }
 

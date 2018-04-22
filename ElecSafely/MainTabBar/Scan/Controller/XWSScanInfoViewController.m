@@ -82,7 +82,7 @@
 
 - (NSMutableArray *)places{
     if (!_places) {
-        _places = [NSMutableArray arrayWithObjects:@"15位英文字母和数字",@"英文字母和数字",@"请您输入",@"请您输入",@"请您输入",@"请您输入",@"6-16位英文字母、数据和下划线",@"请您输入", nil];
+        _places = [NSMutableArray arrayWithObjects:@"15位英文字母和数字",@"英文字母和数字",@"请您输入",@"请您输入",@"请您输入",@"请您输入",@"6-16位英文字母、数字和下划线",@"请您输入", nil];
     }
     return _places;
 }
@@ -135,19 +135,6 @@
 
 - (void)sendRegister{
     [self.textField resignFirstResponder];
-    
-    NSMutableDictionary *param1 = [NSMutableDictionary dictionary];
-    param1[@"CRCID"] = self.CRCID;
-    param1[@"SimCard"] = self.SimCard;
-    param1[@"DevName"] = self.DevName;
-    param1[@"GroupName"] = self.GroupName;
-    param1[@"CustName"] = self.CustName;
-    param1[@"LoginName"] = self.LoginName;
-    //    param[@"Password"] = self.Password;
-    param1[@"Password"] = [NSString md5:self.Password];
-    param1[@"ParentName"] = self.ParentName;
-    param1[@"AppendFlag"] = @"1";
-    NSLog(@"param1:%@",param1);
 
     if (![self checkParam]) {
         return;
@@ -194,7 +181,6 @@
 }
 
 - (BOOL)checkParam{
-    
     
     if (![self checkStr:self.CRCID] || [self.CRCID stringByReplacingOccurrencesOfString:@" " withString:@""].length != 15) {
         [ElecTipsView showTips:@"请输入正确格式的15位设备注册码!" during:2.0];

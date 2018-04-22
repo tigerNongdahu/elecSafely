@@ -72,7 +72,7 @@
             //随机的x
             newframe.origin.x = -(self.frame.size.width + arc4random() % 100);
             //随机的y
-            CGFloat yHeight = (int)_superView.frame.size.height % 50;
+            CGFloat yHeight = (int)_superView.frame.size.height * 0.5;
             newframe.origin.y = arc4random() % 30 + yHeight;
             line.frame = newframe;
             //获取随机的动画时间

@@ -92,7 +92,7 @@
 
 #pragma mark - 加载数据
 - (void)loadData{
-    [self loadHelpData];
+//    [self loadHelpData];
 }
 
 #pragma mark - 设置页面
@@ -399,7 +399,7 @@
         //        [weakVC.tableView reloadData];
         
         
-        [self loadDataWithScroll];
+//        [self loadDataWithScroll];
 
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

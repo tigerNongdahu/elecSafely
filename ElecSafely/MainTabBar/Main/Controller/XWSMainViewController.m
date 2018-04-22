@@ -43,18 +43,18 @@
 @property (nonatomic, strong) NSMutableArray *quetions;
 
 #warning 测试使用
-@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
+//@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
 @end
 
 @implementation XWSMainViewController
 #warning 测试使用
-- (TFMainAnimationView *)mainAnimationView{
-    if (!_mainAnimationView) {
-        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
-        [self.view addSubview:_mainAnimationView];
-    }
-    return _mainAnimationView;
-}
+//- (TFMainAnimationView *)mainAnimationView{
+//    if (!_mainAnimationView) {
+//        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
+//        [self.view addSubview:_mainAnimationView];
+//    }
+//    return _mainAnimationView;
+//}
 
 - (NSMutableArray *)screens{
     if (!_screens) {
@@ -80,7 +80,7 @@
 #warning 测试使用
 //    BOOL isDay = [NSString isDayTime];
 //    if (isDay) {
-         [self mainAnimationView];
+//         [self mainAnimationView];
 //    }
 }
 
@@ -92,7 +92,7 @@
 
 #pragma mark - 加载数据
 - (void)loadData{
-//    [self loadHelpData];
+    [self loadHelpData];
 }
 
 #pragma mark - 设置页面
@@ -348,6 +348,9 @@
     [noticeMgr GET:FrigateAPI_loadNotice parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        
+        NSLog(@"dic:%@",dic);
+        
         NSArray *ds = dic[@"rows"];
         [weakVC.notices removeAllObjects];
         

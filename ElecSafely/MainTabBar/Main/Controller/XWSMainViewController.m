@@ -70,15 +70,14 @@
     [self initView];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self checkBackImage];
-}
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //加载公告应该放在这里，这样在切换控制器的时候，可以加载到最新的公告数据
     [self loadNoticeData];
+    [self checkBackImage];
+
 }
 
 #pragma mark - 加载数据
@@ -408,13 +407,6 @@
         }
         
         [self createScrollView];
-
-        
-        //        [weakVC.tableView reloadData];
-        
-        
-        [self loadDataWithScroll];
-
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);

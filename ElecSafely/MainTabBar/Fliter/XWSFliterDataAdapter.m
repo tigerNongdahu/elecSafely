@@ -93,6 +93,8 @@
                 }
             }];
             model.rightArr = [tempArr copy];
+        }else{
+            [ElecTipsView showTips:@"获取数据失败"];
         }
         
         if ([_delegate respondsToSelector:@selector(getFliterDataReloadTable:)]) {
@@ -101,6 +103,15 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
+        if (error.code == -1009) {
+            
+        }else if (error.code == -1001) {
+            
+        }else{
+        
+        }
+        
+        [ElecTipsView showTips:@"获取数据失败"];
     }];
     
 }

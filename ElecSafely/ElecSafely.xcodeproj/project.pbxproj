@@ -109,6 +109,7 @@
 		55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */; };
 		EE250EC120705ECA0021FA80 /* LCQrcodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EE250EBF20705ECA0021FA80 /* LCQrcodeUtil.m */; };
 		EE2F2141208AD6EF00BB540D /* XWSDayAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */; };
+		EE2F2146208CD3E700BB540D /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2F2145208CD3E700BB540D /* LMJScrollTextView.m */; };
 		EE36A37720691C2300E71A54 /* XWSFeedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */; };
 		EE47D3C1206C9A6E006FEA3C /* XWSAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C0206C9A6E006FEA3C /* XWSAboutViewController.m */; };
 		EE47D3C4206CA46C006FEA3C /* XWSSettingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C3206CA46C006FEA3C /* XWSSettingPasswordViewController.m */; };
@@ -146,7 +147,6 @@
 		EEEF714020746EE600ABD711 /* XWSSingleListRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF713F20746EE600ABD711 /* XWSSingleListRightView.m */; };
 		EEEF714420749E9800ABD711 /* XWSNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF714320749E9800ABD711 /* XWSNoticeModel.m */; };
 		EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73383206532A700FFB99B /* XWSMainViewController.m */; };
-		EEF7338F20663EC700FFB99B /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = EEF7338E20663EC700FFB99B /* json.json */; };
 		EEFB698120862BBC0060C076 /* add-img.png in Resources */ = {isa = PBXBuildFile; fileRef = EEFB698020862BBC0060C076 /* add-img.png */; };
 		EF112779207E5A41006A3709 /* XWSBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF112778207E5A41006A3709 /* XWSBaseModel.m */; };
 		EF45C02B207770ED0074990E /* ESBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C026207770ED0074990E /* ESBaseNavigationController.m */; };
@@ -194,6 +194,8 @@
 		EF45C0C52077BFC10074990E /* XWSFliterConditionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0C42077BFC10074990E /* XWSFliterConditionModel.m */; };
 		EF45C0C92079090A0074990E /* XWSAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0C82079090A0074990E /* XWSAlarmViewController.m */; };
 		EF45C0CC207992820074990E /* XWSAlarmDeviceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0CB207992820074990E /* XWSAlarmDeviceListModel.m */; };
+		EF6741B0208CC18C00B5EA3B /* diaodian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6741AF208CC18C00B5EA3B /* diaodian@3x.png */; };
+		EF6741B1208CD30600B5EA3B /* wendu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6741AA208CC01900B5EA3B /* wendu@3x.png */; };
 		EF6E55C2208AACC700DC9120 /* XWSPrismaticView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6E55C1208AACC700DC9120 /* XWSPrismaticView.m */; };
 		EFED1AA72083508B00179276 /* XWSDeviceBaseInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AA62083508B00179276 /* XWSDeviceBaseInfoVC.m */; };
 		EFED1AD7208523A600179276 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AAB208523A600179276 /* MJRefreshAutoFooter.m */; };
@@ -444,6 +446,8 @@
 		EE250EC020705ECA0021FA80 /* LCQRCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCQRCodeUtil.h; sourceTree = "<group>"; };
 		EE2F213F208AD6EE00BB540D /* XWSDayAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWSDayAnimationView.h; sourceTree = "<group>"; };
 		EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWSDayAnimationView.m; sourceTree = "<group>"; };
+		EE2F2144208CD3E700BB540D /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
+		EE2F2145208CD3E700BB540D /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
 		EE36A37520691C2300E71A54 /* XWSFeedImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFeedImageCell.h; sourceTree = "<group>"; };
 		EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFeedImageCell.m; sourceTree = "<group>"; };
 		EE47D3BF206C9A6E006FEA3C /* XWSAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAboutViewController.h; sourceTree = "<group>"; };
@@ -506,7 +510,6 @@
 		EEEF714320749E9800ABD711 /* XWSNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNoticeModel.m; sourceTree = "<group>"; };
 		EEF73382206532A700FFB99B /* XWSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSMainViewController.h; sourceTree = "<group>"; };
 		EEF73383206532A700FFB99B /* XWSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSMainViewController.m; sourceTree = "<group>"; };
-		EEF7338E20663EC700FFB99B /* json.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = json.json; sourceTree = "<group>"; };
 		EEFB698020862BBC0060C076 /* add-img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-img.png"; sourceTree = "<group>"; };
 		EF112777207E5A41006A3709 /* XWSBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSBaseModel.h; sourceTree = "<group>"; };
 		EF112778207E5A41006A3709 /* XWSBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSBaseModel.m; sourceTree = "<group>"; };
@@ -600,6 +603,8 @@
 		EF45C0C82079090A0074990E /* XWSAlarmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSAlarmViewController.m; sourceTree = "<group>"; };
 		EF45C0CA207992820074990E /* XWSAlarmDeviceListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAlarmDeviceListModel.h; sourceTree = "<group>"; };
 		EF45C0CB207992820074990E /* XWSAlarmDeviceListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSAlarmDeviceListModel.m; sourceTree = "<group>"; };
+		EF6741AA208CC01900B5EA3B /* wendu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wendu@3x.png"; sourceTree = "<group>"; };
+		EF6741AF208CC18C00B5EA3B /* diaodian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "diaodian@3x.png"; sourceTree = "<group>"; };
 		EF6E55C0208AACC700DC9120 /* XWSPrismaticView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSPrismaticView.h; sourceTree = "<group>"; };
 		EF6E55C1208AACC700DC9120 /* XWSPrismaticView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSPrismaticView.m; sourceTree = "<group>"; };
 		EFED1AA52083508B00179276 /* XWSDeviceBaseInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSDeviceBaseInfoVC.h; sourceTree = "<group>"; };
@@ -1135,7 +1140,6 @@
 			children = (
 				EEF73382206532A700FFB99B /* XWSMainViewController.h */,
 				EEF73383206532A700FFB99B /* XWSMainViewController.m */,
-				EEF7338E20663EC700FFB99B /* json.json */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1143,6 +1147,8 @@
 		EE50AEBF2064A3C10068FBC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EE2F2144208CD3E700BB540D /* LMJScrollTextView.h */,
+				EE2F2145208CD3E700BB540D /* LMJScrollTextView.m */,
 				EE50AEC02064A4160068FBC1 /* XWSLeftView.h */,
 				EE50AEC12064A4160068FBC1 /* XWSLeftView.m */,
 				EEEF713E20746EE600ABD711 /* XWSSingleListRightView.h */,
@@ -1364,6 +1370,8 @@
 		EF45C0472077710B0074990E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				EF6741AF208CC18C00B5EA3B /* diaodian@3x.png */,
+				EF6741AA208CC01900B5EA3B /* wendu@3x.png */,
 				EF45C0482077710B0074990E /* dianliu@3x.png */,
 				EF45C0492077710B0074990E /* dianya@3x.png */,
 				EF45C04A2077710B0074990E /* loudian@3x.png */,
@@ -1779,6 +1787,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF6741B1208CD30600B5EA3B /* wendu@3x.png in Resources */,
 				EF45C0502077710B0074990E /* dianya@3x.png in Resources */,
 				EE936EFE20750C5A00D3BD54 /* right_notice@3x.png in Resources */,
 				EED9196B206F10A8002CF969 /* net_error.png in Resources */,
@@ -1787,12 +1796,12 @@
 				5575DF57208994E9001FE8C1 /* baitian.png in Resources */,
 				EE50AECD2064A7C40068FBC1 /* left_setting@3x.png in Resources */,
 				EE936F0020750EAD00D3BD54 /* logo_icon@3x.png in Resources */,
-				EEF7338F20663EC700FFB99B /* json.json in Resources */,
 				EEFB698120862BBC0060C076 /* add-img.png in Resources */,
 				EE50AED12064A7C40068FBC1 /* left_statistics@3x.png in Resources */,
 				55EF89F71FDE3148003F5061 /* Assets.xcassets in Resources */,
 				553D35E6200465FF00FCC58F /* logo@3x.png in Resources */,
 				EF45C04F2077710B0074990E /* dianliu@3x.png in Resources */,
+				EF6741B0208CC18C00B5EA3B /* diaodian@3x.png in Resources */,
 				EF45C0512077710B0074990E /* loudian@3x.png in Resources */,
 				EE50AECB2064A7C40068FBC1 /* left_help@3x.png in Resources */,
 				EEB699E12068A4410078A3F5 /* scan@3x.png in Resources */,
@@ -1975,6 +1984,7 @@
 				55156A16202312AC00B80642 /* DGActivityIndicatorFiveDotsAnimation.m in Sources */,
 				EFED1AE2208523A600179276 /* MJRefreshGifHeader.m in Sources */,
 				EFED1AE1208523A600179276 /* MJRefreshBackStateFooter.m in Sources */,
+				EE2F2146208CD3E700BB540D /* LMJScrollTextView.m in Sources */,
 				EFED1AEA208523A600179276 /* UIView+MJExtension.m in Sources */,
 				55156A0F202312AC00B80642 /* DGActivityIndicatorBallScaleRippleMultipleAnimation.m in Sources */,
 				EE47D3CE206CFC1D006FEA3C /* XWSScanInfoViewController.m in Sources */,

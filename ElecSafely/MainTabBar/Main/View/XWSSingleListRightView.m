@@ -182,7 +182,8 @@
 - (void)setUpUI{
     [self navView];
     [self coverView];
-    [self rightTableView];
+    [self NoDataView];
+//    [self rightTableView];
 }
 
 #pragma mark - 点击以及手势事件

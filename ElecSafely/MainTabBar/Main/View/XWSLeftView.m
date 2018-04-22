@@ -95,7 +95,7 @@
         [self addSubview:_tableView];
         _tableView.frame = CGRectMake(0, 0, ScreenWidth - TableViewMarginRightWidth, ScreenHeight);
 
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 150)];
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 175)];
         [self setUpHeadView:headView];
         headView.userInteractionEnabled = YES;
         _tableView.tableHeaderView = headView;
@@ -126,7 +126,7 @@
     [supView addSubview:self.accountLabel];
     self.accountLabel.textColor = LeftViewTextColor;
     self.accountLabel.font = PingFangMedium(18);
-    self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+    self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
     
     /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
     [self.accountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -142,7 +142,7 @@
         self.accountLabel.text = accountName;
     }
     else {
-        self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+        self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
     }
     
 }

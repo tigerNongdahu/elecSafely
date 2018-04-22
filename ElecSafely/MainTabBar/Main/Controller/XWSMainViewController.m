@@ -46,18 +46,18 @@
 @property (nonatomic, assign) NSInteger scrollIndex;
 
 #warning 测试使用
-//@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
+@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
 @end
 
 @implementation XWSMainViewController
 #warning 测试使用
-//- (TFMainAnimationView *)mainAnimationView{
-//    if (!_mainAnimationView) {
-//        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
-//        [self.view addSubview:_mainAnimationView];
-//    }
-//    return _mainAnimationView;
-//}
+- (TFMainAnimationView *)mainAnimationView{
+    if (!_mainAnimationView) {
+        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
+        [self.view addSubview:_mainAnimationView];
+    }
+    return _mainAnimationView;
+}
 
 - (NSMutableArray *)screens{
     if (!_screens) {
@@ -83,7 +83,7 @@
 #warning 测试使用
 //    BOOL isDay = [NSString isDayTime];
 //    if (isDay) {
-//         [self mainAnimationView];
+         [self mainAnimationView];
 //    }
 }
 
@@ -135,7 +135,7 @@
 #pragma mark -设置主页面
 - (void)createMainView {
     _mainBackImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
+    _mainBackImageView.image = [UIImage imageNamed:@"baitian"];
     [self.view addSubview:_mainBackImageView];
     [_mainBackImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.mas_equalTo(0);

@@ -14,6 +14,7 @@
 @property (nonatomic, assign) BOOL isAnimate;
 @property (nonatomic, assign) CGFloat aTime;
 @property (nonatomic, assign) CGFloat duration;
+@property (nonatomic, strong) UIView *superView;
 @end
 
 @implementation XWSDayAnimationView
@@ -21,6 +22,7 @@
 - (instancetype)initWithFrame:(CGRect)frame withSupuerView:(UIView *)superView afterTime:(CGFloat)aTime animateDuration:(CGFloat)duration{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
+        _superView = superView;
         [superView addSubview:self];
         _aTime = aTime;
         _duration = duration;
@@ -41,7 +43,7 @@
     
     CAShapeLayer *layer = [CAShapeLayer layer];
     layer.path = path.CGPath;
-    layer.fillColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7].CGColor;
+    layer.fillColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5].CGColor;
     [self.layer addSublayer:layer];
     
     //设置圆角
@@ -63,12 +65,18 @@
         
         [UIView animateWithDuration:_duration animations:^{
             CGRect frame = line.frame;
-            frame.origin.x = 800;
+            frame.origin.x = self.superView.frame.size.width + self.frame.size.width + 100;
             line.frame = frame;
         }completion:^(BOOL finished) {
             CGRect newframe = line.frame;
-            newframe.origin.x = -(self.frame.size.width + 100);
+            //随机的x
+            newframe.origin.x = -(self.frame.size.width + arc4random() % 100);
+            //随机的y
+            CGFloat yHeight = (int)_superView.frame.size.height % 50;
+            newframe.origin.y = arc4random() % 30 + yHeight;
             line.frame = newframe;
+            //获取随机的动画时间
+            _duration = arc4random() % 3 + 2 + 100 / self.frame.size.width;
             if (self.isAnimate) {
                 [self setAnimateWithView:self withAfter:time];
             }

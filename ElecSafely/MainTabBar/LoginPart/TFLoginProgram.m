@@ -93,6 +93,7 @@ static TFLoginProgram *loginProgram = nil;
                 NSString *userName = dic[@"Name"];
                 userName = userName.length > 0 ? userName : [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
                 [[NSUserDefaults standardUserDefaults] setObject:userName forKey:UserName];
+                [[NSNotificationCenter defaultCenter] postNotificationName:APPUserNameDidUpdateNotification object:nil];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];

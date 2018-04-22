@@ -193,7 +193,8 @@
     }else {
         [[NSUserDefaults standardUserDefaults] setObject:CLOSE_NOTI forKey:NOTI_KEY];
     }
-
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
     //发出通知去切换开启与关闭通知（通知位置在AppDelegate里面）
     [[NSNotificationCenter defaultCenter] postNotificationName:TRUN_ON_OR_OFF_NOTI object:nil];
 }

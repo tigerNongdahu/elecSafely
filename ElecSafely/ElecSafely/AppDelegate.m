@@ -144,6 +144,7 @@ static BOOL fistLogin = YES;
     else{
         [[NSUserDefaults standardUserDefaults] setObject:@"baitian" forKey:MomentAction];
     }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

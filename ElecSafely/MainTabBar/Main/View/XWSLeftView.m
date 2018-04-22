@@ -37,6 +37,8 @@
 }
 #pragma mark -  设置界面
 - (void)setUpUI{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateAccountLabel) name:APPUserNameDidUpdateNotification object:nil];
     self.backgroundColor = [UIColor clearColor];
     [self coverView];
     [self tableView];
@@ -138,12 +140,19 @@
         
         if (_account == nil || [_account isEqualToString:@" "]) {
             _accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
-        }else{
+        }
+        else{
             _accountLabel.text = _account;
         }
         
         _accountLabel.textColor = LeftViewTextColor;
         _accountLabel.font = PingFangMedium(18);
+    }
+}
+
+- (void)updateAccountLabel {
+    if (_accountLabel) {
+        _accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
     }
 }
 

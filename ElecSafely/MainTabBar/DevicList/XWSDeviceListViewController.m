@@ -170,7 +170,7 @@ static const CGFloat SectionHeight = 50.f;
         cell.textLabel.font = FONT(17);
         cell.detailTextLabel.textColor = [UIColor grayColor];
         cell.detailTextLabel.font = FONT(13);
-        UILabel *label = [UILabel createWithFrame:CGRectMake(0, 0, 40, 20) text:@"" textColor:[UIColor grayColor] textAlignment:1 fontNumber:14];
+        UILabel *label = [UILabel createWithFrame:CGRectMake(0, 0, 160, 20) text:@"" textColor:[UIColor grayColor] textAlignment:NSTextAlignmentRight fontNumber:14];
         cell.accessoryView = label;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 1)];
@@ -180,14 +180,15 @@ static const CGFloat SectionHeight = 50.f;
     XWSDeviceListModel *model = _dataSource[indexPath.row];
     cell.textLabel.text = model.Name;
     cell.detailTextLabel.text = model.AlarmText;
-    if ([model.Alarm isEqualToString:@"1"]){
-        cell.imageView.image = [UIImage imageNamed:@"loudian"];
-    }else{
+//    if ([model.Alarm isEqualToString:@"1"]){
+//        cell.imageView.image = [UIImage imageNamed:@"loudian"];
+//    }else{
         cell.imageView.image = [UIImage imageNamed:@"dianliu"];
-    }
+//    }
     UILabel *la = (UILabel *)cell.accessoryView;
     if ([la isKindOfClass:UILabel.class]) {
-        la.text = [self showDate:model.UpdataDate];
+//        la.text = [self showDate:model.UpdataDate];
+        la.text = model.UpdataDate;
     }
     return cell;
 }

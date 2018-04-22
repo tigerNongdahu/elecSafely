@@ -80,6 +80,7 @@
         if (success) {
             success(@[]);
         }
+        [ElecTipsView showTips:@"获取数据失败"];
     }];
 }
 

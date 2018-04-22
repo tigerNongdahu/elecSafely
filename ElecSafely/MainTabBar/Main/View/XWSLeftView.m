@@ -32,7 +32,6 @@
         _account = userInfo[@"account"];
         _iconName = userInfo[@"icon"];
         [self setUpUI];
-
     }
     return self;
 }

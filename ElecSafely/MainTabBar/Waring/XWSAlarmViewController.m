@@ -186,19 +186,35 @@ static const CGFloat SectionHeight = 40.f;
     if ([la isKindOfClass:UILabel.class]) {
         la.text = model.AlarmType;
     }
+    NSString *imageName = [self imageNameWith:model.AlarmType];
+    cell.imageView.image = [UIImage imageNamed:imageName];
+    
     return cell;
 }
 
-//- (NSString *)showDate:(NSString *)date{
-//    NSArray *arr1 = [date componentsSeparatedByString:@" "];
-//    NSString *time = arr1.lastObject;
-//    NSArray *arr2 = [time componentsSeparatedByString:@":"];
-//    NSString *result = @"";
-//    if (arr2.count > 1) {
-//        result = [arr2[0] stringByAppendingFormat:@":%@",arr2[1]];
-//    }
-//    return result;
-//}
+- (NSString *)imageNameWith:(NSString *)alarmType{
+    NSString *imageName = @"";
+   // NSArray *names = @[@"dianliu",@"wendu",@"diaodian",@"dianya",@"loudian"];
+    
+    //烟雾，漏电，掉电，欠压，过压，过载，短路，温度,缺相
+    if (alarmType.length > 1) {
+        alarmType = [alarmType substringWithRange:NSMakeRange(0, 2)];
+    }
+    
+    if ([alarmType containsString:@"烟雾"] || [alarmType containsString:@"温度"]) {
+        imageName = @"wendu";
+    }else if ([alarmType containsString:@"漏电"] || [alarmType containsString:@"掉电"]) {
+        imageName = @"diaodian";
+    }else if ([alarmType containsString:@"欠压"] || [alarmType containsString:@"过压"] || [alarmType containsString:@"缺相"]) {
+        imageName = @"dianya";
+    }else if ([alarmType containsString:@"过载"] || [alarmType containsString:@"短路"]) {
+        imageName = @"loudian";
+    }else{
+        imageName = @"dianliu";
+    }
+    
+    return imageName;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

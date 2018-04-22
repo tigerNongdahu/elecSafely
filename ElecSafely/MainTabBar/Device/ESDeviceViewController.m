@@ -50,6 +50,7 @@
 - (void)ready{
     _deviceView = [[ESDeviceView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - NavibarHeight)];
     _deviceView.deviceViewDele = self;
+    self.view.backgroundColor = BackColor;
     [self.view addSubview:_deviceView];
     
     self.dataProcessor = [[ESDeviceDataProcessor alloc] init];

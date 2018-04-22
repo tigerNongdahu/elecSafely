@@ -73,7 +73,7 @@
     self.title = @"公告";
     
     UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
-    [sendBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [sendBtn setTitle:@"关闭" forState:UIControlStateNormal];
     [sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
     sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     sendBtn.titleLabel.font = PingFangMedium(15);

@@ -108,6 +108,7 @@
 		55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */; };
 		EE250EC120705ECA0021FA80 /* LCQrcodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EE250EBF20705ECA0021FA80 /* LCQrcodeUtil.m */; };
 		EE2F2141208AD6EF00BB540D /* XWSDayAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */; };
+		EE2F2146208CD3E700BB540D /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2F2145208CD3E700BB540D /* LMJScrollTextView.m */; };
 		EE36A37720691C2300E71A54 /* XWSFeedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */; };
 		EE47D3C1206C9A6E006FEA3C /* XWSAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C0206C9A6E006FEA3C /* XWSAboutViewController.m */; };
 		EE47D3C4206CA46C006FEA3C /* XWSSettingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C3206CA46C006FEA3C /* XWSSettingPasswordViewController.m */; };
@@ -440,6 +441,8 @@
 		EE250EC020705ECA0021FA80 /* LCQRCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCQRCodeUtil.h; sourceTree = "<group>"; };
 		EE2F213F208AD6EE00BB540D /* XWSDayAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWSDayAnimationView.h; sourceTree = "<group>"; };
 		EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWSDayAnimationView.m; sourceTree = "<group>"; };
+		EE2F2144208CD3E700BB540D /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
+		EE2F2145208CD3E700BB540D /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
 		EE36A37520691C2300E71A54 /* XWSFeedImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFeedImageCell.h; sourceTree = "<group>"; };
 		EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFeedImageCell.m; sourceTree = "<group>"; };
 		EE47D3BF206C9A6E006FEA3C /* XWSAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAboutViewController.h; sourceTree = "<group>"; };
@@ -1126,6 +1129,8 @@
 		EE50AEBF2064A3C10068FBC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EE2F2144208CD3E700BB540D /* LMJScrollTextView.h */,
+				EE2F2145208CD3E700BB540D /* LMJScrollTextView.m */,
 				EE50AEC02064A4160068FBC1 /* XWSLeftView.h */,
 				EE50AEC12064A4160068FBC1 /* XWSLeftView.m */,
 				EEEF713E20746EE600ABD711 /* XWSSingleListRightView.h */,
@@ -1956,6 +1961,7 @@
 				55156A16202312AC00B80642 /* DGActivityIndicatorFiveDotsAnimation.m in Sources */,
 				EFED1AE2208523A600179276 /* MJRefreshGifHeader.m in Sources */,
 				EFED1AE1208523A600179276 /* MJRefreshBackStateFooter.m in Sources */,
+				EE2F2146208CD3E700BB540D /* LMJScrollTextView.m in Sources */,
 				EFED1AEA208523A600179276 /* UIView+MJExtension.m in Sources */,
 				55156A0F202312AC00B80642 /* DGActivityIndicatorBallScaleRippleMultipleAnimation.m in Sources */,
 				EE47D3CE206CFC1D006FEA3C /* XWSScanInfoViewController.m in Sources */,

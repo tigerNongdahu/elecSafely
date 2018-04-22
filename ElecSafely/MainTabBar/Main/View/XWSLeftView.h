@@ -46,7 +46,5 @@ typedef NS_ENUM(NSInteger, XWSTouchItem) {
 /*取消门板透明度动画*/
 - (void)cancelCoverViewOpacity;
 
-// 设置账户名称
-- (void)setAccountLabelText:(NSString *)accountName;
 
 @end

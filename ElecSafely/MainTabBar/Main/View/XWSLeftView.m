@@ -8,26 +8,31 @@
 
 #import "XWSLeftView.h"
 #import "UIView+HGCorner.h"
+#import "LMJScrollTextView.h"
+#import "NSString+XWSManager.h"
 #define marginLeft 32.0f
 #define TableViewMarginRightWidth 120.0f
 #define LeftViewTextColor RGBA(170, 170, 170, 1)
-//#define leftLeftBackColor RGBA(20, 25, 33, 1)
+
 #define leftLeftBackColor NavColor
 
 @interface XWSLeftView()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UIImageView *icon;
+@property (nonatomic, strong) LMJScrollTextView * scrollTextView;
 @property (nonatomic, strong) UILabel *accountLabel;
-
+@property (nonatomic, strong) NSString *account;
+@property (nonatomic, strong) NSString *iconName;
 @end
 
 @implementation XWSLeftView
 
 - (instancetype)initWithFrame:(CGRect)frame withUserInfo:(NSDictionary *)userInfo{
     if (self = [super initWithFrame:frame]) {
+        _account = userInfo[@"account"];
+        _iconName = userInfo[@"icon"];
         [self setUpUI];
-        [self initDataWithUserInfo:userInfo];
-        
+
     }
     return self;
 }
@@ -36,21 +41,6 @@
     self.backgroundColor = [UIColor clearColor];
     [self coverView];
     [self tableView];
-}
-
-#pragma mark - 初始化信息
-- (void)initDataWithUserInfo:(NSDictionary *)info{
-    self.accountLabel.text = info[@"account"];
-    NSString *iconUrl = info[@"icon"];
-    if (iconUrl) {
-        if ([iconUrl containsString:@"http"] || [iconUrl containsString:@"https"]) {
-            
-        }else{
-            self.icon.image = [UIImage imageNamed:iconUrl];
-        }
-    }else{
-        self.icon.image = [UIImage imageNamed:@"loading_shape_rectangular"];
-    }
 }
 
 #pragma mark - 内部方法
@@ -110,7 +100,6 @@
     //头像
     self.icon = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.icon.userInteractionEnabled = YES;
-    
     [supView addSubview:self.icon];
 
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -118,30 +107,66 @@
         make.left.mas_equalTo(32);
         make.width.height.mas_equalTo(69);
     }];
-    self.icon.image = [UIImage imageNamed:@"logo_icon"];
+    if (_iconName == nil || [_iconName isEqualToString:@" "]) {
+        self.icon.image = [UIImage imageNamed:@"loading_shape_rectangular"];
+    }else{
+        self.icon.image = [UIImage imageNamed:_iconName];
+    }
+    
     [self.icon hg_setAllCornerWithCornerRadius:34.5];
     
     //账号
-    self.accountLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [supView addSubview:self.accountLabel];
-    self.accountLabel.textColor = LeftViewTextColor;
-    self.accountLabel.font = PingFangMedium(18);
-    self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
-    
-    [self.accountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.icon.mas_centerY);
-        make.left.equalTo(self.icon.mas_right).mas_equalTo(27);
-        make.right.mas_equalTo(-10);
-        make.height.mas_equalTo(30);
-    }];
+    CGFloat accountStrWidth = [NSString getStringSizeWith:_account withStringFont:PingFangMedium(18)].width;
+    CGFloat accountViewWidth = supView.frame.size.width - 32 - 69 - 2 * 17;
+    NSLog(@"accountStrWidth:%lf accountViewWidth:%lf",accountStrWidth,accountViewWidth);
+    if (accountStrWidth > accountViewWidth) {
+        [self setUpScrollTextViewWithSuperView:supView];
+    }else{
+        [self setUpStaticTextViewWithSuperView:supView];
+    }
 }
 
-- (void)setAccountLabelText:(NSString *)accountName {
-    if (accountName.length > 0) {
-        self.accountLabel.text = accountName;
+- (void)setUpStaticTextViewWithSuperView:(UIView *)supView{
+    if (!_accountLabel) {
+        _accountLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        [supView addSubview:_accountLabel];
+        [_accountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.icon.mas_centerY);
+            make.left.equalTo(self.icon.mas_right).mas_equalTo(17);
+            make.right.mas_equalTo(-17);
+            make.height.mas_equalTo(30);
+        }];
+        
+        if (_account == nil || [_account isEqualToString:@" "]) {
+            _accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+        }else{
+            _accountLabel.text = _account;
+        }
+        
+        _accountLabel.textColor = LeftViewTextColor;
+        _accountLabel.font = PingFangMedium(18);
     }
-    else {
-        self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+}
+
+
+- (void)setUpScrollTextViewWithSuperView:(UIView *)supView{
+    
+    if (!_scrollTextView) {
+        _scrollTextView = [[LMJScrollTextView alloc] initWithFrame:CGRectZero textScrollModel:LMJTextScrollWandering direction:LMJTextScrollMoveLeft];
+        [supView addSubview:_scrollTextView];
+        [_scrollTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.icon.mas_centerY);
+            make.left.equalTo(self.icon.mas_right).mas_equalTo(17);
+            make.right.mas_equalTo(-17);
+            make.height.mas_equalTo(30);
+        }];
+        
+        NSString *account = _account;
+        if (_account == nil || [_account isEqualToString:@" "]) {
+            _accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+        }
+        
+        [_scrollTextView startScrollWithText:account textColor:LeftViewTextColor font:PingFangMedium(18)];
     }
 }
 
@@ -159,7 +184,6 @@
         UIImageView *headImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         headImageView.tag = indexPath.row + 100;
         [cell.contentView addSubview:headImageView];
-        /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
         [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(32);
             make.centerY.mas_equalTo(cell.mas_centerY);
@@ -172,7 +196,6 @@
         titleLabel.tag = indexPath.row + 200;
         titleLabel.font = PingFangRegular(17);
         titleLabel.textColor = LeftViewTextColor;
-        /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(headImageView.mas_centerY);
             make.left.mas_equalTo(headImageView.mas_right).mas_equalTo(21);

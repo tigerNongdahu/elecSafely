@@ -19,7 +19,7 @@
 - (XWSDayAnimationView *)dayFisrtAnimView{
     if (!_dayFisrtAnimView) {
         CGFloat x = arc4random() % 100 + 150;
-        CGFloat y = arc4random() % 30 + self.frame.size.height * 0.5;
+        CGFloat y = 50;
         CGFloat duration = arc4random() % 3 + 2;
         _dayFisrtAnimView = [[XWSDayAnimationView alloc] initWithFrame:CGRectMake(-x, y, 150, 1) withSupuerView:self afterTime:2 animateDuration:duration];
         _dayFisrtAnimView.hidden = YES;

@@ -84,10 +84,14 @@
             _passWordTF.userInteractionEnabled = YES;
 
             if (_userNameTF.text.length == 0) {
-                [_userNameTF becomeFirstResponder];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [_userNameTF becomeFirstResponder];
+                });
             }
             else if (_passWordTF.text.length == 0) {
-                [_passWordTF becomeFirstResponder];;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [_passWordTF becomeFirstResponder];;
+                });
             }
         }];
     });

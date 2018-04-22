@@ -54,11 +54,13 @@ static TFLoginProgram *loginProgram = nil;
                     [self.delegate loginProgram:loginProgram DidLoginFailed:@"密码错误"];
                 }
                 
+                
                 TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
                 XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
                 [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
                 [UIApplication sharedApplication].keyWindow.rootViewController = navi;
+                
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

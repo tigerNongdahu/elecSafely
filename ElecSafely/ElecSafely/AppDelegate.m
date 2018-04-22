@@ -18,7 +18,6 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-static BOOL fistLogin = YES;
 @interface AppDelegate ()<XGPushDelegate,XGPushTokenManagerDelegate>
 
 @end

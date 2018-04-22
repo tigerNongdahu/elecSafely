@@ -73,7 +73,8 @@
 		5575DF57208994E9001FE8C1 /* baitian.png in Resources */ = {isa = PBXBuildFile; fileRef = 5575DF55208994E9001FE8C1 /* baitian.png */; };
 		5575DF58208994E9001FE8C1 /* yewan.png in Resources */ = {isa = PBXBuildFile; fileRef = 5575DF56208994E9001FE8C1 /* yewan.png */; };
 		5575DF5B2089D9AB001FE8C1 /* TFMainAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575DF5A2089D9AB001FE8C1 /* TFMainAnimationView.m */; };
-		5575DF5E2089E380001FE8C1 /* TFCustomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575DF5D2089E380001FE8C1 /* TFCustomScrollView.m */; };
+		55A1EE5D208CB1D300DE45A5 /* GYNoticeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A1EE59208CB1D200DE45A5 /* GYNoticeViewCell.m */; };
+		55A1EE5E208CB1D300DE45A5 /* GYRollingNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A1EE5C208CB1D300DE45A5 /* GYRollingNoticeView.m */; };
 		55CDA3F42056831E0044A7EE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CDA3F32056831E0044A7EE /* libz.tbd */; };
 		55E1E8131FF5D9CD00964CFB /* TileGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E1E80C1FF5D9CC00964CFB /* TileGridView.m */; };
 		55E1E8141FF5D9CD00964CFB /* AnimatedULogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E1E80E1FF5D9CC00964CFB /* AnimatedULogoView.m */; };
@@ -107,7 +108,7 @@
 		55FEDD7B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6B1FDF66DC005BD966 /* UIRefreshControl+AFNetworking.m */; };
 		55FEDD7C1FDF66DC005BD966 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */; };
 		EE250EC120705ECA0021FA80 /* LCQrcodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EE250EBF20705ECA0021FA80 /* LCQrcodeUtil.m */; };
-		EE2F2138208A54A900BB540D /* XWSLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2F2136208A54A900BB540D /* XWSLineView.m */; };
+		EE2F2141208AD6EF00BB540D /* XWSDayAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */; };
 		EE36A37720691C2300E71A54 /* XWSFeedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */; };
 		EE47D3C1206C9A6E006FEA3C /* XWSAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C0206C9A6E006FEA3C /* XWSAboutViewController.m */; };
 		EE47D3C4206CA46C006FEA3C /* XWSSettingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C3206CA46C006FEA3C /* XWSSettingPasswordViewController.m */; };
@@ -372,8 +373,10 @@
 		5575DF56208994E9001FE8C1 /* yewan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yewan.png; sourceTree = "<group>"; };
 		5575DF592089D9AB001FE8C1 /* TFMainAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFMainAnimationView.h; sourceTree = "<group>"; };
 		5575DF5A2089D9AB001FE8C1 /* TFMainAnimationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFMainAnimationView.m; sourceTree = "<group>"; };
-		5575DF5C2089E380001FE8C1 /* TFCustomScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFCustomScrollView.h; sourceTree = "<group>"; };
-		5575DF5D2089E380001FE8C1 /* TFCustomScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFCustomScrollView.m; sourceTree = "<group>"; };
+		55A1EE59208CB1D200DE45A5 /* GYNoticeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYNoticeViewCell.m; sourceTree = "<group>"; };
+		55A1EE5A208CB1D300DE45A5 /* GYNoticeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYNoticeViewCell.h; sourceTree = "<group>"; };
+		55A1EE5B208CB1D300DE45A5 /* GYRollingNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYRollingNoticeView.h; sourceTree = "<group>"; };
+		55A1EE5C208CB1D300DE45A5 /* GYRollingNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYRollingNoticeView.m; sourceTree = "<group>"; };
 		55C529D21FF09BCE00E32152 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		55CDA3F32056831E0044A7EE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		55E1E80B1FF5D9CC00964CFB /* Contans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contans.h; sourceTree = "<group>"; };
@@ -441,8 +444,8 @@
 		55FEDD6D1FDF66DC005BD966 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		EE250EBF20705ECA0021FA80 /* LCQrcodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCQrcodeUtil.m; sourceTree = "<group>"; };
 		EE250EC020705ECA0021FA80 /* LCQRCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCQRCodeUtil.h; sourceTree = "<group>"; };
-		EE2F2136208A54A900BB540D /* XWSLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWSLineView.m; sourceTree = "<group>"; };
-		EE2F2137208A54A900BB540D /* XWSLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWSLineView.h; sourceTree = "<group>"; };
+		EE2F213F208AD6EE00BB540D /* XWSDayAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWSDayAnimationView.h; sourceTree = "<group>"; };
+		EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWSDayAnimationView.m; sourceTree = "<group>"; };
 		EE36A37520691C2300E71A54 /* XWSFeedImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFeedImageCell.h; sourceTree = "<group>"; };
 		EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFeedImageCell.m; sourceTree = "<group>"; };
 		EE47D3BF206C9A6E006FEA3C /* XWSAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAboutViewController.h; sourceTree = "<group>"; };
@@ -909,6 +912,17 @@
 			path = PrivateFunction;
 			sourceTree = "<group>";
 		};
+		55A1EE58208CB16B00DE45A5 /* GYRollingNoticeView */ = {
+			isa = PBXGroup;
+			children = (
+				55A1EE5A208CB1D300DE45A5 /* GYNoticeViewCell.h */,
+				55A1EE59208CB1D200DE45A5 /* GYNoticeViewCell.m */,
+				55A1EE5B208CB1D300DE45A5 /* GYRollingNoticeView.h */,
+				55A1EE5C208CB1D300DE45A5 /* GYRollingNoticeView.m */,
+			);
+			path = GYRollingNoticeView;
+			sourceTree = "<group>";
+		};
 		55EC947A1FEDF8C7000D21F4 /* LaunchAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1133,18 +1147,17 @@
 		EE50AEBF2064A3C10068FBC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EE2F2137208A54A900BB540D /* XWSLineView.h */,
-				EE2F2136208A54A900BB540D /* XWSLineView.m */,
 				EE50AEC02064A4160068FBC1 /* XWSLeftView.h */,
 				EE50AEC12064A4160068FBC1 /* XWSLeftView.m */,
 				EEEF713E20746EE600ABD711 /* XWSSingleListRightView.h */,
 				EEEF713F20746EE600ABD711 /* XWSSingleListRightView.m */,
 				5575DF592089D9AB001FE8C1 /* TFMainAnimationView.h */,
 				5575DF5A2089D9AB001FE8C1 /* TFMainAnimationView.m */,
-				5575DF5C2089E380001FE8C1 /* TFCustomScrollView.h */,
-				5575DF5D2089E380001FE8C1 /* TFCustomScrollView.m */,
 				EF6E55C0208AACC700DC9120 /* XWSPrismaticView.h */,
 				EF6E55C1208AACC700DC9120 /* XWSPrismaticView.m */,
+				EE2F213F208AD6EE00BB540D /* XWSDayAnimationView.h */,
+				EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */,
+				55A1EE58208CB16B00DE45A5 /* GYRollingNoticeView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1834,7 +1847,9 @@
 				EF45C0B2207771910074990E /* YRightAxisFormtter.m in Sources */,
 				553D38642004E47300FCC58F /* NSData+AES.m in Sources */,
 				55156A15202312AC00B80642 /* DGActivityIndicatorDoubleBounceAnimation.m in Sources */,
+				55A1EE5D208CB1D300DE45A5 /* GYNoticeViewCell.m in Sources */,
 				553D38382004716500FCC58F /* MASViewAttribute.m in Sources */,
+				EE2F2141208AD6EF00BB540D /* XWSDayAnimationView.m in Sources */,
 				553D38672004E47300FCC58F /* NSString+Base64.m in Sources */,
 				EFED1ADB208523A600179276 /* MJRefreshHeader.m in Sources */,
 				553D383A2004716500FCC58F /* NSArray+MASAdditions.m in Sources */,
@@ -1874,6 +1889,7 @@
 				55156A1B202312AC00B80642 /* DGActivityIndicatorNineDotsAnimation.m in Sources */,
 				553D386C2004E47300FCC58F /* Base64.m in Sources */,
 				EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */,
+				55A1EE5E208CB1D300DE45A5 /* GYRollingNoticeView.m in Sources */,
 				EF45C0A6207771910074990E /* ChartBaseLine.m in Sources */,
 				553D384A2004E0D100FCC58F /* ElecTipsView.m in Sources */,
 				55E1E8161FF5D9CD00964CFB /* Contans.m in Sources */,
@@ -1906,7 +1922,6 @@
 				EF45C0B0207771910074990E /* XAxisFormtter.m in Sources */,
 				553D383C2004716500FCC58F /* View+MASAdditions.m in Sources */,
 				551569AD2022A6D200B80642 /* TFLoginProgram.m in Sources */,
-				EE2F2138208A54A900BB540D /* XWSLineView.m in Sources */,
 				55156A04202312AC00B80642 /* DGActivityIndicatorBallClipRotateAnimation.m in Sources */,
 				553D38362004716500FCC58F /* MASConstraintMaker.m in Sources */,
 				55EF89EC1FDE3148003F5061 /* AppDelegate.m in Sources */,
@@ -1994,7 +2009,6 @@
 				EF45C0AD207771910074990E /* ChartDataEntry.m in Sources */,
 				EF45C044207770F70074990E /* ESDeviceLoopTypeValueView.m in Sources */,
 				55FEDD751FDF66DC005BD966 /* AFImageDownloader.m in Sources */,
-				5575DF5E2089E380001FE8C1 /* TFCustomScrollView.m in Sources */,
 				EED14DAF20726AA3008D0114 /* XWSHelpModel.m in Sources */,
 				EE47D3C8206CA63F006FEA3C /* XWSPwdInputCell.m in Sources */,
 				55156A13202312AC00B80642 /* DGActivityIndicatorBallZigZagDeflectAnimation.m in Sources */,

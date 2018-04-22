@@ -21,17 +21,16 @@
 #import "XWSNoticeModel.h"
 #import "XWSHelpModel.h"
 #import "XWSDetailHelpViewController.h"
-#import "XWSLineView.h"
-#import "TFCustomScrollView.h"
+#import "TFMainAnimationView.h"
+#import "NSString+XWSManager.h"
+#import "GYRollingNoticeView.h"
 
 #define AnimationTime 0.4
 #define CoverAlphaValue 0.5
-#define LineViewWidth 150.0
-#define LineViewStartX -(LineViewWidth + 50)
-#define LineViewTop 60.0
-#define LineViewHeight 1.0
 
-@interface XWSMainViewController ()<XWSLeftViewDelegate,XWSSingleListRightViewDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+
+@interface XWSMainViewController ()<XWSLeftViewDelegate,XWSSingleListRightViewDelegate,GYRollingNoticeViewDataSource,GYRollingNoticeViewDelegate>
+
 @property (nonatomic, strong) XWSLeftView *leftView;
 @property (nonatomic, strong) XWSSingleListRightView *singleRighView;
 /*公告数组*/
@@ -41,17 +40,21 @@
 @property (nonatomic, strong) UIImageView *mainBackImageView;
 @property (nonatomic, strong) UILabel *todayLabel;
 @property (nonatomic, strong) UILabel *dateLable;
-@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *quetions;
-@property (nonatomic, strong) NSTimer *timeScroll;
-@property (nonatomic, assign) NSInteger scrollIndex;
 
-@property (nonatomic, strong) XWSLineView *firstLine;
-@property (nonatomic, strong) XWSLineView *secondLine;
-
+#warning 测试使用
+//@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
 @end
 
 @implementation XWSMainViewController
+#warning 测试使用
+//- (TFMainAnimationView *)mainAnimationView{
+//    if (!_mainAnimationView) {
+//        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
+//        [self.view addSubview:_mainAnimationView];
+//    }
+//    return _mainAnimationView;
+//}
 
 - (NSMutableArray *)screens{
     if (!_screens) {
@@ -74,37 +77,11 @@
     [self loadData];
     [self initView];
     
-    //设置白天的动画
-    [self setCycleAnimation];
-}
-
-- (void)setCycleAnimation{
-    self.firstLine = [[XWSLineView alloc] initWithFrame:CGRectMake(LineViewStartX, LineViewTop, LineViewWidth, LineViewHeight)];
-    [self.view addSubview:self.firstLine];
-    
-    self.secondLine = [[XWSLineView alloc] initWithFrame:CGRectMake(LineViewStartX, LineViewTop + 50, LineViewWidth * 0.6, LineViewHeight)];
-    [self.view addSubview:self.secondLine];
-    
-    [self setAnimWithView:self.firstLine withAfter:2.0];
-    [self setAnimWithView:self.secondLine withAfter:3.0];
-}
-
-- (void)setAnimWithView:(UIView *)line withAfter:(CGFloat)time{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        __block CGRect frame = line.frame;
-        [UIView animateWithDuration:3.0 animations:^{
-            frame.origin.x = ScreenWidth;
-            line.frame = frame;
-        }completion:^(BOOL finished) {
-            CGRect newframe = line.frame;
-            newframe.origin.x = LineViewStartX;
-            line.frame = newframe;
-            
-            [self setAnimWithView:line withAfter:time];
-        }];
-    });
-
+#warning 测试使用
+//    BOOL isDay = [NSString isDayTime];
+//    if (isDay) {
+//         [self mainAnimationView];
+//    }
 }
 
 #pragma mark - 加载数据
@@ -118,33 +95,59 @@
     [self setUpLeftView];
     [self setUpSingleListRightView];
     [self createMainView];
-//    [self createTableView];
 }
 
 - (void)createScrollView {
-    TFCustomScrollView *scrollView = [[TFCustomScrollView alloc] initWithFrame:CGRectMake(30, ScreenHeight - 140, ScreenWidth - 60, 140) delegate:self DataItems:self.quetions isAuto:YES];
-    [self.view addSubview:scrollView];
+    
+    GYRollingNoticeView *noticeView = [[GYRollingNoticeView alloc]initWithFrame:CGRectMake(30, ScreenHeight - NavibarHeight - 100, ScreenWidth - 60, 100)];
+    noticeView.dataSource = self;
+    noticeView.delegate = self;
+    [self.view addSubview:noticeView];
+    noticeView.backgroundColor = [UIColor lightGrayColor];
+    [noticeView registerClass:[GYNoticeViewCell class] forCellReuseIdentifier:@"CustomNoticeCell"];
+    
+    [noticeView reloadDataAndStartRoll];
+    
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(30,  ScreenHeight - NavibarHeight - 130, ScreenWidth - 60, 30)];
+    headView.backgroundColor = BackColor;
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [headView addSubview:titleLabel];
+    titleLabel.frame = CGRectMake(18, 11, headView.frame.size.width - 18 * 2, headView.frame.size.height - 11 * 2);
+    titleLabel.text = @"最新资讯";
+    titleLabel.font = PingFangMedium(13);
+    titleLabel.textColor = RGBA(153, 153, 153, 1);
+    [self.view addSubview:headView];
 }
 
-- (void)createTableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.tableFooterView = [[UIView alloc] init];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.rowHeight = 70;
-        _tableView.backgroundColor = BackColor;
-        [self.view addSubview:_tableView];
-        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.mas_equalTo(30);
-            make.trailing.mas_equalTo(-30);
-            make.bottom.mas_equalTo(0);
-            make.height.mas_equalTo(170);
-        }];
-        _tableView.tableFooterView = [[UIView alloc] init];
-    }
+- (NSInteger)numberOfRowsForRollingNoticeView:(GYRollingNoticeView *)rollingView
+{
+        return _quetions.count;
 }
+- (__kindof GYNoticeViewCell *)rollingNoticeView:(GYRollingNoticeView *)rollingView cellAtIndex:(NSUInteger)index
+{
+    // 普通用法，只有一行label滚动显示文字
+    // normal use, only one line label rolling
+        GYNoticeViewCell *cell = [rollingView dequeueReusableCellWithIdentifier:@"CustomNoticeCell"];
+        XWSHelpModel *model = _quetions[index];
+        cell.textLabel.text = model.Title;
+        cell.textLabel.font = PingFangMedium(15);
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.contentView.backgroundColor = NavColor;
+
+        return cell;
+}
+
+- (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index
+{
+    XWSHelpModel *model = self.quetions[index];
+    NSString *content = model.Content;
+    NSString *title = model.Title;
+    XWSDetailHelpViewController *vc = [[XWSDetailHelpViewController alloc] init];
+    vc.title = title;
+    vc.url = content;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 #pragma mark -设置主页面
 - (void)createMainView {
@@ -201,6 +204,8 @@
 }
 
 
+
+
 #pragma -mark 设置导航栏
 - (void)setUpNav{
     
@@ -213,7 +218,7 @@
 - (void)setUpLeftView{
     
     //获取到的个人信息
-    NSString *account = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+    NSString *account = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"account"] = account;
     dic[@"icon"] = @"logo_icon";
@@ -262,91 +267,6 @@
         _leftView.hidden = YES;
     }];
 }
-
-#pragma mark - UITableViewDataSource,UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.quetions.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *ID = @"helpCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-        cell.backgroundColor = NavColor;
-        cell.textLabel.font = PingFangMedium(15);
-        cell.textLabel.textColor = [UIColor whiteColor];
-    }
-    XWSHelpModel *model = self.quetions[indexPath.row];
-    cell.textLabel.text = model.Title;
-//        //label
-//        UILabel *titleLabel = [[UILabel alloc]init];
-//        [cell addSubview:titleLabel];
-//        titleLabel.tag = 100 + indexPath.row;
-//        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.mas_equalTo(18);
-//            make.right.mas_equalTo(-38);
-//            make.height.mas_equalTo(30);
-//            make.top.mas_equalTo((70 - 30) * 0.5);
-//        }];
-//
-//        //线条
-//        UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
-//        line.backgroundColor = DarkBack;
-//        [cell addSubview:line];
-//        /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
-//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.mas_equalTo(0);
-//            make.left.mas_equalTo(17);
-//            make.bottom.mas_equalTo(-0.3);
-//            make.height.mas_equalTo(0.3);
-//        }];
-//    }
-    
-//    UILabel *titleLabel = (UILabel *)[cell viewWithTag:100 + indexPath.row];
-    
-//    XWSHelpModel *model = self.quetions[indexPath.row];
-//    titleLabel.text = model.Title;
-//    titleLabel.font = PingFangMedium(17);
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 30;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 70;
-};
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, [self tableView:tableView heightForHeaderInSection:section])];
-    headView.backgroundColor = BackColor;
-    
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [headView addSubview:titleLabel];
-    titleLabel.frame = CGRectMake(18, 11, headView.frame.size.width - 18 * 2, headView.frame.size.height - 11 * 2);
-    titleLabel.text = @"最新资讯";
-    titleLabel.font = PingFangMedium(13);
-    titleLabel.textColor = RGBA(153, 153, 153, 1);
-    
-    return headView;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    XWSHelpModel *model = self.quetions[indexPath.row];
-    NSString *content = model.Content;
-    NSString *title = model.Title;
-    XWSDetailHelpViewController *vc = [[XWSDetailHelpViewController alloc] init];
-    vc.title = title;
-    vc.url = content;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 
 #pragma mark - XWSLeftViewDelegate
 - (void)touchLeftView:(XWSLeftView *)leftView byType:(XWSTouchItem)type{
@@ -465,86 +385,12 @@
         }
         
         [self createScrollView];
-
-//        [weakVC.tableView reloadData];
-        
-        
-        [self loadDataWithScroll];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
     }];
 }
-
-- (void)loadDataWithScroll {
-    if ([_timeScroll isValid]) {
-        [_timeScroll invalidate];
-        _timeScroll = nil;
-    }
-
-    _scrollIndex = 0;
-    if (!_timeScroll) { // [[self currentViewController] isKindOfClass:NSClassFromString(@"IMSSChatKnowledgeViewController")] &&
-        _timeScroll = [[NSTimer alloc]initWithFireDate:[NSDate date] interval:5 target:self selector:@selector(startScroll) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timeScroll forMode:NSDefaultRunLoopMode];
-    }
-    
-
-}
-
-- (void)startScroll {
-    if (_quetions.count > 2) {
-        /*
-         末次滚动后需要重新定位到Table表头第一个cell
-         奇数个数据时：
-         1  2  2  3  1  2
-         ∆
-         1  2  2  3  1  2
-         ∆
-         偶数个数据时：
-         1  2  3  4  1  2
-         ∆
-         1  2  3  4  1  2
-         ∆
-         */
-        // 向上滚动2条数据
-        _scrollIndex += 2;
-        if (_scrollIndex < [self.tableView numberOfRowsInSection:0]) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_scrollIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        }
-        else {
-            _scrollIndex = 0;
-            [self.tableView reloadData];
-        }
-    }
-    else {
-        _scrollIndex = 0;
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    }
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    if (_scrollIndex == _quetions.count) {
-        _scrollIndex = 0;
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    }
-    else if (_scrollIndex == _quetions.count - 1) {
-//        [_timeScroll invalidate];
-//        _timeScroll = nil;
-//
-//
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_scrollIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-//            _scrollIndex = 0;
-//            if (!_timeScroll) { // [[self currentViewController] isKindOfClass:NSClassFromString(@"IMSSChatKnowledgeViewController")] &&
-//                _timeScroll = [[NSTimer alloc]initWithFireDate:[NSDate date] interval:5 target:self selector:@selector(startScroll) userInfo:nil repeats:YES];
-//                [[NSRunLoop currentRunLoop] addTimer:_timeScroll forMode:NSDefaultRunLoopMode];
-//            }
-//
-//        });
-    }
-}
-
 
 
 - (void)setUpSingleListRightView{

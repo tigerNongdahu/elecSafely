@@ -32,9 +32,9 @@
         [self.view addSubview:self.progressView];
         [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.mas_equalTo(0);
-            make.height.mas_equalTo(3);
+            make.height.mas_equalTo(3.f);
         }];
-        self.progressView.tintColor = [UIColor greenColor];
+        self.progressView.tintColor = UIColorRGB(0x1C86EE);
         self.progressView.trackTintColor = [UIColor whiteColor];
     }
     

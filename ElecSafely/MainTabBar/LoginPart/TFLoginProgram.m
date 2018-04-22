@@ -54,8 +54,23 @@ static TFLoginProgram *loginProgram = nil;
             }
         }];
         
-        [_requestManager POST:FrigateAPI_BindApp parameters:@{@"account":account,@"pwd":password,@"SourecType":@"02"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [self bindWithAccount:account];
+        [_requestManager POST:FrigateAPI_BindApp parameters:@{@"account":account,@"pwd":password,@"SourceType":@"02"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+            
+            if ([dic[@"Flag"] isKindOfClass:[NSNumber class]] &&
+                     [dic[@"Flag"] integerValue] == 1) {
+                [self bindWithAccount:account];
+            }
+            else if ([dic[@"Flag"] isKindOfClass:[NSString class]] &&
+                [dic[@"Flag"] isEqualToString:@"1"]) {
+                [self bindWithAccount:account];
+            }
+            
+            if ([dic[@"Name"] isKindOfClass:[NSString class]]) {
+                NSString *userName = dic[@"Name"];
+                userName = userName.length > 0 ? userName : [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+                [[NSUserDefaults standardUserDefaults] setObject:userName forKey:UserName];
+            }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // do nothing;
         }];

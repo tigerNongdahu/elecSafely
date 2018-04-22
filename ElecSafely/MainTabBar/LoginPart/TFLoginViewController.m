@@ -292,7 +292,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
     
     XWSMainViewController *vc = [[XWSMainViewController alloc] init];
     XWSNavigationController *nv = [[XWSNavigationController alloc] initWithRootViewController:vc];
-    
+
     [UIApplication sharedApplication].keyWindow.rootViewController = nv;
     _loginBtn.userInteractionEnabled = YES;
 }

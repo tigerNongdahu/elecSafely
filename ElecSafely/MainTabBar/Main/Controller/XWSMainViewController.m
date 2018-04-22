@@ -87,9 +87,15 @@
 //    }
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //加载公告应该放在这里，这样在切换控制器的时候，可以加载到最新的公告数据
+    [self loadNoticeData];
+}
+
 #pragma mark - 加载数据
 - (void)loadData{
-    [self loadNoticeData];
+    [self loadHelpData];
 }
 
 #pragma mark - 设置页面
@@ -198,7 +204,7 @@
     NSString *account = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"account"] = account;
-    dic[@"icon"] = @"logo_icon";
+    dic[@"icon"] = @"loading_shape_rectangular";
     
     if (!_leftView) {
         //目前里面设置的icon暂时没有实现加载网络图片，要实现可以自己到leftView里面去添加
@@ -400,7 +406,6 @@
 #pragma mark - 公告
 - (void)loadNoticeData{
     ElecHTTPManager *noticeMgr = [ElecHTTPManager manager];
-    self.quetions = [[NSMutableArray alloc] initWithCapacity:0];
     __weak typeof(self) weakVC = self;
     [noticeMgr GET:FrigateAPI_loadNotice parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -430,7 +435,13 @@
         NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
     }];
-    
+}
+
+#pragma mark - 热点问题
+- (void)loadHelpData{
+    ElecHTTPManager *noticeMgr = [ElecHTTPManager manager];
+    self.quetions = [[NSMutableArray alloc] initWithCapacity:0];
+    __weak typeof(self) weakVC = self;
     [noticeMgr GET:FrigateAPI_Help_InformationList parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSArray *results = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
@@ -442,13 +453,11 @@
             model.Content = dic[@"Content"];
             
             [weakVC.quetions addObject:model];
-            
-            NSLog(@"title:%@ %@",model.Title,model.Content);
         }
         
         [self createScrollView];
-
-//        [weakVC.tableView reloadData];
+        
+        //        [weakVC.tableView reloadData];
         
         
         [self loadDataWithScroll];
@@ -545,9 +554,7 @@
 }
 
 - (void)showSingleListRightView{
-    
     _singleRighView.dataAtts = self.notices;
-    
     _singleRighView.hidden = NO;
     [UIView animateWithDuration:AnimationTime animations:^{
         [_singleRighView mas_updateConstraints:^(MASConstraintMaker *make) {

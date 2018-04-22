@@ -51,13 +51,23 @@
 
 - (UIView *)headView{
     if (!_headView) {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 190)];
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 263)];
         [self.view addSubview:headView];
+
+        UIImageView *heImageView = [[UIImageView alloc] init];
+        heImageView.image = [UIImage imageNamed:@"loading_shape_rectangular"];
+        [headView addSubview:heImageView];
+        [heImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self.view.mas_centerX);
+            make.top.mas_equalTo(20);
+            make.width.height.mas_equalTo(121);
+        }];
+        
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
         [headView addSubview:imageView];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.view.mas_centerX);
-            make.top.mas_equalTo(60);
+            make.top.mas_equalTo(heImageView.mas_bottom).mas_equalTo(20);
             make.height.mas_equalTo(32);
             make.width.mas_equalTo(146);
         }];
@@ -182,6 +192,8 @@
 - (void)dealloc{
     [self.shadowAnimation stop];
     self.shadowAnimation = nil;
+    
+    NSLog(@"%s",__func__);
 }
 
 - (void)didReceiveMemoryWarning {

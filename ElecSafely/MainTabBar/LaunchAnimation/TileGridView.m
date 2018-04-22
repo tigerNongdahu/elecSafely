@@ -293,4 +293,10 @@
     return CGPointMake(deltaX / length, deltaY / length);
 }
 
+- (void)dealloc{
+    [self.shadowLogoAnimation stop];
+    [self.shadowCompanyAnimation stop];
+    NSLog(@"%s",__func__);
+}
+
 @end

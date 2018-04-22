@@ -49,7 +49,7 @@
             self.icon.image = [UIImage imageNamed:iconUrl];
         }
     }else{
-        self.icon.image = [UIImage imageNamed:@"logo_icon"];
+        self.icon.image = [UIImage imageNamed:@"loading_shape_rectangular"];
     }
 }
 
@@ -112,7 +112,7 @@
     self.icon.userInteractionEnabled = YES;
     
     [supView addSubview:self.icon];
-    /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
+
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(70);
         make.left.mas_equalTo(32);
@@ -128,7 +128,6 @@
     self.accountLabel.font = PingFangMedium(18);
     self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
     
-    /*在这里使用masonry控制，会爆出约束冲突，但是不影响使用，所以就不管了*/
     [self.accountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.icon.mas_centerY);
         make.left.equalTo(self.icon.mas_right).mas_equalTo(27);
@@ -144,7 +143,6 @@
     else {
         self.accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
     }
-    
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource

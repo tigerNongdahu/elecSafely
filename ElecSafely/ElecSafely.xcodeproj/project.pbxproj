@@ -145,7 +145,6 @@
 		EEEF714020746EE600ABD711 /* XWSSingleListRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF713F20746EE600ABD711 /* XWSSingleListRightView.m */; };
 		EEEF714420749E9800ABD711 /* XWSNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF714320749E9800ABD711 /* XWSNoticeModel.m */; };
 		EEF73384206532A700FFB99B /* XWSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF73383206532A700FFB99B /* XWSMainViewController.m */; };
-		EEF7338F20663EC700FFB99B /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = EEF7338E20663EC700FFB99B /* json.json */; };
 		EEFB698120862BBC0060C076 /* add-img.png in Resources */ = {isa = PBXBuildFile; fileRef = EEFB698020862BBC0060C076 /* add-img.png */; };
 		EF112779207E5A41006A3709 /* XWSBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF112778207E5A41006A3709 /* XWSBaseModel.m */; };
 		EF45C02B207770ED0074990E /* ESBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C026207770ED0074990E /* ESBaseNavigationController.m */; };
@@ -503,7 +502,6 @@
 		EEEF714320749E9800ABD711 /* XWSNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNoticeModel.m; sourceTree = "<group>"; };
 		EEF73382206532A700FFB99B /* XWSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSMainViewController.h; sourceTree = "<group>"; };
 		EEF73383206532A700FFB99B /* XWSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSMainViewController.m; sourceTree = "<group>"; };
-		EEF7338E20663EC700FFB99B /* json.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = json.json; sourceTree = "<group>"; };
 		EEFB698020862BBC0060C076 /* add-img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-img.png"; sourceTree = "<group>"; };
 		EF112777207E5A41006A3709 /* XWSBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSBaseModel.h; sourceTree = "<group>"; };
 		EF112778207E5A41006A3709 /* XWSBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSBaseModel.m; sourceTree = "<group>"; };
@@ -1121,7 +1119,6 @@
 			children = (
 				EEF73382206532A700FFB99B /* XWSMainViewController.h */,
 				EEF73383206532A700FFB99B /* XWSMainViewController.m */,
-				EEF7338E20663EC700FFB99B /* json.json */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1774,7 +1771,6 @@
 				5575DF57208994E9001FE8C1 /* baitian.png in Resources */,
 				EE50AECD2064A7C40068FBC1 /* left_setting@3x.png in Resources */,
 				EE936F0020750EAD00D3BD54 /* logo_icon@3x.png in Resources */,
-				EEF7338F20663EC700FFB99B /* json.json in Resources */,
 				EEFB698120862BBC0060C076 /* add-img.png in Resources */,
 				EE50AED12064A7C40068FBC1 /* left_statistics@3x.png in Resources */,
 				55EF89F71FDE3148003F5061 /* Assets.xcassets in Resources */,

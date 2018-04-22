@@ -48,7 +48,7 @@
     
     CAGradientLayer *gradientMask = [CAGradientLayer layer];
     gradientMask.frame = self.animatedView.bounds;
-    NSLog(@"gradientMask:%@ %@",gradientMask,NSStringFromCGRect(gradientMask.frame));
+ 
     CGFloat gradientSize = self.shadowWidth / self.animatedView.frame.size.width;
     
     NSArray *startLocations = @[
@@ -71,8 +71,6 @@
     gradientMask.locations = startLocations;
     gradientMask.startPoint = CGPointMake(0 - (gradientSize * 2), .5);
     gradientMask.endPoint = CGPointMake(1 + gradientSize, .5);
-    
-    NSLog(@"startPoint:%@ endPoint:%@",NSStringFromCGPoint(gradientMask.startPoint),NSStringFromCGPoint(gradientMask.endPoint));
     
     self.animatedView.layer.mask = gradientMask;
     

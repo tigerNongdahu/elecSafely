@@ -148,6 +148,8 @@
 #pragma mark -设置主页面
 - (void)createMainView {
     _mainBackImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    _mainBackImageView.image = [UIImage imageNamed:@"baitian"];
+
     [self.view addSubview:_mainBackImageView];
     [_mainBackImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.mas_equalTo(0);
@@ -361,6 +363,9 @@
     [noticeMgr GET:FrigateAPI_loadNotice parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        
+        NSLog(@"dic:%@",dic);
+        
         NSArray *ds = dic[@"rows"];
         [weakVC.notices removeAllObjects];
         
@@ -407,7 +412,13 @@
         }
         
         [self createScrollView];
+
         
+        //        [weakVC.tableView reloadData];
+        
+        
+//        [self loadDataWithScroll];
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];

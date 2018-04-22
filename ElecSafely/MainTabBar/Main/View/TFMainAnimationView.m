@@ -18,7 +18,10 @@
 
 - (XWSDayAnimationView *)dayFisrtAnimView{
     if (!_dayFisrtAnimView) {
-        _dayFisrtAnimView = [[XWSDayAnimationView alloc] initWithFrame:CGRectMake(- 150, 50, 150, 1) withSupuerView:self afterTime:2.0 animateDuration:3.0];
+        CGFloat x = arc4random() % 100 + 150;
+        CGFloat y = 50;
+        CGFloat duration = arc4random() % 3 + 2;
+        _dayFisrtAnimView = [[XWSDayAnimationView alloc] initWithFrame:CGRectMake(-x, y, 150, 1) withSupuerView:self afterTime:2 animateDuration:duration];
         _dayFisrtAnimView.hidden = YES;
     }
     return _dayFisrtAnimView;
@@ -26,7 +29,8 @@
 
 - (XWSDayAnimationView *)daySecondAnimView{
     if (!_daySecondAnimView) {
-        _daySecondAnimView = [[XWSDayAnimationView alloc] initWithFrame:CGRectMake( - _dayFisrtAnimView.frame.size.width * 0.4, CGRectGetMaxY(_dayFisrtAnimView.frame) + 30, _dayFisrtAnimView.frame.size.width * 0.4, 1) withSupuerView:self afterTime:3.0 animateDuration:4.0];
+        CGFloat duration = arc4random() % 3 + 3;
+        _daySecondAnimView = [[XWSDayAnimationView alloc] initWithFrame:CGRectMake( - _dayFisrtAnimView.frame.size.width * 0.4, CGRectGetMaxY(_dayFisrtAnimView.frame) + 30, _dayFisrtAnimView.frame.size.width * 0.4, 1) withSupuerView:self afterTime:3 animateDuration:duration];
         _daySecondAnimView.hidden = YES;
     }
     return _daySecondAnimView;

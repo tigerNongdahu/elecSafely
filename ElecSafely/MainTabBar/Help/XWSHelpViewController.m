@@ -69,11 +69,15 @@
 
     __weak typeof(self) weakVC = self;
     [manager GET:FrigateAPI_Help_AnswerForAsk parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
+        NSLog(@"responseObject:%@",resultStr);
         [weakVC dismissNoti];
         [XWSTipsView dismissTipViewWithSuperView:weakVC.view];
 
         NSArray *results = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         [weakVC.quetions removeAllObjects];
+        
+        NSLog(@"results:%ld",results.count);
         
         for (NSDictionary *dic in results) {
             XWSHelpModel *model = [[XWSHelpModel alloc] init];
@@ -86,6 +90,7 @@
         [weakVC.tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error:%@",error);
         [weakVC dismissNoti];
         [XWSTipsView showTipViewWithType:XWSShowViewTypeError inSuperView:weakVC.view];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];

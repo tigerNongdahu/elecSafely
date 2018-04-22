@@ -138,7 +138,7 @@
         }];
         
         if (_account == nil || [_account isEqualToString:@" "]) {
-            _accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+            _accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
         }else{
             _accountLabel.text = _account;
         }
@@ -163,7 +163,7 @@
         
         NSString *account = _account;
         if (_account == nil || [_account isEqualToString:@" "]) {
-            _accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+            _accountLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
         }
         
         [_scrollTextView startScrollWithText:account textColor:LeftViewTextColor font:PingFangMedium(18)];

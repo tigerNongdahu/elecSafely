@@ -11,7 +11,6 @@
 #import "TFLoginViewController.h"
 #import "PrivateFunction.h"
 #import "DESCrypt.h"
-#import "TFLoginProgram.h"
 #import "ElecProgressHUD.h"
 #import "XWSMainViewController.h"
 #import "XWSNavigationController.h"

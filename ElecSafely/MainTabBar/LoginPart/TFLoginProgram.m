@@ -10,6 +10,8 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "NSString+XWSManager.h"
 #import "AppDelegate.h"
+#import "TFLoginViewController.h"
+#import "XWSNavigationController.h"
 
 @interface TFLoginProgram ()<XGPushTokenManagerDelegate>
 
@@ -45,6 +47,11 @@ static TFLoginProgram *loginProgram = nil;
                 if (self.delegate && [self.delegate respondsToSelector:@selector(loginProgram: DidLoginFailed:)]) {
                     [self.delegate loginProgram:loginProgram DidLoginFailed:@"密码错误"];
                 }
+                
+                TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+                XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
+                [UIApplication sharedApplication].keyWindow.rootViewController = navi;
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -52,6 +59,11 @@ static TFLoginProgram *loginProgram = nil;
             if (self.delegate && [self.delegate respondsToSelector:@selector(loginProgram: DidLoginFailed:)]) {
                 [self.delegate loginProgram:loginProgram DidLoginFailed:@"登陆失败"];
             }
+            
+            TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+            XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
+            [UIApplication sharedApplication].keyWindow.rootViewController = navi;
         }];
         
         [_requestManager POST:FrigateAPI_BindApp parameters:@{@"account":account,@"pwd":password,@"SourceType":@"02"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

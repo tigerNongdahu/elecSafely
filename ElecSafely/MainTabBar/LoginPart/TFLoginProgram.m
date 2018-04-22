@@ -80,7 +80,6 @@ static TFLoginProgram *loginProgram = nil;
 
 //绑定信鸽推送
 - (void)bindWithAccount:(NSString *)account {
-    [XGPushTokenManager defaultTokenManager].delegatge = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [[XGPushTokenManager defaultTokenManager] bindWithIdentifier:account type:XGPushTokenBindTypeAccount];
 }
 

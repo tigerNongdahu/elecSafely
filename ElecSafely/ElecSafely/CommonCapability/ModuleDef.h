@@ -53,6 +53,7 @@
 #define UserAccount @"userAccount"
 #define UserPassword @"userPassword"
 #define UserName @"userName"
+#define MomentAction @"MomentAction"
 
 #define XWSTipViewClickTipViewNotification @"XWSTipViewClickTipViewNotification"
 

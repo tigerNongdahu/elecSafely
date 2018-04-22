@@ -56,6 +56,7 @@ static TFLoginProgram *loginProgram = nil;
                 
                 TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
                 XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
+                [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
                 [UIApplication sharedApplication].keyWindow.rootViewController = navi;
             }
@@ -68,6 +69,7 @@ static TFLoginProgram *loginProgram = nil;
             
             TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
             XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
+            [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
             [UIApplication sharedApplication].keyWindow.rootViewController = navi;
         }];
@@ -100,56 +102,7 @@ static TFLoginProgram *loginProgram = nil;
 
 - (void)relogin:(NSString *)account and:(NSString *)password {
     password = [[self class] getPassword];
-    password = [NSString md5:password];
-    if (account.length > 0 && password.length > 0) {
-        
-        [_requestManager POST:FrigateAPI_Login_Check parameters:@{@"name":account,@"pwd":password} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSString *checkId =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
-            
-            if ([checkId isEqualToString:@"-1"]) {
-                
-            }
-            else if ([checkId isEqualToString:@"1"]) {
-                
-                TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
-                [loginVC loginProgram:loginProgram DidLoginFailed:@"登录失败"];
-                XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
-                [UIApplication sharedApplication].keyWindow.rootViewController = navi;
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"error:%@",error);
-            
-            TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
-            [loginVC loginProgram:loginProgram DidLoginFailed:@"登录失败"];
-            XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
-            [UIApplication sharedApplication].keyWindow.rootViewController = navi;
-        }];
-        
-        [_requestManager POST:FrigateAPI_BindApp parameters:@{@"account":account,@"pwd":password,@"SourceType":@"02"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-            
-            if ([dic[@"Flag"] isKindOfClass:[NSNumber class]] &&
-                [dic[@"Flag"] integerValue] == 1) {
-                [self bindWithAccount:account];
-            }
-            else if ([dic[@"Flag"] isKindOfClass:[NSString class]] &&
-                     [dic[@"Flag"] isEqualToString:@"1"]) {
-                [self bindWithAccount:account];
-            }
-            else {
-                [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
-            }
-            
-            if ([dic[@"Name"] isKindOfClass:[NSString class]]) {
-                NSString *userName = dic[@"Name"];
-                userName = userName.length > 0 ? userName : [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
-                [[NSUserDefaults standardUserDefaults] setObject:userName forKey:UserName];
-            }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
-        }];
-    }
+    [self userLoginWithAccount:account passWord:password];
 }
 
 + (NSString *)getPassword {

@@ -291,7 +291,6 @@
 
 - (void)loginProgram:(TFLoginProgram *)program DidLoginFailed:(NSString *)error {
     [ElecTipsView showTips:error];
-    [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
     _loginBtn.userInteractionEnabled = YES;
 }
 

@@ -18,7 +18,7 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-
+static BOOL fistLogin = YES;
 @interface AppDelegate ()<XGPushDelegate,XGPushTokenManagerDelegate>
 
 @end
@@ -95,7 +95,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
+    fistLogin = NO;
     //取消通知
     [self UnRegesterNotification];
 }
@@ -112,8 +112,11 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [self matchingTimeSetBackImage];
-    if (UserAccount.length > 0 && UserPassword.length > 0) {
-        [[TFLoginProgram sharedInstance] userLoginWithAccount:UserAccount passWord:UserPassword];
+    
+    NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+    NSString *passWord = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
+    if (userAccount.length > 0 && passWord.length > 0 && !fistLogin) {
+        [[TFLoginProgram sharedInstance] relogin:userAccount and:passWord];
     }
 }
 

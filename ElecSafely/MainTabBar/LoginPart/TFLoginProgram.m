@@ -10,6 +10,8 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "NSString+XWSManager.h"
 #import "AppDelegate.h"
+#import "DESCrypt.h"
+#import "PrivateFunction.h"
 #import "TFLoginViewController.h"
 #import "XWSNavigationController.h"
 
@@ -32,6 +34,10 @@ static TFLoginProgram *loginProgram = nil;
 }
 
 - (void)userLoginWithAccount:(NSString *)account passWord:(NSString *)password {
+    [[NSUserDefaults standardUserDefaults] setObject:account forKey:UserAccount];//存贮账号1
+    [[NSUserDefaults standardUserDefaults] setObject:XPressEncryptUTF8(password) forKey:UserPassword];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     password = [NSString md5:password];
     if (account.length > 0 && password.length > 0) {
 
@@ -77,6 +83,9 @@ static TFLoginProgram *loginProgram = nil;
                 [dic[@"Flag"] isEqualToString:@"1"]) {
                 [self bindWithAccount:account];
             }
+            else {
+                [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
+            }
             
             if ([dic[@"Name"] isKindOfClass:[NSString class]]) {
                 NSString *userName = dic[@"Name"];
@@ -84,10 +93,73 @@ static TFLoginProgram *loginProgram = nil;
                 [[NSUserDefaults standardUserDefaults] setObject:userName forKey:UserName];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            // do nothing;
+            [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
+        }];
+    }
+}
+
+- (void)relogin:(NSString *)account and:(NSString *)password {
+    password = [[self class] getPassword];
+    password = [NSString md5:password];
+    if (account.length > 0 && password.length > 0) {
+        
+        [_requestManager POST:FrigateAPI_Login_Check parameters:@{@"name":account,@"pwd":password} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSString *checkId =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
+            
+            if ([checkId isEqualToString:@"-1"]) {
+                
+            }
+            else if ([checkId isEqualToString:@"1"]) {
+                
+                TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+                [loginVC loginProgram:loginProgram DidLoginFailed:@"登录失败"];
+                XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
+                [UIApplication sharedApplication].keyWindow.rootViewController = navi;
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error:%@",error);
+            
+            TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
+            [loginVC loginProgram:loginProgram DidLoginFailed:@"登录失败"];
+            XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
+            [UIApplication sharedApplication].keyWindow.rootViewController = navi;
         }];
         
+        [_requestManager POST:FrigateAPI_BindApp parameters:@{@"account":account,@"pwd":password,@"SourceType":@"02"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+            
+            if ([dic[@"Flag"] isKindOfClass:[NSNumber class]] &&
+                [dic[@"Flag"] integerValue] == 1) {
+                [self bindWithAccount:account];
+            }
+            else if ([dic[@"Flag"] isKindOfClass:[NSString class]] &&
+                     [dic[@"Flag"] isEqualToString:@"1"]) {
+                [self bindWithAccount:account];
+            }
+            else {
+                [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
+            }
+            
+            if ([dic[@"Name"] isKindOfClass:[NSString class]]) {
+                NSString *userName = dic[@"Name"];
+                userName = userName.length > 0 ? userName : [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+                [[NSUserDefaults standardUserDefaults] setObject:userName forKey:UserName];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
+        }];
     }
+}
+
++ (NSString *)getPassword {
+    NSString *pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
+    return [DESCrypt decryptUTF8:pwd password:[PrivateFunction getUserFunction]];
+}
+
+NSString *XPressEncryptUTF8(NSString *plainText) {
+    //使用utf8加解密
+    return [DESCrypt encryptUTF8:plainText password:[PrivateFunction getUserFunction]];
 }
 
 //绑定信鸽推送

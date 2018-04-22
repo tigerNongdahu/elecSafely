@@ -12,6 +12,7 @@
 #import "TileView.h"
 #import "TileGridView.h"
 #import "Contans.h"
+#import "JTSlideShadowAnimation.h"
 
 @interface TileGridView ()
 @property (nonatomic,strong) UIView *containerView;
@@ -22,11 +23,15 @@
 
 @property (nonatomic,strong) UILabel *logoLabel;
 @property (nonatomic,strong) UILabel *newlogoLabel;
-
+@property (nonatomic,strong) UILabel *companyLabel;
 @property (nonatomic,strong) UIImageView *companyImage;
 @property (nonatomic,strong) NSMutableArray *tileViewRows;
 @property (nonatomic,assign) CFTimeInterval beginTime;
 @property (nonatomic,assign) NSTimeInterval kRippleDelayMultiplier;
+
+@property (nonatomic, strong) JTSlideShadowAnimation *shadowCompanyAnimation;
+
+@property (nonatomic, strong) JTSlideShadowAnimation *shadowLogoAnimation;
 @end
 
 @implementation TileGridView
@@ -62,15 +67,36 @@
         [self addSubview:_newlogoLabel];
         [self layoutIfNeeded];
         
+        [self setUpShadowAnimation];
+
     }
     return self;
+}
+
+- (void)setUpShadowAnimation{
+    //company
+    self.shadowCompanyAnimation = [self getShadowAnimationWithView:_companyLabel];
+
+    //newLogoLabel
+    self.shadowLogoAnimation = [self getShadowAnimationWithView:_newlogoLabel];
+}
+
+- (JTSlideShadowAnimation *)getShadowAnimationWithView:(UIView *)view{
+    JTSlideShadowAnimation *animation = [[JTSlideShadowAnimation alloc] init];
+    animation.shadowBackgroundColor = [UIColor colorWithWhite:1. alpha:.7];
+    animation.shadowForegroundColor = [UIColor whiteColor];
+    animation.animatedView = view;
+    animation.duration = 1.0;
+    animation.shadowWidth = 40.;
+    return animation;
 }
 
 - (void)startAnimating
 {
     _beginTime = CACurrentMediaTime();
     [self startAnimatingWithBeginTime:_beginTime];
-    
+    [self.shadowCompanyAnimation start];
+    [self.shadowLogoAnimation start];
 }
 
 -(void)layoutSubviews

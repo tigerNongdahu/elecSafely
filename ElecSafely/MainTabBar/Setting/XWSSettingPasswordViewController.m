@@ -97,6 +97,7 @@
         self.title = @"账号与安全";
     }else{
         self.title = @"注册";
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:0 target:self action:@selector(clickBack)];
     }
     
     self.sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 30)];
@@ -108,6 +109,13 @@
     [self.sendBtn addTarget:self action:@selector(savePwd) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.sendBtn];
+}
+
+- (void)clickBack{
+    [self.oldTextField resignFirstResponder];
+    [self.neTextField resignFirstResponder];
+    [self.conTextField resignFirstResponder];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)initView{
@@ -171,7 +179,7 @@
         // 如果放回的是“密码修改成功”，则退出到登录页面
         if ([resultStr isEqualToString:@"1"]) {
             [ElecTipsView showTips:@"注册成功，请回到登录页面进行登录" during:2.0];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [weakVC clickBack];
         }else{
             [ElecTipsView showTips:@"注册失败，请检查数据情况" during:2.0];
         }

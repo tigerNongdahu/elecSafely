@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "XGPush.h"
 
+static BOOL fistLogin = YES;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

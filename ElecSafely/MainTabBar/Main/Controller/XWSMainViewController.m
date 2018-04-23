@@ -43,6 +43,7 @@
 @property (nonatomic, strong) NSMutableArray *quetions;
 
 @property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
+@property (nonatomic, strong) GYRollingNoticeView *noticeView;
 @end
 
 @implementation XWSMainViewController
@@ -95,14 +96,14 @@
 
 - (void)createScrollView {
     
-    GYRollingNoticeView *noticeView = [[GYRollingNoticeView alloc]initWithFrame:CGRectMake(30, ScreenHeight - NavibarHeight - 100, ScreenWidth - 60, 100)];
-    noticeView.dataSource = self;
-    noticeView.delegate = self;
-    [self.view addSubview:noticeView];
-    noticeView.backgroundColor = [UIColor lightGrayColor];
-    [noticeView registerClass:[GYNoticeViewCell class] forCellReuseIdentifier:@"CustomNoticeCell"];
+    _noticeView = [[GYRollingNoticeView alloc]initWithFrame:CGRectMake(30, ScreenHeight - NavibarHeight - 100, ScreenWidth - 60, 100)];
+    _noticeView.dataSource = self;
+    _noticeView.delegate = self;
+    [self.view addSubview:_noticeView];
+    _noticeView.backgroundColor = [UIColor lightGrayColor];
+    [_noticeView registerClass:[GYNoticeViewCell class] forCellReuseIdentifier:@"CustomNoticeCell"];
     
-    [noticeView reloadDataAndStartRoll];
+    [_noticeView reloadDataAndStartRoll];
     
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(30,  ScreenHeight - NavibarHeight - 130, ScreenWidth - 60, 30)];
     headView.backgroundColor = BackColor;
@@ -497,6 +498,7 @@
 
 - (void)dealloc{
     NSLog(@"main:%s",__func__);
+    [_noticeView stopRoll];
 }
 
 @end

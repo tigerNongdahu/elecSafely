@@ -74,6 +74,7 @@
             //随机的y
             int yHeight = ScreenHeight / 6 - 50;
             newframe.origin.y = arc4random() % yHeight;
+
             line.frame = newframe;
             //获取随机的动画时间
             _duration = arc4random() % 3 + 2 + 100 / self.frame.size.width;

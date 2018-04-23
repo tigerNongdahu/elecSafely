@@ -25,6 +25,11 @@
 
 + (instancetype)sharedInstance;
 
++ (NSString *)getPassword;
+
 - (void)userLoginWithAccount:(NSString *)account passWord:(NSString *)password;
+
+- (void)relogin:(NSString *)account and:(NSString *)password;
+
 
 @end

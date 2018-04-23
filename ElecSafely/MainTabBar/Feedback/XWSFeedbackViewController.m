@@ -125,7 +125,9 @@
             make.right.mas_equalTo(-10);
             make.bottom.mas_equalTo(-12);
         }];
-        [_textView becomeFirstResponder];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [_textView becomeFirstResponder];
+        });
     }
     return _textView;
 }
@@ -241,7 +243,7 @@
     self.sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.sendBtn setTitleColor:RGBA(153, 153, 153, 1) forState:UIControlStateNormal];
     self.sendBtn.titleLabel.font = PingFangMedium(15);
-    self.sendBtn.userInteractionEnabled = NO;
+    self.sendBtn.userInteractionEnabled = YES;
     [self.sendBtn addTarget:self action:@selector(sendFeedBack) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.sendBtn];
@@ -306,10 +308,8 @@
     }
     
     if (textView.text.length < 10) {
-        self.sendBtn.userInteractionEnabled = NO;
         [self.sendBtn setTitleColor:RGBA(153, 153, 153, 1) forState:UIControlStateNormal];
     }else{
-        self.sendBtn.userInteractionEnabled = YES;
         [self.sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
     }
     

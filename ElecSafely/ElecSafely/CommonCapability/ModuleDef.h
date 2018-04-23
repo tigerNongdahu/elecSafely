@@ -56,5 +56,5 @@
 #define MomentAction @"MomentAction"
 
 #define XWSTipViewClickTipViewNotification @"XWSTipViewClickTipViewNotification"
-
+#define APPUserNameDidUpdateNotification @"APPUserNameDidUpdate"
 #endif /* ModuleDef_h */

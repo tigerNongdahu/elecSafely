@@ -90,7 +90,11 @@
 #pragma mark- rolling
 - (void)layoutCurrentCellAndWillShowCell
 {
-    int count = (int)[self.dataSource numberOfRowsForRollingNoticeView:self];
+    NSInteger count = 0;
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfRowsForRollingNoticeView:)]) {
+        count = (int)[self.dataSource numberOfRowsForRollingNoticeView:self];
+    }
+    
     if (_currentIndex > count - 1) {
         _currentIndex = 0;
     }
@@ -138,7 +142,11 @@
     [self stopRoll];
 
     [self layoutCurrentCellAndWillShowCell];
-    NSInteger count = [self.dataSource numberOfRowsForRollingNoticeView:self];
+    NSInteger count = 0;
+
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfRowsForRollingNoticeView:)]) {
+         count = [self.dataSource numberOfRowsForRollingNoticeView:self];
+    }
     if (count && count < 2) {
         return;
     }
@@ -195,7 +203,10 @@
 
 - (void)handleCellTapAction
 {
-    int count = (int)[self.dataSource numberOfRowsForRollingNoticeView:self];
+    NSInteger count = 0;
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfRowsForRollingNoticeView:)]) {
+        count = [self.dataSource numberOfRowsForRollingNoticeView:self];
+    }
     if (_currentIndex > count - 1) {
         _currentIndex = 0;
     }
@@ -226,6 +237,10 @@
         _gyTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleCellTapAction)];
     }
     return _gyTapGesture;
+}
+
+- (void)dealloc {
+    [self stopRoll];
 }
 
 @end

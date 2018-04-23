@@ -164,8 +164,9 @@
             case 0:
             {
                 XWSSettingPasswordViewController *PwdVC = [[XWSSettingPasswordViewController alloc] init];
-                PwdVC.type = XWSShowVCTypeSettingPassword;
+                PwdVC.type = XWSShowVCTypeRegister;
                 vc = PwdVC;
+                
             }
                 break;
             case 1:

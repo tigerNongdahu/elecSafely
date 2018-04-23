@@ -97,7 +97,14 @@
         self.title = @"账号与安全";
     }else{
         self.title = @"注册";
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:0 target:self action:@selector(clickBack)];
+        UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
+        [sendBtn setTitle:@"返回" forState:UIControlStateNormal];
+        [sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+        sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        sendBtn.titleLabel.font = PingFangMedium(15);
+        [sendBtn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sendBtn];
     }
     
     self.sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 30)];

@@ -12,6 +12,7 @@
 #import "ElecProgressHUD.h"
 #import "XWSMainViewController.h"
 #import "XWSNavigationController.h"
+#import "XWSSettingPasswordViewController.h"
 
 @interface TFLoginViewController ()<UITextFieldDelegate,TFLoginProgramDelegate>
 
@@ -20,6 +21,8 @@
 @property (nonatomic, strong) UITextField *passWordTF;
 @property (nonatomic, strong) UIView *loginSquare;
 @property (nonatomic, strong) ElecProgressHUD *progressHUD;
+@property (nonatomic, strong) UIButton *registerBtn;
+
 @end
 
 @implementation TFLoginViewController
@@ -142,6 +145,15 @@
             make.bottom.mas_equalTo(loginSquare.bottom);
         }];
         
+        [self.view addSubview:self.registerBtn];
+        //注册按钮
+        [_registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(20);
+            make.trailing.mas_equalTo(-20);
+            make.bottom.mas_equalTo(-20);
+            make.width.mas_equalTo(50);
+        }];
+        
         // 密码行
         UIView *passWordLine = [[UIView alloc] initWithFrame:CGRectZero];
         passWordLine.backgroundColor = UIColorRGB(0x525252);
@@ -181,8 +193,27 @@
             make.bottom.mas_equalTo(userNameLine.mas_top).offset(-14);
         }];
         _loginSquare = loginSquare;
+        
+        
     }
     return _loginSquare;
+}
+
+- (UIButton *)registerBtn {
+    if (_registerBtn == nil){
+        UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [registerBtn setTitle:@"注册" forState:UIControlStateNormal];
+        registerBtn.backgroundColor = [UIColor clearColor];
+        registerBtn.userInteractionEnabled = YES;
+        [registerBtn addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
+        registerBtn.titleLabel.font = PingFangRegular(15);
+        [registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [registerBtn setTitleColor:UIColorRGB(0xacacac) forState:UIControlStateHighlighted];
+        registerBtn.layer.cornerRadius = 20;
+        registerBtn.layer.masksToBounds= YES;
+        _registerBtn = registerBtn;
+    }
+    return _registerBtn;
 }
 
 - (UIButton *)loginBtn {
@@ -257,6 +288,14 @@
         }
     }
     return _passWordTF;
+}
+
+- (void)registerAction {
+    XWSSettingPasswordViewController *registerVC = [[XWSSettingPasswordViewController alloc] init];
+    registerVC.type = XWSShowVCTypeRegister;
+    [self presentViewController:registerVC animated:YES completion:^{
+        
+    }];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

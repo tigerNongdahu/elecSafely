@@ -29,7 +29,7 @@
     
     for (int i = 0; i < 6; i++) {
         
-        int time = arc4random()%3;
+        int time = arc4random()%12;
 
         CGFloat x_add = arc4random()%((int)gapWidth);
         CGFloat y_add = arc4random()%((int)gapHeight);

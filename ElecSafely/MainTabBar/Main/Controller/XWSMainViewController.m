@@ -78,7 +78,6 @@
     //加载公告应该放在这里，这样在切换控制器的时候，可以加载到最新的公告数据
     [self loadNoticeData];
     [self checkBackImage];
-
 }
 
 #pragma mark - 加载数据
@@ -156,19 +155,7 @@
         make.top.left.bottom.right.mas_equalTo(0);
     }];
     
-    NSString *moment = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
-    if ([moment isEqualToString:@"baitian"]) {
-        _mainBackImageView.image = [UIImage imageNamed:@"baitian"];
-        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
-
-    }
-    else if ([moment isEqualToString:@"yewan"]) {
-        _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
-        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
-
-    }
-    [self.view addSubview:_mainAnimationView];
-    
+//    [self createAnimationView];
     _todayLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _todayLabel.textColor = [UIColor whiteColor];
     _todayLabel.textAlignment = NSTextAlignmentLeft;
@@ -193,14 +180,41 @@
 }
 
 - (void)checkBackImage {
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.3;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionFade;
-    [_mainBackImageView.layer addAnimation:transition forKey:@"a"];
-    NSString *imageName = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
-    [_mainBackImageView setImage:[UIImage imageNamed:imageName]];
+    NSString *moment = [NSString isDayTime]?@"baitian":@"yewan";
 
+    if (!_mainAnimationView) {
+        [self createAnimationView:moment];
+    }
+    else {
+        NSString *imageName = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
+        if (![moment isEqualToString:imageName]) {
+            [_mainAnimationView removeFromSuperview];
+            [self createAnimationView:moment];
+            
+            CATransition *transition = [CATransition animation];
+            transition.duration = 2;
+            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            transition.type = kCATransitionFade;
+            [_mainBackImageView.layer addAnimation:transition forKey:@"a"];
+            [_mainBackImageView setImage:[UIImage imageNamed:moment]];
+            [[NSUserDefaults standardUserDefaults] setObject:moment forKey:MomentAction];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+}
+
+- (void)createAnimationView:(NSString *)moment {
+    if ([moment isEqualToString:@"baitian"]) {
+        _mainBackImageView.image = [UIImage imageNamed:@"baitian"];
+        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, ScreenHeight / 6 - 60, ScreenWidth, 80) withAnimation:TFAnimationTypeOfDayTime];
+        
+    }
+    else if ([moment isEqualToString:@"yewan"]) {
+        _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
+        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, ScreenHeight / 6 - 60, ScreenWidth, 80) withAnimation:TFAnimationTypeOfDayNight];
+        
+    }
+    [self.view addSubview:_mainAnimationView];
 }
 
 - (NSString *)getNowDate {
@@ -354,7 +368,22 @@
     if (vc == nil) {
         return;
     }
-     [self.navigationController pushViewController:vc animated:YES];
+    [UIView transitionWithView:self.navigationController.view
+     
+                      duration:1
+     
+                       options:UIViewAnimationOptionPreferredFramesPerSecond60
+     
+                    animations:^{
+                        
+                        [self.navigationController pushViewController:vc animated:NO];
+                        
+                    }
+     
+                    completion:nil];
+    
+
+//     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 公告

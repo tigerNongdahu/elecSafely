@@ -39,7 +39,7 @@
         if (self.type == XWSShowVCTypeSettingPassword) {
             _places = [NSMutableArray arrayWithObjects:@"请输入6-16位原密码",@"请输入6-16位新密码",@"请重复输入新密码", nil];
         }else{
-            _places = [NSMutableArray arrayWithObjects:@"请输入用户名",@"请输入6-16位新密码",@"请重复输入新密码", nil];
+            _places = [NSMutableArray arrayWithObjects:@"请输入用户名",@"请输入6-16位密码",@"请重复输入以上密码", nil];
         }
         
     }
@@ -51,7 +51,7 @@
         if (_type == XWSShowVCTypeSettingPassword) {
             _titles = [NSMutableArray arrayWithObjects:@"原密码",@"新密码",@"确认密码", nil];
         }else{
-            _titles = [NSMutableArray arrayWithObjects:@"用户名",@"新密码",@"确认密码", nil];
+            _titles = [NSMutableArray arrayWithObjects:@"用户名",@"密码",@"确认密码", nil];
         }
     }
     return _titles;

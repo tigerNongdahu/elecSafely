@@ -8,17 +8,19 @@
 
 #import "XWSPrismaticView.h"
 
-const CGFloat StarWidth = 6.f;
-const CGFloat StarHeight = 6.f;
+const CGFloat StarWidth = 3.f;
+const CGFloat StarHeight = 3.f;
 
-@implementation XWSPrismaticView
+@implementation XWSPrismaticView {
+    NSInteger duraingTime;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.hidden = YES;
-        [self setAnimateWithAfter:2];
+        [self setAnimateWithAfter:0];
         self.transform = CGAffineTransformMakeRotation(-M_PI*0.02);
         self.backgroundColor = [UIColor clearColor];
     }
@@ -59,19 +61,21 @@ const CGFloat StarHeight = 6.f;
         self.width_ES = 0;
         self.height_ES = 0;
         
-        [UIView animateWithDuration:3 animations:^{
-            
+        [UIView animateWithDuration:2 animations:^{
+            self.
             self.width_ES = StarWidth;
             self.height_ES = StarHeight;
             self.alpha = 1;
             
         }completion:^(BOOL finished) {
-            [UIView animateWithDuration:3 animations:^{
+            [UIView animateWithDuration:2 animations:^{
                 self.alpha = 0;
                 self.width_ES = 0;
                 self.height_ES = 0;
             }completion:^(BOOL finished) {
-                [self setAnimateWithAfter:2];
+                self.x_ES = arc4random() % (int)((int)ScreenWidth / 3) + ScreenWidth/2;
+                self.y_ES = arc4random() % (int)(self.superview.frame.size.height);
+                [self setAnimateWithAfter:arc4random()%12 + 4];
             }];
         }];
     });

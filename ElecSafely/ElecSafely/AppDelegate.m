@@ -61,6 +61,7 @@
     
     [[XGPush defaultManager] setXgApplicationBadgeNumber:0];
     [[XGPush defaultManager] reportXGNotificationInfo:launchOptions];
+    [XGPushTokenManager defaultTokenManager].delegatge = self;
     return YES;
 }
 
@@ -105,13 +106,17 @@
     
     //注册通知（自己的通知）
     [self regesterNotification];
+    for (UIViewController *mainVC in [UIApplication sharedApplication].keyWindow.rootViewController.childViewControllers) {
+        if ([mainVC isKindOfClass:[XWSMainViewController class]]) {
+            [mainVC performSelector:@selector(checkBackImage) withObject:nil];
+            break;
+        }
+    }
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [self matchingTimeSetBackImage];
-    
     NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
     NSString *passWord = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
     if (userAccount.length > 0 && passWord.length > 0 && !fistLogin) {
@@ -131,20 +136,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"registerDeviceFailed" object:nil];
 }
 
-// 对比当前时间
-- (void)matchingTimeSetBackImage {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"HH"];
-    NSString *str = [formatter stringFromDate:[NSDate date]];
-    int time = [str intValue];
-    if (time>=19||time<=07) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"yewan" forKey:MomentAction];
-    }
-    else{
-        [[NSUserDefaults standardUserDefaults] setObject:@"baitian" forKey:MomentAction];
-    }
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
 
 
 /**
@@ -180,9 +171,11 @@
 
 #pragma mark - XGPushTokenManagerDelegate
 - (void)xgPushDidBindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
+    
 }
 
 - (void)xgPushDidUnbindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
+    
 }
 
 

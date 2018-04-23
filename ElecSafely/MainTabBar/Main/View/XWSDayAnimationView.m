@@ -72,7 +72,7 @@
             //随机的x
             newframe.origin.x = -(self.frame.size.width + arc4random() % 100);
             //随机的y
-            int yHeight = ScreenHeight / 6 - 50;
+            int yHeight = 80;
             newframe.origin.y = arc4random() % yHeight;
 
             line.frame = newframe;

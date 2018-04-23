@@ -275,7 +275,6 @@
     _dataAtts = dataAtts;
     
     [self.datas removeAllObjects];
-    
     [self.datas addObjectsFromArray:_dataAtts];
 
     if (self.datas.count == 0) {

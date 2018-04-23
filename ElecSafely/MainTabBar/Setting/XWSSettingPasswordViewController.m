@@ -36,14 +36,23 @@
 
 - (NSMutableArray *)places{
     if (!_places) {
-        _places = [NSMutableArray arrayWithObjects:@"请输入6-16位原密码",@"请输入6-16位新密码",@"请重复输入新密码", nil];
+        if (self.type == XWSShowVCTypeSettingPassword) {
+            _places = [NSMutableArray arrayWithObjects:@"请输入6-16位原密码",@"请输入6-16位新密码",@"请重复输入新密码", nil];
+        }else{
+            _places = [NSMutableArray arrayWithObjects:@"请输入用户名",@"请输入6-16位新密码",@"请重复输入新密码", nil];
+        }
+        
     }
     return _places;
 }
 
 - (NSMutableArray *)titles{
     if (!_titles) {
-        _titles = [NSMutableArray arrayWithObjects:@"原密码",@"新密码",@"确认密码", nil];
+        if (_type == XWSShowVCTypeSettingPassword) {
+            _titles = [NSMutableArray arrayWithObjects:@"原密码",@"新密码",@"确认密码", nil];
+        }else{
+            _titles = [NSMutableArray arrayWithObjects:@"用户名",@"新密码",@"确认密码", nil];
+        }
     }
     return _titles;
 }
@@ -84,7 +93,20 @@
 
 - (void)setUpNavi{
     //设置标题
-    self.title = @"账号与安全";
+    if (self.type == XWSShowVCTypeSettingPassword) {
+        self.title = @"账号与安全";
+    }else{
+        self.title = @"注册";
+        UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
+        [sendBtn setTitle:@"返回" forState:UIControlStateNormal];
+        [sendBtn setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+        sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        sendBtn.titleLabel.font = PingFangMedium(15);
+        [sendBtn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sendBtn];
+    }
+    
     self.sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 30)];
     [self.sendBtn setTitle:@"提交" forState:UIControlStateNormal];
     _sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -94,6 +116,13 @@
     [self.sendBtn addTarget:self action:@selector(savePwd) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.sendBtn];
+}
+
+- (void)clickBack{
+    [self.oldTextField resignFirstResponder];
+    [self.neTextField resignFirstResponder];
+    [self.conTextField resignFirstResponder];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)initView{
@@ -123,31 +152,73 @@
         return;
     }
     
-     [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
+    [self.progressHUD showHUD:self.view Offset:-NavibarHeight animation:18];
+    //修改密码
+    if (self.type == XWSShowVCTypeSettingPassword) {
+        [self settingPassword];
+    }else{
+        [self setttingRegister];
+    }
+}
+
+- (void)setttingRegister{
+    NSString *nickname = [self.oldTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *password = [self.neTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
+    ElecHTTPManager *manager = [ElecHTTPManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"LoginName"] = nickname;
+    param[@"Password"] = [NSString md5:password];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    __weak typeof(self) weakVC = self;
+    [manager POST:FrigateAPI_UserInfoRegister parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [weakVC.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+        NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
+        resultStr = [resultStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+        resultStr = [resultStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
+        NSLog(@"register:%@ %ld",resultStr,resultStr.length);
+        // 如果放回的是“密码修改成功”，则退出到登录页面
+        if ([resultStr isEqualToString:@"1"]) {
+            [ElecTipsView showTips:@"注册成功，请回到登录页面进行登录" during:2.0];
+            [weakVC clickBack];
+        }else{
+            [ElecTipsView showTips:@"注册失败，请检查数据情况" during:2.0];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error:%@",error);
+        [weakVC.progressHUD dismiss];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
+    }];
+}
+
+- (void)settingPassword{
     NSString *old = [self.oldTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *nP = [self.neTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
-   
+    
     ElecHTTPManager *manager = [ElecHTTPManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"OldPW"] = old;
     param[@"NewPW"] = nP;
-//    param[@"OldPW"] = [NSString md5:old];
-//    param[@"NewPW"] = [NSString md5:nP];
-
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     __weak typeof(self) weakVC = self;
     [manager POST:FrigateAPI_ChangePW parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
+        
         [weakVC.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
         NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
         
         [ElecTipsView showTips:resultStr during:2.0];
-         NSLog(@"checkId:%@",resultStr);
+        NSLog(@"checkId:%@",resultStr);
         // 如果放回的是“密码修改成功”，则退出到登录页面
         if ([resultStr containsString:MODIFY_PASSWORD_SUCCESS_STRING]) {
             [weakVC logOut];
@@ -171,15 +242,29 @@
     });
 }
 
+
+
 - (BOOL)checkParam{
     [self.oldTextField resignFirstResponder];
     [self.neTextField resignFirstResponder];
     [self.conTextField resignFirstResponder];
     
     if (![self checkPwd:self.oldTextField.text]) {
-        [ElecTipsView showTips:@"请输入6~16位的原密码" during:2.0];
+        if (self.type == XWSShowVCTypeSettingPassword) {
+            [ElecTipsView showTips:@"请输入6~16位的原密码" during:2.0];
+        }else{
+            [ElecTipsView showTips:@"请输入6~16位的用户名" during:2.0];
+        }
         return NO;
     }
+    
+    if (self.type == XWSShowVCTypeRegister) {
+        if ([NSString hasChinese:self.oldTextField.text]) {
+            [ElecTipsView showTips:@"不能输入中文!" during:2.0];
+            return NO;
+        }
+    }
+    
     
     if (![self checkPwd:self.neTextField.text]) {
         [ElecTipsView showTips:@"请输入6~16位的新密码" during:2.0];
@@ -187,7 +272,7 @@
     }
     
     if (![self checkPwd:self.conTextField.text]) {
-        [ElecTipsView showTips:@"请输入6~16位的新密码" during:2.0];
+        [ElecTipsView showTips:@"请输入6~16位的确认密码" during:2.0];
         return NO;
     }
     
@@ -231,6 +316,9 @@
         case 0:
         {
             self.oldTextField = cell.textField;
+            if (self.type == XWSShowVCTypeRegister) {
+                cell.textField.secureTextEntry = NO;
+            }
         }
             break;
         case 1:

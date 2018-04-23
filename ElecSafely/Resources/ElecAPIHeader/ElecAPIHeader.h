@@ -42,6 +42,9 @@
 /*设备注册*/
 #define FrigateAPI_Register @"http://www.frigate-iot.com/API/Register.php"
 
+/*用户注册*/
+#define FrigateAPI_UserInfoRegister @"http://www.frigate-iot.com/API/CreateUser.php"
+
 /*公告列表*/
 #define FrigateAPI_loadNotice @"http://www.frigate-iot.com/MonitoringCentre/Data/loadNewNotice.php"
 

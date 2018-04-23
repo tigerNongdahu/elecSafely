@@ -8,6 +8,12 @@
 
 #import "XWSBasrViewController.h"
 
-@interface XWSSettingPasswordViewController : XWSBasrViewController
+typedef NS_ENUM(NSInteger, XWSShowVCType) {
+    XWSShowVCTypeSettingPassword = 0,//修改密码
+    XWSShowVCTypeRegister,//注册
+};
 
+
+@interface XWSSettingPasswordViewController : XWSBasrViewController
+@property (nonatomic, assign) XWSShowVCType type;
 @end

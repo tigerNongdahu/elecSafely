@@ -439,6 +439,7 @@
             make.left.mas_equalTo(0);
             make.right.mas_equalTo(ScreenWidth);
         }];
+        _singleRighView.dataAtts = self.notices;
     }
 }
 

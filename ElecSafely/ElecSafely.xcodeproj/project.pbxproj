@@ -196,6 +196,7 @@
 		EF45C0CC207992820074990E /* XWSAlarmDeviceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45C0CB207992820074990E /* XWSAlarmDeviceListModel.m */; };
 		EF6741B0208CC18C00B5EA3B /* diaodian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6741AF208CC18C00B5EA3B /* diaodian@3x.png */; };
 		EF6741B1208CD30600B5EA3B /* wendu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6741AA208CC01900B5EA3B /* wendu@3x.png */; };
+		EF6741B4208D4EC400B5EA3B /* XWSNightStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6741B3208D4EC400B5EA3B /* XWSNightStarsView.m */; };
 		EF6E55C2208AACC700DC9120 /* XWSPrismaticView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6E55C1208AACC700DC9120 /* XWSPrismaticView.m */; };
 		EFED1AA72083508B00179276 /* XWSDeviceBaseInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AA62083508B00179276 /* XWSDeviceBaseInfoVC.m */; };
 		EFED1AD7208523A600179276 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFED1AAB208523A600179276 /* MJRefreshAutoFooter.m */; };
@@ -604,6 +605,8 @@
 		EF45C0CB207992820074990E /* XWSAlarmDeviceListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSAlarmDeviceListModel.m; sourceTree = "<group>"; };
 		EF6741AA208CC01900B5EA3B /* wendu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wendu@3x.png"; sourceTree = "<group>"; };
 		EF6741AF208CC18C00B5EA3B /* diaodian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "diaodian@3x.png"; sourceTree = "<group>"; };
+		EF6741B2208D4EC400B5EA3B /* XWSNightStarsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSNightStarsView.h; sourceTree = "<group>"; };
+		EF6741B3208D4EC400B5EA3B /* XWSNightStarsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSNightStarsView.m; sourceTree = "<group>"; };
 		EF6E55C0208AACC700DC9120 /* XWSPrismaticView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSPrismaticView.h; sourceTree = "<group>"; };
 		EF6E55C1208AACC700DC9120 /* XWSPrismaticView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSPrismaticView.m; sourceTree = "<group>"; };
 		EFED1AA52083508B00179276 /* XWSDeviceBaseInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSDeviceBaseInfoVC.h; sourceTree = "<group>"; };
@@ -1155,6 +1158,8 @@
 				5575DF5A2089D9AB001FE8C1 /* TFMainAnimationView.m */,
 				EF6E55C0208AACC700DC9120 /* XWSPrismaticView.h */,
 				EF6E55C1208AACC700DC9120 /* XWSPrismaticView.m */,
+				EF6741B2208D4EC400B5EA3B /* XWSNightStarsView.h */,
+				EF6741B3208D4EC400B5EA3B /* XWSNightStarsView.m */,
 				EE2F213F208AD6EE00BB540D /* XWSDayAnimationView.h */,
 				EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */,
 				55A1EE58208CB16B00DE45A5 /* GYRollingNoticeView */,
@@ -1955,6 +1960,7 @@
 				553D383B2004716500FCC58F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				EF45C06D207771720074990E /* MXNCircleCharts.m in Sources */,
 				EF45C0A8207771910074990E /* ChartHighlight.m in Sources */,
+				EF6741B4208D4EC400B5EA3B /* XWSNightStarsView.m in Sources */,
 				EF45C0B4207771910074990E /* SLGCDTimerTool.m in Sources */,
 				EEC53B402063CFCB00EE3900 /* XWSSettingViewController.m in Sources */,
 				553D38662004E47300FCC58F /* NSData+CommonCrypto.m in Sources */,

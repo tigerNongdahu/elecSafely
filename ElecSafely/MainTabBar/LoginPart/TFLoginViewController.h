@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TFLoginProgram.h"
 
 @interface TFLoginViewController : UIViewController
 - (instancetype)initWithFrame:(CGRect)frame;
+- (void)loginProgram:(TFLoginProgram *)program DidLoginFailed:(NSString *)error;
 
 @end

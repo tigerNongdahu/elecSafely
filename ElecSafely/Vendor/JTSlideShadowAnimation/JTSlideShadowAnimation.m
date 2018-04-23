@@ -48,7 +48,7 @@
     
     CAGradientLayer *gradientMask = [CAGradientLayer layer];
     gradientMask.frame = self.animatedView.bounds;
-    
+ 
     CGFloat gradientSize = self.shadowWidth / self.animatedView.frame.size.width;
     
     NSArray *startLocations = @[

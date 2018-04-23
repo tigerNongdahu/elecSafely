@@ -18,7 +18,6 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-
 @interface AppDelegate ()<XGPushDelegate,XGPushTokenManagerDelegate>
 
 @end
@@ -46,6 +45,7 @@
     //注册通知（自己的通知）
     [self regesterNotification];
     
+    //
     //注册推送
     [[XGPush defaultManager] setEnableDebug:YES];
     XGNotificationAction *action1 = [XGNotificationAction actionWithIdentifier:@"xgaction001" title:@"xgAction1" options:XGNotificationActionOptionNone];
@@ -94,7 +94,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
+    fistLogin = NO;
     //取消通知
     [self UnRegesterNotification];
 }
@@ -110,6 +110,13 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self matchingTimeSetBackImage];
+    
+    NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+    NSString *passWord = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
+    if (userAccount.length > 0 && passWord.length > 0 && !fistLogin) {
+        [[TFLoginProgram sharedInstance] relogin:userAccount and:passWord];
+    }
 }
 
 
@@ -122,6 +129,21 @@
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"[XGDemo] register APNS fail.\n[XGDemo] reason : %@", error);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"registerDeviceFailed" object:nil];
+}
+
+// 对比当前时间
+- (void)matchingTimeSetBackImage {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"HH"];
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    int time = [str intValue];
+    if (time>=19||time<=07) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"yewan" forKey:MomentAction];
+    }
+    else{
+        [[NSUserDefaults standardUserDefaults] setObject:@"baitian" forKey:MomentAction];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

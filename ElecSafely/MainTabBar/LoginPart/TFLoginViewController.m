@@ -9,9 +9,6 @@
 #define SquareWith 320
 
 #import "TFLoginViewController.h"
-#import "PrivateFunction.h"
-#import "DESCrypt.h"
-#import "TFLoginProgram.h"
 #import "ElecProgressHUD.h"
 #import "XWSMainViewController.h"
 #import "XWSNavigationController.h"
@@ -87,24 +84,20 @@
             _passWordTF.userInteractionEnabled = YES;
 
             if (_userNameTF.text.length == 0) {
-                [_userNameTF becomeFirstResponder];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [_userNameTF becomeFirstResponder];
+                });
             }
             else if (_passWordTF.text.length == 0) {
-                [_passWordTF becomeFirstResponder];;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [_passWordTF becomeFirstResponder];;
+                });
             }
         }];
     });
 }
 
-+ (NSString *)getW3Password {
-    NSString *pwd = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
-    return [DESCrypt decryptUTF8:pwd password:[PrivateFunction getUserFunction]];
-}
 
-NSString *XPressEncryptUTF8(NSString *plainText) {
-    //使用utf8加解密
-    return [DESCrypt encryptUTF8:plainText password:[PrivateFunction getUserFunction]];
-}
 
 - (void)FieldDidChange {
     if (_userNameTF.text.length > 0 && _passWordTF.text.length > 0) {
@@ -231,7 +224,10 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         userNameTF.backgroundColor = [UIColor clearColor];
         userNameTF.textColor = RGBA(221, 221, 221, 1);
         _userNameTF = userNameTF;
-        _userNameTF.text = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+        NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+        if (userAccount.length > 0) {
+            _userNameTF.text = userAccount;
+        }
     }
     return _userNameTF;
 }
@@ -256,7 +252,9 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
         passWordTF.backgroundColor = [UIColor clearColor];
         passWordTF.textColor = RGBA(221, 221, 221, 1);
         _passWordTF = passWordTF;
-        _passWordTF.text = [[self class] getW3Password] ;
+        if ([TFLoginProgram getPassword].length > 0) {
+            _passWordTF.text = [TFLoginProgram getPassword];
+        }
     }
     return _passWordTF;
 }
@@ -274,9 +272,7 @@ NSString *XPressEncryptUTF8(NSString *plainText) {
     NSString *passWordStr = [_passWordTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if(nameStr && ![nameStr isEqualToString:@""] && ![passWordStr isEqualToString:@""]) {
-        [[NSUserDefaults standardUserDefaults] setObject:nameStr forKey:UserAccount];//存贮账号1
-        [[NSUserDefaults standardUserDefaults] setObject:XPressEncryptUTF8(passWordStr) forKey:UserPassword];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        
 
         [_progressHUD showHUD:self.view Offset:0 animation:18];
 

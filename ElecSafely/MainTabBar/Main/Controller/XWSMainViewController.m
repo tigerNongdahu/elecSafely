@@ -42,19 +42,12 @@
 @property (nonatomic, strong) UILabel *dateLable;
 @property (nonatomic, strong) NSMutableArray *quetions;
 
-#warning 测试使用
-//@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
+@property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
+@property (nonatomic, strong) GYRollingNoticeView *noticeView;
 @end
 
 @implementation XWSMainViewController
-#warning 测试使用
-//- (TFMainAnimationView *)mainAnimationView{
-//    if (!_mainAnimationView) {
-//        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
-//        [self.view addSubview:_mainAnimationView];
-//    }
-//    return _mainAnimationView;
-//}
+
 
 - (NSMutableArray *)screens{
     if (!_screens) {
@@ -76,17 +69,21 @@
     self.view.backgroundColor = BackColor;
     [self loadData];
     [self initView];
-    
-#warning 测试使用
-//    BOOL isDay = [NSString isDayTime];
-//    if (isDay) {
-//         [self mainAnimationView];
-//    }
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //加载公告应该放在这里，这样在切换控制器的时候，可以加载到最新的公告数据
+    [self loadNoticeData];
+    [self checkBackImage];
+
 }
 
 #pragma mark - 加载数据
 - (void)loadData{
-    [self loadNoticeData];
+    [self loadHelpData];
 }
 
 #pragma mark - 设置页面
@@ -99,14 +96,14 @@
 
 - (void)createScrollView {
     
-    GYRollingNoticeView *noticeView = [[GYRollingNoticeView alloc]initWithFrame:CGRectMake(30, ScreenHeight - NavibarHeight - 100, ScreenWidth - 60, 100)];
-    noticeView.dataSource = self;
-    noticeView.delegate = self;
-    [self.view addSubview:noticeView];
-    noticeView.backgroundColor = [UIColor lightGrayColor];
-    [noticeView registerClass:[GYNoticeViewCell class] forCellReuseIdentifier:@"CustomNoticeCell"];
+    _noticeView = [[GYRollingNoticeView alloc]initWithFrame:CGRectMake(30, ScreenHeight - NavibarHeight - 100, ScreenWidth - 60, 100)];
+    _noticeView.dataSource = self;
+    _noticeView.delegate = self;
+    [self.view addSubview:_noticeView];
+    _noticeView.backgroundColor = [UIColor lightGrayColor];
+    [_noticeView registerClass:[GYNoticeViewCell class] forCellReuseIdentifier:@"CustomNoticeCell"];
     
-    [noticeView reloadDataAndStartRoll];
+    [_noticeView reloadDataAndStartRoll];
     
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(30,  ScreenHeight - NavibarHeight - 130, ScreenWidth - 60, 30)];
     headView.backgroundColor = BackColor;
@@ -152,11 +149,25 @@
 #pragma mark -设置主页面
 - (void)createMainView {
     _mainBackImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
+    _mainBackImageView.image = [UIImage imageNamed:@"baitian"];
+
     [self.view addSubview:_mainBackImageView];
     [_mainBackImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.mas_equalTo(0);
     }];
+    
+    NSString *moment = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
+    if ([moment isEqualToString:@"baitian"]) {
+        _mainBackImageView.image = [UIImage imageNamed:@"baitian"];
+        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
+
+    }
+    else if ([moment isEqualToString:@"yewan"]) {
+        _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
+        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
+
+    }
+    [self.view addSubview:_mainAnimationView];
     
     _todayLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _todayLabel.textColor = [UIColor whiteColor];
@@ -179,6 +190,17 @@
         make.top.mas_equalTo(_todayLabel.mas_bottom).offset(10);
         make.leading.mas_equalTo(_todayLabel.mas_leading).offset(0);
     }];
+}
+
+- (void)checkBackImage {
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.3;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    [_mainBackImageView.layer addAnimation:transition forKey:@"a"];
+    NSString *imageName = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
+    [_mainBackImageView setImage:[UIImage imageNamed:imageName]];
+
 }
 
 - (NSString *)getNowDate {
@@ -221,7 +243,7 @@
     NSString *account = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"account"] = account;
-    dic[@"icon"] = @"logo_icon";
+    dic[@"icon"] = @"loading_shape_rectangular";
     
     if (!_leftView) {
         //目前里面设置的icon暂时没有实现加载网络图片，要实现可以自己到leftView里面去添加
@@ -338,11 +360,13 @@
 #pragma mark - 公告
 - (void)loadNoticeData{
     ElecHTTPManager *noticeMgr = [ElecHTTPManager manager];
-    self.quetions = [[NSMutableArray alloc] initWithCapacity:0];
     __weak typeof(self) weakVC = self;
     [noticeMgr GET:FrigateAPI_loadNotice parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        
+        NSLog(@"dic:%@",dic);
+        
         NSArray *ds = dic[@"rows"];
         [weakVC.notices removeAllObjects];
         
@@ -368,7 +392,13 @@
         NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
     }];
-    
+}
+
+#pragma mark - 热点问题
+- (void)loadHelpData{
+    ElecHTTPManager *noticeMgr = [ElecHTTPManager manager];
+    self.quetions = [[NSMutableArray alloc] initWithCapacity:0];
+    __weak typeof(self) weakVC = self;
     [noticeMgr GET:FrigateAPI_Help_InformationList parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSArray *results = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
@@ -380,12 +410,16 @@
             model.Content = dic[@"Content"];
             
             [weakVC.quetions addObject:model];
-            
-            NSLog(@"title:%@ %@",model.Title,model.Content);
         }
         
         [self createScrollView];
+
         
+        //        [weakVC.tableView reloadData];
+        
+        
+//        [self loadDataWithScroll];
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
@@ -409,9 +443,7 @@
 }
 
 - (void)showSingleListRightView{
-    
     _singleRighView.dataAtts = self.notices;
-    
     _singleRighView.hidden = NO;
     [UIView animateWithDuration:AnimationTime animations:^{
         [_singleRighView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -465,6 +497,7 @@
 
 - (void)dealloc{
     NSLog(@"main:%s",__func__);
+    [_noticeView stopRoll];
 }
 
 @end

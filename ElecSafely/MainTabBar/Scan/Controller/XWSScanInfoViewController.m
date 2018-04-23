@@ -75,14 +75,14 @@
 
 - (NSMutableArray *)titles{
     if (!_titles) {
-        _titles = [NSMutableArray arrayWithObjects:@"设备注册码",@"物联网卡号",@"设备名称",@"设备分组",@"客户名称",@"登录账号",@"客户登录密码",@"上级客户名称", nil];
+        _titles = [NSMutableArray arrayWithObjects:@"设备注册码",@"物联网卡号",@"设备名称",@"设备分组",@"客户名称",@"登录账号",@"客户登录密码", nil];
     }
     return _titles;
 }
 
 - (NSMutableArray *)places{
     if (!_places) {
-        _places = [NSMutableArray arrayWithObjects:@"15位英文字母和数字",@"英文字母和数字",@"请您输入",@"请您输入",@"请您输入",@"请您输入",@"6-16位英文字母、数据和下划线",@"请您输入", nil];
+        _places = [NSMutableArray arrayWithObjects:@"15位英文字母和数字",@"英文字母和数字",@"请您输入",@"请您输入",@"请您输入",@"请您输入",@"6-16位英文字母、数字和下划线", nil];
     }
     return _places;
 }
@@ -135,19 +135,6 @@
 
 - (void)sendRegister{
     [self.textField resignFirstResponder];
-    
-    NSMutableDictionary *param1 = [NSMutableDictionary dictionary];
-    param1[@"CRCID"] = self.CRCID;
-    param1[@"SimCard"] = self.SimCard;
-    param1[@"DevName"] = self.DevName;
-    param1[@"GroupName"] = self.GroupName;
-    param1[@"CustName"] = self.CustName;
-    param1[@"LoginName"] = self.LoginName;
-    //    param[@"Password"] = self.Password;
-    param1[@"Password"] = [NSString md5:self.Password];
-    param1[@"ParentName"] = self.ParentName;
-    param1[@"AppendFlag"] = @"1";
-    NSLog(@"param1:%@",param1);
 
     if (![self checkParam]) {
         return;
@@ -164,9 +151,8 @@
     param[@"GroupName"] = self.GroupName;
     param[@"CustName"] = self.CustName;
     param[@"LoginName"] = self.LoginName;
-//    param[@"Password"] = self.Password;
     param[@"Password"] = [NSString md5:self.Password];
-    param[@"ParentName"] = self.ParentName;
+//    param[@"ParentName"] = self.ParentName;
     param[@"AppendFlag"] = @"1";
     
     NSLog(@"param:%@",param);
@@ -194,7 +180,6 @@
 }
 
 - (BOOL)checkParam{
-    
     
     if (![self checkStr:self.CRCID] || [self.CRCID stringByReplacingOccurrencesOfString:@" " withString:@""].length != 15) {
         [ElecTipsView showTips:@"请输入正确格式的15位设备注册码!" during:2.0];
@@ -284,7 +269,9 @@
             cell.textField.enabled = NO;
         }else{
             if (indexPath.row == 0) {
-                [cell.textField becomeFirstResponder];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [cell.textField becomeFirstResponder];
+                });
             }
         }
     }
@@ -298,7 +285,7 @@
         cell.textField.secureTextEntry = YES;
     }
     
-    if (indexPath.row != 7) {
+    if (indexPath.row != self.titles.count - 1) {
         cell.textField.returnKeyType = UIReturnKeyNext;
     }else{
         cell.textField.returnKeyType = UIReturnKeyDone;
@@ -315,9 +302,10 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     NSArray *cells = [self.tableView visibleCells];
     NSInteger tag = textField.tag - 100 + 1;
-    if (tag > 7) {
-        tag = 7;
+    if (tag > 6) {
+        tag = 6;
     }
+    
     XWSDeviceInfoCell *cell = cells[tag];
     UITextField *cellTextfield = cell.textField;
     switch (textField.tag - 100) {
@@ -327,10 +315,9 @@
         case 3:
         case 4:
         case 5:
-        case 6:
             [cellTextfield becomeFirstResponder];
             break;
-        case 7:
+        case 6:
             [textField resignFirstResponder];
             break;
             

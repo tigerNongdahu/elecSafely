@@ -293,7 +293,8 @@
 - (void)registerAction {
     XWSSettingPasswordViewController *registerVC = [[XWSSettingPasswordViewController alloc] init];
     registerVC.type = XWSShowVCTypeRegister;
-    [self presentViewController:registerVC animated:YES completion:^{
+    XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:registerVC];
+    [self presentViewController:navi animated:YES completion:^{
         
     }];
 }

@@ -192,6 +192,9 @@
             make.centerX.mas_equalTo(loginSquare.mas_centerX);
             make.bottom.mas_equalTo(userNameLine.mas_top).offset(-14);
         }];
+        
+        
+        
         _loginSquare = loginSquare;
         
         

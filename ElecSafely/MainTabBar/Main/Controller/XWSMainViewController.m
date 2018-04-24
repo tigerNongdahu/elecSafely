@@ -370,9 +370,9 @@
     }
     [UIView transitionWithView:self.navigationController.view
      
-                      duration:1
+                      duration:0.5
      
-                       options:UIViewAnimationOptionPreferredFramesPerSecond60
+                       options:UIViewAnimationOptionTransitionCrossDissolve
      
                     animations:^{
                         

@@ -127,8 +127,8 @@
     
     
     if (GYRollingDebugLog) {
-        NSLog(@"_currentCell  %p", _currentCell);
-        NSLog(@"_willShowCell %p", _willShowCell);
+//        NSLog(@"_currentCell  %p", _currentCell);
+//        NSLog(@"_willShowCell %p", _willShowCell);
     }
 
     [self.reuseCells removeObject:_currentCell];

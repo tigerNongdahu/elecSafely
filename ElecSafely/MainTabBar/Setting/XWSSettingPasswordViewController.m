@@ -184,7 +184,7 @@
         resultStr = [resultStr stringByReplacingOccurrencesOfString:@" " withString:@""];
         resultStr = [resultStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
-        NSLog(@"register:%@ %ld",resultStr,resultStr.length);
+//        NSLog(@"register:%@ %ld",resultStr,resultStr.length);
         // 如果放回的是“密码修改成功”，则退出到登录页面
         if ([resultStr isEqualToString:@"1"]) {
             [ElecTipsView showTips:@"注册成功，请回到登录页面进行登录" during:2.0];
@@ -193,7 +193,7 @@
             [ElecTipsView showTips:@"注册失败，请检查数据情况" during:2.0];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [weakVC.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
@@ -220,13 +220,13 @@
         NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
         
         [ElecTipsView showTips:resultStr during:2.0];
-        NSLog(@"checkId:%@",resultStr);
+//        NSLog(@"checkId:%@",resultStr);
         // 如果放回的是“密码修改成功”，则退出到登录页面
         if ([resultStr containsString:MODIFY_PASSWORD_SUCCESS_STRING]) {
             [weakVC logOut];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [weakVC.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];

@@ -65,7 +65,7 @@ static TFLoginProgram *loginProgram = nil;
             
         }
         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"error:%@",error);
+//            NSLog(@"error:%@",error);
             if (self.delegate && [self.delegate respondsToSelector:@selector(loginProgram: DidLoginFailed:)]) {
                 [self.delegate loginProgram:loginProgram DidLoginFailed:@"登陆失败"];
             }

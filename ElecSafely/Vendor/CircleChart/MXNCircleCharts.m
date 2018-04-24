@@ -33,7 +33,7 @@
     self =  [super initWithFrame:frame];
     
     if (self) {
-        NSLog(@"%f---%f",maxValue,value);
+//        NSLog(@"%f---%f",maxValue,value);
         
         if (maxValue < value) {
             maxValue = value;
@@ -72,7 +72,7 @@
     ///顶层圆
     CGFloat outerRadius = radius;
     
-    NSLog(@"value:%f---maxValue:%f",_value,_maxValue);
+//    NSLog(@"value:%f---maxValue:%f",_value,_maxValue);
     
     UIBezierPath *outerArcPath = [UIBezierPath bezierPathWithArcCenter:center radius:outerRadius startAngle:-M_PI_2 endAngle:M_PI * 2 * (_value / _maxValue) - M_PI_2  clockwise:YES];
     

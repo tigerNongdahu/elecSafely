@@ -223,7 +223,7 @@
 }
 
 - (void)dealloc{
-    NSLog(@"setting:%s",__func__);
+//    NSLog(@"setting:%s",__func__);
 }
 
 - (void)didReceiveMemoryWarning {

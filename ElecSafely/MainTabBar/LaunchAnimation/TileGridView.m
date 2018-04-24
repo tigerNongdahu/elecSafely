@@ -296,7 +296,7 @@
 - (void)dealloc{
     [self.shadowLogoAnimation stop];
     [self.shadowCompanyAnimation stop];
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
 }
 
 @end

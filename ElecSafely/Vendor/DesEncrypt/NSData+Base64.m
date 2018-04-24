@@ -9,7 +9,7 @@
 #import "NSData+Base64.h"
 
 extern void useNSDataBase64 () {
-    NSLog(@"%s",__FUNCTION__);
+//    NSLog(@"%s",__FUNCTION__);
 }
 
 @implementation NSData (Base64Additions)

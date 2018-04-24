@@ -221,7 +221,7 @@
     unsigned unitFlags = NSCalendarUnitYear |NSCalendarUnitMonth |NSCalendarUnitDay;
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:unitFlags fromDate:[NSDate date]];
-    NSLog(@"%ld, %ld, %ld", (long)components.year, (long)components.month, (long)components.day);
+//    NSLog(@"%ld, %ld, %ld", (long)components.year, (long)components.month, (long)components.day);
     NSString *dateStr = [NSString stringWithFormat:@"%ld月%ld日",(long)components.month,(long)components.day];
     NSString *weekStr = [self weekdayStringFromDate:[NSDate date]];
     
@@ -394,7 +394,7 @@
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
-        NSLog(@"dic:%@",dic);
+//        NSLog(@"dic:%@",dic);
         
         NSArray *ds = dic[@"rows"];
         [weakVC.notices removeAllObjects];
@@ -418,7 +418,7 @@
             [weakVC.notices addObject:model];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
     }];
 }
@@ -450,7 +450,7 @@
 //        [self loadDataWithScroll];
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
     }];
 }
@@ -526,7 +526,7 @@
 }
 
 - (void)dealloc{
-    NSLog(@"main:%s",__func__);
+//    NSLog(@"main:%s",__func__);
     [_noticeView stopRoll];
 }
 

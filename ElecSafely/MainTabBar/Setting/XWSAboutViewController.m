@@ -179,13 +179,13 @@
         
         if (@available(iOS 10.0, *)) {
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
-                NSLog(@"打开去评分");
+//                NSLog(@"打开去评分");
             }];
         } else {
             [[UIApplication sharedApplication] openURL:url];
         }
     }else{
-        NSLog(@"无法打开该URL");
+//        NSLog(@"无法打开该URL");
     }
 }
 
@@ -193,7 +193,7 @@
     [self.shadowAnimation stop];
     self.shadowAnimation = nil;
     
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
 }
 
 - (void)didReceiveMemoryWarning {

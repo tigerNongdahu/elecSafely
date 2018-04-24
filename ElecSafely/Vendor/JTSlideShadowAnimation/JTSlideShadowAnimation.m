@@ -40,7 +40,7 @@
 - (void)start
 {
     if(!self.animatedView){
-        NSLog(@"JTSlideShadowAnimation no view to animate");
+//        NSLog(@"JTSlideShadowAnimation no view to animate");
         return;
     }
     

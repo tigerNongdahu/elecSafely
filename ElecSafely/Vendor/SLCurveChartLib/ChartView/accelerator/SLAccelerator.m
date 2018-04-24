@@ -86,7 +86,7 @@
         if (self.pageScrollerEnable) {
             deRate = 10000;
             double userSwipeLength = totalPanLength - ((int)(totalPanLength/self.pageWidth))*self.pageWidth;
-            NSLog(@"totalPanLength = %lf, userSwipeLength = %lf", totalPanLength, userSwipeLength);
+//            NSLog(@"totalPanLength = %lf, userSwipeLength = %lf", totalPanLength, userSwipeLength);
             if (fabs(userSwipeLength) > fabs(self.pageWidth/2.0)) {
                 __block double retainLength = self.pageWidth - fabs(userSwipeLength);
                 self.timer = [SLGCDTimerTool scheduledWith:dispatch_get_main_queue() interval:time handler:^{

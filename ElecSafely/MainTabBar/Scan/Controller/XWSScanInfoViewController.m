@@ -155,7 +155,7 @@
 //    param[@"ParentName"] = self.ParentName;
     param[@"AppendFlag"] = @"1";
     
-    NSLog(@"param:%@",param);
+//    NSLog(@"param:%@",param);
     __weak typeof(self) weakVC = self;
     [manager POST:FrigateAPI_Register parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [weakVC.progressHUD dismiss];
@@ -169,10 +169,10 @@
             [ElecTipsView showTips:@"提交失败" during:2.0];
         }
 
-        NSLog(@"resultStr:%@",resultStr);
+//        NSLog(@"resultStr:%@",resultStr);
        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [weakVC.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况" during:2.0];
@@ -431,7 +431,7 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
 }
 
 - (void)showNotiView{

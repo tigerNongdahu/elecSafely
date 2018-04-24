@@ -12,6 +12,7 @@
 #import "ElecProgressHUD.h"
 #import "XWSMainViewController.h"
 #import "XWSNavigationController.h"
+#import "XWSSettingPasswordViewController.h"
 
 @interface TFLoginViewController ()<UITextFieldDelegate,TFLoginProgramDelegate>
 
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) UITextField *passWordTF;
 @property (nonatomic, strong) UIView *loginSquare;
 @property (nonatomic, strong) ElecProgressHUD *progressHUD;
+@property (nonatomic, strong) UIButton *registerBtn;
 @end
 
 @implementation TFLoginViewController
@@ -95,6 +97,8 @@
             }
         }];
     });
+    
+    [self registerBtn];
 }
 
 
@@ -118,6 +122,27 @@
 }
 
 #pragma make 控件
+
+- (UIButton *)registerBtn{
+    if (!_registerBtn) {
+        _registerBtn = [[UIButton alloc] initWithFrame:CGRectZero];
+        [_registerBtn setTitle:@"注册" forState:UIControlStateNormal];
+        [_registerBtn addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
+        _registerBtn.titleLabel.font = PingFangRegular(17);
+        [_registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        [self.view addSubview:_registerBtn];
+        [_registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-20);
+            make.bottom.mas_equalTo(-20);
+            make.width.mas_equalTo(50);
+            make.height.mas_equalTo(30);
+        }];
+        
+    }
+    return _registerBtn;
+}
+
 - (UIView *)loginSquare {
     if (!_loginSquare) {
         
@@ -180,6 +205,9 @@
             make.centerX.mas_equalTo(loginSquare.mas_centerX);
             make.bottom.mas_equalTo(userNameLine.mas_top).offset(-14);
         }];
+        
+        
+        
         _loginSquare = loginSquare;
     }
     return _loginSquare;
@@ -261,6 +289,13 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+}
+
+- (void)registerAction{
+    XWSSettingPasswordViewController *setVC = [[XWSSettingPasswordViewController alloc] init];
+    setVC.type = XWSShowVCTypeRegister;
+    XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:setVC];
+    [self presentViewController:navi animated:YES completion:nil];
 }
 
 - (void)sureAction {

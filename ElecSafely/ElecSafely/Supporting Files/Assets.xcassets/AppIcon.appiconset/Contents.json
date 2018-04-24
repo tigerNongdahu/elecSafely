@@ -33,7 +33,7 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "icondsf.png",
+      "filename" : "120-120.png",
       "scale" : "2x"
     },
     {
@@ -63,9 +63,8 @@
       "scale" : "2x"
     },
     {
-      "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "icon.png",
+      "size" : "40x40",
       "scale" : "1x"
     },
     {

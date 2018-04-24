@@ -86,7 +86,7 @@
     animation.shadowBackgroundColor = [UIColor colorWithWhite:1. alpha:.7];
     animation.shadowForegroundColor = [UIColor whiteColor];
     animation.animatedView = view;
-    animation.duration = 1.0;
+    animation.duration = 1.5f;
     animation.shadowWidth = 40.;
     return animation;
 }

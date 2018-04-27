@@ -25,7 +25,7 @@
 @implementation AppDelegate
 
 - (void)xgPushDidFinishStart:(BOOL)isSuccess error:(NSError *)error {
-    NSLog(@"%s, result %@, error %@", __FUNCTION__, isSuccess?@"OK":@"NO", error);
+//    NSLog(@"%s, result %@, error %@", __FUNCTION__, isSuccess?@"OK":@"NO", error);
     
 }
 
@@ -47,7 +47,7 @@
     
     //
     //注册推送
-    [[XGPush defaultManager] setEnableDebug:YES];
+//    [[XGPush defaultManager] setEnableDebug:YES];
     XGNotificationAction *action1 = [XGNotificationAction actionWithIdentifier:@"xgaction001" title:@"xgAction1" options:XGNotificationActionOptionNone];
     XGNotificationAction *action2 = [XGNotificationAction actionWithIdentifier:@"xgaction002" title:@"xgAction2" options:XGNotificationActionOptionDestructive];
     XGNotificationCategory *category = [XGNotificationCategory categoryWithIdentifier:@"xgCategory" actions:@[action1, action2] intentIdentifiers:@[] options:XGNotificationCategoryOptionNone];
@@ -61,6 +61,7 @@
     
     [[XGPush defaultManager] setXgApplicationBadgeNumber:0];
     [[XGPush defaultManager] reportXGNotificationInfo:launchOptions];
+    [XGPushTokenManager defaultTokenManager].delegatge = self;
     return YES;
 }
 
@@ -105,13 +106,17 @@
     
     //注册通知（自己的通知）
     [self regesterNotification];
+    for (UIViewController *mainVC in [UIApplication sharedApplication].keyWindow.rootViewController.childViewControllers) {
+        if ([mainVC isKindOfClass:[XWSMainViewController class]]) {
+            [mainVC performSelector:@selector(checkBackImage) withObject:nil];
+            break;
+        }
+    }
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [self matchingTimeSetBackImage];
-    
     NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
     NSString *passWord = [[NSUserDefaults standardUserDefaults] objectForKey:UserPassword];
     if (userAccount.length > 0 && passWord.length > 0 && !fistLogin) {
@@ -127,24 +132,10 @@
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"[XGDemo] register APNS fail.\n[XGDemo] reason : %@", error);
+//    NSLog(@"[XGDemo] register APNS fail.\n[XGDemo] reason : %@", error);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"registerDeviceFailed" object:nil];
 }
 
-// 对比当前时间
-- (void)matchingTimeSetBackImage {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"HH"];
-    NSString *str = [formatter stringFromDate:[NSDate date]];
-    int time = [str intValue];
-    if (time>=19||time<=07) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"yewan" forKey:MomentAction];
-    }
-    else{
-        [[NSUserDefaults standardUserDefaults] setObject:@"baitian" forKey:MomentAction];
-    }
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
 
 
 /**
@@ -154,7 +145,7 @@
  @param userInfo 推送时指定的参数
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"[XGDemo] receive Notification");
+//    NSLog(@"[XGDemo] receive Notification");
     [[XGPush defaultManager] reportXGNotificationInfo:userInfo];
 }
 
@@ -167,8 +158,8 @@
  @param completionHandler 完成回调
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    NSLog(@"[XGDemo] receive slient Notification");
-    NSLog(@"[XGDemo] userinfo %@", userInfo);
+//    NSLog(@"[XGDemo] receive slient Notification");
+//    NSLog(@"[XGDemo] userinfo %@", userInfo);
     [[XGPush defaultManager] reportXGNotificationInfo:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
@@ -180,9 +171,11 @@
 
 #pragma mark - XGPushTokenManagerDelegate
 - (void)xgPushDidBindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
+    
 }
 
 - (void)xgPushDidUnbindWithIdentifier:(NSString *)identifier type:(XGPushTokenBindType)type error:(NSError *)error {
+    
 }
 
 
@@ -196,11 +189,11 @@
 // App 用户在通知中心清除消息
 // 无论本地推送还是远程推送都会走这个回调
 - (void)xgPushUserNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
-    NSLog(@"[XGDemo] click notification");
+//    NSLog(@"[XGDemo] click notification");
     if ([response.actionIdentifier isEqualToString:@"xgaction001"]) {
-        NSLog(@"click from Action1");
+//        NSLog(@"click from Action1");
     } else if ([response.actionIdentifier isEqualToString:@"xgaction002"]) {
-        NSLog(@"click from Action2");
+//        NSLog(@"click from Action2");
     }
     
     [[XGPush defaultManager] reportXGNotificationResponse:response];
@@ -256,7 +249,7 @@
     if ([context hasChanges] && ![context save:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+//        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
 }

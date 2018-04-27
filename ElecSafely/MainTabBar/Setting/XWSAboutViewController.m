@@ -173,20 +173,21 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
     NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/us/app/id1375551874"];
 
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         
         if (@available(iOS 10.0, *)) {
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
-                NSLog(@"打开去评分");
+//                NSLog(@"打开去评分");
             }];
         } else {
             [[UIApplication sharedApplication] openURL:url];
         }
     }else{
         [ElecTipsView showTips:@"无法跳转到appStore" during:2.0];
+
     }
 }
 
@@ -194,7 +195,7 @@
     [self.shadowAnimation stop];
     self.shadowAnimation = nil;
     
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
 }
 
 - (void)didReceiveMemoryWarning {

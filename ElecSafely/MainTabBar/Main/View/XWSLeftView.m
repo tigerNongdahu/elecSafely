@@ -119,7 +119,7 @@
     //账号
     CGFloat accountStrWidth = [NSString getStringSizeWith:_account withStringFont:PingFangMedium(18)].width;
     CGFloat accountViewWidth = supView.frame.size.width - 32 - 69 - 2 * 17;
-    
+
     if (accountStrWidth > accountViewWidth) {
         [self setUpScrollTextViewWithSuperView:supView];
     }else{
@@ -161,6 +161,7 @@
     
     if (!_scrollTextView) {
         _scrollTextView = [[LMJScrollTextView alloc] initWithFrame:CGRectZero textScrollModel:LMJTextScrollWandering direction:LMJTextScrollMoveLeft];
+        [_scrollTextView setMoveSpeed:0.1];
         [supView addSubview:_scrollTextView];
         [_scrollTextView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.icon.mas_centerY);

@@ -65,7 +65,7 @@
             make.top.mas_equalTo(297);
             
         }];
-        tipLabel.text = @"暂时无数据";
+        tipLabel.text = @"暂无数据";
     }
 }
 
@@ -91,7 +91,7 @@
 
 
 - (void)dealloc{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
 }
 
 @end

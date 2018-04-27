@@ -79,12 +79,12 @@
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    NSLog(@"error++++:%@",error);
+//    NSLog(@"error++++:%@",error);
     [XWSTipsView showTipViewWithType:XWSShowViewTypeError inSuperView:self.view];
 }
 
 - (void)dealloc{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     //移除kvo的监听
     [self.webview removeObserver:self forKeyPath:@"estimatedProgress"];
 }

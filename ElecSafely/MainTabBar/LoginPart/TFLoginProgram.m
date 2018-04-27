@@ -57,22 +57,23 @@ static TFLoginProgram *loginProgram = nil;
                 
                 TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
                 XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
-                [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
+                NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+                [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:userAccount type:XGPushTokenBindTypeAccount];
                 [UIApplication sharedApplication].keyWindow.rootViewController = navi;
                 
             }
             
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"error:%@",error);
+        }
+        failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//            NSLog(@"error:%@",error);
             if (self.delegate && [self.delegate respondsToSelector:@selector(loginProgram: DidLoginFailed:)]) {
                 [self.delegate loginProgram:loginProgram DidLoginFailed:@"登陆失败"];
             }
             
             TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
             XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
-            [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
+            NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+            [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:userAccount type:XGPushTokenBindTypeAccount];
             [UIApplication sharedApplication].keyWindow.rootViewController = navi;
         }];
         
@@ -88,7 +89,8 @@ static TFLoginProgram *loginProgram = nil;
                 [self bindWithAccount:account];
             }
             else {
-                [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
+                NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+                [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:userAccount type:XGPushTokenBindTypeAccount];
             }
             
             if ([dic[@"Name"] isKindOfClass:[NSString class]]) {
@@ -98,7 +100,8 @@ static TFLoginProgram *loginProgram = nil;
                 [[NSNotificationCenter defaultCenter] postNotificationName:APPUserNameDidUpdateNotification object:nil];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
+            NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+            [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:userAccount type:XGPushTokenBindTypeAccount];
         }];
     }
 }

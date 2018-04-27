@@ -15,7 +15,7 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         if (GYRollingDebugLog) {
-            NSLog(@"init a cell from code: %p", self);
+//            NSLog(@"init a cell from code: %p", self);
         }
         _reuseIdentifier = reuseIdentifier;
         [self setupInitialUI];
@@ -29,7 +29,7 @@
     if (self) {
         
         if (GYRollingDebugLog) {
-            NSLog(@"init a cell from xib");
+//            NSLog(@"init a cell from xib");
         }
     }
     return self;
@@ -69,7 +69,7 @@
 - (void)dealloc
 {
     if (GYRollingDebugLog) {
-        NSLog(@"%p, %s", self, __func__);
+//        NSLog(@"%p, %s", self, __func__);
     }
     
 }

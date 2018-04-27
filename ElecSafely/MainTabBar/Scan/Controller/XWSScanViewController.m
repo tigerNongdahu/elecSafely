@@ -327,11 +327,11 @@
         
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
         NSString *stringValue = metadataObject.stringValue;
-        NSLog(@"扫描结果：%@",stringValue);
+//        NSLog(@"扫描结果：%@",stringValue);
         
         [self showScanResultWithStr:stringValue];
     } else {
-        NSLog(@"无扫描信息");
+//        NSLog(@"无扫描信息");
         return;
     }
 }
@@ -432,7 +432,7 @@
 
 
 - (void)dealloc{
-    NSLog(@"dealloc:%s",__func__);
+//    NSLog(@"dealloc:%s",__func__);
     [self stopTimer];
 }
 

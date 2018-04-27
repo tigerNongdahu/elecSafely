@@ -293,7 +293,7 @@
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [weakVC.progressHUD dismiss];
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
     }];
@@ -476,7 +476,7 @@
 }
 
 - (void)dealloc{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
 }
 
 /*

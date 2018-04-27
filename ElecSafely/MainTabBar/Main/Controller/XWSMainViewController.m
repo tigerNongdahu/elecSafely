@@ -78,7 +78,6 @@
     //加载公告应该放在这里，这样在切换控制器的时候，可以加载到最新的公告数据
     [self loadNoticeData];
     [self checkBackImage];
-
 }
 
 #pragma mark - 加载数据
@@ -156,19 +155,7 @@
         make.top.left.bottom.right.mas_equalTo(0);
     }];
     
-    NSString *moment = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
-    if ([moment isEqualToString:@"baitian"]) {
-        _mainBackImageView.image = [UIImage imageNamed:@"baitian"];
-        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
-
-    }
-    else if ([moment isEqualToString:@"yewan"]) {
-        _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
-        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth) withAnimation:TFAnimationTypeOfDayTime];
-
-    }
-    [self.view addSubview:_mainAnimationView];
-    
+//    [self createAnimationView];
     _todayLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _todayLabel.textColor = [UIColor whiteColor];
     _todayLabel.textAlignment = NSTextAlignmentLeft;
@@ -193,21 +180,48 @@
 }
 
 - (void)checkBackImage {
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.3;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionFade;
-    [_mainBackImageView.layer addAnimation:transition forKey:@"a"];
-    NSString *imageName = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
-    [_mainBackImageView setImage:[UIImage imageNamed:imageName]];
+    NSString *moment = [NSString isDayTime]?@"baitian":@"yewan";
 
+    if (!_mainAnimationView) {
+        [self createAnimationView:moment];
+    }
+    else {
+        NSString *imageName = [[NSUserDefaults standardUserDefaults] objectForKey:MomentAction];
+        if (![moment isEqualToString:imageName]) {
+            [_mainAnimationView removeFromSuperview];
+            [self createAnimationView:moment];
+            
+            CATransition *transition = [CATransition animation];
+            transition.duration = 2;
+            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            transition.type = kCATransitionFade;
+            [_mainBackImageView.layer addAnimation:transition forKey:@"a"];
+            [_mainBackImageView setImage:[UIImage imageNamed:moment]];
+            [[NSUserDefaults standardUserDefaults] setObject:moment forKey:MomentAction];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+}
+
+- (void)createAnimationView:(NSString *)moment {
+    if ([moment isEqualToString:@"baitian"]) {
+        _mainBackImageView.image = [UIImage imageNamed:@"baitian"];
+        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, ScreenHeight / 6 - 60, ScreenWidth, 80) withAnimation:TFAnimationTypeOfDayTime];
+        
+    }
+    else if ([moment isEqualToString:@"yewan"]) {
+        _mainBackImageView.image = [UIImage imageNamed:@"yewan"];
+        _mainAnimationView = [[TFMainAnimationView alloc] initWithFrame:CGRectMake(0, ScreenHeight / 6 - 60, ScreenWidth, 80) withAnimation:TFAnimationTypeOfDayNight];
+        
+    }
+    [self.view addSubview:_mainAnimationView];
 }
 
 - (NSString *)getNowDate {
     unsigned unitFlags = NSCalendarUnitYear |NSCalendarUnitMonth |NSCalendarUnitDay;
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:unitFlags fromDate:[NSDate date]];
-    NSLog(@"%ld, %ld, %ld", (long)components.year, (long)components.month, (long)components.day);
+//    NSLog(@"%ld, %ld, %ld", (long)components.year, (long)components.month, (long)components.day);
     NSString *dateStr = [NSString stringWithFormat:@"%ld月%ld日",(long)components.month,(long)components.day];
     NSString *weekStr = [self weekdayStringFromDate:[NSDate date]];
     
@@ -354,7 +368,22 @@
     if (vc == nil) {
         return;
     }
-     [self.navigationController pushViewController:vc animated:YES];
+    [UIView transitionWithView:self.navigationController.view
+     
+                      duration:0.5
+     
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+     
+                    animations:^{
+                        
+                        [self.navigationController pushViewController:vc animated:NO];
+                        
+                    }
+     
+                    completion:nil];
+    
+
+//     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 公告
@@ -365,7 +394,7 @@
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         
-        NSLog(@"dic:%@",dic);
+//        NSLog(@"dic:%@",dic);
         
         NSArray *ds = dic[@"rows"];
         [weakVC.notices removeAllObjects];
@@ -389,7 +418,7 @@
             [weakVC.notices addObject:model];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
     }];
 }
@@ -421,7 +450,7 @@
 //        [self loadDataWithScroll];
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [ElecTipsView showTips:@"网络错误，请检查网络连接情况"];
     }];
 }
@@ -497,7 +526,7 @@
 }
 
 - (void)dealloc{
-    NSLog(@"main:%s",__func__);
+//    NSLog(@"main:%s",__func__);
     [_noticeView stopRoll];
 }
 

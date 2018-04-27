@@ -206,10 +206,10 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确定退出登录?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
-        [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:UserAccount type:XGPushTokenBindTypeAccount];
+        NSString *userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccount];
+        [[XGPushTokenManager defaultTokenManager] unbindWithIdentifer:userAccount type:XGPushTokenBindTypeAccount];
         TFLoginViewController *loginVC = [[TFLoginViewController alloc] initWithFrame:CGRectZero];
         XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:loginVC];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserPassword];
         [UIApplication sharedApplication].keyWindow.rootViewController = navi;
     }];
     
@@ -223,7 +223,7 @@
 }
 
 - (void)dealloc{
-    NSLog(@"setting:%s",__func__);
+//    NSLog(@"setting:%s",__func__);
 }
 
 - (void)didReceiveMemoryWarning {

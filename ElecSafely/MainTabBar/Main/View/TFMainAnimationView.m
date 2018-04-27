@@ -8,10 +8,12 @@
 
 #import "TFMainAnimationView.h"
 #import "XWSDayAnimationView.h"
+#import "XWSNightStarsView.h"
 
 @interface TFMainAnimationView ()
 @property (nonatomic, strong) XWSDayAnimationView *dayFisrtAnimView;
 @property (nonatomic, strong) XWSDayAnimationView *daySecondAnimView;
+@property (nonatomic, strong) XWSNightStarsView *nightStarsView;
 @end
 
 @implementation TFMainAnimationView
@@ -39,6 +41,13 @@
     return _daySecondAnimView;
 }
 
+- (XWSNightStarsView *)nightStarsView {
+    if (!_nightStarsView) {
+        _nightStarsView = [[XWSNightStarsView alloc] initWithFrame:self.bounds];
+    }
+    return _nightStarsView;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame withAnimation:(TFAnimationType)animationType {
     self = [super initWithFrame:frame];
     if (self) {
@@ -52,10 +61,14 @@
     // 横线动画
     if (animationType == TFAnimationTypeOfDayTime) {
         [self startDayAnimation];
+        if (_nightStarsView) {
+            [_nightStarsView removeFromSuperview];
+        }
     }
     // 闪亮动画
     else if (animationType == TFAnimationTypeOfDayNight) {
         [self stopDayAnimation];
+        [self addSubview:self.nightStarsView];
     }
 }
 

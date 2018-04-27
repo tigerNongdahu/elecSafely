@@ -39,7 +39,7 @@
         if (self.type == XWSShowVCTypeSettingPassword) {
             _places = [NSMutableArray arrayWithObjects:@"请输入6-16位原密码",@"请输入6-16位新密码",@"请重复输入新密码", nil];
         }else{
-            _places = [NSMutableArray arrayWithObjects:@"请输入用户名",@"请输入6-16位新密码",@"请重复输入新密码", nil];
+            _places = [NSMutableArray arrayWithObjects:@"请输入用户名",@"请输入6-16位密码",@"请重复输入以上密码", nil];
         }
         
     }
@@ -51,7 +51,7 @@
         if (_type == XWSShowVCTypeSettingPassword) {
             _titles = [NSMutableArray arrayWithObjects:@"原密码",@"新密码",@"确认密码", nil];
         }else{
-            _titles = [NSMutableArray arrayWithObjects:@"用户名",@"新密码",@"确认密码", nil];
+            _titles = [NSMutableArray arrayWithObjects:@"用户名",@"密码",@"确认密码", nil];
         }
     }
     return _titles;
@@ -105,8 +105,6 @@
         [sendBtn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
         
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sendBtn];
-        
-        
     }
     
     self.sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 30)];
@@ -184,7 +182,7 @@
         resultStr = [resultStr stringByReplacingOccurrencesOfString:@" " withString:@""];
         resultStr = [resultStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
-        NSLog(@"register:%@ %ld",resultStr,resultStr.length);
+//        NSLog(@"register:%@ %ld",resultStr,resultStr.length);
         // 如果放回的是“密码修改成功”，则退出到登录页面
         if ([resultStr isEqualToString:@"1"]) {
             [ElecTipsView showTips:@"注册成功，请回到登录页面进行登录" during:2.0];
@@ -193,7 +191,7 @@
             [ElecTipsView showTips:@"注册失败，请检查数据情况" during:2.0];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [weakVC.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];
@@ -220,13 +218,13 @@
         NSString *resultStr =  [[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding];
         
         [ElecTipsView showTips:resultStr during:2.0];
-        NSLog(@"checkId:%@",resultStr);
+//        NSLog(@"checkId:%@",resultStr);
         // 如果放回的是“密码修改成功”，则退出到登录页面
         if ([resultStr containsString:MODIFY_PASSWORD_SUCCESS_STRING]) {
             [weakVC logOut];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+//        NSLog(@"error:%@",error);
         [weakVC.progressHUD dismiss];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [ElecTipsView showTips:@"网络错误，请检查网络情况" during:2.0];

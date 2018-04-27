@@ -1,4 +1,4 @@
-//
+
 //  TFLoginViewController.m
 //  ElecSafely
 //
@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIView *loginSquare;
 @property (nonatomic, strong) ElecProgressHUD *progressHUD;
 @property (nonatomic, strong) UIButton *registerBtn;
+
 @end
 
 @implementation TFLoginViewController
@@ -97,8 +98,6 @@
             }
         }];
     });
-    
-    [self registerBtn];
 }
 
 
@@ -122,27 +121,6 @@
 }
 
 #pragma make 控件
-
-- (UIButton *)registerBtn{
-    if (!_registerBtn) {
-        _registerBtn = [[UIButton alloc] initWithFrame:CGRectZero];
-        [_registerBtn setTitle:@"注册" forState:UIControlStateNormal];
-        [_registerBtn addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
-        _registerBtn.titleLabel.font = PingFangRegular(17);
-        [_registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
-        [self.view addSubview:_registerBtn];
-        [_registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-20);
-            make.bottom.mas_equalTo(-20);
-            make.width.mas_equalTo(50);
-            make.height.mas_equalTo(30);
-        }];
-        
-    }
-    return _registerBtn;
-}
-
 - (UIView *)loginSquare {
     if (!_loginSquare) {
         
@@ -165,6 +143,15 @@
             make.height.mas_equalTo(40);
             make.centerX.mas_equalTo(loginSquare.centerX);
             make.bottom.mas_equalTo(loginSquare.bottom);
+        }];
+        
+        [self.view addSubview:self.registerBtn];
+        //注册按钮
+        [_registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(20);
+            make.trailing.mas_equalTo(-20);
+            make.bottom.mas_equalTo(-20);
+            make.width.mas_equalTo(50);
         }];
         
         // 密码行
@@ -209,8 +196,27 @@
         
         
         _loginSquare = loginSquare;
+        
+        
     }
     return _loginSquare;
+}
+
+- (UIButton *)registerBtn {
+    if (_registerBtn == nil){
+        UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [registerBtn setTitle:@"注册" forState:UIControlStateNormal];
+        registerBtn.backgroundColor = [UIColor clearColor];
+        registerBtn.userInteractionEnabled = YES;
+        [registerBtn addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
+        registerBtn.titleLabel.font = PingFangRegular(15);
+        [registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [registerBtn setTitleColor:UIColorRGB(0xacacac) forState:UIControlStateHighlighted];
+        registerBtn.layer.cornerRadius = 20;
+        registerBtn.layer.masksToBounds= YES;
+        _registerBtn = registerBtn;
+    }
+    return _registerBtn;
 }
 
 - (UIButton *)loginBtn {
@@ -287,15 +293,17 @@
     return _passWordTF;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
+- (void)registerAction {
+    XWSSettingPasswordViewController *registerVC = [[XWSSettingPasswordViewController alloc] init];
+    registerVC.type = XWSShowVCTypeRegister;
+    XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:registerVC];
+    [self presentViewController:navi animated:YES completion:^{
+        
+    }];
 }
 
-- (void)registerAction{
-    XWSSettingPasswordViewController *setVC = [[XWSSettingPasswordViewController alloc] init];
-    setVC.type = XWSShowVCTypeRegister;
-    XWSNavigationController *navi = [[XWSNavigationController alloc] initWithRootViewController:setVC];
-    [self presentViewController:navi animated:YES completion:nil];
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 - (void)sureAction {
@@ -334,7 +342,7 @@
 }
 
 - (void)dealloc{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
 }
 
 - (void)didReceiveMemoryWarning {

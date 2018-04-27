@@ -9,7 +9,7 @@
 #import "NSString+Base64.h"
 
 extern void useNSStringBase64 () {
-    NSLog(@"%s",__FUNCTION__);
+//    NSLog(@"%s",__FUNCTION__);
 }
 
 static char base64EncodingTable[64] = {

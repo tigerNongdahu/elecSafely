@@ -93,6 +93,12 @@ static const CGFloat SectionHeight = 40.f;
     
     NSArray *rows = result[@"rows"];
     [self addObject:rows];
+    if (rows.count == 0) {
+        [XWSTipsView showTipViewWithType:XWSShowViewTypeNoData inSuperView:self.view];
+    }
+    else {
+        [XWSTipsView dismissTipViewWithSuperView:self.view];
+    }
 }
 
 - (void)addObject:(NSArray *)rows{

@@ -76,7 +76,8 @@ static const CGFloat LeftMargin = 15.0;
         self.titleLabel.text = [NSString stringWithFormat:@"%@回路曲线",_curveChartData[@"Name"]];
         
         [self setUpChartData:curveChartData];
-    }else{
+    }
+    else{
         
     }
 }
@@ -232,6 +233,7 @@ static const CGFloat LeftMargin = 15.0;
     }
     
     NSArray *yAxisArr = curveData[loopNum];
+    
     if (yAxisArr.count != dateArr.count) {
         return [@[] mutableCopy];
     }

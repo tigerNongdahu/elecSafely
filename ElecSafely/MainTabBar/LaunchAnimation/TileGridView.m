@@ -136,7 +136,7 @@
 - (UILabel *)companyLabel
 {
     UILabel *label = [UILabel new];
-    label.text = @"福瑞特科技产业有限公司";
+    label.text = @"中山市福瑞特科技产业有限公司";
     label.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:18];
     label.textColor = UIColorRGB(0xAAAAAA);
     [label sizeToFit];

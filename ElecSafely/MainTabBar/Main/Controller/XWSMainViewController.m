@@ -27,6 +27,8 @@
 
 #define AnimationTime 0.4
 #define CoverAlphaValue 0.5
+#define HeaderViewY (ScreenHeight - NavibarHeight - 130)
+#define AlarmLightViewY (HeaderViewY - 257 + 20)
 
 
 @interface XWSMainViewController ()<XWSLeftViewDelegate,XWSSingleListRightViewDelegate,GYRollingNoticeViewDataSource,GYRollingNoticeViewDelegate>
@@ -44,6 +46,8 @@
 
 @property (nonatomic, strong) TFMainAnimationView *mainAnimationView;
 @property (nonatomic, strong) GYRollingNoticeView *noticeView;
+
+@property (nonatomic, strong) UIButton *alarmLightImageView;
 @end
 
 @implementation XWSMainViewController
@@ -90,10 +94,13 @@
     [self setUpNav];
     [self setUpLeftView];
     [self setUpSingleListRightView];
+
     [self createMainView];
 }
 
 - (void)createScrollView {
+    
+    [self setAlarmLightView];
     
     _noticeView = [[GYRollingNoticeView alloc]initWithFrame:CGRectMake(30, ScreenHeight - NavibarHeight - 100, ScreenWidth - 60, 100)];
     _noticeView.dataSource = self;
@@ -104,7 +111,8 @@
     
     [_noticeView reloadDataAndStartRoll];
     
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(30,  ScreenHeight - NavibarHeight - 130, ScreenWidth - 60, 30)];
+
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(30, HeaderViewY, ScreenWidth - 60, 30)];
     headView.backgroundColor = BackColor;
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [headView addSubview:titleLabel];
@@ -113,7 +121,122 @@
     titleLabel.font = PingFangMedium(13);
     titleLabel.textColor = RGBA(153, 153, 153, 1);
     [self.view addSubview:headView];
+    
+    
 }
+
+//报警灯显示
+- (void)setAlarmLightView{
+    if (self.alarmLightImageView == nil) {
+        UIImage *image = [UIImage imageNamed:@"alarm_red"];
+        self.alarmLightImageView = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.alarmLightImageView setImage:image forState:UIControlStateNormal];
+        self.alarmLightImageView.tag = 100;
+        CGRect frame = self.alarmLightImageView.frame;
+        frame.origin.x = ScreenWidth - image.size.width - 20;
+        frame.origin.y = AlarmLightViewY;
+        frame.size.width = image.size.width;
+        frame.size.height = image.size.height;
+        self.alarmLightImageView.frame = frame;
+        [self.view addSubview:self.alarmLightImageView];
+        self.alarmLightImageView.adjustsImageWhenHighlighted = NO;
+        
+        [self.alarmLightImageView addTarget:self action:@selector(gotoAlarmVC:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
+                                                        
+                                                        initWithTarget:self
+                                                        
+                                                        action:@selector(handlePan:)];
+        
+        [self.alarmLightImageView addGestureRecognizer:panGestureRecognizer];
+        
+    }
+}
+
+- (void) handlePan:(UIPanGestureRecognizer*) recognizer
+{
+    UIImage *image = [UIImage imageNamed:@"alarm_white"];
+    
+    CGPoint translation = [recognizer translationInView:self.view];
+
+    if(recognizer.state == UIGestureRecognizerStateChanged){
+       int dr = [self commitTranslation:[recognizer translationInView:self.view]];
+        if (dr == 0 || dr == 1) {
+            return;
+        }
+    }
+    
+    //限制左右滑动
+    if (translation.x != 0) {
+        translation.x = 0;
+    }
+    //限制上滑
+    if (translation.y < 0) {
+        translation.y = 0;
+    }
+    
+    CGFloat centerX = recognizer.view.center.x+ translation.x;
+    CGFloat centerY = recognizer.view.center.y+ translation.y;
+    
+    //滑动的距离
+    __block CGFloat translationH = centerY - AlarmLightViewY;
+    recognizer.view.center = CGPointMake(centerX,centerY);
+    [recognizer setTranslation:CGPointZero inView:self.view];
+    
+    if(recognizer.state==UIGestureRecognizerStateEnded|| recognizer.state==UIGestureRecognizerStateCancelled) {
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect frame = self.alarmLightImageView.frame;
+            frame.origin.y = AlarmLightViewY;
+            self.alarmLightImageView.frame = frame;
+        } completion:^(BOOL finished) {
+            if (translationH > 200) {
+                [self.alarmLightImageView setImage:image forState:UIControlStateNormal];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self gotoAlarmVC:self.alarmLightImageView];
+                });
+            }
+            translationH = 0;
+        }];
+    }
+}
+
+- (int)commitTranslation:(CGPoint)translation
+{
+    CGFloat absX = fabs(translation.x);
+    CGFloat absY = fabs(translation.y);
+    
+    //上：0 左：1 下：2 右：3
+    if (absX > absY ) {
+        if (translation.x<0) {
+            //向左滑动
+            return 0;
+        }else{
+            //向右滑动
+            return 1;
+        }
+    } else if (absY > absX) {
+        if (translation.y<0) {
+            //向上滑动
+            return 2;
+        }else{
+            //向下滑动
+            return 3;
+        }
+    }
+    return 0;
+}
+
+- (void)gotoAlarmVC:(UIButton *)sender{
+
+    UIImage *image = [UIImage imageNamed:@"alarm_red"];
+    [sender setImage:image forState:UIControlStateNormal];
+    
+    XWSAlarmViewController *vc = [[XWSAlarmViewController alloc] init];
+    [self pushToViewController:vc];
+}
+
+#pragma mark - GYRollingNoticeViewDataSource,GYRollingNoticeViewDelegate
 
 - (NSInteger)numberOfRowsForRollingNoticeView:(GYRollingNoticeView *)rollingView
 {
@@ -368,22 +491,15 @@
     if (vc == nil) {
         return;
     }
-    [UIView transitionWithView:self.navigationController.view
-     
-                      duration:0.5
-     
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-     
-                    animations:^{
-                        
-                        [self.navigationController pushViewController:vc animated:NO];
-                        
-                    }
-     
-                    completion:nil];
-    
+    [self pushToViewController:vc];
+}
 
-//     [self.navigationController pushViewController:vc animated:YES];
+- (void)pushToViewController:(UIViewController *)vc{
+    [UIView transitionWithView:self.navigationController.view duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [self.navigationController pushViewController:vc animated:NO];
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 #pragma mark - 公告
@@ -393,8 +509,6 @@
     [noticeMgr GET:FrigateAPI_loadNotice parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        
-//        NSLog(@"dic:%@",dic);
         
         NSArray *ds = dic[@"rows"];
         [weakVC.notices removeAllObjects];
@@ -429,9 +543,13 @@
     self.quetions = [[NSMutableArray alloc] initWithCapacity:0];
     __weak typeof(self) weakVC = self;
     [noticeMgr GET:FrigateAPI_Help_InformationList parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+        NSLog(@"responseObject:%@",responseObject);
         NSArray *results = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         [weakVC.quetions removeAllObjects];
+        
+        NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"str:%@",str);
         
         for (NSDictionary *dic in results) {
             XWSHelpModel *model = [[XWSHelpModel alloc] init];

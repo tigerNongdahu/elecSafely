@@ -29,7 +29,7 @@
             make.left.right.top.bottom.mas_equalTo(0);
         }];
         _comLabel.textAlignment = NSTextAlignmentCenter;
-        _comLabel.text = @"福瑞特科技产业有限公司";
+        _comLabel.text = @"中山市福瑞特科技产业有限公司";
         _comLabel.textColor = UIColorRGB(0xAAAAAA);
         _comLabel.font = PingFangRegular(17);
     }

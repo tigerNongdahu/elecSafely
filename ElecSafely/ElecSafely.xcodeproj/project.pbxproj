@@ -110,6 +110,7 @@
 		EE250EC120705ECA0021FA80 /* LCQrcodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EE250EBF20705ECA0021FA80 /* LCQrcodeUtil.m */; };
 		EE2F2141208AD6EF00BB540D /* XWSDayAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */; };
 		EE2F2146208CD3E700BB540D /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2F2145208CD3E700BB540D /* LMJScrollTextView.m */; };
+		EE30C09220BC402700DE58FB /* XWSGetAlarmStatuManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EE30C09120BC402700DE58FB /* XWSGetAlarmStatuManager.m */; };
 		EE36A37720691C2300E71A54 /* XWSFeedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */; };
 		EE47D3C1206C9A6E006FEA3C /* XWSAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C0206C9A6E006FEA3C /* XWSAboutViewController.m */; };
 		EE47D3C4206CA46C006FEA3C /* XWSSettingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE47D3C3206CA46C006FEA3C /* XWSSettingPasswordViewController.m */; };
@@ -451,6 +452,8 @@
 		EE2F2140208AD6EE00BB540D /* XWSDayAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWSDayAnimationView.m; sourceTree = "<group>"; };
 		EE2F2144208CD3E700BB540D /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
 		EE2F2145208CD3E700BB540D /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
+		EE30C09020BC402700DE58FB /* XWSGetAlarmStatuManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSGetAlarmStatuManager.h; sourceTree = "<group>"; };
+		EE30C09120BC402700DE58FB /* XWSGetAlarmStatuManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSGetAlarmStatuManager.m; sourceTree = "<group>"; };
 		EE36A37520691C2300E71A54 /* XWSFeedImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSFeedImageCell.h; sourceTree = "<group>"; };
 		EE36A37620691C2300E71A54 /* XWSFeedImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWSFeedImageCell.m; sourceTree = "<group>"; };
 		EE47D3BF206C9A6E006FEA3C /* XWSAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWSAboutViewController.h; sourceTree = "<group>"; };
@@ -1310,6 +1313,8 @@
 			children = (
 				EEEF714220749E9800ABD711 /* XWSNoticeModel.h */,
 				EEEF714320749E9800ABD711 /* XWSNoticeModel.m */,
+				EE30C09020BC402700DE58FB /* XWSGetAlarmStatuManager.h */,
+				EE30C09120BC402700DE58FB /* XWSGetAlarmStatuManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1954,6 +1959,7 @@
 				55156A14202312AC00B80642 /* DGActivityIndicatorCookieTerminatorAnimation.m in Sources */,
 				553D38652004E47300FCC58F /* SecurityUtil.m in Sources */,
 				EF6E55C2208AACC700DC9120 /* XWSPrismaticView.m in Sources */,
+				EE30C09220BC402700DE58FB /* XWSGetAlarmStatuManager.m in Sources */,
 				EF45C040207770F70074990E /* ESDeviceViewController.m in Sources */,
 				55FEDD791FDF66DC005BD966 /* UIImageView+AFNetworking.m in Sources */,
 				EF45C0C92079090A0074990E /* XWSAlarmViewController.m in Sources */,

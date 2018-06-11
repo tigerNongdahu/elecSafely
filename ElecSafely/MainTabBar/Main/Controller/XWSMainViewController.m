@@ -658,7 +658,6 @@ typedef void(^IsAlarmBlock)(BOOL isAlarm);
     if (hAlarm) {
         imageName = @"alarm_red";
     }
-    
     [self.alarmLightImageView setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
 }
 
